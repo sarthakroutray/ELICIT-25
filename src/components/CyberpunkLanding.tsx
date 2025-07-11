@@ -9,6 +9,7 @@ import SystemWarnings from './SystemWarnings';
 import CountdownTimer from './CountdownTimer';
 import SocialLinks from './SocialLinks';
 import DigitalRain from './DigitalRain';
+import { playSound } from '../utils/audio';
 import { Monitor, Zap, Users, Calendar, Info, Phone } from 'lucide-react';
 
 const CyberpunkLanding: React.FC = () => {
@@ -23,9 +24,9 @@ const CyberpunkLanding: React.FC = () => {
     }, 1000);
 
     const handleMouseMove = (e: MouseEvent) => {
-      setMousePosition({
-        x: (e.clientX / window.innerWidth) * 2 - 1,
-        y: -(e.clientY / window.innerHeight) * 2 + 1,
+      setMousePosition({ // Directly use clientX and clientY for accurate cursor position
+        x: e.clientX,
+        y: e.clientY,
       });
     };
 
@@ -36,13 +37,6 @@ const CyberpunkLanding: React.FC = () => {
       window.removeEventListener('mousemove', handleMouseMove);
     };
   }, []);
-
-  const handleMouseMove = (e: React.MouseEvent) => {
-    setMousePosition({
-      x: e.clientX,
-      y: e.clientY,
-    });
-  };
 
   const handleInfiltrate = () => {
     setShowTerminal(true);
@@ -114,7 +108,7 @@ const CyberpunkLanding: React.FC = () => {
                 <motion.div
                   initial={{ opacity: 0, scale: 0.8 }}
                   animate={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 1.2, ease: "easeOut" }}
+                  transition={{ duration: 0.8, ease: "easeOut" }}
                 >
                   <GlitchText 
                     text="SYSTEM CORRUPTION DETECTED"
@@ -123,7 +117,7 @@ const CyberpunkLanding: React.FC = () => {
                   <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 1.5 }}
+                    transition={{ delay: 1.0 }}
                   >
                     <GlitchText 
                       text="ELICIT FEST INITIATED..."
@@ -180,6 +174,7 @@ const CyberpunkLanding: React.FC = () => {
                   style={{
                     clipPath: 'polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px))',
                   }}
+                  onClick={() => playSound('/audio/click.mp3')} // Play sound on click
                 >
                   <div className="flex flex-col items-center space-y-2">
                     <motion.div
