@@ -43,15 +43,16 @@ const CyberpunkLanding: React.FC = () => {
   };
 
   return (
-    <div className="relative w-full h-screen bg-black overflow-hidden cursor-none">
+    <div className="relative w-full h-screen bg-black overflow-hidden" style={{ cursor: 'none' }}>
       {/* Custom Cursor */}
       <div 
-        className="fixed w-6 h-6 bg-cyan-400 rounded-full pointer-events-none z-50 transition-all duration-100 ease-out"
+        className="fixed w-6 h-6 bg-blue-500 rounded-full pointer-events-none transition-all duration-100 ease-out"
         style={{
           left: mousePosition.x + 'px',
           top: mousePosition.y + 'px',
           transform: 'translate(-50%, -50%)',
-          boxShadow: '0 0 20px #00ffff, 0 0 40px #00ffff, 0 0 60px #00ffff, 0 0 80px #00ffff',
+          boxShadow: '0 0 20px #3b82f6, 0 0 40px #3b82f6, 0 0 60px #3b82f6, 0 0 80px #3b82f6',
+          zIndex: 9999,
         }}
       />
 
@@ -112,7 +113,11 @@ const CyberpunkLanding: React.FC = () => {
                 >
                   <GlitchText 
                     text="SYSTEM CORRUPTION DETECTED"
-                    className="text-4xl md:text-6xl lg:text-7xl font-mono font-bold text-green-400 mb-6"
+                    className="text-4xl md:text-6xl lg:text-7xl font-mono font-bold text-cyan-400 mb-6"
+                    style={{
+                      textShadow: '0 0 10px #00ffff, 0 0 20px #00ffff, 0 0 30px #00ffff',
+                      filter: 'drop-shadow(2px 2px 4px rgba(0,0,0,0.8))'
+                    }}
                   />
                   <motion.div
                     initial={{ opacity: 0, y: 20 }}
@@ -174,7 +179,7 @@ const CyberpunkLanding: React.FC = () => {
                   style={{
                     clipPath: 'polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px))',
                   }}
-                  onClick={() => playSound('/audio/click.mp3')} // Play sound on click
+                  onClick={() => playSound('/audio/click.mp3')}
                 >
                   <div className="flex flex-col items-center space-y-2">
                     <motion.div
