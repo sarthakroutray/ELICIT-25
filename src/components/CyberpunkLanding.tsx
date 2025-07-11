@@ -1,0 +1,201 @@
+import React, { useEffect, useRef, useState } from 'react';
+import { Canvas } from '@react-three/fiber';
+import { OrbitControls, PerspectiveCamera } from '@react-three/drei';
+import { motion, AnimatePresence } from 'framer-motion';
+import CyberpunkScene from './CyberpunkScene';
+import GlitchText from './GlitchText';
+import TerminalInterface from './TerminalInterface';
+import SystemWarnings from './SystemWarnings';
+import CountdownTimer from './CountdownTimer';
+import SocialLinks from './SocialLinks';
+import DigitalRain from './DigitalRain';
+import { Monitor, Zap, Users, Calendar, Info, Phone } from 'lucide-react';
+
+const CyberpunkLanding: React.FC = () => {
+  const [isInitialized, setIsInitialized] = useState(false);
+  const [showTerminal, setShowTerminal] = useState(false);
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const audioRef = useRef<HTMLAudioElement>(null);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsInitialized(true);
+    }, 1000);
+
+    const handleMouseMove = (e: MouseEvent) => {
+      setMousePosition({
+        x: (e.clientX / window.innerWidth) * 2 - 1,
+        y: -(e.clientY / window.innerHeight) * 2 + 1,
+      });
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
+    
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener('mousemove', handleMouseMove);
+    };
+  }, []);
+
+  const handleInfiltrate = () => {
+    setShowTerminal(true);
+  };
+
+  return (
+    <div className="relative w-full h-screen bg-black overflow-hidden cursor-none">
+      {/* Custom Cursor */}
+      <div 
+        className="fixed w-4 h-4 bg-cyan-400 rounded-full pointer-events-none z-50 mix-blend-difference"
+        style={{
+          left: mousePosition.x * 50 + 'px',
+          top: mousePosition.y * 50 + 'px',
+          transform: 'translate(-50%, -50%)',
+          boxShadow: '0 0 20px #00ffff, 0 0 40px #00ffff, 0 0 60px #00ffff',
+        }}
+      />
+
+      {/* Digital Rain Background */}
+      <DigitalRain />
+
+      {/* 3D Scene */}
+      <Canvas className="absolute inset-0">
+        <PerspectiveCamera makeDefault position={[0, 10, 20]} fov={60} />
+        <OrbitControls 
+          enableZoom={false}
+          enablePan={false}
+          enableRotate={true}
+          autoRotate={true}
+          autoRotateSpeed={0.5}
+          maxPolarAngle={Math.PI / 2}
+          minPolarAngle={Math.PI / 4}
+        />
+        <CyberpunkScene mousePosition={mousePosition} />
+      </Canvas>
+
+      {/* Static Overlay */}
+      <div className="absolute inset-0 opacity-10 pointer-events-none">
+        <div className="w-full h-full bg-gradient-to-br from-transparent via-white to-transparent animate-pulse mix-blend-overlay" />
+      </div>
+
+      {/* Main UI Overlay */}
+      <div className="absolute inset-0 z-10 flex flex-col justify-between p-8">
+        {/* Top Bar */}
+        <div className="flex justify-between items-start">
+          <motion.div
+            initial={{ opacity: 0, x: -50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.5 }}
+            className="flex flex-col"
+          >
+            <div className="flex items-center space-x-2 mb-2">
+              <Monitor className="w-8 h-8 text-cyan-400" />
+              <span className="text-cyan-400 font-mono text-lg tracking-wider">ELICIT FEST</span>
+            </div>
+            <div className="text-red-400 font-mono text-xs tracking-widest">
+              NETWORK_STATUS: CORRUPTED
+            </div>
+          </motion.div>
+          
+          <CountdownTimer />
+        </div>
+
+        {/* Hero Section */}
+        <div className="flex-1 flex items-center justify-center">
+          <div className="text-center">
+            <AnimatePresence>
+              {isInitialized && (
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.8, ease: "easeOut" }}
+                >
+                  <GlitchText 
+                    text="SYSTEM CORRUPTION DETECTED"
+                    className="text-4xl md:text-6xl lg:text-7xl font-mono font-bold text-red-400 mb-6"
+                  />
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 1.2 }}
+                  >
+                    <GlitchText 
+                      text="ELICIT FEST INITIATED..."
+                      className="text-lg md:text-xl font-mono text-cyan-400 mb-8"
+                    />
+                  </motion.div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+
+            {/* Navigation Grid */}
+            <motion.div
+              initial={{ opacity: 0, y: 50 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 1.8 }}
+              className="grid grid-cols-2 md:grid-cols-3 gap-4 mt-12 max-w-4xl mx-auto"
+            >
+              {[
+                { icon: Calendar, label: 'EVENTS', color: 'text-cyan-400' },
+                { icon: Users, label: 'SPEAKERS', color: 'text-green-400' },
+                { icon: Info, label: 'ABOUT', color: 'text-purple-400' },
+                { icon: Phone, label: 'CONTACT', color: 'text-yellow-400' },
+                { icon: Zap, label: 'SPONSORS', color: 'text-pink-400' },
+                { icon: Monitor, label: 'REGISTER', color: 'text-red-400' },
+              ].map((item, index) => (
+                <motion.button
+                  key={item.label}
+                  whileHover={{ scale: 1.05, boxShadow: '0 0 20px currentColor' }}
+                  whileTap={{ scale: 0.95 }}
+                  className={`group relative p-4 border border-current ${item.color} bg-black bg-opacity-50 hover:bg-opacity-70 transition-all duration-300 font-mono tracking-wider`}
+                  style={{
+                    clipPath: 'polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px))',
+                  }}
+                >
+                  <div className="flex flex-col items-center space-y-2">
+                    <item.icon className="w-6 h-6" />
+                    <span className="text-sm">{item.label}</span>
+                  </div>
+                  <div className="absolute inset-0 bg-current opacity-0 group-hover:opacity-10 transition-opacity" />
+                </motion.button>
+              ))}
+            </motion.div>
+          </div>
+        </div>
+
+        {/* Bottom Bar */}
+        <div className="flex justify-between items-end">
+          <SocialLinks />
+          
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 2.2 }}
+          >
+            <button
+              onClick={handleInfiltrate}
+              className="group relative px-8 py-3 bg-red-500 text-black font-mono font-bold tracking-wider hover:bg-red-400 transition-colors duration-300"
+              style={{
+                clipPath: 'polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px))',
+              }}
+            >
+              <span className="relative z-10">&gt; INFILTRATE SYSTEM</span>
+              <div className="absolute inset-0 bg-white opacity-0 group-hover:opacity-20 transition-opacity" />
+            </button>
+          </motion.div>
+        </div>
+      </div>
+
+      {/* System Warnings */}
+      <SystemWarnings />
+
+      {/* Terminal Interface */}
+      <AnimatePresence>
+        {showTerminal && (
+          <TerminalInterface onClose={() => setShowTerminal(false)} />
+        )}
+      </AnimatePresence>
+    </div>
+  );
+};
+
+export default CyberpunkLanding;
