@@ -36,8 +36,8 @@ const CyberpunkLanding: React.FC = () => {
       window.removeEventListener('mousemove', handleMouseMove);
     };
   }, []);
-
-  const handleInfiltrate = () => {
+      x: e.clientX,
+      y: e.clientY,
     setShowTerminal(true);
   };
 
@@ -45,12 +45,12 @@ const CyberpunkLanding: React.FC = () => {
     <div className="relative w-full h-screen bg-black overflow-hidden cursor-none">
       {/* Custom Cursor */}
       <div 
-        className="fixed w-4 h-4 bg-cyan-400 rounded-full pointer-events-none z-50 mix-blend-difference"
+        className="fixed w-6 h-6 bg-cyan-400 rounded-full pointer-events-none z-50 transition-all duration-100 ease-out"
         style={{
-          left: mousePosition.x * 50 + 'px',
-          top: mousePosition.y * 50 + 'px',
+          left: mousePosition.x + 'px',
+          top: mousePosition.y + 'px',
           transform: 'translate(-50%, -50%)',
-          boxShadow: '0 0 20px #00ffff, 0 0 40px #00ffff, 0 0 60px #00ffff',
+          boxShadow: '0 0 20px #00ffff, 0 0 40px #00ffff, 0 0 60px #00ffff, 0 0 80px #00ffff',
         }}
       />
 
@@ -107,20 +107,20 @@ const CyberpunkLanding: React.FC = () => {
                 <motion.div
                   initial={{ opacity: 0, scale: 0.8 }}
                   animate={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.8, ease: "easeOut" }}
+                  transition={{ duration: 1.2, ease: "easeOut" }}
                 >
                   <GlitchText 
                     text="SYSTEM CORRUPTION DETECTED"
-                    className="text-4xl md:text-6xl lg:text-7xl font-mono font-bold text-red-400 mb-6"
+                    className="text-4xl md:text-6xl lg:text-7xl font-mono font-bold text-green-400 mb-6"
                   />
                   <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 1.2 }}
+                    transition={{ delay: 1.5 }}
                   >
                     <GlitchText 
                       text="ELICIT FEST INITIATED..."
-                      className="text-lg md:text-xl font-mono text-cyan-400 mb-8"
+                      className="text-lg md:text-xl font-mono text-red-400 mb-8"
                     />
                   </motion.div>
                 </motion.div>
@@ -131,12 +131,24 @@ const CyberpunkLanding: React.FC = () => {
             <motion.div
               initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 1.8 }}
+              transition={{ delay: 2.0 }}
               className="grid grid-cols-2 md:grid-cols-3 gap-4 mt-12 max-w-4xl mx-auto"
+              variants={{
+                hidden: { opacity: 0 },
+                visible: {
+                  opacity: 1,
+                  transition: {
+                    staggerChildren: 0.1,
+                    delayChildren: 2.2
+                  }
+                }
+              }}
+              initial="hidden"
+              animate="visible"
             >
               {[
                 { icon: Calendar, label: 'EVENTS', color: 'text-cyan-400' },
-                { icon: Users, label: 'SPEAKERS', color: 'text-green-400' },
+                { icon: Users, label: 'SPEAKERS', color: 'text-lime-400' },
                 { icon: Info, label: 'ABOUT', color: 'text-purple-400' },
                 { icon: Phone, label: 'CONTACT', color: 'text-yellow-400' },
                 { icon: Zap, label: 'SPONSORS', color: 'text-pink-400' },
@@ -144,18 +156,42 @@ const CyberpunkLanding: React.FC = () => {
               ].map((item, index) => (
                 <motion.button
                   key={item.label}
-                  whileHover={{ scale: 1.05, boxShadow: '0 0 20px currentColor' }}
-                  whileTap={{ scale: 0.95 }}
+                  variants={{
+                    hidden: { opacity: 0, y: 20, scale: 0.8 },
+                    visible: { opacity: 1, y: 0, scale: 1 }
+                  }}
+                  whileHover={{ 
+                    scale: 1.08, 
+                    boxShadow: '0 0 30px currentColor, inset 0 0 20px rgba(255,255,255,0.1)',
+                    y: -5
+                  }}
+                  whileTap={{ 
+                    scale: 0.92,
+                    boxShadow: '0 0 40px currentColor, inset 0 0 30px rgba(255,255,255,0.2)'
+                  }}
                   className={`group relative p-4 border border-current ${item.color} bg-black bg-opacity-50 hover:bg-opacity-70 transition-all duration-300 font-mono tracking-wider`}
                   style={{
                     clipPath: 'polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px))',
                   }}
                 >
                   <div className="flex flex-col items-center space-y-2">
-                    <item.icon className="w-6 h-6" />
+                    <motion.div
+                      whileHover={{ rotate: 360 }}
+                      transition={{ duration: 0.5 }}
+                    >
+                      <item.icon className="w-6 h-6" />
+                    </motion.div>
                     <span className="text-sm">{item.label}</span>
                   </div>
-                  <div className="absolute inset-0 bg-current opacity-0 group-hover:opacity-10 transition-opacity" />
+                  <div className="absolute inset-0 bg-current opacity-0 group-hover:opacity-20 transition-opacity duration-300" />
+                  
+                  {/* Scanning line effect */}
+                  <motion.div
+                    className="absolute inset-0 bg-gradient-to-r from-transparent via-current to-transparent opacity-0 group-hover:opacity-30"
+                    initial={{ x: '-100%' }}
+                    whileHover={{ x: '100%' }}
+                    transition={{ duration: 0.6, ease: "easeInOut" }}
+                  />
                 </motion.button>
               ))}
             </motion.div>
@@ -169,17 +205,35 @@ const CyberpunkLanding: React.FC = () => {
           <motion.div
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 2.2 }}
+            transition={{ delay: 2.8 }}
           >
             <button
               onClick={handleInfiltrate}
-              className="group relative px-8 py-3 bg-red-500 text-black font-mono font-bold tracking-wider hover:bg-red-400 transition-colors duration-300"
+              className="group relative px-8 py-3 bg-red-500 text-black font-mono font-bold tracking-wider hover:bg-red-400 transition-all duration-300 hover:scale-105"
               style={{
                 clipPath: 'polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px))',
+                boxShadow: '0 0 20px #ff0040',
               }}
             >
               <span className="relative z-10">&gt; INFILTRATE SYSTEM</span>
-              <div className="absolute inset-0 bg-white opacity-0 group-hover:opacity-20 transition-opacity" />
+              <div className="absolute inset-0 bg-white opacity-0 group-hover:opacity-30 transition-opacity duration-300" />
+              
+              {/* Pulsing border effect */}
+              <motion.div
+                className="absolute inset-0 border-2 border-red-400"
+                style={{
+                  clipPath: 'polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px))',
+                }}
+                animate={{
+                  opacity: [0, 1, 0],
+                  scale: [1, 1.05, 1],
+                }}
+                transition={{
+                  duration: 2,
+                  repeat: Infinity,
+                  ease: "easeInOut"
+                }}
+              />
             </button>
           </motion.div>
         </div>

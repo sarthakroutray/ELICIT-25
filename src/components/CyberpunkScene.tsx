@@ -34,7 +34,7 @@ const CyberpunkScene: React.FC<CyberpunkSceneProps> = ({ mousePosition }) => {
               itemSize={3}
             />
           </bufferGeometry>
-          <lineBasicMaterial color="#00ffff" opacity={0.3} transparent />
+          <lineBasicMaterial color="#00ff41" opacity={0.4} transparent />
         </line>
       );
       
@@ -52,7 +52,7 @@ const CyberpunkScene: React.FC<CyberpunkSceneProps> = ({ mousePosition }) => {
               itemSize={3}
             />
           </bufferGeometry>
-          <lineBasicMaterial color="#00ffff" opacity={0.3} transparent />
+          <lineBasicMaterial color="#00ff41" opacity={0.4} transparent />
         </line>
       );
     }
@@ -75,9 +75,21 @@ const CyberpunkScene: React.FC<CyberpunkSceneProps> = ({ mousePosition }) => {
   }, []);
 
   useFrame((state) => {
+    const pulseIntensity = Math.sin(state.clock.elapsedTime * 2) * 0.2 + 0.4;
+    
     if (gridRef.current) {
-      gridRef.current.rotation.x = mousePosition.y * 0.1;
-      gridRef.current.rotation.y = mousePosition.x * 0.1;
+      const normalizedX = (mousePosition.x / window.innerWidth) * 2 - 1;
+      const normalizedY = -(mousePosition.y / window.innerHeight) * 2 + 1;
+      
+      gridRef.current.rotation.x = normalizedY * 0.1;
+      gridRef.current.rotation.y = normalizedX * 0.1;
+      
+      // Add pulsing effect to grid lines
+      gridRef.current.children.forEach((line) => {
+        if (line.material) {
+          line.material.opacity = pulseIntensity;
+        }
+      });
     }
     
     if (robotsRef.current) {
@@ -152,8 +164,8 @@ const CyberpunkScene: React.FC<CyberpunkSceneProps> = ({ mousePosition }) => {
             Math.sin(i * Math.PI / 3) * 2.2
           ]}>
             <meshStandardMaterial 
-              color="#00ffff" 
-              emissive="#00ffff" 
+              color="#00ff41" 
+              emissive="#00ff41" 
               emissiveIntensity={3} 
             />
           </Sphere>
@@ -167,8 +179,8 @@ const CyberpunkScene: React.FC<CyberpunkSceneProps> = ({ mousePosition }) => {
             Math.sin(i * Math.PI / 2) * 3
           ]} rotation={[0, i * Math.PI / 2, 0]}>
             <meshStandardMaterial 
-              color="#00ff41" 
-              emissive="#00ff41" 
+              color="#ff0040" 
+              emissive="#ff0040" 
               emissiveIntensity={2}
               transparent
               opacity={0.7}

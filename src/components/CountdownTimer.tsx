@@ -41,10 +41,10 @@ const CountdownTimer: React.FC = () => {
       className="bg-black bg-opacity-70 border border-cyan-400 p-4 font-mono"
       style={{
         clipPath: 'polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px))',
-        boxShadow: '0 0 20px rgba(0, 255, 255, 0.3)',
+        boxShadow: '0 0 20px rgba(0, 255, 65, 0.4), 0 0 40px rgba(255, 0, 64, 0.2)',
       }}
     >
-      <div className="text-cyan-400 text-xs mb-2 text-center">SYSTEM BREACH IN:</div>
+      <div className="text-lime-400 text-xs mb-2 text-center matrix-glow">SYSTEM BREACH IN:</div>
       <div className="grid grid-cols-4 gap-2 text-center">
         {[
           { value: timeLeft.days, label: 'DAYS' },
@@ -53,10 +53,25 @@ const CountdownTimer: React.FC = () => {
           { value: timeLeft.seconds, label: 'SEC' },
         ].map((item, index) => (
           <div key={index} className="flex flex-col">
-            <div className="text-red-400 text-lg font-bold">
+            <motion.div 
+              className="text-red-400 text-lg font-bold"
+              animate={{
+                scale: [1, 1.1, 1],
+                textShadow: [
+                  '0 0 5px #ff0040',
+                  '0 0 15px #ff0040, 0 0 25px #ff0040',
+                  '0 0 5px #ff0040'
+                ]
+              }}
+              transition={{
+                duration: 1,
+                repeat: Infinity,
+                delay: index * 0.2
+              }}
+            >
               {formatNumber(item.value)}
-            </div>
-            <div className="text-cyan-400 text-xs">
+            </motion.div>
+            <div className="text-lime-400 text-xs">
               {item.label}
             </div>
           </div>
