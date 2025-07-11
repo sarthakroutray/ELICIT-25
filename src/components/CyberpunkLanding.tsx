@@ -36,8 +36,15 @@ const CyberpunkLanding: React.FC = () => {
       window.removeEventListener('mousemove', handleMouseMove);
     };
   }, []);
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    setMousePosition({
       x: e.clientX,
       y: e.clientY,
+    });
+  };
+
+  const handleInfiltrate = () => {
     setShowTerminal(true);
   };
 
