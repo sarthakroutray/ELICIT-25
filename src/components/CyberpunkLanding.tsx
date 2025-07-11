@@ -108,7 +108,7 @@ const CyberpunkLanding: React.FC = () => {
                 <motion.div
                   initial={{ opacity: 0, scale: 0.8 }}
                   animate={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.8, ease: "easeOut" }}
+                  transition={{ duration: 0.8, ease: 'easeOut' }}
                 >
                   <GlitchText 
                     text="SYSTEM CORRUPTION DETECTED"
@@ -191,7 +191,7 @@ const CyberpunkLanding: React.FC = () => {
                   <motion.div
                     className="absolute inset-0 bg-gradient-to-r from-transparent via-current to-transparent opacity-0 group-hover:opacity-30"
                     initial={{ x: '-100%' }}
-                    whileHover={{ x: '100%' }}
+                    animate={{ x: '100%' }}
                     transition={{ duration: 0.6, ease: "easeInOut" }}
                   />
                 </motion.button>
