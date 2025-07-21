@@ -46,7 +46,7 @@ const CyberpunkLanding: React.FC = () => {
     <div className="relative w-full h-screen bg-black overflow-hidden" style={{ cursor: 'none' }}>
       {/* Custom Cursor */}
       <div 
-        className="fixed w-6 h-6 bg-blue-500 rounded-full pointer-events-none transition-all duration-100 ease-out"
+        className="fixed w-2.5 h-2.5 bg-blue-500 rounded-full pointer-events-none transition-transform duration-[200ms] ease-[cubic-bezier(0.22, 1, 0.36, 1)]"
         style={{
           left: mousePosition.x + 'px',
           top: mousePosition.y + 'px',
@@ -113,12 +113,21 @@ const CyberpunkLanding: React.FC = () => {
                 >
                   <GlitchText 
                     text="SYSTEM CORRUPTION DETECTED"
-                    className="text-4xl md:text-6xl lg:text-7xl font-mono font-bold text-cyan-400 mb-6"
+                    className="text-4xl md:text-6xl lg:text-7xl font-mono font-bold text-[#00ff41] mb-6"
                     style={{
-                      textShadow: '0 0 10px #00ffff, 0 0 20px #00ffff, 0 0 30px #00ffff',
-                      filter: 'drop-shadow(2px 2px 4px rgba(0,0,0,0.8))'
+                      textShadow: `
+                        -1px -1px 0 #000,
+                        1px -1px 0 #000,
+                        -1px 1px 0 #000,
+                        1px 1px 0 #000,
+                        0 0 5px #00ff41,
+                        0 0 10px #00ff41,
+                        2px 0 5px #ff1a1a
+                      `,
+                      filter: 'drop-shadow(2px 2px 4px rgba(0,0,0,0.8))',
                     }}
                   />
+
                   <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -135,9 +144,9 @@ const CyberpunkLanding: React.FC = () => {
 
             {/* Navigation Grid */}
             <motion.div
-              initial={{ opacity: 0, y: 50 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 2.0 }}
+              // initial={{ opacity: 0, y: 50 }}
+              // animate={{ opacity: 1, y: 0 }}
+              // transition={{ delay: 2.0 }}
               className="grid grid-cols-2 md:grid-cols-3 gap-4 mt-12 max-w-4xl mx-auto"
               variants={{
                 hidden: { opacity: 0 },
