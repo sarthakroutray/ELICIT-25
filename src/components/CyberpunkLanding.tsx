@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls, PerspectiveCamera } from '@react-three/drei';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -16,7 +16,6 @@ const CyberpunkLanding: React.FC = () => {
   const [isInitialized, setIsInitialized] = useState(false);
   const [showTerminal, setShowTerminal] = useState(false);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  const audioRef = useRef<HTMLAudioElement>(null);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -102,7 +101,7 @@ const CyberpunkLanding: React.FC = () => {
         </div>
 
         {/* Hero Section */}
-        <div className="flex-1 flex items-center justify-center">
+        <div className="absolute top-24 left-0 right-0 z-20">
           <div className="text-center">
             <AnimatePresence>
               {isInitialized && (
@@ -113,7 +112,7 @@ const CyberpunkLanding: React.FC = () => {
                 >
                   <GlitchText 
                     text="SYSTEM CORRUPTION DETECTED"
-                    className="text-4xl md:text-6xl lg:text-7xl font-mono font-bold text-[#00ff41] mb-6"
+                    className="text-2xl md:text-4xl lg:text-5xl font-mono font-bold text-[#00ff41] mb-8"
                     style={{
                       textShadow: `
                         -1px -1px 0 #000,
@@ -128,14 +127,44 @@ const CyberpunkLanding: React.FC = () => {
                     }}
                   />
 
+                  {/* Logo Section */}
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ delay: 0.8, duration: 0.6 }}
+                    className="mb-8"
+                  >
+                    <img
+                      src="/logo.png"
+                      alt="ELICIT FEST Logo"
+                      className="mx-auto w-32 h-32 md:w-40 md:h-40 lg:w-48 lg:h-48 object-contain"
+                      style={{
+                        filter: 'drop-shadow(0 0 20px #00ff41) drop-shadow(0 0 40px #ff0040)'
+                      }}
+                    />
+                  </motion.div>
+
                   <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 1.0 }}
+                    transition={{ delay: 1.2 }}
                   >
                     <GlitchText 
                       text="ELICIT FEST INITIATED..."
-                      className="text-lg md:text-xl font-mono text-red-400 mb-8"
+                      className="text-3xl md:text-4xl font-mono text-green-400 mb-12"
+                      style={{
+                        textShadow: `
+                          -2px -2px 0 #000,
+                          2px -2px 0 #000,
+                          -2px 2px 0 #000,
+                          2px 2px 0 #000,
+                          0 0 10px #00ff41,
+                          0 0 20px #00ff41,
+                          0 0 30px #00ff41,
+                          4px 4px 8px rgba(0,0,0,0.8)
+                        `,
+                        filter: 'drop-shadow(4px 4px 8px rgba(0,0,0,0.9)) drop-shadow(0 0 15px #00ff41)',
+                      }}
                     />
                   </motion.div>
                 </motion.div>
@@ -143,18 +172,16 @@ const CyberpunkLanding: React.FC = () => {
             </AnimatePresence>
 
             {/* Navigation Grid */}
-            <motion.div
-              // initial={{ opacity: 0, y: 50 }}
-              // animate={{ opacity: 1, y: 0 }}
-              // transition={{ delay: 2.0 }}
-              className="grid grid-cols-2 md:grid-cols-3 gap-4 mt-12 max-w-4xl mx-auto"
+            <div className="absolute top-96 left-1/2 transform -translate-x-1/2 w-full max-w-4xl px-8">
+              <motion.div
+                className="grid grid-cols-2 md:grid-cols-3 gap-4"
               variants={{
                 hidden: { opacity: 0 },
                 visible: {
                   opacity: 1,
                   transition: {
                     staggerChildren: 0.1,
-                    delayChildren: 2.2
+                    delayChildren: 2.5
                   }
                 }
               }}
@@ -168,7 +195,7 @@ const CyberpunkLanding: React.FC = () => {
                 { icon: Phone, label: 'CONTACT', color: 'text-yellow-400' },
                 { icon: Zap, label: 'SPONSORS', color: 'text-pink-400' },
                 { icon: Monitor, label: 'REGISTER', color: 'text-red-400' },
-              ].map((item, index) => (
+              ].map((item) => (
                 <motion.button
                   key={item.label}
                   variants={{
@@ -184,7 +211,7 @@ const CyberpunkLanding: React.FC = () => {
                     scale: 0.92,
                     boxShadow: '0 0 40px currentColor, inset 0 0 30px rgba(255,255,255,0.2)'
                   }}
-                  className={`group relative p-4 border border-current ${item.color} bg-black bg-opacity-50 hover:bg-opacity-70 transition-all duration-300 font-mono tracking-wider`}
+                  className={`group relative px-1 py-3 border border-current ${item.color} bg-black bg-opacity-50 hover:bg-opacity-70 transition-all duration-300 font-mono tracking-wider`}
                   style={{
                     clipPath: 'polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px))',
                   }}
@@ -195,7 +222,7 @@ const CyberpunkLanding: React.FC = () => {
                       whileHover={{ rotate: 360 }}
                       transition={{ duration: 0.5 }}
                     >
-                      <item.icon className="w-6 h-6" />
+                      <item.icon className="w-5 h-5" />
                     </motion.div>
                     <span className="text-sm">{item.label}</span>
                   </div>
@@ -210,7 +237,8 @@ const CyberpunkLanding: React.FC = () => {
                   />
                 </motion.button>
               ))}
-            </motion.div>
+              </motion.div>
+            </div>
           </div>
         </div>
 
