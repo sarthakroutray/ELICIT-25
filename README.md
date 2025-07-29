@@ -10,8 +10,10 @@ Install dependencies: Run the following command to install all the necessary pro
 
 
 npm install
+
 Start the development server: Once the dependencies are installed, you can start the development server using the script defined in package.json:
 
 
 npm run dev
+
 After running npm run dev, the application will typically be accessible in your web browser at http://localhost:5173 (or a similar port, which will be displayed in your terminal).
