@@ -172,75 +172,217 @@ const CyberpunkLanding: React.FC = () => {
             </AnimatePresence>
 
             {/* Navigation Grid */}
-            <div className="absolute top-96 left-1/2 transform -translate-x-1/2 w-full max-w-4xl px-8">
-              <motion.div
-                className="grid grid-cols-2 md:grid-cols-3 gap-4"
-              variants={{
-                hidden: { opacity: 0 },
-                visible: {
-                  opacity: 1,
-                  transition: {
-                    staggerChildren: 0.1,
-                    delayChildren: 2.5
-                  }
-                }
-              }}
-              initial="hidden"
-              animate="visible"
-            >
-              {[
-                { icon: Calendar, label: 'EVENTS', color: 'text-cyan-400' },
-                { icon: Users, label: 'SPEAKERS', color: 'text-lime-400' },
-                { icon: Info, label: 'ABOUT', color: 'text-purple-400' },
-                { icon: Phone, label: 'CONTACT', color: 'text-yellow-400' },
-                { icon: Zap, label: 'SPONSORS', color: 'text-pink-400' },
-                { icon: Monitor, label: 'REGISTER', color: 'text-red-400' },
-              ].map((item) => (
-                <motion.button
-                  key={item.label}
-                  variants={{
-                    hidden: { opacity: 0, y: 20, scale: 0.8 },
-                    visible: { opacity: 1, y: 0, scale: 1 }
-                  }}
-                  whileHover={{ 
-                    scale: 1.08, 
-                    boxShadow: '0 0 30px currentColor, inset 0 0 20px rgba(255,255,255,0.1)',
-                    y: -5
-                  }}
-                  whileTap={{ 
-                    scale: 0.92,
-                    boxShadow: '0 0 40px currentColor, inset 0 0 30px rgba(255,255,255,0.2)'
-                  }}
-                  className={`group relative px-1 py-3 border border-current ${item.color} bg-black bg-opacity-50 hover:bg-opacity-70 transition-all duration-300 font-mono tracking-wider`}
-                  style={{
-                    clipPath: 'polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px))',
-                  }}
-                  onClick={() => playSound('/audio/click.mp3')}
-                >
-                  <div className="flex flex-col items-center space-y-2">
-                    <motion.div
-                      whileHover={{ rotate: 360 }}
-                      transition={{ duration: 0.5 }}
-                    >
-                      <item.icon className="w-5 h-5" />
-                    </motion.div>
-                    <span className="text-sm">{item.label}</span>
-                  </div>
-                  <div className="absolute inset-0 bg-current opacity-0 group-hover:opacity-20 transition-opacity duration-300" />
-                  
-                  {/* Scanning line effect */}
-                  <motion.div
-                    className="absolute inset-0 bg-gradient-to-r from-transparent via-current to-transparent opacity-0 group-hover:opacity-30"
-                    initial={{ x: '-100%' }}
-                    animate={{ x: '100%' }}
-                    transition={{ duration: 0.6, ease: "easeInOut" }}
-                  />
-                </motion.button>
-              ))}
-              </motion.div>
-            </div>
           </div>
         </div>
+
+        {/* Left Side Navigation Panel */}
+        <motion.div
+          initial={{ opacity: 0, x: -100 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ delay: 2.5, duration: 0.8 }}
+          className="absolute left-4 top-1/2 transform -translate-y-1/2 space-y-3"
+        >
+          {[
+            { icon: Calendar, label: 'EVENTS', color: 'border-cyan-400 text-cyan-400', glowColor: '#00ffff' },
+            { icon: Users, label: 'SPEAKERS', color: 'border-lime-400 text-lime-400', glowColor: '#00ff41' },
+            { icon: Info, label: 'ABOUT', color: 'border-purple-400 text-purple-400', glowColor: '#8b5cf6' },
+          ].map((item, index) => (
+            <motion.button
+              key={item.label}
+              initial={{ opacity: 0, x: -50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 2.8 + index * 0.1 }}
+              whileHover={{ 
+                scale: 1.05,
+                x: 10,
+                boxShadow: `0 0 25px ${item.glowColor}, inset 0 0 15px rgba(255,255,255,0.1)`
+              }}
+              whileTap={{ scale: 0.95 }}
+              className={`group relative w-20 h-16 ${item.color} bg-black bg-opacity-80 hover:bg-opacity-90 transition-all duration-300 font-mono text-xs tracking-wider overflow-hidden`}
+              style={{
+                clipPath: 'polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px))',
+                boxShadow: `0 0 10px ${item.glowColor}40`,
+              }}
+              onClick={() => playSound('/audio/click.mp3')}
+            >
+              {/* Data stream lines */}
+              <div className="absolute inset-0 opacity-30">
+                {[...Array(3)].map((_, i) => (
+                  <motion.div
+                    key={i}
+                    className="absolute w-full h-px bg-current"
+                    style={{ top: `${20 + i * 20}%` }}
+                    animate={{
+                      scaleX: [0, 1, 0],
+                      opacity: [0, 1, 0]
+                    }}
+                    transition={{
+                      duration: 2,
+                      repeat: Infinity,
+                      delay: index * 0.3 + i * 0.2,
+                      ease: "easeInOut"
+                    }}
+                  />
+                ))}
+              </div>
+              
+              <div className="relative z-10 flex flex-col items-center justify-center h-full space-y-1">
+                <motion.div
+                  whileHover={{ rotate: 180, scale: 1.2 }}
+                  transition={{ duration: 0.3 }}
+                  className="relative"
+                >
+                  <item.icon className="w-4 h-4" />
+                  {/* Icon glow effect */}
+                  <motion.div
+                    className="absolute inset-0"
+                    animate={{
+                      boxShadow: [
+                        `0 0 5px ${item.glowColor}`,
+                        `0 0 15px ${item.glowColor}, 0 0 25px ${item.glowColor}`,
+                        `0 0 5px ${item.glowColor}`
+                      ]
+                    }}
+                    transition={{ duration: 2, repeat: Infinity }}
+                  />
+                </motion.div>
+                <span className="text-[10px] leading-tight text-center">{item.label}</span>
+              </div>
+              
+              {/* Glitch overlay */}
+              <motion.div
+                className="absolute inset-0 bg-current opacity-0 group-hover:opacity-10"
+                animate={{
+                  opacity: [0, 0.1, 0],
+                  scaleY: [1, 1.1, 1]
+                }}
+                transition={{
+                  duration: 0.2,
+                  repeat: Infinity,
+                  repeatDelay: 3
+                }}
+              />
+              
+              {/* Scanning line */}
+              <motion.div
+                className="absolute left-0 w-full h-px bg-current opacity-0 group-hover:opacity-60"
+                animate={{
+                  y: [0, 64, 0],
+                  opacity: [0, 0.6, 0]
+                }}
+                transition={{
+                  duration: 1,
+                  repeat: Infinity,
+                  ease: "linear"
+                }}
+              />
+            </motion.button>
+          ))}
+        </motion.div>
+
+        {/* Right Side Navigation Panel */}
+        <motion.div
+          initial={{ opacity: 0, x: 100 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ delay: 2.8, duration: 0.8 }}
+          className="absolute right-4 top-1/2 transform -translate-y-1/2 space-y-3"
+        >
+          {[
+            { icon: Phone, label: 'CONTACT', color: 'border-yellow-400 text-yellow-400', glowColor: '#fbbf24' },
+            { icon: Zap, label: 'SPONSORS', color: 'border-pink-400 text-pink-400', glowColor: '#f472b6' },
+            { icon: Monitor, label: 'REGISTER', color: 'border-red-400 text-red-400', glowColor: '#ff0040' },
+          ].map((item, index) => (
+            <motion.button
+              key={item.label}
+              initial={{ opacity: 0, x: 50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 3.1 + index * 0.1 }}
+              whileHover={{ 
+                scale: 1.05,
+                x: -10,
+                boxShadow: `0 0 25px ${item.glowColor}, inset 0 0 15px rgba(255,255,255,0.1)`
+              }}
+              whileTap={{ scale: 0.95 }}
+              className={`group relative w-20 h-16 ${item.color} bg-black bg-opacity-80 hover:bg-opacity-90 transition-all duration-300 font-mono text-xs tracking-wider overflow-hidden`}
+              style={{
+                clipPath: 'polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px)',
+                boxShadow: `0 0 10px ${item.glowColor}40`,
+              }}
+              onClick={() => playSound('/audio/click.mp3')}
+            >
+              {/* Circuit pattern */}
+              <div className="absolute inset-0 opacity-20">
+                <div className="absolute top-2 left-2 w-4 h-px bg-current" />
+                <div className="absolute top-2 left-2 w-px h-4 bg-current" />
+                <div className="absolute bottom-2 right-2 w-4 h-px bg-current" />
+                <div className="absolute bottom-2 right-2 w-px h-4 bg-current" />
+                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-2 h-2 border border-current" />
+              </div>
+              
+              <div className="relative z-10 flex flex-col items-center justify-center h-full space-y-1">
+                <motion.div
+                  whileHover={{ rotate: -180, scale: 1.2 }}
+                  transition={{ duration: 0.3 }}
+                  className="relative"
+                >
+                  <item.icon className="w-4 h-4" />
+                  {/* Pulsing glow */}
+                  <motion.div
+                    className="absolute inset-0 rounded-full"
+                    animate={{
+                      boxShadow: [
+                        `0 0 0px ${item.glowColor}`,
+                        `0 0 20px ${item.glowColor}`,
+                        `0 0 0px ${item.glowColor}`
+                      ]
+                    }}
+                    transition={{ duration: 1.5, repeat: Infinity }}
+                  />
+                </motion.div>
+                <span className="text-[10px] leading-tight text-center">{item.label}</span>
+              </div>
+              
+              {/* Matrix-style falling characters */}
+              <div className="absolute inset-0 overflow-hidden opacity-0 group-hover:opacity-30">
+                {[...Array(3)].map((_, i) => (
+                  <motion.div
+                    key={i}
+                    className="absolute text-[8px] font-mono"
+                    style={{ 
+                      left: `${20 + i * 25}%`,
+                      color: item.glowColor
+                    }}
+                    animate={{
+                      y: [-20, 80],
+                      opacity: [0, 1, 0]
+                    }}
+                    transition={{
+                      duration: 1.5,
+                      repeat: Infinity,
+                      delay: i * 0.3,
+                      ease: "linear"
+                    }}
+                  >
+                    {Math.random() > 0.5 ? '1' : '0'}
+                  </motion.div>
+                ))}
+              </div>
+              
+              {/* Holographic shimmer */}
+              <motion.div
+                className="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent opacity-0 group-hover:opacity-20"
+                animate={{
+                  x: [-100, 100],
+                  skewX: [0, 15, 0]
+                }}
+                transition={{
+                  duration: 0.8,
+                  ease: "easeInOut"
+                }}
+              />
+            </motion.button>
+          ))}
+        </motion.div>
 
         {/* Bottom Bar */}
         <div className="flex justify-between items-end">
