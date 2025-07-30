@@ -45,7 +45,7 @@ const CyberpunkLanding: React.FC = () => {
     <div className="relative w-full h-screen bg-black overflow-hidden" style={{ cursor: 'none' }}>
       {/* Custom Cursor */}
       <div 
-        className="fixed w-2.5 h-2.5 bg-blue-500 rounded-full pointer-events-none transition-transform duration-[200ms] ease-[cubic-bezier(0.22, 1, 0.36, 1)]"
+        className="fixed w-2 h-2 bg-blue-500 rounded-full pointer-events-none transition-transform duration-[50ms] ease-linear will-change-transform"
         style={{
           left: mousePosition.x + 'px',
           top: mousePosition.y + 'px',
