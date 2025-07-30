@@ -4,9 +4,10 @@ import { motion } from 'framer-motion';
 interface GlitchTextProps {
   text: string;
   className?: string;
+  style?: React.CSSProperties;
 }
 
-const GlitchText: React.FC<GlitchTextProps> = ({ text, className = '' }) => {
+const GlitchText: React.FC<GlitchTextProps> = ({ text, className = '', style }) => {
   const [glitchText, setGlitchText] = useState(text);
   const [isGlitching, setIsGlitching] = useState(false);
 
@@ -44,6 +45,7 @@ const GlitchText: React.FC<GlitchTextProps> = ({ text, className = '' }) => {
   return (
     <motion.div
       className={`relative ${className}`}
+      style={style}
       animate={{
         textShadow: isGlitching 
           ? ['0 0 0 #00ff41', '2px 0 0 #ff0040, -2px 0 0 #00ffff', '0 0 0 #00ff41']
