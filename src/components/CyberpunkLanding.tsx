@@ -12,7 +12,11 @@ import DigitalRain from './DigitalRain';
 import { playSound } from '../utils/audio';
 import { Monitor, Zap, Users, Calendar, Info, Phone } from 'lucide-react';
 
-const CyberpunkLanding: React.FC = () => {
+interface CyberpunkLandingProps {
+  onSpeakersClick?: () => void;
+}
+
+const CyberpunkLanding: React.FC<CyberpunkLandingProps> = ({ onSpeakersClick }) => {
   const [isInitialized, setIsInitialized] = useState(false);
   const [showTerminal, setShowTerminal] = useState(false);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
@@ -202,7 +206,12 @@ const CyberpunkLanding: React.FC = () => {
                     boxShadow: `0 0 25px ${item.glowColor}, inset 0 0 15px rgba(255,255,255,0.1)`
                   }}
                   whileTap={{ scale: 0.95 }}
-                  onClick={() => playSound('/audio/click.mp3')}
+                  onClick={() => {
+                    playSound('/audio/click.mp3');
+                    if (item.label === 'SPEAKERS' && onSpeakersClick) {
+                      onSpeakersClick();
+                    }
+                  }}
                   className={`group relative w-32 h-32 ${item.color} bg-black bg-opacity-80 hover:bg-opacity-90 transition-all duration-300 font-mono text-xs tracking-wider overflow-hidden`}
                   style={{
                     clipPath: 'polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px))',
