@@ -112,7 +112,12 @@ const Speakers: React.FC = () => {
                   src={speaker.outline}
                   alt="Card outline"
                   className="absolute inset-0 w-full h-full pointer-events-none select-none"
-                  style={{ zIndex: 3, transform: `scale(${index === 1 ? '1.2' : '1.2'})`, margin: '-3%' }}
+                  style={{
+                    zIndex: 3,
+                    transform: `scale(${index === 1 ? '1.2' : '1.2'})`,
+                    margin: '-3%',
+                    filter: 'drop-shadow(0 0 16px #00ffff) drop-shadow(0 0 32px #00ffff80)'
+                  }}
                   draggable={false}
                 />
                 {/* Scaled-down content */}
