@@ -14,9 +14,10 @@ import { Monitor, Zap, Users, Calendar, Info, Phone } from 'lucide-react';
 
 interface CyberpunkLandingProps {
   onSpeakersClick?: () => void;
+    onAboutClick?: () => void; 
 }
 
-const CyberpunkLanding: React.FC<CyberpunkLandingProps> = ({ onSpeakersClick }) => {
+const CyberpunkLanding: React.FC<CyberpunkLandingProps> = ({ onSpeakersClick,onAboutClick }) => {
   const [isInitialized, setIsInitialized] = useState(false);
   const [showTerminal, setShowTerminal] = useState(false);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
@@ -210,6 +211,9 @@ const CyberpunkLanding: React.FC<CyberpunkLandingProps> = ({ onSpeakersClick }) 
                     playSound('/audio/click.mp3');
                     if (item.label === 'SPEAKERS' && onSpeakersClick) {
                       onSpeakersClick();
+                    }
+                    else if (item.label === 'ABOUT' && onAboutClick) {
+                      onAboutClick();
                     }
                   }}
                   className={`group relative w-32 h-32 ${item.color} bg-black bg-opacity-80 hover:bg-opacity-90 transition-all duration-300 font-mono text-xs tracking-wider overflow-hidden`}
