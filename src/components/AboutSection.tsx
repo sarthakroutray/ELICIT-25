@@ -19,22 +19,28 @@ const AboutSection: React.FC = () => {
       
       {/* Overlay content goes here */}
      <div className="w-full flex flex-col items-center mt-12 mb-8 select-none z-10">
-  <div className="uppercase text-sm tracking-widest text-cyan-400 font-mono drop-shadow-[0_0_6px_#00fff7] mb-2">
+  <div className="uppercase text-sm tracking-widest text-green-400 font-mono drop-shadow-[0_0_6px_#00fff7] mb-2">
     SYSTEM CORE[03]
   </div>
-  <h1
-    className="text-5xl md:text-6xl font-black tracking-widest text-white neon-glow"
-    style={{
-      textShadow: `
-        0 0 8px #fff,
-        0 0 32px #00fff7,
-        0 0 64px #0ff
-      `
-    }}
-  >
-    ABOUT
-  </h1>
-  <div className="uppercase mb-4 text-xs tracking-widest text-white font-mono mt-2 drop-shadow-[0_0_6px_#17ff6b]">
+ <h1 
+            className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 tracking-wider"
+            style={{
+              fontFamily: 'Orbitron, monospace',
+              textShadow: `
+                -2px -2px 0 #000,
+                2px -2px 0 #000,
+                -2px 2px 0 #000,
+                2px 2px 0 #000,
+                0 0 10px #18a04eff,
+                0 0 20px #6acb8dff,
+                0 0 30px #a9ef94ff
+              `,
+              filter: 'drop-shadow(4px 4px 8px rgba(0,0,0,0.9))',
+            }}
+          >
+            ABOUT
+          </h1>
+  <div className="uppercase mb-10 text-xs tracking-widest text-white font-mono mt-0 drop-shadow-[0_0_6px_#17ff6b]">
     MAIN SYSTEM POWERS
   </div>
 
@@ -42,26 +48,27 @@ const AboutSection: React.FC = () => {
 
       {/* Wrapper */}
       <div
-        className=" mb-32 ml-4 mr-20 rounded-2xl bg-[rgba(10,10,10,0.75)] w-3/4 shadow-[0_0_40px_#0ff,0_0_80px_#0ff,0_0_100px_#0ff,inset_0_0_25px_#0ff]"
+        className=" mb-32 ml-4 mr-28 rounded-2xl bg-[rgba(10,10,10,0.75)] w-3/4 shadow-[0_0_40px_#39ff14,0_0_80px_#39ff14,0_0_100px_#39ff14,inset_0_0_25px_#39ff14]
+"
       >
         <div
           // Neon border with clip-path polygon effect - no direct Tailwind support, inline style used
-          className="relative pb-16 bg-[rgba(0,0,0,0.25)] border-2 border-cyan-400 flex justify-center items-start gap-8 rounded-lg"
+          className="relative pb-2 bg-[rgba(0,0,0,0.25)] border-2 border-white flex justify-center items-start gap-8 rounded-lg"
           style={{
             clipPath:
               "polygon(10px 0%, calc(100% - 10px) 0%, 100% 10px, 100% calc(100% - 10px), calc(100% - 10px) 100%, 10px 100%, 0% calc(100% - 10px), 0% 10px)",
             boxShadow:
-              "0 0 10px #00ffff, 0 0 25px #00ffff, 0 0 45px #0ff, inset 0 0 20px #00ffff",
+              "0 0 10px #d1e8d8ff, 0 0 25px #bfddd0ff, 0 0 45px #0ff, inset 0 0 20px #429f6cff",
           }}
         >
           {/* LEFT RECTANGLE BOX */}
           <div
-  className="flex-shrink-0 h-[340px] w-[480px] m-8 mr-2 mt-16 rounded-2xl"
+  className="flex-shrink-0 h-[400px] w-[480px] m-8 mr-2 border-white mt-8 rounded-2xl"
   style={{
     background: "rgba(10, 20, 15, 0.8)",
-    boxShadow:
-      "inset 0 0 16px #0ff, inset 0 0 36px #12ff5e, 0 0 6px #0ff, 0 0 16px #12ff5e",
-    border: "2px solid #0ff",
+   boxShadow: "inset 0 0 16px rgba(57, 255, 20, 0.3), inset 0 0 36px rgba(140, 255, 100, 0.25), 0 0 6px rgba(57, 255, 20, 0.35), 0 0 16px rgba(173, 255, 47, 0.3)",
+
+    border: "1px white solid ",
     clipPath:
       "polygon(10px 0%, calc(100% - 10px) 0%, 100% 10px, 100% calc(100% - 10px), calc(100% - 10px) 100%, 10px 100%, 0% calc(100% - 10px), 0% 10px)"
   }}
@@ -74,22 +81,22 @@ const AboutSection: React.FC = () => {
           <div className="flex flex-col gap-8 w-3/5 pr-8 h-[340px] my-8">
             {/* About Section Box */}
             <div
-              className="flex flex-col justify-center flex-1 h-1/2 p-4 rounded-lg border-2 border-yellow-400"
+              className="flex flex-col justify-center flex-1 h-1/2 p-4 rounded-lg border-2 border-green-400"
               style={{
                 backgroundColor: "rgba(0,0,0,0.25)",
-                boxShadow:
-                  "0 0 10px #ffff33, 0 0 25px #ffff33, 0 0 45px #ff0, inset 0 0 20px #ffff33",
+               boxShadow: "0 0 10px #adff2f, 0 0 25px #ccffcc, 0 0 45px #b6ff00, inset 0 0 20px #7eb47eff",
+
                 clipPath:
                   "polygon(10px 0%, calc(100% - 10px) 0%, 100% 10px, 100% calc(100% - 10px), calc(100% - 10px) 100%, 10px 100%, 0% calc(100% - 10px), 0% 10px)",
               }}
             >
               <h2
-                className="mb-4 text-yellow-400 text-lg"
-                style={{ textShadow: "0 0 10px #ffff33" }}
+                className="mb-1 text-green-400 text-sm"
+                style={{ textShadow: "0 0 10px #28462aff" }}
               >
                 ABOUT ACM
               </h2>
-              <p className="leading-relaxed">
+              <p className="leading-relaxed text-sm">
                 PLACEHOLDER TEXT STYLED IN A NEON LAYOUT.
                 <br />
                 REFLECTING GLOWING EDGES AND CYBERPUNK DESIGN.
@@ -100,19 +107,19 @@ const AboutSection: React.FC = () => {
 
             {/* Bizendint Section */}
             <div
-              className="flex justify-between gap-4 items-start p-2 rounded-lg border-2  border-yellow-400"
+              className="flex justify-between gap-4 items-start p-2 rounded-lg border-2  border-green-400"
               style={{
                 backgroundColor: "rgba(0,0,0,0.25)",
-                boxShadow:
-                  "0 0 10px #ffff33, 0 0 25px #ffff33, 0 0 45px #ff0, inset 0 0 20px #ffff33",
+                boxShadow: "0 0 10px #adff2f, 0 0 25px #ccffcc, 0 0 45px #b6ff00, inset 0 0 20px #dfffdf",
+
                 clipPath:
                   "polygon(10px 0%, calc(100% - 10px) 0%, 100% 10px, 100% calc(100% - 10px), calc(100% - 10px) 100%, 10px 100%, 0% calc(100% - 10px), 0% 10px)",
               }}
             >
               <div className="flex flex-col justify-center">
                 <h2
-                  className="mb-4 text-yellow-400 text-lg"
-                  style={{ textShadow: "0 0 10px #ffff33" }}
+                  className="mb-4 text-green-400 text-lg"
+                  style={{ textShadow: "0 0 10px #a2cfaaff" }}
                 >
                   BIZENDINT
                 </h2>
