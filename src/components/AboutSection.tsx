@@ -62,18 +62,31 @@ const AboutSection: React.FC = () => {
           }}
         >
           {/* LEFT RECTANGLE BOX */}
-          <div
-  className="flex-shrink-0 h-[400px] w-[480px] m-8 mr-2 border-white mt-8 rounded-2xl"
+       <div
+  className="relative flex-shrink-0 h-[400px] w-[480px] m-8 mr-2 mt-8"
   style={{
-    background: "rgba(10, 20, 15, 0.8)",
-   boxShadow: "inset 0 0 16px rgba(57, 255, 20, 0.3), inset 0 0 36px rgba(140, 255, 100, 0.25), 0 0 6px rgba(57, 255, 20, 0.35), 0 0 16px rgba(173, 255, 47, 0.3)",
-
-    border: "1px white solid ",
-    clipPath:
-      "polygon(10px 0%, calc(100% - 10px) 0%, 100% 10px, 100% calc(100% - 10px), calc(100% - 10px) 100%, 10px 100%, 0% calc(100% - 10px), 0% 10px)"
+    overflow: "visible",
   }}
 >
-  {/* Optional: Insert content here if needed */}
+  <div
+    style={{
+      height: "100%",
+      width: "100%",
+      background: "rgba(10, 20, 15, 0.8)",
+      border: "1px solid #00ff66",
+      borderRadius: "1rem",
+      boxShadow: `
+        0 0 12px 2px #00ff66,
+        0 0 24px 6px rgba(0, 255, 102, 0.4),
+        inset 0 0 12px rgba(0, 255, 102, 0.15),
+        inset 0 0 24px rgba(0, 255, 102, 0.1)
+      `,
+      backdropFilter: "blur(2px)",
+      WebkitBackdropFilter: "blur(2px)",
+    }}
+  >
+    {/* content here */}
+  </div>
 </div>
 
 
