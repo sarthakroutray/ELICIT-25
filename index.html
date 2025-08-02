@@ -1,88 +1,742 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/logo.png" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ELICIT FEST - System Corruption Detected</title>
-    <meta name="description" content="Enter the corrupted hacker network. ELICIT FEST - Where technology meets rebellion.">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
-    <style>
-      body {
-        font-family: 'Orbitron', monospace;
-        background: #000;
-        overflow-x: hidden;
-        scroll-behavior: smooth;
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/logo.png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ELICIT FEST - System Corruption Detected</title>
+  <meta name="description"
+    content="Enter the corrupted hacker network. ELICIT FEST - Where technology meets rebellion.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap"
+    rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      font-family: 'Orbitron', monospace;
+      background: #000;
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+    }
+
+    /* System Breach Animation Styles */
+    .system-breach-overlay {
+      position: fixed;
+      inset: 0;
+      background: #000;
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: opacity 0.5s ease;
+    }
+
+    .scanlines::before {
+      content: '';
+      pointer-events: none;
+      position: fixed;
+      z-index: 60;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: repeating-linear-gradient(to bottom,
+          rgba(0, 0, 0, 0) 0px,
+          rgba(0, 0, 0, 0.12) 2px,
+          rgba(0, 0, 0, 0.18) 4px,
+          rgba(0, 0, 0, 0) 6px);
+      mix-blend-mode: multiply;
+      opacity: 0.7;
+      transition: filter 0.2s;
+    }
+
+    .scanlines.jitter::before {
+      filter: blur(1.5px) brightness(1.2) hue-rotate(10deg);
+    }
+
+    .static-bg {
+      position: fixed;
+      z-index: 50;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      background: url('https://media.giphy.com/media/oEI9uBYSzLpBK/giphy.gif') repeat;
+      opacity: 0.2;
+      mix-blend-mode: screen;
+      animation: staticMove 1.5s linear infinite;
+      filter: contrast(1.5) brightness(0.8);
+    }
+
+    @keyframes staticMove {
+      0% {
+        background-position: 0 0;
       }
-      
-      /* Loading screen */
-      #loading {
-        position: fixed;
-        inset: 0;
-        background: #000;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        z-index: 9999;
-        transition: opacity 0.5s ease;
+
+      100% {
+        background-position: 100px 100px;
       }
-      
-      .loading-text {
-        color: #00ffff;
-        font-size: 24px;
-        animation: pulse 2s infinite;
+    }
+
+    .glitch {
+      position: relative;
+      color: #00ff41;
+      animation: flicker 1.5s infinite alternate;
+      letter-spacing: 0.1em;
+      filter: drop-shadow(0 0 8px #00ff41);
+      transition: filter 0.1s, color 0.1s;
+    }
+
+    .glitch::before,
+    .glitch::after {
+      content: attr(data-text);
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0.7;
+      pointer-events: none;
+    }
+
+    .glitch::before {
+      color: #ff006e;
+      z-index: -1;
+      animation: glitchTop 1s infinite linear alternate-reverse;
+      filter: blur(1px);
+    }
+
+    .glitch::after {
+      color: #00fff7;
+      z-index: -2;
+      animation: glitchBot 1.2s infinite linear alternate-reverse;
+      filter: blur(1px);
+    }
+
+    @keyframes glitchTop {
+      0% {
+        transform: translate(0, 0);
       }
-      
-      @keyframes pulse {
-        0%, 100% { opacity: 1; }
-        50% { opacity: 0.5; }
+
+      20% {
+        transform: translate(-2px, -2px);
       }
-      
-      /* Scanline effect */
-      .scanline {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 2px;
-        background: linear-gradient(90deg, transparent, #ff0040, transparent);
-        animation: scanline 3s linear infinite;
-        z-index: 10;
-        pointer-events: none;
+
+      40% {
+        transform: translate(-4px, 2px);
       }
-      
-      @keyframes scanline {
-        0% { transform: translateY(-100vh); }
-        100% { transform: translateY(100vh); }
+
+      60% {
+        transform: translate(2px, -1px);
       }
-    </style>
-  </head>
-  <body>
-    <!-- Loading Screen -->
-    <div id="loading">
-      <div class="loading-text">INITIALIZING SYSTEM...</div>
+
+      80% {
+        transform: translate(-1px, 2px);
+      }
+
+      100% {
+        transform: translate(0, 0);
+      }
+    }
+
+    @keyframes glitchBot {
+      0% {
+        transform: translate(0, 0);
+      }
+
+      20% {
+        transform: translate(2px, 2px);
+      }
+
+      40% {
+        transform: translate(4px, -2px);
+      }
+
+      60% {
+        transform: translate(-2px, 1px);
+      }
+
+      80% {
+        transform: translate(1px, -2px);
+      }
+
+      100% {
+        transform: translate(0, 0);
+      }
+    }
+
+    @keyframes flicker {
+
+      0%,
+      19%,
+      21%,
+      23%,
+      25%,
+      54%,
+      56%,
+      100% {
+        opacity: 1;
+      }
+
+      20%,
+      22%,
+      24%,
+      55% {
+        opacity: 0.4;
+      }
+    }
+
+    .blink {
+      animation: blink 1s steps(2, start) infinite;
+    }
+
+    @keyframes blink {
+      to {
+        visibility: hidden;
+      }
+    }
+
+    .shake {
+      animation: shake 0.4s cubic-bezier(.36, .07, .19, .97) both;
+    }
+
+    @keyframes shake {
+
+      10%,
+      90% {
+        transform: translate3d(-2px, 0, 0);
+      }
+
+      20%,
+      80% {
+        transform: translate3d(4px, 0, 0);
+      }
+
+      30%,
+      50%,
+      70% {
+        transform: translate3d(-8px, 0, 0);
+      }
+
+      40%,
+      60% {
+        transform: translate3d(8px, 0, 0);
+      }
+    }
+
+    .terminal-flicker {
+      animation: terminal-flicker 0.15s 2;
+    }
+
+    @keyframes terminal-flicker {
+      0% {
+        filter: invert(0) brightness(1);
+      }
+
+      50% {
+        filter: invert(1) brightness(2);
+      }
+
+      100% {
+        filter: invert(0) brightness(1);
+      }
+    }
+
+    .rgb-split {
+      position: fixed;
+      z-index: 70;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      mix-blend-mode: lighten;
+      background: repeating-linear-gradient(90deg, rgba(255, 0, 110, 0.05) 0 2px, transparent 2px 4px), repeating-linear-gradient(0deg, rgba(0, 255, 65, 0.05) 0 2px, transparent 2px 4px);
+      animation: rgbSplit 1.2s infinite alternate;
+      opacity: 0.5;
+      transition: filter 0.2s;
+    }
+
+    .rgb-split.glitch-rgb {
+      filter: blur(3px) hue-rotate(40deg) brightness(1.5);
+    }
+
+    .tv-flicker {
+      position: fixed;
+      z-index: 80;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      background: radial-gradient(circle at center, transparent 0%, rgba(0, 0, 0, 0.1) 50%, rgba(0, 0, 0, 0.3) 100%);
+      animation: tvFlicker 0.1s infinite;
+      mix-blend-mode: multiply;
+    }
+
+    @keyframes tvFlicker {
+
+      0%,
+      100% {
+        opacity: 0.1;
+      }
+
+      50% {
+        opacity: 0.3;
+      }
+    }
+
+    .tv-curvature {
+      position: fixed;
+      z-index: 75;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      background: radial-gradient(ellipse at center, transparent 30%, rgba(0, 0, 0, 0.2) 70%, rgba(0, 0, 0, 0.4) 100%);
+      mix-blend-mode: multiply;
+    }
+
+    .tv-vignette {
+      position: fixed;
+      z-index: 85;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      background: radial-gradient(circle at center, transparent 0%, transparent 40%, rgba(0, 0, 0, 0.3) 70%, rgba(0, 0, 0, 0.6) 100%);
+      mix-blend-mode: multiply;
+    }
+
+    .tv-glitch-overlay {
+      position: fixed;
+      z-index: 90;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      background: repeating-linear-gradient(0deg,
+          transparent 0px,
+          transparent 2px,
+          rgba(255, 0, 0, 0.1) 2px,
+          rgba(255, 0, 0, 0.1) 4px,
+          transparent 4px,
+          transparent 6px);
+      animation: tvGlitch 0.3s infinite;
+      opacity: 0.3;
+      mix-blend-mode: screen;
+    }
+
+    @keyframes tvGlitch {
+
+      0%,
+      100% {
+        transform: translateX(0);
+      }
+
+      10% {
+        transform: translateX(-2px);
+      }
+
+      20% {
+        transform: translateX(2px);
+      }
+
+      30% {
+        transform: translateX(-1px);
+      }
+
+      40% {
+        transform: translateX(1px);
+      }
+
+      50% {
+        transform: translateX(0);
+      }
+
+      60% {
+        transform: translateX(-3px);
+      }
+
+      70% {
+        transform: translateX(3px);
+      }
+
+      80% {
+        transform: translateX(-1px);
+      }
+
+      90% {
+        transform: translateX(1px);
+      }
+    }
+
+    .popup {
+      animation: popup-flicker 0.2s infinite alternate;
+      transition: transform 0.2s;
+    }
+
+    @keyframes popup-flicker {
+      0% {
+        box-shadow: 0 0 10px #ff006e, 0 0 40px #ff006e;
+      }
+
+      100% {
+        box-shadow: 0 0 20px #ff006e, 0 0 60px #ff006e;
+      }
+    }
+
+    .popup.wiggle {
+      animation: popup-flicker 0.2s infinite alternate, wiggle 0.5s 1;
+    }
+
+    @keyframes wiggle {
+      0% {
+        transform: rotate(-2deg) scale(1.05);
+      }
+
+      20% {
+        transform: rotate(2deg) scale(1.08);
+      }
+
+      40% {
+        transform: rotate(-1deg) scale(1.04);
+      }
+
+      60% {
+        transform: rotate(1deg) scale(1.06);
+      }
+
+      80% {
+        transform: rotate(-2deg) scale(1.03);
+      }
+
+      100% {
+        transform: none;
+      }
+    }
+
+    .draggable {
+      cursor: move;
+      user-select: none;
+    }
+
+    #restore-overlay {
+      transition: opacity 0.7s;
+    }
+
+    #restore-overlay.fade-out {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    #restore-glitch {
+      animation: flicker 1.2s infinite alternate, restore-glitch-flicker 0.3s infinite steps(2, start);
+    }
+
+    @keyframes restore-glitch-flicker {
+      0% {
+        filter: blur(0.5px) brightness(1.2) hue-rotate(0deg);
+      }
+
+      20% {
+        filter: blur(2px) brightness(2) hue-rotate(30deg);
+      }
+
+      40% {
+        filter: blur(1px) brightness(1.5) hue-rotate(-20deg);
+      }
+
+      60% {
+        filter: blur(0.5px) brightness(1.2) hue-rotate(0deg);
+      }
+
+      100% {
+        filter: none;
+      }
+    }
+
+    #restore-progress {
+      box-shadow: 0 0 10px #00ff41, 0 0 20px #00ff41;
+      transition: width 0.2s cubic-bezier(.4, 2, .6, 1), box-shadow 0.2s;
+    }
+
+    #restore-status {
+      transition: opacity 0.5s;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- System Breach Animation Overlay -->
+  <div id="system-breach-overlay" class="system-breach-overlay scanlines">
+    <!-- Enhanced Broken Old TV Effects -->
+    <div id="scanlines" class="fixed inset-0 w-full h-full pointer-events-none z-10"></div>
+    <div class="static-bg"></div>
+    <div class="rgb-split"></div>
+    <div class="tv-flicker"></div>
+    <div class="tv-curvature"></div>
+    <div class="tv-vignette"></div>
+    <div class="tv-glitch-overlay"></div>
+
+    <!-- Hacked Overlay -->
+    <div id="hacked-overlay"
+      class="fixed inset-0 z-50 flex flex-col items-center justify-center bg-transparent transition-all duration-700 relative">
+      <!-- Broken Old TV Effects for System Breach -->
+      <div id="scanlines-breach" class="absolute inset-0 w-full h-full pointer-events-none z-10"></div>
+      <div class="static-bg-breach absolute inset-0 w-full h-full pointer-events-none z-15"></div>
+      <div class="rgb-split-breach absolute inset-0 w-full h-full pointer-events-none z-20"></div>
+      <div class="tv-flicker-breach absolute inset-0 w-full h-full pointer-events-none z-25"></div>
+      <div class="tv-curvature-breach absolute inset-0 w-full h-full pointer-events-none z-30"></div>
+      <div class="tv-vignette-breach absolute inset-0 w-full h-full pointer-events-none z-35"></div>
+      <div class="tv-glitch-overlay-breach absolute inset-0 w-full h-full pointer-events-none z-40"></div>
+
+      <div class="flex flex-col items-center gap-8 w-full relative z-50">
+        <div class="glitch text-5xl md:text-7xl font-bold tracking-widest" data-text="SYSTEM BREACH">SYSTEM BREACH</div>
+        <div class="glitch text-2xl md:text-4xl text-red-500 font-bold" data-text="YOU HAVE BEEN HACKED">YOU HAVE BEEN
+          HACKED</div>
+        <!-- Multiple Popups -->
+        <div id="popup-container" class="fixed inset-0 pointer-events-none z-60"></div>
+        <!-- Terminal Output -->
+        <div
+          class="relative w-full max-w-xl h-48 md:h-64 bg-black border-2 border-green-400 rounded-lg overflow-hidden shadow-lg mt-6">
+          <div class="absolute inset-0 p-4 text-green-400 text-xs md:text-base leading-relaxed" id="terminal-output"
+            style="white-space: pre-line; font-family: 'Share Tech Mono', monospace; overflow-y: auto; max-height: 100%;">
+          </div>
+          <div class="absolute bottom-4 left-4 text-green-400 text-base md:text-lg flex items-center">
+            <span id="terminal-cursor" class="blink">█</span>
+          </div>
+        </div>
+        <button id="restore-btn"
+          class="mt-8 px-8 py-3 bg-green-500 hover:bg-green-700 text-black font-bold rounded-lg text-lg shadow-lg transition-all duration-300">Restore
+          System</button>
+      </div>
     </div>
-    
-    <!-- Scanline Effect -->
-    <div class="scanline"></div>
-    
-    <div id="root"></div>
-    
-    <script>
-      // Remove loading screen after a short delay
+
+    <!-- Restore Animation Overlay (hidden by default) -->
+    <div id="restore-overlay"
+      class="fixed inset-0 z-60 flex flex-col items-center justify-center bg-black bg-opacity-100 hidden">
+      <div class="flex flex-col items-center gap-8 w-full">
+        <div id="restore-glitch" class="glitch text-3xl md:text-5xl font-bold tracking-widest text-green-400"
+          data-text="Restoring System...">Restoring System...</div>
+        <div class="w-80 max-w-xs h-4 bg-gray-800 rounded-full overflow-hidden border-2 border-green-400">
+          <div id="restore-progress" class="h-full bg-green-400 transition-all duration-200" style="width:0%"></div>
+        </div>
+        <div id="restore-status" class="text-green-400 text-lg mt-4 opacity-0">System Restored <span
+            class="text-green-500">✔</span></div>
+      </div>
+    </div>
+
+    <audio id="alarm-sound" src="https://cdn.pixabay.com/audio/2022/07/26/audio_124bfae7e2.mp3" preload="auto"></audio>
+  </div>
+
+  <!-- Scanline Effect -->
+  <div class="scanline"></div>
+
+  <div id="root"></div>
+
+  <script>
+    // System Breach Animation Script
+    const terminalLines = [
+      '[2025-03-15 09:00:01] > Initializing system integrity check...',
+      '[2025-03-15 09:00:03] > Warning: Unauthorized access detected!',
+      '[2025-03-15 09:00:05] > Attempting to trace source...',
+      '[2025-03-15 09:00:07] > Trace failed. Intrusion in progress.',
+      '[2025-03-15 09:00:09] > SYSTEM BREACH! Data exfiltration detected.',
+      '[2025-03-15 09:00:11] > Locking down all access points...',
+      '[2025-03-15 09:00:13] > ALERT: Security protocol override!',
+      '[2025-03-15 09:00:15] > Displaying warning to user...',
+      '[2025-03-15 09:00:17] > ...',
+      '[2025-03-15 09:00:19] > Awaiting user action...'
+    ];
+    let terminalIndex = 0;
+    const terminalOutput = document.getElementById('terminal-output');
+
+    function typeTerminalLine() {
+      if (terminalIndex < terminalLines.length) {
+        let line = terminalLines[terminalIndex];
+        let i = 0;
+        function typeChar() {
+          if (i < line.length) {
+            terminalOutput.textContent += line.charAt(i);
+            i++;
+            terminalOutput.scrollTop = terminalOutput.scrollHeight;
+            if (Math.random() < 0.03) {
+              terminalOutput.classList.add('terminal-flicker');
+              setTimeout(() => terminalOutput.classList.remove('terminal-flicker'), 120);
+            }
+            setTimeout(typeChar, 18 + Math.random() * 30);
+          } else {
+            terminalOutput.textContent += '\n';
+            terminalOutput.scrollTop = terminalOutput.scrollHeight;
+            terminalIndex++;
+            setTimeout(typeTerminalLine, 400 + Math.random() * 400);
+          }
+        }
+        typeChar();
+      }
+    }
+    setTimeout(typeTerminalLine, 800);
+
+    // Animated Popups
+    const popups = [
+      {
+        title: 'CRITICAL ERROR',
+        message: 'System files corrupted. Immediate action required!',
+        color: 'bg-red-700 border-red-500',
+        icon: `<svg class='w-6 h-6 text-white animate-pulse' fill='none' stroke='currentColor' stroke-width='2' viewBox='0 0 24 24'><path stroke-linecap='round' stroke-linejoin='round' d='M12 9v2m0 4h.01M21 12c0 4.97-4.03 9-9 9s-9-4.03-9-9 4.03-9 9-9 9 4.03 9 9z'/></svg>`
+      },
+      {
+        title: 'ACCESS DENIED',
+        message: 'Unauthorized access. All activities are being monitored.',
+        color: 'bg-black border-pink-500',
+        icon: `<svg class='w-6 h-6 text-pink-400 animate-pulse' fill='none' stroke='currentColor' stroke-width='2' viewBox='0 0 24 24'><path stroke-linecap='round' stroke-linejoin='round' d='M18.364 5.636l-12.728 12.728M5.636 5.636l12.728 12.728'/></svg>`
+      },
+      {
+        title: 'ENCRYPTION ACTIVE',
+        message: 'All files are being encrypted. Please wait...',
+        color: 'bg-gray-900 border-green-400',
+        icon: `<svg class='w-6 h-6 text-green-400 animate-spin' fill='none' stroke='currentColor' stroke-width='2' viewBox='0 0 24 24'><circle cx='12' cy='12' r='10' stroke='currentColor' stroke-width='4' fill='none'/></svg>`
+      }
+    ];
+
+    function showPopup(idx) {
+      const popup = popups[idx];
+      const popupDiv = document.createElement('div');
+      popupDiv.className = `popup draggable fixed left-1/2 top-1/2 z-70 px-6 py-4 rounded-lg shadow-2xl border-4 ${popup.color} text-white text-base md:text-xl font-bold flex items-center gap-4 pointer-events-auto select-none`;
+      popupDiv.style.transform = `translate(-${40 + Math.random() * 20}vw, -${40 + Math.random() * 20}vh)`;
+      popupDiv.innerHTML = `
+          ${popup.icon}
+          <div>
+            <div class='text-lg md:text-2xl font-extrabold mb-1'>${popup.title}</div>
+            <div class='text-xs md:text-base'>${popup.message}</div>
+          </div>
+          <button class='ml-4 text-white text-2xl font-bold focus:outline-none close-btn'>&times;</button>
+        `;
+      document.getElementById('popup-container').appendChild(popupDiv);
+
+      let isDragging = false, startX, startY, origX, origY;
+      popupDiv.addEventListener('mousedown', function (e) {
+        isDragging = true;
+        startX = e.clientX; startY = e.clientY;
+        origX = popupDiv.offsetLeft; origY = popupDiv.offsetTop;
+        popupDiv.style.zIndex = 1000;
+      });
+      document.addEventListener('mousemove', function (e) {
+        if (isDragging) {
+          popupDiv.style.left = (origX + e.clientX - startX) + 'px';
+          popupDiv.style.top = (origY + e.clientY - startY) + 'px';
+        }
+      });
+      document.addEventListener('mouseup', function () { isDragging = false; });
+
+      popupDiv.querySelector('.close-btn').onclick = () => popupDiv.remove();
+
+      if (idx === 0) {
+        document.getElementById('alarm-sound').play();
+      }
+
+      popupDiv.classList.add('wiggle');
+      document.getElementById('hacked-overlay').classList.add('shake');
       setTimeout(() => {
-        const loading = document.getElementById('loading');
-        if (loading) {
-          loading.style.opacity = '0';
+        popupDiv.classList.remove('wiggle');
+        document.getElementById('hacked-overlay').classList.remove('shake');
+      }, 600);
+    }
+    setTimeout(() => showPopup(0), 1200);
+    setTimeout(() => showPopup(1), 2500);
+    setTimeout(() => showPopup(2), 4000);
+
+    // Glitch Flicker Animation
+    function randomGlitch() {
+      const overlay = document.getElementById('hacked-overlay');
+      const rgb = document.querySelector('.rgb-split');
+      const glitches = document.querySelectorAll('.glitch');
+      if (Math.random() < 0.18) {
+        overlay.classList.add('shake');
+        rgb.classList.add('glitch-rgb');
+        glitches.forEach(g => g.classList.add('flicker'));
+        setTimeout(() => {
+          overlay.classList.remove('shake');
+          rgb.classList.remove('glitch-rgb');
+          glitches.forEach(g => g.classList.remove('flicker'));
+        }, 200 + Math.random() * 200);
+      }
+      if (Math.random() < 0.12) {
+        document.body.classList.add('jitter');
+        setTimeout(() => document.body.classList.remove('jitter'), 120);
+      }
+      if (Math.random() < 0.09) {
+        document.getElementById('terminal-cursor').classList.add('glitch-cursor');
+        setTimeout(() => document.getElementById('terminal-cursor').classList.remove('glitch-cursor'), 300);
+      }
+      setTimeout(randomGlitch, 350 + Math.random() * 600);
+    }
+    setTimeout(randomGlitch, 1200);
+
+    // Restore system button
+    const restoreBtn = document.getElementById('restore-btn');
+    const restoreOverlay = document.getElementById('restore-overlay');
+    const restoreProgress = document.getElementById('restore-progress');
+    const restoreGlitch = document.getElementById('restore-glitch');
+    const restoreStatus = document.getElementById('restore-status');
+
+    restoreBtn.addEventListener('click', function () {
+      document.getElementById('hacked-overlay').classList.add('opacity-0');
+      setTimeout(() => {
+        document.getElementById('hacked-overlay').classList.add('hidden');
+        restoreOverlay.classList.remove('hidden');
+        restoreOverlay.style.opacity = '1';
+        animateRestore();
+      }, 700);
+    });
+
+    function animateRestore() {
+      restoreProgress.style.width = '0%';
+      restoreStatus.style.opacity = 0;
+      restoreGlitch.setAttribute('data-text', 'Restoring System...');
+      restoreGlitch.textContent = 'Restoring System...';
+      let progress = 0;
+      let interval = setInterval(() => {
+        progress += Math.random() * 13 + 7;
+        if (progress > 100) progress = 100;
+        restoreProgress.style.width = progress + '%';
+        if (progress > 30 && progress < 60) {
+          restoreGlitch.setAttribute('data-text', 'Decrypting...');
+          restoreGlitch.textContent = 'Decrypting...';
+        } else if (progress >= 60 && progress < 100) {
+          restoreGlitch.setAttribute('data-text', 'Rebuilding System...');
+          restoreGlitch.textContent = 'Rebuilding System...';
+        }
+        if (progress >= 100) {
+          clearInterval(interval);
           setTimeout(() => {
-            loading.remove();
+            restoreGlitch.setAttribute('data-text', 'System Restored');
+            restoreGlitch.textContent = 'System Restored';
+            restoreStatus.style.opacity = 1;
+            setTimeout(() => {
+              restoreOverlay.classList.add('fade-out');
+              setTimeout(() => {
+                document.getElementById('system-breach-overlay').style.opacity = '0';
+                setTimeout(() => {
+                  document.getElementById('system-breach-overlay').style.display = 'none';
+                }, 500);
+              }, 700);
+            }, 1200);
           }, 500);
         }
-      }, 3000);
-    </script>
-    
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+      }, 180);
+    }
+  </script>
+
+  <script type="module" src="/src/main.tsx"></script>
+</body>
+
 </html>
