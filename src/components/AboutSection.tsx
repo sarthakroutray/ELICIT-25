@@ -10,20 +10,20 @@ const AboutSection: React.FC = () => {
       className="relative px-8 pl-48 bg-black text-white font-orbitron uppercase overflow-hidden"
       style={{ fontFamily: "'Orbitron', sans-serif" }}
     >
-      {/* 3D Scene Canvas absolutely fills the AboutSection */}
+     
       <div className="absolute inset-0 w-full h-full z-0">
         <Canvas camera={{ position: [0, 20, 30], fov: 60 }}>
           <CyberpunkScene mousePosition={{ x: 0, y: 0 }} />
         </Canvas>
       </div>
       
-      {/* Overlay content goes here */}
-     <div className="w-full flex flex-col items-center mt-12 mb-8 select-none z-10">
-  <div className="uppercase text-sm tracking-widest text-green-400 font-mono drop-shadow-[0_0_6px_#00fff7] mb-2">
+      
+     <div className="w-full flex flex-col  items-center mt-12 mb-8 select-none z-10">
+  <div className="uppercase text-sm tracking-widest text-green-400 mr-44 font-mono drop-shadow-[0_0_6px_#00fff7] mb-2">
     SYSTEM CORE[03]
   </div>
  <h1 
-            className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 tracking-wider"
+            className="text-4xl md:text-5xl lg:text-6xl mr-44 font-bold text-white mb-6 tracking-wider"
             style={{
               fontFamily: 'Orbitron, monospace',
               textShadow: `
@@ -40,7 +40,7 @@ const AboutSection: React.FC = () => {
           >
             ABOUT
           </h1>
-  <div className="uppercase mb-10 text-xs tracking-widest text-white font-mono mt-0 drop-shadow-[0_0_6px_#17ff6b]">
+  <div className="uppercase mr-44 mb-10 text-xs tracking-widest text-white font-mono mt-0 drop-shadow-[0_0_6px_#17ff6b]">
     MAIN SYSTEM POWERS
   </div>
 
@@ -48,7 +48,7 @@ const AboutSection: React.FC = () => {
 
       {/* Wrapper */}
       <div
-        className=" mb-32 ml-4 mr-28 rounded-2xl bg-[rgba(10,10,10,0.75)] w-3/4 shadow-[0_0_40px_#39ff14,0_0_80px_#39ff14,0_0_100px_#39ff14,inset_0_0_25px_#39ff14]
+        className=" mb-32  mr-40 rounded-2xl bg-[rgba(10,10,10,0.75)] w-3/4 shadow-[0_0_40px_#39ff14,0_0_80px_#39ff14,0_0_100px_#39ff14,inset_0_0_25px_#39ff14]
 "
       >
         <div
@@ -91,12 +91,12 @@ const AboutSection: React.FC = () => {
               }}
             >
               <h2
-                className="mb-1 text-green-400 text-sm"
+                className="mb-2 text-green-400 text-xl"
                 style={{ textShadow: "0 0 10px #28462aff" }}
               >
                 ABOUT ACM
               </h2>
-              <p className="leading-relaxed text-sm">
+              <p className="leading-relaxed text-xs">
                 PLACEHOLDER TEXT STYLED IN A NEON LAYOUT.
                 <br />
                 REFLECTING GLOWING EDGES AND CYBERPUNK DESIGN.
@@ -118,17 +118,21 @@ const AboutSection: React.FC = () => {
             >
               <div className="flex flex-col justify-center">
                 <h2
-                  className="mb-4 text-green-400 text-lg"
+                  className="mb-2 text-green-400 text-lg"
                   style={{ textShadow: "0 0 10px #a2cfaaff" }}
                 >
                   BIZENDINT
                 </h2>
-                <p className="leading-relaxed">
+                <p className="leading-relaxed text-xs">
                   DATA MATRIX VALUES, SIMULATION FLUX.
                   <br />
                   YELLOW NUMBER MATRIX IN COLUMN.
                   <br />
                   SEGMENT LOGIC ACTIVE.
+                  <br/>
+                  ACM IS RANKED #1 
+                  <br/>
+                  WE ROCKING IT!
                 </p>
               </div>
               <div
