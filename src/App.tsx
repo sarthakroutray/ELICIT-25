@@ -2,6 +2,7 @@ import React, { useRef } from 'react';
 import CyberpunkLanding from './components/CyberpunkLanding';
 import Speakers from './components/Speakers';
 import AboutSection from './components/AboutSection';
+import CyberpunkEvents from './components/CyberpunkEvents';
 import './styles/glitch.css';
 
 function App() {
@@ -41,11 +42,19 @@ function App() {
     }
   };
 
+  // Scroll to Events section
+  const scrollToEvents = () => {
+    const eventsElement = document.getElementById('events-section');
+    if (eventsElement) {
+      eventsElement.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <div className="w-full bg-black">
       {/* Landing Page Section */}
       <div className="h-screen overflow-hidden">
-        <CyberpunkLanding onSpeakersClick={scrollToSpeakers} onAboutClick={scrollToAbout} />
+        <CyberpunkLanding onSpeakersClick={scrollToSpeakers} onAboutClick={scrollToAbout} onEventsClick={scrollToEvents} />
       </div>
 
       {/* Speakers Section */}
@@ -56,6 +65,11 @@ function App() {
       {/* AboutSection in the page */}
       <div id="about-section">
         <AboutSection />
+      </div>
+      
+      {/* Events Section */}
+      <div id="events-section">
+        <CyberpunkEvents />
       </div>
     </div>
   );
