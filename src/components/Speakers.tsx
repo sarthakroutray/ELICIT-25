@@ -7,7 +7,8 @@ interface SpeakerData {
   name: string;
   title: string;
   description: string;
-  image: string; // This will be the JPG file path
+  image: string;
+  outline: string; // This will be the JPG file path
 }
 
 const Speakers: React.FC = () => {
@@ -96,12 +97,13 @@ const Speakers: React.FC = () => {
         {speakers.map((speaker, index) => {
           const sectionRef = React.useRef<HTMLDivElement>(null);
           const { scrollYProgress } = useScroll({ container: undefined, target: sectionRef });
-          const x = useTransform(scrollYProgress, [0, 1], [0, index === 0 ? -60 : 60]);
+          // Animation: boxes move together as you scroll into section, then move apart after passing it
+          const x = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [index === 0 ? -60 : 60, 0, 0, index === 0 ? 60 : -60]);
           return (
             <motion.div
               key={speaker.id}
               ref={sectionRef}
-              style={{ x, marginRight: index === 0 ? '-4px' : '0px' }}
+              style={{ x, marginRight: index === 0 ? '135px' : '0px' }}
               className="relative group flex flex-col items-center"
             >
               {/* Card with outline PNG as border */}
