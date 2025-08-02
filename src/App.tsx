@@ -1,7 +1,7 @@
-
 import React, { useRef } from 'react';
 import CyberpunkLanding from './components/CyberpunkLanding';
 import Speakers from './components/Speakers';
+import AboutSection from './components/AboutSection';
 import './styles/glitch.css';
 
 function App() {
@@ -33,18 +33,33 @@ function App() {
     }
   };
 
+  // Scroll to About section handler (still here for passing to CyberpunkLanding)
+  const scrollToAbout = () => {
+    const aboutElement = document.getElementById('about-section');
+    if (aboutElement) {
+      aboutElement.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <div className="w-full bg-black">
       {/* Landing Page Section */}
       <div className="h-screen overflow-hidden">
-        <CyberpunkLanding onSpeakersClick={scrollToSpeakers} />
+        <CyberpunkLanding onSpeakersClick={scrollToSpeakers} onAboutClick={scrollToAbout} />
       </div>
+
       {/* Speakers Section */}
       <div ref={speakersRef} className="min-h-screen">
         <Speakers />
+      </div>
+
+      {/* AboutSection in the page */}
+      <div id="about-section">
+        <AboutSection />
       </div>
     </div>
   );
 }
 
 export default App;
+
