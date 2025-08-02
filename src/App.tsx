@@ -56,6 +56,10 @@ function App() {
       <div className="h-screen overflow-hidden">
         <CyberpunkLanding onSpeakersClick={scrollToSpeakers} onAboutClick={scrollToAbout} onEventsClick={scrollToEvents} />
       </div>
+      {/* Events Section */}
+      <div id="events-section">
+        <CyberpunkEvents />
+      </div>
 
       {/* Speakers Section */}
       <div ref={speakersRef} className="min-h-screen">
@@ -65,11 +69,6 @@ function App() {
       {/* AboutSection in the page */}
       <div id="about-section">
         <AboutSection />
-      </div>
-      
-      {/* Events Section */}
-      <div id="events-section">
-        <CyberpunkEvents />
       </div>
     </div>
   );
