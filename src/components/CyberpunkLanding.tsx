@@ -12,7 +12,13 @@ import DigitalRain from './DigitalRain';
 import { playSound } from '../utils/audio';
 import { Monitor, Zap, Users, Calendar, Info, Phone } from 'lucide-react';
 
-const CyberpunkLanding: React.FC = () => {
+interface CyberpunkLandingProps {
+  onSpeakersClick?: () => void;
+  onAboutClick?: () => void; 
+  onEventsClick?: () => void;
+}
+
+const CyberpunkLanding: React.FC<CyberpunkLandingProps> = ({ onSpeakersClick, onAboutClick, onEventsClick }) => {
   const [isInitialized, setIsInitialized] = useState(false);
   const [showTerminal, setShowTerminal] = useState(false);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
@@ -57,6 +63,24 @@ const CyberpunkLanding: React.FC = () => {
 
       {/* Digital Rain Background */}
       <DigitalRain />
+
+      {/* Global Scanning Line */}
+      <motion.div
+        className="fixed top-0 left-0 w-full h-0.5 pointer-events-none z-50"
+        style={{
+          background: 'linear-gradient(90deg, transparent, #ff0040, transparent)',
+          boxShadow: '0 0 10px #ff0040, 0 0 20px #ff0040',
+        }}
+        animate={{
+          y: [-10, window.innerHeight + 10]
+        }}
+        transition={{
+          duration: 4,
+          repeat: Infinity,
+          ease: "linear",
+          repeatDelay: 1
+        }}
+      />
 
       {/* 3D Scene */}
       <Canvas className="absolute inset-0">
@@ -202,7 +226,18 @@ const CyberpunkLanding: React.FC = () => {
                     boxShadow: `0 0 25px ${item.glowColor}, inset 0 0 15px rgba(255,255,255,0.1)`
                   }}
                   whileTap={{ scale: 0.95 }}
-                  onClick={() => playSound('/audio/click.mp3')}
+                  onClick={() => {
+                    playSound('/audio/click.mp3');
+                    if (item.label === 'SPEAKERS' && onSpeakersClick) {
+                      onSpeakersClick();
+                    }
+                    else if (item.label === 'ABOUT' && onAboutClick) {
+                      onAboutClick();
+                    }
+                    else if(item.label === 'EVENTS' && onEventsClick) {
+                      onEventsClick();
+                    }
+                  }}
                   className={`group relative w-32 h-32 ${item.color} bg-black bg-opacity-80 hover:bg-opacity-90 transition-all duration-300 font-mono text-xs tracking-wider overflow-hidden`}
                   style={{
                     clipPath: 'polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px))',
@@ -254,11 +289,6 @@ const CyberpunkLanding: React.FC = () => {
                     className="absolute inset-0 bg-current opacity-0 group-hover:opacity-10"
                     animate={{ opacity: [0, 0.1, 0], scaleY: [1, 1.1, 1] }}
                     transition={{ duration: 0.2, repeat: Infinity, repeatDelay: 3 }}
-                  />
-                  <motion.div
-                    className="absolute left-0 w-full h-px bg-current opacity-0 group-hover:opacity-60"
-                    animate={{ y: [0, 64, 0], opacity: [0, 0.6, 0] }}
-                    transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
                   />
                 </motion.button>
               ))}
