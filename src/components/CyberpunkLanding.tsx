@@ -64,6 +64,24 @@ const CyberpunkLanding: React.FC<CyberpunkLandingProps> = ({ onSpeakersClick, on
       {/* Digital Rain Background */}
       <DigitalRain />
 
+      {/* Global Scanning Line */}
+      <motion.div
+        className="fixed top-0 left-0 w-full h-0.5 pointer-events-none z-50"
+        style={{
+          background: 'linear-gradient(90deg, transparent, #ff0040, transparent)',
+          boxShadow: '0 0 10px #ff0040, 0 0 20px #ff0040',
+        }}
+        animate={{
+          y: [-10, window.innerHeight + 10]
+        }}
+        transition={{
+          duration: 4,
+          repeat: Infinity,
+          ease: "linear",
+          repeatDelay: 1
+        }}
+      />
+
       {/* 3D Scene */}
       <Canvas className="absolute inset-0">
         <PerspectiveCamera makeDefault position={[0, 10, 20]} fov={60} />
@@ -271,11 +289,6 @@ const CyberpunkLanding: React.FC<CyberpunkLandingProps> = ({ onSpeakersClick, on
                     className="absolute inset-0 bg-current opacity-0 group-hover:opacity-10"
                     animate={{ opacity: [0, 0.1, 0], scaleY: [1, 1.1, 1] }}
                     transition={{ duration: 0.2, repeat: Infinity, repeatDelay: 3 }}
-                  />
-                  <motion.div
-                    className="absolute left-0 w-full h-px bg-current opacity-0 group-hover:opacity-60"
-                    animate={{ y: [0, 64, 0], opacity: [0, 0.6, 0] }}
-                    transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
                   />
                 </motion.button>
               ))}
