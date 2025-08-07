@@ -50,6 +50,9 @@ const CyberpunkEvents = () => {
   const prev = () => setCurrentIndex((i) => (i === 0 ? events.length - 1 : i - 1));
   const next = () => setCurrentIndex((i) => (i + 1) % events.length);
 
+  // Use the same outline PNG for all events (replace with your actual path)
+  const outlinePng = "/events/events-box.png";
+
   return (
     <section
       className="relative w-full px-6 md:px-12 py-20 text-white overflow-hidden font-mono bg-[radial-gradient(#00ffbb1a_1px,transparent_1px)] [background-size:40px_40px]"
@@ -66,50 +69,69 @@ const CyberpunkEvents = () => {
           <ChevronLeft size={40} />
         </button>
 
-        <div className="relative w-full max-w-6xl h-[480px] flex justify-center items-center overflow-hidden">
-          {events.map((event, index) => {
-            const rel = getRelativeIndex(index, currentIndex, events.length);
-            if (Math.abs(rel) > 1) return null;
-
-            const isCenter = rel === 0;
-            const translate = rel * 105;
-
-            return (
-              <div
-                key={event.id}
-                className={`absolute transition-transform duration-700 ease-in-out ${
-                  isCenter ? 'z-30 scale-100 opacity-100' : 'z-10 scale-95 opacity-70 blur-[1px]'
-                }`}
-                style={{ transform: `translateX(${translate}%)` }}
-              >
-                <div className="w-[320px] md:w-[460px] bg-black glow-card clipped-card px-6 py-8 relative hover:rotate-[0.5deg] transition-transform duration-500">
+        {/* Only show the current event, inside an outlined box with 3 sections - bigger and better aligned */}
+        <div className="relative w-full max-w-7xl h-[750px] flex justify-center items-center overflow-visible">
+          <div className="relative group flex flex-col items-center">
+            <div className="relative h-[750px] w-[1200px] max-w-full flex flex-col items-stretch overflow-visible">
+              <img
+                src={outlinePng}
+                alt="Card outline"
+                className="absolute inset-0 w-full h-full pointer-events-none select-none"
+                style={{
+                  zIndex: 3,
+                  transform: 'scale(1.25)',
+                  margin: '0',
+                  filter: 'drop-shadow(0 0 32px #00ffff) drop-shadow(0 0 64px #00ffff80)'
+                }}
+                draggable={false}
+              />
+              {/* 3-box layout: left big image, right top name, right bottom info */}
+              <div className="absolute inset-0 z-10 flex" style={{ padding: '4.5% 4.5%' }}>
+                {/* Left big box: event image */}
+                <div style={{ width: '57%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                   <img
-                    src={event.image}
-                    alt={event.name}
-                    className="w-full h-48 object-cover rounded-md mb-4"
+                    src={events[currentIndex].image}
+                    alt={events[currentIndex].name}
+                    className="object-cover rounded-xl shadow-2xl"
+                    style={{ width: '100%', height: '95%', borderRadius: '22px', background: '#111', boxShadow: '0 0 32px #00ffff80' }}
+                    onError={e => (e.target.style.display = 'none')}
                   />
-                  <h3
-                    className="text-2xl font-bold text-cyber-pink glitchy-title relative z-10 mb-3"
-                    data-text={event.name}
-                  >
-                    {event.name}
-                    <span className="absolute left-0 bottom-[-4px] w-full h-[1px] bg-cyber-pink animate-scanline z-20 glow-line" />
-                  </h3>
-                  <p className="text-cyber-green/80 text-sm mt-2">{event.description}</p>
-                  <div className="flex gap-4 mt-4 text-cyber-green text-xs">
-                    <div className="flex items-center gap-2 border border-cyber-green px-3 py-1 rounded-full glitch-chip">
-                      <Calendar size={16} />
-                      <span>{event.date}</span>
-                    </div>
-                    <div className="flex items-center gap-2 border border-cyber-green px-3 py-1 rounded-full glitch-chip">
-                      <Clock size={16} />
-                      <span>{event.time}</span>
-                    </div>
-                  </div>
                 </div>
+                {/* Right side: two stacked boxes with adjustable heights */}
+                {(() => {
+                  // Set these variables to adjust heights independently
+                  const headingBoxHeight = '110%'; // e.g. '40%' or '300px'
+                  const infoBoxHeight = '60%'; // e.g. '60%' or '400px'
+                  return (
+                    <div style={{ width: '60%', height: '90%', display: 'flex', flexDirection: 'column' }}>
+                      {/* Top right: event name - perfectly centered */}
+                      <div style={{ height: headingBoxHeight, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '0 10%' }}>
+                        <h3 className="text-cyan-400 text-4xl md:text-5xl font-bold tracking-wider text-center" style={{ fontFamily: 'Orbitron, monospace', textShadow: '0 0 18px #00ffff, 0 0 32px #00ffff', margin: 0, width: '100%' }}>
+                          {events[currentIndex].name}
+                        </h3>
+                      </div>
+                      {/* Bottom right: event info - vertically and horizontally centered */}
+                      <div style={{ height: infoBoxHeight, display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', padding: '0 6%', gap: '2.5rem' }}>
+                        <p className="text-gray-200 text-lg leading-relaxed font-mono text-center" style={{ fontSize: '18px', lineHeight: '1.7', textShadow: '0 0 8px #00ffff80', margin: 0, width: '100%' }}>
+                          {events[currentIndex].description}
+                        </p>
+                        <div className="flex gap-8 text-cyber-green text-base justify-center w-full">
+                          <div className="flex items-center gap-2 border border-cyber-green px-6 py-3 rounded-full glitch-chip text-lg" style={{ minWidth: '140px', justifyContent: 'center' }}>
+                            <Calendar size={22} />
+                            <span>{events[currentIndex].date}</span>
+                          </div>
+                          <div className="flex items-center gap-2 border border-cyber-green px-6 py-3 rounded-full glitch-chip text-lg" style={{ minWidth: '140px', justifyContent: 'center' }}>
+                            <Clock size={22} />
+                            <span>{events[currentIndex].time}</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })()}
               </div>
-            );
-          })}
+            </div>
+          </div>
         </div>
 
         <button onClick={next} className="z-20 text-cyber-pink hover:text-white transition">
