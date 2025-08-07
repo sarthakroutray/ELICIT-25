@@ -7,6 +7,9 @@ export default {
         'cyber-green': '#00FF41',
         'cyber-pink': '#FF00D4',
       },
+      fontFamily: {
+        techno: ["'Share Tech Mono'", "monospace"],
+      },
     },
   },
   plugins: [],

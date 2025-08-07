@@ -3,6 +3,8 @@ import CyberpunkLanding from './components/CyberpunkLanding';
 import Speakers from './components/Speakers';
 import AboutSection from './components/AboutSection';
 import CyberpunkEvents from './components/CyberpunkEvents';
+
+import Footer from './components/Footer';
 import './styles/glitch.css';
 
 function App() {
@@ -34,7 +36,6 @@ function App() {
     }
   };
 
-  // Scroll to About section handler (still here for passing to CyberpunkLanding)
   const scrollToAbout = () => {
     const aboutElement = document.getElementById('about-section');
     if (aboutElement) {
@@ -42,7 +43,6 @@ function App() {
     }
   };
 
-  // Scroll to Events section
   const scrollToEvents = () => {
     const eventsElement = document.getElementById('events-section');
     if (eventsElement) {
@@ -54,8 +54,18 @@ function App() {
     <div className="w-full bg-black">
       {/* Landing Page Section */}
       <div className="h-screen overflow-hidden">
-        <CyberpunkLanding onSpeakersClick={scrollToSpeakers} onAboutClick={scrollToAbout} onEventsClick={scrollToEvents} />
+        <CyberpunkLanding 
+          onSpeakersClick={scrollToSpeakers} 
+          onAboutClick={scrollToAbout} 
+          onEventsClick={scrollToEvents} 
+        />
       </div>
+
+      {/* About Section */}
+      <div id="about-section">
+        <AboutSection />
+      </div>
+
       {/* Events Section */}
       <div id="events-section">
         <CyberpunkEvents />
@@ -66,13 +76,12 @@ function App() {
         <Speakers />
       </div>
 
-      {/* AboutSection in the page */}
-      <div id="about-section">
-        <AboutSection />
-      </div>
+
+
+      {/* Footer at the bottom */}
+      <Footer />
     </div>
   );
 }
 
 export default App;
-
