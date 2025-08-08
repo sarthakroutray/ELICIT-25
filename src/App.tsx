@@ -61,10 +61,8 @@ function App() {
         />
       </div>
 
-      {/* About Section */}
-      <div id="about-section">
-        <AboutSection />
-      </div>
+  {/* About Section */}
+  <AboutSection />
 
       {/* Events Section */}
       <div id="events-section">

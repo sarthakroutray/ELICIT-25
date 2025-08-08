@@ -17,6 +17,36 @@
 
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
+    /* Responsive: Make clock smaller and move main heading down on mobile/tablet */
+    @media (max-width: 1024px) {
+      .countdown-timer-responsive {
+        transform: scale(0.8);
+        margin-top: 0.5rem;
+      }
+      .main-corruption-heading-responsive {
+        margin-top: 3.5rem !important;
+      }
+    }
+    @media (max-width: 768px) {
+      .countdown-timer-responsive {
+        transform: scale(0.7);
+        margin-top: 0.2rem;
+      }
+      .main-corruption-heading-responsive {
+        font-size: 1.2rem !important;
+        margin-top: 4.5rem !important;
+      }
+    }
+    @media (max-width: 600px) {
+      .countdown-timer-responsive {
+        transform: scale(0.6);
+        margin-top: 0.1rem;
+      }
+      .main-corruption-heading-responsive {
+        font-size: 1rem !important;
+        margin-top: 5.5rem !important;
+      }
+    }
     body {
       font-family: 'Orbitron', monospace;
       background: #000;
