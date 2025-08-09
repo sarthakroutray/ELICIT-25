@@ -4,6 +4,8 @@ import Speakers from './components/Speakers';
 import AboutSection from './components/AboutSection';
 import PreviousSponsors from './components/PreviousSponsors';
 import CyberpunkEvents from './components/CyberpunkEvents';
+import Carousel from "./components/Carousel";
+import Footer from './components/Footer';
 import './styles/glitch.css';
 
 function App() {
@@ -35,7 +37,6 @@ function App() {
     }
   };
 
-  // Scroll to About section handler (still here for passing to CyberpunkLanding)
   const scrollToAbout = () => {
     const aboutElement = document.getElementById('about-section');
     if (aboutElement) {
@@ -43,7 +44,6 @@ function App() {
     }
   };
 
-  // Scroll to Events section
   const scrollToEvents = () => {
     const eventsElement = document.getElementById('events-section');
     if (eventsElement) {
@@ -51,7 +51,6 @@ function App() {
     }
   };
 
-  // Scroll to Sponsors section
   const scrollToSponsors = () => {
     const sponsorsElement = document.getElementById('sponsors-section');
     if (sponsorsElement) {
@@ -63,8 +62,17 @@ function App() {
     <div className="w-full bg-black">
       {/* Landing Page Section */}
       <div className="h-screen overflow-hidden">
-        <CyberpunkLanding onSpeakersClick={scrollToSpeakers} onAboutClick={scrollToAbout} onEventsClick={scrollToEvents} onSponsorsClick={scrollToSponsors} />
+        <CyberpunkLanding 
+          onSpeakersClick={scrollToSpeakers} 
+          onAboutClick={scrollToAbout} 
+          onEventsClick={scrollToEvents} 
+          onSponsorsClick={scrollToSponsors} 
+        />
       </div>
+
+      {/* About Section */}
+      <AboutSection />
+
       {/* Events Section */}
       <div id="events-section">
         <CyberpunkEvents />
@@ -75,18 +83,20 @@ function App() {
         <Speakers />
       </div>
 
-      {/* AboutSection in the page */}
-      <div id="about-section">
-        <AboutSection />
+      {/* Carousel Section */}
+      <div id="carousel-section" className="min-h-screen">
+        <Carousel />
       </div>
 
       {/* Previous Sponsors Section */}
       <div id="sponsors-section">
         <PreviousSponsors />
       </div>
+
+      {/* Footer */}
+      <Footer />
     </div>
   );
 }
 
 export default App;
-
