@@ -80,32 +80,22 @@ const SponsorsCarousel = () => {
 
 
   return (
-    
     <section
-      // NEW: Added onMouseEnter and onMouseLeave for pause-on-hover
       onMouseEnter={stopAutoplay}
       onMouseLeave={startAutoplay}
       className="relative w-full px-6 md:px-12 py-20 text-white overflow-hidden font-mono bg-black"
     >
-      <div
-        id="carousel-section"
-        className="relative px-8 pl-48 bg-black text-white font-orbitron uppercase "
-        style={{ fontFamily: "'Orbitron', sans-serif" }}
-      >
-        <div className="absolute inset-0 w-full h-full z-0">
-          <Canvas camera={{ position: [0, 20, 30], fov: 60 }}>
-            <CyberpunkScene mousePosition={{ x: 0, y: 0 }} />
-          </Canvas>
-        </div>
+      {/* Background 3D Canvas */}
+      <div className="absolute inset-0 w-full h-full z-0">
+        <Canvas camera={{ position: [0, 20, 30], fov: 60 }}>
+          <CyberpunkScene mousePosition={{ x: 0, y: 0 }} />
+        </Canvas>
       </div>
 
-      <div
-        id="sponsors-section"
-        className="absolute inset-0 w-full h-full z-0"
-        style={{ marginLeft: '600px' }}
-      >
+      {/* Centered foreground content */}
+      <div className="relative z-10 flex flex-col items-center gap-10">
         <h1
-          className="text-4xl md:text-5xl lg:text-6xl mr-44 font-bold text-white mb-6 tracking-wider"
+          className="text-center text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-2 tracking-wider"
           style={{
             fontFamily: 'Orbitron, monospace',
             textShadow: `
@@ -117,59 +107,54 @@ const SponsorsCarousel = () => {
                 0 0 20px #6acb8dff,
                 0 0 30px #a9ef94ff
               `,
-              filter: 'drop-shadow(4px 4px 8px rgba(0,0,0,0.9))',
-            }}
-          >
-            OUR SPONSORS
-          </h1>
+            filter: 'drop-shadow(4px 4px 8px rgba(0,0,0,0.9))',
+          }}
+        >
+          OUR SPONSORS
+        </h1>
+
+        <div className="flex justify-center items-center gap-4 md:gap-6 w-full">
+          <button onClick={handlePrevClick} className="z-20 text-cyber-pink hover:text-white transition-colors duration-300">
+            <ChevronLeft size={40} />
+          </button>
+
+          <div className="relative w-full max-w-4xl h-[100px] flex justify-center items-center overflow-hidden">
+            {sponsors.map((sponsor, index) => {
+              const rel = getRelativeIndex(index, currentIndex, sponsors.length);
+              if (Math.abs(rel) > 2) return null;
+              const isCenter = rel === 0;
+              const translate = rel * 50;
+              const scale = isCenter ? 1 : 0.7;
+              const opacity = isCenter ? 1 : 0.5;
+              const zIndex = isCenter ? 20 : 10 - Math.abs(rel);
+              const blur = isCenter ? 'blur(0)' : 'blur(1px)';
+              return (
+                <div
+                  key={sponsor.id}
+                  className="absolute transition-all duration-500 ease-in-out"
+                  style={{
+                    transform: `translateX(${translate}%) scale(${scale})`,
+                    opacity,
+                    zIndex,
+                    filter: blur,
+                  }}
+                >
+                  <div className="w-[500px] h-[200px] flex justify-center items-center">
+                    <img
+                      src={sponsor.logoSrc}
+                      alt={`${sponsor.name} logo`}
+                      className="max-w-full max-h-full object-contain logo-glow"
+                    />
+                  </div>
+                </div>
+              );
+            })}
           </div>
 
-      <div className="relative flex justify-center items-center gap-4 md:gap-6">
-        {/* NEW: Using the new click handlers */}
-        <button onClick={handlePrevClick} className="z-20 text-cyber-pink hover:text-white transition-colors duration-300">
-          <ChevronLeft size={40} />
-        </button>
-
-        <div className="relative w-full max-w-4xl h-[100px] flex justify-center items-center overflow-hidden">
-          {sponsors.map((sponsor, index) => {
-            const rel = getRelativeIndex(index, currentIndex, sponsors.length);
-            
-            if (Math.abs(rel) > 2) return null;
-
-            const isCenter = rel === 0;
-            const translate = rel * 50;
-            const scale = isCenter ? 1 : 0.7;
-            const opacity = isCenter ? 1 : 0.5;
-            const zIndex = isCenter ? 20 : 10 - Math.abs(rel);
-            const blur = isCenter ? 'blur(0)' : 'blur(1px)';
-
-            return (
-              <div
-                key={sponsor.id}
-                className="absolute transition-all duration-500 ease-in-out"
-                style={{
-                  transform: `translateX(${translate}%) scale(${scale})`,
-                  opacity: opacity,
-                  zIndex: zIndex,
-                  filter: blur,
-                }}
-              >
-                <div className="w-[500px] h-[200px] flex justify-center items-center">
-                  <img
-                    src={sponsor.logoSrc}
-                    alt={`${sponsor.name} logo`}
-                    className="max-w-full max-h-full object-contain logo-glow"
-                  />
-                </div>
-              </div>
-            );
-          })}
+          <button onClick={handleNextClick} className="z-20 text-cyber-pink hover:text-white transition-colors duration-300">
+            <ChevronRight size={40} />
+          </button>
         </div>
-
-        {/* NEW: Using the new click handlers */}
-        <button onClick={handleNextClick} className="z-20 text-cyber-pink hover:text-white transition-colors duration-300">
-          <ChevronRight size={40} />
-        </button>
       </div>
 
       <style>{`
