@@ -2,6 +2,7 @@ import React, { useRef } from 'react';
 import CyberpunkLanding from './components/CyberpunkLanding';
 import Speakers from './components/Speakers';
 import AboutSection from './components/AboutSection';
+import PreviousSponsors from './components/PreviousSponsors';
 import CyberpunkEvents from './components/CyberpunkEvents';
 import './styles/glitch.css';
 
@@ -50,11 +51,19 @@ function App() {
     }
   };
 
+  // Scroll to Sponsors section
+  const scrollToSponsors = () => {
+    const sponsorsElement = document.getElementById('sponsors-section');
+    if (sponsorsElement) {
+      sponsorsElement.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <div className="w-full bg-black">
       {/* Landing Page Section */}
       <div className="h-screen overflow-hidden">
-        <CyberpunkLanding onSpeakersClick={scrollToSpeakers} onAboutClick={scrollToAbout} onEventsClick={scrollToEvents} />
+        <CyberpunkLanding onSpeakersClick={scrollToSpeakers} onAboutClick={scrollToAbout} onEventsClick={scrollToEvents} onSponsorsClick={scrollToSponsors} />
       </div>
       {/* Events Section */}
       <div id="events-section">
@@ -69,6 +78,11 @@ function App() {
       {/* AboutSection in the page */}
       <div id="about-section">
         <AboutSection />
+      </div>
+
+      {/* Previous Sponsors Section */}
+      <div id="sponsors-section">
+        <PreviousSponsors />
       </div>
     </div>
   );

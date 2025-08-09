@@ -16,9 +16,10 @@ interface CyberpunkLandingProps {
   onSpeakersClick?: () => void;
   onAboutClick?: () => void; 
   onEventsClick?: () => void;
+  onSponsorsClick?: () => void;
 }
 
-const CyberpunkLanding: React.FC<CyberpunkLandingProps> = ({ onSpeakersClick, onAboutClick, onEventsClick }) => {
+const CyberpunkLanding: React.FC<CyberpunkLandingProps> = ({ onSpeakersClick, onAboutClick, onEventsClick, onSponsorsClick }) => {
   const [isInitialized, setIsInitialized] = useState(false);
   const [showTerminal, setShowTerminal] = useState(false);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
@@ -218,6 +219,9 @@ const CyberpunkLanding: React.FC<CyberpunkLandingProps> = ({ onSpeakersClick, on
                     }
                     else if(item.label === 'EVENTS' && onEventsClick) {
                       onEventsClick();
+                    }
+                    else if(item.label === 'SPONSORS' && onSponsorsClick) {
+                      onSponsorsClick();
                     }
                   }}
                   className={`group relative w-32 h-32 ${item.color} bg-black bg-opacity-80 hover:bg-opacity-90 transition-all duration-300 font-mono text-xs tracking-wider overflow-hidden`}
