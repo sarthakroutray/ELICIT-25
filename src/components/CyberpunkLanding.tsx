@@ -22,6 +22,7 @@ const CyberpunkLanding: React.FC<CyberpunkLandingProps> = ({ onSpeakersClick, on
   const [isInitialized, setIsInitialized] = useState(false);
   const [showTerminal, setShowTerminal] = useState(false);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [showMobileMenu, setShowMobileMenu] = useState(false);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -49,6 +50,42 @@ const CyberpunkLanding: React.FC<CyberpunkLandingProps> = ({ onSpeakersClick, on
 
   return (
     <div className="relative w-full h-screen bg-black overflow-hidden" style={{ cursor: 'none' }}>
+      {/* Responsive styles for mobile/tablet */}
+      <style>{`
+        @media (max-width: 1024px) {
+          .nav-buttons-desktop {
+            display: none !important;
+          }
+          .hamburger-menu {
+            display: block !important;
+          }
+        }
+        @media (min-width: 1025px) {
+          .hamburger-menu {
+            display: none !important;
+          }
+        }
+        @media (max-width: 768px) {
+          .main-corruption-heading-responsive {
+            font-size: 1.2rem !important;
+            margin-bottom: 2rem !important;
+          }
+          .countdown-timer-responsive {
+            transform: scale(0.8);
+            margin-top: 0.5rem;
+          }
+        }
+        @media (max-width: 600px) {
+          .main-corruption-heading-responsive {
+            font-size: 1rem !important;
+            margin-bottom: 1.2rem !important;
+          }
+          .countdown-timer-responsive {
+            transform: scale(0.7);
+            margin-top: 0.2rem;
+          }
+        }
+      `}</style>
       {/* Custom Cursor */}
       <div 
         className="fixed w-2 h-2 bg-blue-500 rounded-full pointer-events-none transition-transform duration-[50ms] ease-linear will-change-transform"
@@ -121,7 +158,9 @@ const CyberpunkLanding: React.FC<CyberpunkLandingProps> = ({ onSpeakersClick, on
             </div>
           </motion.div>
           
-          <CountdownTimer />
+          <div className="countdown-timer-responsive">
+            <CountdownTimer />
+          </div>
         </div>
 
         {/* Hero Section */}
@@ -136,7 +175,7 @@ const CyberpunkLanding: React.FC<CyberpunkLandingProps> = ({ onSpeakersClick, on
                 >
                   <GlitchText 
                     text="SYSTEM CORRUPTION DETECTED"
-                    className="text-2xl md:text-4xl lg:text-5xl font-mono font-bold text-[#00ff41] mb-16"
+                    className="main-corruption-heading-responsive text-2xl md:text-4xl lg:text-5xl font-mono font-bold text-[#00ff41] mb-16"
                     style={{
                       textShadow: `
                         -1px -1px 0 #000,
@@ -199,15 +238,16 @@ const CyberpunkLanding: React.FC<CyberpunkLandingProps> = ({ onSpeakersClick, on
           </div>
         </div>
 
-        {/* Unified Navigation Row */}
+        {/* Desktop Nav Buttons (hidden on mobile/tablet) */}
         <AnimatePresence>
           {isInitialized && (
             <motion.div
               initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 2.5, duration: 0.8 }}
-              className="absolute top-[65%] right-[21%] transform -translate-x-1/2 -translate-y-1/2 flex gap-12"
+              className="nav-buttons-desktop absolute top-[65%] right-[21%] transform -translate-x-1/2 -translate-y-1/2 flex gap-12"
             >
+              {/* ...existing code for nav buttons... */}
               {[
                 { icon: Calendar, label: 'EVENTS', color: 'border-cyan-400 text-cyan-400', glowColor: '#00ffff' },
                 { icon: Users, label: 'SPEAKERS', color: 'border-lime-400 text-lime-400', glowColor: '#00ff41' },
@@ -216,6 +256,7 @@ const CyberpunkLanding: React.FC<CyberpunkLandingProps> = ({ onSpeakersClick, on
                 { icon: Zap, label: 'SPONSORS', color: 'border-pink-400 text-pink-400', glowColor: '#f472b6' },
                 { icon: Monitor, label: 'REGISTER', color: 'border-red-400 text-red-400', glowColor: '#ff0040' },
               ].map((item, index) => (
+                // ...existing code for each button...
                 <motion.button
                   key={item.label}
                   initial={{ opacity: 0, y: 30 }}
@@ -244,7 +285,7 @@ const CyberpunkLanding: React.FC<CyberpunkLandingProps> = ({ onSpeakersClick, on
                     boxShadow: `0 0 10px ${item.glowColor}40`,
                   }}
                 >
-                  {/* Decorative effects remain unchanged */}
+                  {/* ...existing code... */}
                   <div className="absolute inset-0 opacity-30">
                     {[...Array(3)].map((_, i) => (
                       <motion.div
@@ -261,7 +302,6 @@ const CyberpunkLanding: React.FC<CyberpunkLandingProps> = ({ onSpeakersClick, on
                       />
                     ))}
                   </div>
-
                   <div className="relative z-10 flex flex-col items-center justify-center h-full space-y-1">
                     <motion.div
                       whileHover={{ rotate: 180, scale: 1.2 }}
@@ -283,8 +323,6 @@ const CyberpunkLanding: React.FC<CyberpunkLandingProps> = ({ onSpeakersClick, on
                     </motion.div>
                     <span className="text-[10px] leading-tight text-center">{item.label}</span>
                   </div>
-
-                  {/* Glitch / scan effects */}
                   <motion.div
                     className="absolute inset-0 bg-current opacity-0 group-hover:opacity-10"
                     animate={{ opacity: [0, 0.1, 0], scaleY: [1, 1.1, 1] }}
@@ -295,6 +333,65 @@ const CyberpunkLanding: React.FC<CyberpunkLandingProps> = ({ onSpeakersClick, on
             </motion.div>
           )}
         </AnimatePresence>
+
+        {/* Hamburger Icon for Mobile */}
+        <div className="hamburger-menu" style={{position: 'absolute', top: 24, right: 24, display: 'none', zIndex: 100}}>
+          <button
+            aria-label="Open navigation menu"
+            className="flex flex-col justify-center items-center w-12 h-12 bg-black bg-opacity-80 border-2 border-cyan-400 rounded-lg shadow-lg hover:bg-opacity-100 transition-all"
+            onClick={() => setShowMobileMenu(v => !v)}
+          >
+            <span className="block w-7 h-1 bg-cyan-400 mb-1 rounded"></span>
+            <span className="block w-7 h-1 bg-cyan-400 mb-1 rounded"></span>
+            <span className="block w-7 h-1 bg-cyan-400 rounded"></span>
+          </button>
+        </div>
+
+        {/* Mobile Nav Drawer */}
+        {showMobileMenu && (
+          <div className="fixed inset-0 bg-black bg-opacity-90 z-[200] flex flex-col items-end p-6 animate-fade-in">
+            <button
+              aria-label="Close navigation menu"
+              className="mb-8 w-12 h-12 flex items-center justify-center bg-black border-2 border-cyan-400 rounded-lg relative"
+              onClick={() => setShowMobileMenu(false)}
+            >
+              <span className="block w-7 h-1 bg-cyan-400 rotate-45 absolute"></span>
+              <span className="block w-7 h-1 bg-cyan-400 -rotate-45 absolute"></span>
+            </button>
+            <div className="flex flex-col gap-6 w-full items-end">
+              {[
+                { icon: Calendar, label: 'EVENTS', color: 'text-cyan-400' },
+                { icon: Users, label: 'SPEAKERS', color: 'text-lime-400' },
+                { icon: Info, label: 'ABOUT', color: 'text-purple-400' },
+                { icon: Phone, label: 'CONTACT', color: 'text-yellow-400' },
+                { icon: Zap, label: 'SPONSORS', color: 'text-pink-400' },
+                { icon: Monitor, label: 'REGISTER', color: 'text-red-400' },
+              ].map((item, index) => (
+                <button
+                  key={item.label}
+                  onClick={() => {
+                    playSound('/audio/click.mp3');
+                    setShowMobileMenu(false);
+                    if (item.label === 'SPEAKERS' && onSpeakersClick) {
+                      onSpeakersClick();
+                    }
+                    else if (item.label === 'ABOUT' && onAboutClick) {
+                      onAboutClick();
+                    }
+                    else if(item.label === 'EVENTS' && onEventsClick) {
+                      onEventsClick();
+                    }
+                  }}
+                  className={`flex items-center gap-3 px-6 py-3 rounded-lg bg-black bg-opacity-70 border-2 border-cyan-400 font-mono text-lg font-bold shadow-md hover:bg-opacity-100 transition-all ${item.color}`}
+                  style={{ minWidth: 180 }}
+                >
+                  <item.icon className="w-6 h-6" />
+                  {item.label}
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
 
 
         {/* Bottom Bar */}
