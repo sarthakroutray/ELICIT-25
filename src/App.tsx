@@ -3,7 +3,7 @@ import CyberpunkLanding from './components/CyberpunkLanding';
 import Speakers from './components/Speakers';
 import AboutSection from './components/AboutSection';
 import CyberpunkEvents from './components/CyberpunkEvents';
-
+import Carousel from "./components/Carousel";
 import Footer from './components/Footer';
 import './styles/glitch.css';
 
@@ -73,6 +73,11 @@ function App() {
       <div ref={speakersRef} className="min-h-screen">
         <Speakers />
       </div>
+      {/* Carousel Section */}
+      <div id="carousel-section" className="min-h-screen">
+        <Carousel />
+      </div>
+    
 
 
 
