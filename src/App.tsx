@@ -2,6 +2,7 @@ import React, { useRef } from 'react';
 import CyberpunkLanding from './components/CyberpunkLanding';
 import Speakers from './components/Speakers';
 import AboutSection from './components/AboutSection';
+import PreviousSponsors from './components/PreviousSponsors';
 import CyberpunkEvents from './components/CyberpunkEvents';
 import Carousel from "./components/Carousel";
 import Footer from './components/Footer';
@@ -50,6 +51,13 @@ function App() {
     }
   };
 
+  const scrollToSponsors = () => {
+    const sponsorsElement = document.getElementById('sponsors-section');
+    if (sponsorsElement) {
+      sponsorsElement.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <div className="w-full bg-black">
       {/* Landing Page Section */}
@@ -58,11 +66,12 @@ function App() {
           onSpeakersClick={scrollToSpeakers} 
           onAboutClick={scrollToAbout} 
           onEventsClick={scrollToEvents} 
+          onSponsorsClick={scrollToSponsors} 
         />
       </div>
 
-  {/* About Section */}
-  <AboutSection />
+      {/* About Section */}
+      <AboutSection />
 
       {/* Events Section */}
       <div id="events-section">
@@ -73,15 +82,18 @@ function App() {
       <div ref={speakersRef} className="min-h-screen">
         <Speakers />
       </div>
+
       {/* Carousel Section */}
       <div id="carousel-section" className="min-h-screen">
         <Carousel />
       </div>
-    
 
+      {/* Previous Sponsors Section */}
+      <div id="sponsors-section">
+        <PreviousSponsors />
+      </div>
 
-
-      {/* Footer at the bottom */}
+      {/* Footer */}
       <Footer />
     </div>
   );
