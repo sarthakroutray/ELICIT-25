@@ -50,7 +50,7 @@ const CyberpunkLanding: React.FC<CyberpunkLandingProps> = ({ onSpeakersClick, on
   };
 
   return (
-    <div className="relative w-full h-screen bg-black overflow-hidden" style={{ cursor: 'none' }}>
+    <div className="relative w-full h-screen bg-black overflow-hidden">
       {/* Responsive styles for mobile/tablet */}
       <style>{`
         @media (max-width: 1024px) {
@@ -87,7 +87,7 @@ const CyberpunkLanding: React.FC<CyberpunkLandingProps> = ({ onSpeakersClick, on
           }
         }
       `}</style>
-      {/* Custom Cursor */}
+      {/* Custom Cursor
       <div 
         className="fixed w-2 h-2 bg-blue-500 rounded-full pointer-events-none transition-transform duration-[50ms] ease-linear will-change-transform"
         style={{
@@ -97,7 +97,7 @@ const CyberpunkLanding: React.FC<CyberpunkLandingProps> = ({ onSpeakersClick, on
           boxShadow: '0 0 20px #3b82f6, 0 0 40px #3b82f6, 0 0 60px #3b82f6, 0 0 80px #3b82f6',
           zIndex: 9999,
         }}
-      />
+      /> */}
 
       {/* Digital Rain Background */}
       <DigitalRain />
