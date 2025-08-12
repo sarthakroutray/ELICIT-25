@@ -7,18 +7,21 @@ const AboutSection: React.FC = () => {
   return (
     <div
       id="about-section"
-      className="relative px-8 pl-48 bg-black text-white font-orbitron uppercase overflow-hidden"
-      style={{ fontFamily: "'Orbitron', sans-serif" }}
+      className="px-8 pl-48 bg-black text-white font-orbitron uppercase"
+      style={{ fontFamily: "'Orbitron', sans-serif", minHeight: '100vh', overflowY: 'auto', overflowX: 'hidden', position: 'relative' }}
     >
      
-      <div className="absolute inset-0 w-full h-full z-0">
-        <Canvas camera={{ position: [0, 20, 30], fov: 60 }}>
+      <div style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', zIndex: -1, pointerEvents: 'none' }}>
+        <Canvas camera={{ position: [0, 20, 30], fov: 60 }} style={{ pointerEvents: 'none' }}>
           <CyberpunkScene mousePosition={{ x: 0, y: 0 }} />
         </Canvas>
       </div>
       
       
-     <div className="w-full flex flex-col  items-center mt-12 mb-8 select-none z-10">
+  <div
+    className="w-full flex flex-col items-center mt-12 mb-8 select-none about-section-content"
+    style={{ zIndex: 2, position: 'relative' }}
+  >
   <div className="uppercase text-sm tracking-widest text-green-400 mr-44 font-mono drop-shadow-[0_0_6px_#00fff7] mb-2">
     SYSTEM CORE[03]
   </div>
@@ -91,7 +94,7 @@ const AboutSection: React.FC = () => {
 
 
           {/* Right stacked yellow boxes */}
-          <div className="flex flex-col gap-8 w-3/5 pr-8 h-[340px] my-8">
+          <div className="flex flex-col gap-8 w-3/5 pr-8 h-[340px] my-8 about-section-rightboxes">
             {/* About Section Box */}
             <div
               className="flex flex-col justify-center flex-1 h-1/2 p-4 rounded-lg border-2 border-green-400"
@@ -161,7 +164,7 @@ const AboutSection: React.FC = () => {
         </div>
       </div>
 
-      {/* Animations as global styles */}
+      {/* Animations and responsive styles as global styles */}
       <style>
         {`
           @keyframes typing {
@@ -185,6 +188,107 @@ const AboutSection: React.FC = () => {
 
           .font-orbitron {
             font-family: 'Orbitron', sans-serif;
+          }
+
+          /* Responsive styles for About Section */
+          @media (max-width: 1024px) {
+            #about-section .about-section-rightboxes {
+              transform: scale(0.92);
+              transform-origin: top center;
+            }
+            #about-section .about-section-rightboxes h2,
+            #about-section .about-section-rightboxes p {
+              font-size: 90% !important;
+            }
+            #about-section {
+              padding-left: 0.5rem !important;
+              padding-right: 0.5rem !important;
+            }
+            #about-section .mr-44, #about-section .mr-40 {
+              margin-right: 0 !important;
+            }
+            #about-section .w-3\/4 {
+              width: 98% !important;
+            }
+            #about-section .h-\[400px\], #about-section .h-\[340px\] {
+              height: 180px !important;
+            }
+            #about-section .w-\[480px\] {
+              width: 98vw !important;
+              min-width: 0 !important;
+              max-width: 100% !important;
+            }
+            #about-section .flex-col.gap-8.w-3\/5.pr-8.h-\[340px\].my-8 {
+              width: 100% !important;
+              padding-right: 0 !important;
+              height: auto !important;
+              gap: 0.5rem !important;
+              margin: 0 !important;
+            }
+          }
+          @media (max-width: 768px) {
+            #about-section .about-section-rightboxes {
+              transform: scale(0.82);
+              transform-origin: top center;
+            }
+            #about-section .about-section-rightboxes h2,
+            #about-section .about-section-rightboxes p {
+              font-size: 80% !important;
+            }
+            #about-section {
+              padding-left: 0.1rem !important;
+              padding-right: 0.1rem !important;
+            }
+            #about-section .w-3\/4 {
+              width: 100% !important;
+            }
+            #about-section .h-\[400px\], #about-section .h-\[340px\] {
+              height: 110px !important;
+            }
+            #about-section .w-\[480px\] {
+              width: 100vw !important;
+              min-width: 0 !important;
+              max-width: 100% !important;
+            }
+            #about-section .flex-col.gap-8.w-3\/5.pr-8.h-\[340px\].my-8 {
+              width: 100% !important;
+              padding-right: 0 !important;
+              height: auto !important;
+              gap: 0.2rem !important;
+              margin: 0 !important;
+            }
+          }
+          @media (max-width: 600px) {
+            #about-section .about-section-rightboxes {
+              transform: scale(0.7);
+              transform-origin: top center;
+            }
+            #about-section .about-section-rightboxes h2,
+            #about-section .about-section-rightboxes p {
+              font-size: 65% !important;
+            }
+            #about-section {
+              padding-left: 0 !important;
+              padding-right: 0 !important;
+            }
+            #about-section .w-3\/4 {
+              width: 100% !important;
+            }
+            #about-section .h-\[400px\], #about-section .h-\[340px\] {
+              height: 70px !important;
+            }
+            #about-section .w-\[480px\] {
+              width: 100vw !important;
+              min-width: 0 !important;
+              max-width: 100% !important;
+            }
+            #about-section .flex-col.gap-8.w-3\/5.pr-8.h-\[340px\].my-8 {
+              width: 100% !important;
+              padding-right: 0 !important;
+              height: auto !important;
+              gap: 0.1rem !important;
+              margin: 0 !important;
+            }
           }
         `}
       </style>
