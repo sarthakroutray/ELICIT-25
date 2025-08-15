@@ -5,7 +5,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 import CyberpunkScene from './CyberpunkScene';
 import GlitchText from './GlitchText';
 import TerminalInterface from './TerminalInterface';
-import SystemWarnings from './SystemWarnings';
 import CountdownTimer from './CountdownTimer';
 import SocialLinks from './SocialLinks';
 import DigitalRain from './DigitalRain';
@@ -485,7 +484,6 @@ const CyberpunkLanding: React.FC<CyberpunkLandingProps> = ({ onSpeakersClick, on
       </div>
 
       {/* System Warnings */}
-      <SystemWarnings />
 
       {/* Terminal Interface */}
       <AnimatePresence>
