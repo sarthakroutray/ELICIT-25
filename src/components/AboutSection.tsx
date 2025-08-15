@@ -1,6 +1,5 @@
 import React from 'react';
-import { Canvas } from '@react-three/fiber';
-import CyberpunkScene from './CyberpunkScene';
+import DigitalRain from './DigitalRain';
 
 
 const AboutSection: React.FC = () => {
@@ -11,10 +10,12 @@ const AboutSection: React.FC = () => {
       style={{ fontFamily: "'Orbitron', sans-serif", minHeight: '100vh', overflowY: 'auto', overflowX: 'hidden', position: 'relative' }}
     >
      
-      <div style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', zIndex: -1, pointerEvents: 'none' }}>
-        <Canvas camera={{ position: [0, 20, 30], fov: 60 }} style={{ pointerEvents: 'none' }}>
-          <CyberpunkScene mousePosition={{ x: 0, y: 0 }} />
-        </Canvas>
+      {/* Digital rain background */}
+      <DigitalRain />
+
+      {/* Shared overlay to match site look */}
+      <div className="absolute inset-0 opacity-10 pointer-events-none" style={{ zIndex: -1 }}>
+        <div className="w-full h-full bg-gradient-to-br from-transparent via-white to-transparent animate-pulse mix-blend-overlay" />
       </div>
       
       

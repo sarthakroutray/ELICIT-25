@@ -1,9 +1,6 @@
 
-import React, { useState, useEffect, useRef, useCallback } from 'react';
-import { Canvas } from '@react-three/fiber';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
-
-import CyberpunkScene from './CyberpunkScene';
       
 //// --- Sponsor Data ---
 const sponsors = [
@@ -83,14 +80,9 @@ const SponsorsCarousel = () => {
     <section
       onMouseEnter={stopAutoplay}
       onMouseLeave={startAutoplay}
-      className="relative w-full px-6 md:px-12 py-20 text-white overflow-hidden font-mono bg-black"
+      className="relative w-full px-6 md:px-12 py-20 text-white overflow-hidden font-mono bg-transparent"
     >
-      {/* Background 3D Canvas */}
-      <div className="absolute inset-0 w-full h-full z-0">
-        <Canvas camera={{ position: [0, 20, 30], fov: 60 }}>
-          <CyberpunkScene mousePosition={{ x: 0, y: 0 }} />
-        </Canvas>
-      </div>
+  {/* Background provided by parent SponsorsPage for seamless stacking */}
 
       {/* Centered foreground content */}
       <div className="relative z-10 flex flex-col items-center gap-10">

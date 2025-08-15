@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import DigitalRain from './DigitalRain';
 
 interface SponsorData {
   id: number;
@@ -280,17 +279,11 @@ const PreviousSponsors: React.FC = () => {
 
 
   return (
-    <div className="min-h-screen bg-black relative overflow-hidden">
-      {/* Digital Rain Background */}
-      <DigitalRain />
-      
-      {/* Static Overlay */}
-      <div className="absolute inset-0 opacity-10 pointer-events-none">
-        <div className="w-full h-full bg-gradient-to-br from-transparent via-white to-transparent animate-pulse mix-blend-overlay" />
-      </div>
+    <div className="min-h-screen relative overflow-hidden bg-transparent">
+      {/* Background/overlay provided by parent SponsorsPage for seamless stacking */}
 
       {/* Main Content */}
-      <div className="relative z-10 min-h-screen flex flex-col items-center justify-center px-4 py-8">
+  <div className="relative z-10 flex flex-col items-center justify-center px-4 py-6 md:py-8">
         
         {/* Header */}
         <motion.div

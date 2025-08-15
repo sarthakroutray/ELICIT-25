@@ -1,101 +1,42 @@
-import React, { useRef } from 'react';
+import React from 'react';
+import { Routes, Route } from 'react-router-dom';
 import CyberpunkLanding from './components/CyberpunkLanding';
-import Speakers from './components/Speakers';
 import AboutSection from './components/AboutSection';
-import PreviousSponsors from './components/PreviousSponsors';
 import CyberpunkEvents from './components/CyberpunkEvents';
-import Carousel from "./components/Carousel";
+import Speakers from './components/Speakers';
+import Carousel from './components/Carousel';
+// PreviousSponsors is now composed inside SponsorsPage
+import SponsorsPage from './components/SponsorsPage';
 import Footer from './components/Footer';
+import Contact from './components/Contact';
+import Register from './components/Register';
 import './styles/glitch.css';
 
+// Simple wrapper to add spacing + footer for section pages
+const SectionPage: React.FC<{ children: React.ReactNode }> = ({ children }) => (
+  <div className="w-full min-h-screen bg-black flex flex-col">
+    <div className="flex-1">{children}</div>
+    <Footer />
+  </div>
+);
+
 function App() {
-  const speakersRef = useRef<HTMLDivElement>(null);
-
-  const scrollToSpeakers = () => {
-    if (speakersRef.current) {
-      const targetY = speakersRef.current.getBoundingClientRect().top + window.scrollY;
-      const startY = window.scrollY;
-      const distance = targetY - startY;
-      const duration = 1200; // ms
-      let startTime: number | null = null;
-
-      function step(currentTime: number) {
-        if (!startTime) startTime = currentTime;
-        const elapsed = currentTime - startTime;
-        const progress = Math.min(elapsed / duration, 1);
-        window.scrollTo(0, startY + distance * easeInOutQuad(progress));
-        if (progress < 1) {
-          window.requestAnimationFrame(step);
-        }
-      }
-
-      function easeInOutQuad(t: number) {
-        return t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
-      }
-
-      window.requestAnimationFrame(step);
-    }
-  };
-
-  const scrollToAbout = () => {
-    const aboutElement = document.getElementById('about-section');
-    if (aboutElement) {
-      aboutElement.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
-  const scrollToEvents = () => {
-    const eventsElement = document.getElementById('events-section');
-    if (eventsElement) {
-      eventsElement.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
-  const scrollToSponsors = () => {
-    const sponsorsElement = document.getElementById('sponsors-section');
-    if (sponsorsElement) {
-      sponsorsElement.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
   return (
-    <div className="w-full bg-black">
-      {/* Landing Page Section */}
-      <div className="h-screen overflow-hidden">
-        <CyberpunkLanding 
-          onSpeakersClick={scrollToSpeakers} 
-          onAboutClick={scrollToAbout} 
-          onEventsClick={scrollToEvents} 
-          onSponsorsClick={scrollToSponsors} 
-        />
-      </div>
-
-      {/* About Section */}
-      <AboutSection />
-
-      {/* Events Section */}
-      <div id="events-section">
-        <CyberpunkEvents />
-      </div>
-
-      {/* Speakers Section */}
-      <div ref={speakersRef} className="min-h-screen">
-        <Speakers />
-      </div>
-
-      {/* Carousel Section */}
-      <div id="carousel-section" className="min-h-screen">
-        <Carousel />
-      </div>
-
-      {/* Previous Sponsors Section */}
-      <div id="sponsors-section">
-        <PreviousSponsors />
-      </div>
-
-      {/* Footer */}
-      <Footer />
-    </div>
+    <Routes>
+      <Route path="/" element={<CyberpunkLanding />} />
+      <Route path="/about" element={<SectionPage><AboutSection /></SectionPage>} />
+      <Route path="/events" element={<SectionPage><CyberpunkEvents /></SectionPage>} />
+      <Route path="/speakers" element={<SectionPage><Speakers /></SectionPage>} />
+  <Route path="/carousel" element={<SectionPage><Carousel /></SectionPage>} />
+  <Route path="/sponsors" element={<SectionPage><SponsorsPage /></SectionPage>} />
+  <Route path="/contact" element={<SectionPage><Contact /></SectionPage>} />
+  <Route path="/register" element={<SectionPage><Register /></SectionPage>} />
+      <Route path="*" element={<SectionPage><div className="text-center text-white py-32 font-mono">
+        <h1 className="text-4xl mb-4">404</h1>
+        <p className="mb-6">Route not found.</p>
+        <a href="/" className="text-cyan-400 underline">Return Home</a>
+      </div></SectionPage>} />
+    </Routes>
   );
 }
 

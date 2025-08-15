@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 
-const CountdownTimer: React.FC = () => {
+type CountdownProps = {
+  targetDate?: string | Date; // ISO string or Date object
+};
+
+const CountdownTimer: React.FC<CountdownProps> = ({ targetDate }) => {
   const [timeLeft, setTimeLeft] = useState({
     days: 0,
     hours: 0,
@@ -10,13 +14,24 @@ const CountdownTimer: React.FC = () => {
   });
 
   useEffect(() => {
-    // Set target date (example: 30 days from now)
-    const targetDate = new Date();
-    targetDate.setDate(targetDate.getDate() + 30);
+    // Resolve target date from prop or default to 30 days from now
+    let resolvedTarget: Date;
+    if (targetDate) {
+      resolvedTarget = typeof targetDate === 'string' ? new Date(targetDate) : targetDate;
+    } else {
+      
+      const now = new Date();
+      const year = now.getFullYear();
+      let candidate = new Date(year, 8, 12, 0, 0, 0); 
+      if (candidate.getTime() <= now.getTime()) {
+        candidate = new Date(year + 1, 8, 12, 0, 0, 0);
+      }
+      resolvedTarget = candidate;
+    }
 
-    const timer = setInterval(() => {
-      const now = new Date().getTime();
-      const distance = targetDate.getTime() - now;
+    const tick = () => {
+      const now = Date.now();
+      const distance = resolvedTarget.getTime() - now;
 
       if (distance > 0) {
         setTimeLeft({
@@ -25,11 +40,15 @@ const CountdownTimer: React.FC = () => {
           minutes: Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)),
           seconds: Math.floor((distance % (1000 * 60)) / 1000),
         });
+      } else {
+        setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 });
       }
-    }, 1000);
+    };
 
+    tick();
+    const timer = setInterval(tick, 1000);
     return () => clearInterval(timer);
-  }, []);
+  }, [targetDate]);
 
   const formatNumber = (num: number) => num.toString().padStart(2, '0');
 
