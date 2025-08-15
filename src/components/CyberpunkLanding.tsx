@@ -362,31 +362,19 @@ const CyberpunkLanding: React.FC<CyberpunkLandingProps> = ({ onSpeakersClick, on
                       />
                     ))}
                   </div>
-                  <motion.div className="relative z-10 flex flex-col items-center justify-center h-full space-y-1"
-                    whileHover={{ scale: 1.06 }}
-                    whileTap={{ scale: 0.98 }}
-                    transition={{ duration: 0.18 }}
-                  >
-                    <motion.div
-                      whileHover={{ rotate: 180 }}
-                      transition={{ duration: 0.3 }}
-                      className="relative"
-                    >
+                  {/* inner visual wrapper uses CSS group-hover so the Link element keeps a stable hitbox */}
+                  <div className="relative z-10 flex flex-col items-center justify-center h-full space-y-1 pointer-events-none">
+                    <div className="relative transform transition-transform duration-150 group-hover:scale-105">
                       <item.icon className="w-6 h-6" />
-                      <motion.div
-                        className="absolute inset-0"
-                        animate={{
-                          boxShadow: [
-                            `0 0 5px ${item.glowColor}`,
-                            `0 0 15px ${item.glowColor}, 0 0 25px ${item.glowColor}`,
-                            `0 0 5px ${item.glowColor}`
-                          ]
+                      <div
+                        className="absolute inset-0 pointer-events-none"
+                        style={{
+                          boxShadow: `0 0 5px ${item.glowColor}`,
                         }}
-                        transition={{ duration: 2, repeat: Infinity }}
                       />
-                    </motion.div>
-                    <span className="text-[10px] leading-tight text-center">{item.label}</span>
-                  </motion.div>
+                    </div>
+                    <div className="pointer-events-none text-[10px] leading-tight text-center">{item.label}</div>
+                  </div>
                   <motion.div
                     className="absolute inset-0 bg-current opacity-0 group-hover:opacity-10"
                     animate={{ opacity: [0, 0.1, 0], scaleY: [1, 1.1, 1] }}
@@ -444,10 +432,10 @@ const CyberpunkLanding: React.FC<CyberpunkLandingProps> = ({ onSpeakersClick, on
                   className={`flex items-center gap-3 px-6 py-3 rounded-lg bg-black bg-opacity-70 border-2 border-cyan-400 font-mono text-lg font-bold shadow-md hover:bg-opacity-100 transition-all ${item.color}`}
                   style={{ minWidth: 180, textDecoration: 'none' }}
                 >
-                  <motion.div whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.98 }} transition={{ duration: 0.15 }} className="flex items-center gap-3">
+                  <div className="flex items-center gap-3 transform transition-transform duration-150 group-hover:scale-103 pointer-events-none">
                     <item.icon className="w-6 h-6" />
                     <span>{item.label}</span>
-                  </motion.div>
+                  </div>
                 </Link>
               ))}
             </div>
