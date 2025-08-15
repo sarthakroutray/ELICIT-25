@@ -329,11 +329,7 @@ const CyberpunkLanding: React.FC<CyberpunkLandingProps> = ({ onSpeakersClick, on
                   initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 2.8 + idx * 0.1 }}
-                  whileHover={{
-                    scale: 1.1,
-                    boxShadow: `0 0 25px ${item.glowColor}, inset 0 0 15px rgba(255,255,255,0.1)`
-                  }}
-                  whileTap={{ scale: 0.95 }}
+                  /* keep MotionLink size/hitbox stable; animate inner visual wrapper instead */
                   onClick={() => {
                     playSound('/audio/click.mp3');
                     // Legacy callbacks for scroll behavior
@@ -366,9 +362,13 @@ const CyberpunkLanding: React.FC<CyberpunkLandingProps> = ({ onSpeakersClick, on
                       />
                     ))}
                   </div>
-                  <div className="relative z-10 flex flex-col items-center justify-center h-full space-y-1">
+                  <motion.div className="relative z-10 flex flex-col items-center justify-center h-full space-y-1"
+                    whileHover={{ scale: 1.06 }}
+                    whileTap={{ scale: 0.98 }}
+                    transition={{ duration: 0.18 }}
+                  >
                     <motion.div
-                      whileHover={{ rotate: 180, scale: 1.2 }}
+                      whileHover={{ rotate: 180 }}
                       transition={{ duration: 0.3 }}
                       className="relative"
                     >
@@ -386,7 +386,7 @@ const CyberpunkLanding: React.FC<CyberpunkLandingProps> = ({ onSpeakersClick, on
                       />
                     </motion.div>
                     <span className="text-[10px] leading-tight text-center">{item.label}</span>
-                  </div>
+                  </motion.div>
                   <motion.div
                     className="absolute inset-0 bg-current opacity-0 group-hover:opacity-10"
                     animate={{ opacity: [0, 0.1, 0], scaleY: [1, 1.1, 1] }}
@@ -444,8 +444,10 @@ const CyberpunkLanding: React.FC<CyberpunkLandingProps> = ({ onSpeakersClick, on
                   className={`flex items-center gap-3 px-6 py-3 rounded-lg bg-black bg-opacity-70 border-2 border-cyan-400 font-mono text-lg font-bold shadow-md hover:bg-opacity-100 transition-all ${item.color}`}
                   style={{ minWidth: 180, textDecoration: 'none' }}
                 >
-                  <item.icon className="w-6 h-6" />
-                  {item.label}
+                  <motion.div whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.98 }} transition={{ duration: 0.15 }} className="flex items-center gap-3">
+                    <item.icon className="w-6 h-6" />
+                    <span>{item.label}</span>
+                  </motion.div>
                 </Link>
               ))}
             </div>
