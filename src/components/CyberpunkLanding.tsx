@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, Suspense, lazy } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls, PerspectiveCamera } from '@react-three/drei';
 import { motion, AnimatePresence } from 'framer-motion';
 import CyberpunkScene from './CyberpunkScene';
 import GlitchText from './GlitchText';
 import TerminalInterface from './TerminalInterface';
-import SystemWarnings from './SystemWarnings';
 import CountdownTimer from './CountdownTimer';
 import SocialLinks from './SocialLinks';
 import DigitalRain from './DigitalRain';
@@ -14,6 +13,8 @@ import { Monitor, Zap, Users, Calendar, Info, Phone } from 'lucide-react';
 
 import { useNavigate, Link } from 'react-router-dom';
 const MotionLink = motion(Link);
+
+const SponsorsWheel = lazy(() => import('./SponsorsWheel'));
 
 interface CyberpunkLandingProps {
   // Callbacks removed in favor of router navigation; keep optional for backwards compatibility
@@ -29,6 +30,8 @@ const CyberpunkLanding: React.FC<CyberpunkLandingProps> = ({ onSpeakersClick, on
   const [showTerminal, setShowTerminal] = useState(false);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [showMobileMenu, setShowMobileMenu] = useState(false);
+  const [wheelY, setWheelY] = useState<number>(4.4);
+  const [wheelBrightness, setWheelBrightness] = useState<number>(1);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -136,12 +139,29 @@ const CyberpunkLanding: React.FC<CyberpunkLandingProps> = ({ onSpeakersClick, on
           minPolarAngle={Math.PI / 4}
         />
         <CyberpunkScene mousePosition={mousePosition} />
+  <Suspense fallback={null}>
+          {/* Sponsors wheel: lazy-loaded 3D ring of sponsor logos */}
+          <SponsorsWheel logos={[
+            '/sponsors/cisco.png',
+            '/sponsors/coding_blocks.jpg',
+            '/sponsors/zebronics.jpg',
+            '/sponsors/InterviewCake.png',
+            '/sponsors/GeeksforGeeks.svg.png',
+            '/sponsors/Lenovo.png',
+            '/sponsors/ONGC_Logo.svg.png',
+            '/sponsors/snapchat.webp',
+            '/logos/3.png',
+            '/logos/4.png',
+          ]} radius={8.7} speed={0.1} y={3.9} brightness={0.1} />
+        </Suspense>
       </Canvas>
 
       {/* Static Overlay */}
       <div className="absolute inset-0 opacity-10 pointer-events-none">
         <div className="w-full h-full bg-gradient-to-br from-transparent via-white to-transparent animate-pulse mix-blend-overlay" />
       </div>
+
+  {/* Sponsors wheel controls removed (was debug UI) */}
 
       {/* Main UI Overlay */}
       <div className="absolute inset-0 z-10 flex flex-col justify-between p-8">
@@ -485,7 +505,6 @@ const CyberpunkLanding: React.FC<CyberpunkLandingProps> = ({ onSpeakersClick, on
       </div>
 
       {/* System Warnings */}
-      <SystemWarnings />
 
       {/* Terminal Interface */}
       <AnimatePresence>
