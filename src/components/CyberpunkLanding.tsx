@@ -12,7 +12,11 @@ import DigitalRain from './DigitalRain';
 import { playSound } from '../utils/audio';
 import { Monitor, Zap, Users, Calendar, Info, Phone } from 'lucide-react';
 
+import { useNavigate, Link } from 'react-router-dom';
+const MotionLink = motion(Link);
+
 interface CyberpunkLandingProps {
+  // Callbacks removed in favor of router navigation; keep optional for backwards compatibility
   onSpeakersClick?: () => void;
   onAboutClick?: () => void; 
   onEventsClick?: () => void;
@@ -21,13 +25,28 @@ interface CyberpunkLandingProps {
 
 const CyberpunkLanding: React.FC<CyberpunkLandingProps> = ({ onSpeakersClick, onAboutClick, onEventsClick, onSponsorsClick }) => {
   const [isInitialized, setIsInitialized] = useState(false);
+  const [skipIntro, setSkipIntro] = useState(false);
   const [showTerminal, setShowTerminal] = useState(false);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [showMobileMenu, setShowMobileMenu] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
+    // If user already saw the intro, skip animations and mark initialized immediately
+    try {
+      const seen = localStorage.getItem('elicit_seen_intro');
+      if (seen) {
+        setIsInitialized(true);
+        setSkipIntro(true);
+        return;
+      }
+    } catch (e) {
+      // localStorage may be unavailable in some environments — fall back to normal behavior
+    }
+
     const timer = setTimeout(() => {
       setIsInitialized(true);
+      try { localStorage.setItem('elicit_seen_intro', '1'); } catch (e) {}
     }, 1000);
 
     const handleMouseMove = (e: MouseEvent) => {
@@ -102,23 +121,7 @@ const CyberpunkLanding: React.FC<CyberpunkLandingProps> = ({ onSpeakersClick, on
       {/* Digital Rain Background */}
       <DigitalRain />
 
-      {/* Global Scanning Line */}
-      <motion.div
-        className="fixed top-0 left-0 w-full h-0.5 pointer-events-none z-50"
-        style={{
-          background: 'linear-gradient(90deg, transparent, #ff0040, transparent)',
-          boxShadow: '0 0 10px #ff0040, 0 0 20px #ff0040',
-        }}
-        animate={{
-          y: [-10, window.innerHeight + 10]
-        }}
-        transition={{
-          duration: 4,
-          repeat: Infinity,
-          ease: "linear",
-          repeatDelay: 1
-        }}
-      />
+  {/* Removed global framer-motion scanning line per request */}
 
       {/* 3D Scene */}
       <Canvas className="absolute inset-0">
@@ -144,21 +147,33 @@ const CyberpunkLanding: React.FC<CyberpunkLandingProps> = ({ onSpeakersClick, on
       <div className="absolute inset-0 z-10 flex flex-col justify-between p-8">
         {/* Top Bar */}
         <div className="flex justify-between items-start">
-          <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.5 }}
-            className="flex flex-col"
-          >
-            <div className="flex items-center space-x-2 mb-2">
-              <Monitor className="w-8 h-8 text-cyan-400" />
-              <span className="text-cyan-400 font-mono text-lg tracking-wider">ELICIT FEST</span>
+          {skipIntro ? (
+            <div className="flex flex-col">
+              <div className="flex items-center space-x-2 mb-2">
+                <Monitor className="w-8 h-8 text-cyan-400" />
+                <span className="text-cyan-400 font-mono text-lg tracking-wider">ELICIT FEST</span>
+              </div>
+              <div className="text-red-400 font-mono text-xs tracking-widest">
+                NETWORK_STATUS: CORRUPTED
+              </div>
             </div>
-            <div className="text-red-400 font-mono text-xs tracking-widest">
-              NETWORK_STATUS: CORRUPTED
-            </div>
-          </motion.div>
-          
+          ) : (
+            <motion.div
+              initial={{ opacity: 0, x: -50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.5 }}
+              className="flex flex-col"
+            >
+              <div className="flex items-center space-x-2 mb-2">
+                <Monitor className="w-8 h-8 text-cyan-400" />
+                <span className="text-cyan-400 font-mono text-lg tracking-wider">ELICIT FEST</span>
+              </div>
+              <div className="text-red-400 font-mono text-xs tracking-widest">
+                NETWORK_STATUS: CORRUPTED
+              </div>
+            </motion.div>
+          )}
+
           <div className="countdown-timer-responsive">
             <CountdownTimer />
           </div>
@@ -167,73 +182,123 @@ const CyberpunkLanding: React.FC<CyberpunkLandingProps> = ({ onSpeakersClick, on
         {/* Hero Section */}
         <div className="absolute top-24 left-0 right-0 z-20">
           <div className="text-center">
-            <AnimatePresence>
-              {isInitialized && (
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.8, ease: 'easeOut' }}
-                >
-                  <GlitchText 
-                    text="SYSTEM CORRUPTION DETECTED"
-                    className="main-corruption-heading-responsive text-2xl md:text-4xl lg:text-5xl font-mono font-bold text-[#00ff41] mb-16"
+            {skipIntro ? (
+              <>
+                <GlitchText 
+                  text="SYSTEM CORRUPTION DETECTED"
+                  className="main-corruption-heading-responsive text-2xl md:text-4xl lg:text-5xl font-mono font-bold text-[#00ff41] mb-16"
+                  style={{
+                    textShadow: `
+                      -1px -1px 0 #000,
+                      1px -1px 0 #000,
+                      -1px 1px 0 #000,
+                      1px 1px 0 #000,
+                      0 0 5px #00ff41,
+                      0 0 10px #00ff41,
+                      2px 0 5px #ff1a1a
+                    `,
+                    filter: 'drop-shadow(2px 2px 4px rgba(0,0,0,0.8))',
+                  }}
+                />
+
+                <div className="mb-16">
+                  <img
+                    src="/logo.png"
+                    alt="ELICIT FEST Logo"
+                    className="mx-auto w-32 h-32 md:w-40 md:h-40 lg:w-48 lg:h-48 object-contain"
                     style={{
-                      textShadow: `
-                        -1px -1px 0 #000,
-                        1px -1px 0 #000,
-                        -1px 1px 0 #000,
-                        1px 1px 0 #000,
-                        0 0 5px #00ff41,
-                        0 0 10px #00ff41,
-                        2px 0 5px #ff1a1a
-                      `,
-                      filter: 'drop-shadow(2px 2px 4px rgba(0,0,0,0.8))',
+                      filter: 'drop-shadow(0 0 20px #00ff41) drop-shadow(0 0 40px #ff0040)'
                     }}
                   />
+                </div>
 
-                  {/* Logo Section */}
+                <GlitchText 
+                  text="ELICIT FEST INITIATED..."
+                  className="text-4xl md:text-4xl lg:text-5xl font-mono font-bold text-green-400 mb-12"
+                  style={{
+                    textShadow: `
+                      -2px -2px 0 #000,
+                      2px -2px 0 #000,
+                      -2px 2px 0 #000,
+                      2px 2px 0 #000,
+                      0 0 10px #00ff41,
+                      0 0 20px #00ff41,
+                      0 0 30px #00ff41,
+                      4px 4px 8px rgba(0,0,0,0.8)
+                    `,
+                    filter: 'drop-shadow(4px 4px 8px rgba(0,0,0,0.9)) drop-shadow(0 0 15px #00ff41)'
+                  }}
+                />
+              </>
+            ) : (
+              <AnimatePresence>
+                {isInitialized && (
                   <motion.div
                     initial={{ opacity: 0, scale: 0.8 }}
                     animate={{ opacity: 1, scale: 1 }}
-                    transition={{ delay: 0.8, duration: 0.6 }}
-                    className="mb-16"
-                  >
-                    <img
-                      src="/logo.png"
-                      alt="ELICIT FEST Logo"
-                      className="mx-auto w-32 h-32 md:w-40 md:h-40 lg:w-48 lg:h-48 object-contain"
-                      style={{
-                        filter: 'drop-shadow(0 0 20px #00ff41) drop-shadow(0 0 40px #ff0040)'
-                      }}
-                    />
-                  </motion.div>
-
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 1.2 }}
+                    transition={{ duration: 0.8, ease: 'easeOut' }}
                   >
                     <GlitchText 
-                      text="ELICIT FEST INITIATED..."
-                      className="text-4xl md:text-4xl lg:text-5xl font-mono font-bold text-green-400 mb-12"
+                      text="SYSTEM CORRUPTION DETECTED"
+                      className="main-corruption-heading-responsive text-2xl md:text-4xl lg:text-5xl font-mono font-bold text-[#00ff41] mb-16"
                       style={{
                         textShadow: `
-                          -2px -2px 0 #000,
-                          2px -2px 0 #000,
-                          -2px 2px 0 #000,
-                          2px 2px 0 #000,
+                          -1px -1px 0 #000,
+                          1px -1px 0 #000,
+                          -1px 1px 0 #000,
+                          1px 1px 0 #000,
+                          0 0 5px #00ff41,
                           0 0 10px #00ff41,
-                          0 0 20px #00ff41,
-                          0 0 30px #00ff41,
-                          4px 4px 8px rgba(0,0,0,0.8)
+                          2px 0 5px #ff1a1a
                         `,
-                        filter: 'drop-shadow(4px 4px 8px rgba(0,0,0,0.9)) drop-shadow(0 0 15px #00ff41)',
+                        filter: 'drop-shadow(2px 2px 4px rgba(0,0,0,0.8))',
                       }}
                     />
+
+                    {/* Logo Section */}
+                    <motion.div
+                      initial={{ opacity: 0, scale: 0.8 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ delay: 0.8, duration: 0.6 }}
+                      className="mb-16"
+                    >
+                      <img
+                        src="/logo.png"
+                        alt="ELICIT FEST Logo"
+                        className="mx-auto w-32 h-32 md:w-40 md:h-40 lg:w-48 lg:h-48 object-contain"
+                        style={{
+                          filter: 'drop-shadow(0 0 20px #00ff41) drop-shadow(0 0 40px #ff0040)'
+                        }}
+                      />
+                    </motion.div>
+
+                    <motion.div
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 1.2 }}
+                    >
+                      <GlitchText 
+                        text="ELICIT FEST INITIATED..."
+                        className="text-4xl md:text-4xl lg:text-5xl font-mono font-bold text-green-400 mb-12"
+                        style={{
+                          textShadow: `
+                            -2px -2px 0 #000,
+                            2px -2px 0 #000,
+                            -2px 2px 0 #000,
+                            2px 2px 0 #000,
+                            0 0 10px #00ff41,
+                            0 0 20px #00ff41,
+                            0 0 30px #00ff41,
+                            4px 4px 8px rgba(0,0,0,0.8)
+                          `,
+                          filter: 'drop-shadow(4px 4px 8px rgba(0,0,0,0.9)) drop-shadow(0 0 15px #00ff41)',
+                        }}
+                      />
+                    </motion.div>
                   </motion.div>
-                </motion.div>
-              )}
-            </AnimatePresence>
+                )}
+              </AnimatePresence>
+            )}
 
             {/* Navigation Grid */}
           </div>
@@ -250,43 +315,34 @@ const CyberpunkLanding: React.FC<CyberpunkLandingProps> = ({ onSpeakersClick, on
             >
               {/* ...existing code for nav buttons... */}
               {[
-                { icon: Calendar, label: 'EVENTS', color: 'border-cyan-400 text-cyan-400', glowColor: '#00ffff' },
-                { icon: Users, label: 'SPEAKERS', color: 'border-lime-400 text-lime-400', glowColor: '#00ff41' },
-                { icon: Info, label: 'ABOUT', color: 'border-purple-400 text-purple-400', glowColor: '#8b5cf6' },
-                { icon: Phone, label: 'CONTACT', color: 'border-yellow-400 text-yellow-400', glowColor: '#fbbf24' },
-                { icon: Zap, label: 'SPONSORS', color: 'border-pink-400 text-pink-400', glowColor: '#f472b6' },
-                { icon: Monitor, label: 'REGISTER', color: 'border-red-400 text-red-400', glowColor: '#ff0040' },
-              ].map((item, index) => (
-                // ...existing code for each button...
-                <motion.button
+                { icon: Calendar, label: 'EVENTS', color: 'border-cyan-400 text-cyan-400', glowColor: '#00ffff', to: '/events' },
+                { icon: Users, label: 'SPEAKERS', color: 'border-lime-400 text-lime-400', glowColor: '#00ff41', to: '/speakers' },
+                { icon: Info, label: 'ABOUT', color: 'border-purple-400 text-purple-400', glowColor: '#8b5cf6', to: '/about' },
+                { icon: Phone, label: 'CONTACT', color: 'border-yellow-400 text-yellow-400', glowColor: '#fbbf24', to: '/contact' },
+                { icon: Zap, label: 'SPONSORS', color: 'border-pink-400 text-pink-400', glowColor: '#f472b6', to: '/sponsors' },
+                { icon: Monitor, label: 'REGISTER', color: 'border-red-400 text-red-400', glowColor: '#ff0040', to: '/register' },
+              ].map((item, idx) => (
+                // ...existing code for each button using Link for robust navigation...
+                <MotionLink
                   key={item.label}
+                  to={item.to}
                   initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 2.8 + index * 0.1 }}
-                  whileHover={{
-                    scale: 1.1,
-                    boxShadow: `0 0 25px ${item.glowColor}, inset 0 0 15px rgba(255,255,255,0.1)`
-                  }}
-                  whileTap={{ scale: 0.95 }}
+                  transition={{ delay: 2.8 + idx * 0.1 }}
+                  /* keep MotionLink size/hitbox stable; animate inner visual wrapper instead */
                   onClick={() => {
                     playSound('/audio/click.mp3');
-                    if (item.label === 'SPEAKERS' && onSpeakersClick) {
-                      onSpeakersClick();
-                    }
-                    else if (item.label === 'ABOUT' && onAboutClick) {
-                      onAboutClick();
-                    }
-                    else if(item.label === 'EVENTS' && onEventsClick) {
-                      onEventsClick();
-                    }
-                    else if(item.label === 'SPONSORS' && onSponsorsClick) {
-                      onSponsorsClick();
-                    }
+                    // Legacy callbacks for scroll behavior
+                    if (item.label === 'SPEAKERS' && onSpeakersClick) onSpeakersClick();
+                    if (item.label === 'ABOUT' && onAboutClick) onAboutClick();
+                    if (item.label === 'EVENTS' && onEventsClick) onEventsClick();
+                    if (item.label === 'SPONSORS' && onSponsorsClick) onSponsorsClick();
                   }}
-                  className={`group relative w-32 h-32 ${item.color} bg-black bg-opacity-80 hover:bg-opacity-90 transition-all duration-300 font-mono text-xs tracking-wider overflow-hidden`}
+                  className={`group relative w-32 h-32 ${item.color} bg-black bg-opacity-80 hover:bg-opacity-90 transition-all duration-300 font-mono text-xs tracking-wider overflow-hidden flex items-center justify-center`}
                   style={{
                     clipPath: 'polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px))',
                     boxShadow: `0 0 10px ${item.glowColor}40`,
+                    textDecoration: 'none'
                   }}
                 >
                   {/* ...existing code... */}
@@ -300,39 +356,31 @@ const CyberpunkLanding: React.FC<CyberpunkLandingProps> = ({ onSpeakersClick, on
                         transition={{
                           duration: 2,
                           repeat: Infinity,
-                          delay: index * 0.3 + i * 0.2,
+                          delay: idx * 0.3 + i * 0.2,
                           ease: "easeInOut",
                         }}
                       />
                     ))}
                   </div>
-                  <div className="relative z-10 flex flex-col items-center justify-center h-full space-y-1">
-                    <motion.div
-                      whileHover={{ rotate: 180, scale: 1.2 }}
-                      transition={{ duration: 0.3 }}
-                      className="relative"
-                    >
+                  {/* inner visual wrapper uses CSS group-hover so the Link element keeps a stable hitbox */}
+                  <div className="relative z-10 flex flex-col items-center justify-center h-full space-y-1 pointer-events-none">
+                    <div className="relative transform transition-transform duration-150 group-hover:scale-105">
                       <item.icon className="w-6 h-6" />
-                      <motion.div
-                        className="absolute inset-0"
-                        animate={{
-                          boxShadow: [
-                            `0 0 5px ${item.glowColor}`,
-                            `0 0 15px ${item.glowColor}, 0 0 25px ${item.glowColor}`,
-                            `0 0 5px ${item.glowColor}`
-                          ]
+                      <div
+                        className="absolute inset-0 pointer-events-none"
+                        style={{
+                          boxShadow: `0 0 5px ${item.glowColor}`,
                         }}
-                        transition={{ duration: 2, repeat: Infinity }}
                       />
-                    </motion.div>
-                    <span className="text-[10px] leading-tight text-center">{item.label}</span>
+                    </div>
+                    <div className="pointer-events-none text-[10px] leading-tight text-center">{item.label}</div>
                   </div>
                   <motion.div
                     className="absolute inset-0 bg-current opacity-0 group-hover:opacity-10"
                     animate={{ opacity: [0, 0.1, 0], scaleY: [1, 1.1, 1] }}
                     transition={{ duration: 0.2, repeat: Infinity, repeatDelay: 3 }}
                   />
-                </motion.button>
+                </MotionLink>
               ))}
             </motion.div>
           )}
@@ -364,34 +412,31 @@ const CyberpunkLanding: React.FC<CyberpunkLandingProps> = ({ onSpeakersClick, on
             </button>
             <div className="flex flex-col gap-6 w-full items-end">
               {[
-                { icon: Calendar, label: 'EVENTS', color: 'text-cyan-400' },
-                { icon: Users, label: 'SPEAKERS', color: 'text-lime-400' },
-                { icon: Info, label: 'ABOUT', color: 'text-purple-400' },
-                { icon: Phone, label: 'CONTACT', color: 'text-yellow-400' },
-                { icon: Zap, label: 'SPONSORS', color: 'text-pink-400' },
-                { icon: Monitor, label: 'REGISTER', color: 'text-red-400' },
-              ].map((item, index) => (
-                <button
+                { icon: Calendar, label: 'EVENTS', color: 'text-cyan-400', to: '/events' },
+                { icon: Users, label: 'SPEAKERS', color: 'text-lime-400', to: '/speakers' },
+                { icon: Info, label: 'ABOUT', color: 'text-purple-400', to: '/about' },
+                { icon: Phone, label: 'CONTACT', color: 'text-yellow-400', to: '/contact' },
+                { icon: Zap, label: 'SPONSORS', color: 'text-pink-400', to: '/sponsors' },
+                { icon: Monitor, label: 'REGISTER', color: 'text-red-400', to: '/register' },
+              ].map((item) => (
+                <Link
                   key={item.label}
+                  to={item.to}
                   onClick={() => {
                     playSound('/audio/click.mp3');
                     setShowMobileMenu(false);
-                    if (item.label === 'SPEAKERS' && onSpeakersClick) {
-                      onSpeakersClick();
-                    }
-                    else if (item.label === 'ABOUT' && onAboutClick) {
-                      onAboutClick();
-                    }
-                    else if(item.label === 'EVENTS' && onEventsClick) {
-                      onEventsClick();
-                    }
+                    if (item.label === 'SPEAKERS' && onSpeakersClick) onSpeakersClick();
+                    if (item.label === 'ABOUT' && onAboutClick) onAboutClick();
+                    if (item.label === 'EVENTS' && onEventsClick) onEventsClick();
                   }}
                   className={`flex items-center gap-3 px-6 py-3 rounded-lg bg-black bg-opacity-70 border-2 border-cyan-400 font-mono text-lg font-bold shadow-md hover:bg-opacity-100 transition-all ${item.color}`}
-                  style={{ minWidth: 180 }}
+                  style={{ minWidth: 180, textDecoration: 'none' }}
                 >
-                  <item.icon className="w-6 h-6" />
-                  {item.label}
-                </button>
+                  <div className="flex items-center gap-3 transform transition-transform duration-150 group-hover:scale-103 pointer-events-none">
+                    <item.icon className="w-6 h-6" />
+                    <span>{item.label}</span>
+                  </div>
+                </Link>
               ))}
             </div>
           </div>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion } from 'framer-motion';
 import DigitalRain from './DigitalRain';
 
 interface SpeakerData {
@@ -88,6 +88,12 @@ const Speakers: React.FC = () => {
         className="flex flex-col lg:flex-row gap-0 lg:gap-0 max-w-5xl w-full items-stretch justify-center"
         style={{ position: 'relative', left: '0px' }}
         id="speakers-scroll-section"
+        initial="hidden"
+        animate="show"
+        variants={{
+          hidden: {},
+          show: { transition: { staggerChildren: 0.25 } }
+        }}
       >
         {/* Left GIF - vertically centered relative to speaker boxes */}
         <div className="hidden lg:flex items-center" style={{ minWidth: '120px', marginLeft: '0px', marginRight: '200px' }}>
@@ -95,16 +101,15 @@ const Speakers: React.FC = () => {
         </div>
         {/* Speaker Boxes */}
         {speakers.map((speaker, index) => {
-          const sectionRef = React.useRef<HTMLDivElement>(null);
-          const { scrollYProgress } = useScroll({ container: undefined, target: sectionRef });
-          // Animation: boxes move together as you scroll into section, then move apart after passing it
-          const x = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [index === 0 ? -60 : 60, 0, 0, index === 0 ? 60 : -60]);
           return (
             <motion.div
               key={speaker.id}
-              ref={sectionRef}
-              style={{ x, marginRight: index === 0 ? '135px' : '0px' }}
               className="relative group flex flex-col items-center"
+              style={{ marginRight: index === 0 ? '20px' : '0px' }}
+              variants={{
+                hidden: { x: index === 0 ? -160 : 160, opacity: 0 },
+                show: { x: 0, opacity: 1, transition: { duration: 1.2, ease: 'easeOut' } }
+              }}
             >
               {/* Card with outline PNG as border */}
               <div 
