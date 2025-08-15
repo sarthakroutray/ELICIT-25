@@ -12,7 +12,8 @@ import DigitalRain from './DigitalRain';
 import { playSound } from '../utils/audio';
 import { Monitor, Zap, Users, Calendar, Info, Phone } from 'lucide-react';
 
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
+const MotionLink = motion(Link);
 
 interface CyberpunkLandingProps {
   // Callbacks removed in favor of router navigation; keep optional for backwards compatibility
@@ -314,19 +315,20 @@ const CyberpunkLanding: React.FC<CyberpunkLandingProps> = ({ onSpeakersClick, on
             >
               {/* ...existing code for nav buttons... */}
               {[
-                { icon: Calendar, label: 'EVENTS', color: 'border-cyan-400 text-cyan-400', glowColor: '#00ffff' },
-                { icon: Users, label: 'SPEAKERS', color: 'border-lime-400 text-lime-400', glowColor: '#00ff41' },
-                { icon: Info, label: 'ABOUT', color: 'border-purple-400 text-purple-400', glowColor: '#8b5cf6' },
-                { icon: Phone, label: 'CONTACT', color: 'border-yellow-400 text-yellow-400', glowColor: '#fbbf24' },
-                { icon: Zap, label: 'SPONSORS', color: 'border-pink-400 text-pink-400', glowColor: '#f472b6' },
-                { icon: Monitor, label: 'REGISTER', color: 'border-red-400 text-red-400', glowColor: '#ff0040' },
-        ].map((item, idx) => (
-                // ...existing code for each button...
-                <motion.button
+                { icon: Calendar, label: 'EVENTS', color: 'border-cyan-400 text-cyan-400', glowColor: '#00ffff', to: '/events' },
+                { icon: Users, label: 'SPEAKERS', color: 'border-lime-400 text-lime-400', glowColor: '#00ff41', to: '/speakers' },
+                { icon: Info, label: 'ABOUT', color: 'border-purple-400 text-purple-400', glowColor: '#8b5cf6', to: '/about' },
+                { icon: Phone, label: 'CONTACT', color: 'border-yellow-400 text-yellow-400', glowColor: '#fbbf24', to: '/contact' },
+                { icon: Zap, label: 'SPONSORS', color: 'border-pink-400 text-pink-400', glowColor: '#f472b6', to: '/sponsors' },
+                { icon: Monitor, label: 'REGISTER', color: 'border-red-400 text-red-400', glowColor: '#ff0040', to: '/register' },
+              ].map((item, idx) => (
+                // ...existing code for each button using Link for robust navigation...
+                <MotionLink
                   key={item.label}
+                  to={item.to}
                   initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 2.8 + idx * 0.1 }}
+                  transition={{ delay: 2.8 + idx * 0.1 }}
                   whileHover={{
                     scale: 1.1,
                     boxShadow: `0 0 25px ${item.glowColor}, inset 0 0 15px rgba(255,255,255,0.1)`
@@ -334,24 +336,17 @@ const CyberpunkLanding: React.FC<CyberpunkLandingProps> = ({ onSpeakersClick, on
                   whileTap={{ scale: 0.95 }}
                   onClick={() => {
                     playSound('/audio/click.mp3');
-                    // Prefer navigation; fall back to legacy callbacks if provided
-                    const label = item.label;
-                    if (label === 'SPEAKERS') navigate('/speakers');
-                    else if (label === 'ABOUT') navigate('/about');
-                    else if (label === 'EVENTS') navigate('/events');
-                    else if (label === 'SPONSORS') navigate('/sponsors');
-                    else if (label === 'REGISTER') navigate('/register');
-                    else if (label === 'CONTACT') navigate('/contact');
-                    // Legacy scroll support
-                    if (label === 'SPEAKERS' && onSpeakersClick) onSpeakersClick();
-                    if (label === 'ABOUT' && onAboutClick) onAboutClick();
-                    if (label === 'EVENTS' && onEventsClick) onEventsClick();
-                    if (label === 'SPONSORS' && onSponsorsClick) onSponsorsClick();
+                    // Legacy callbacks for scroll behavior
+                    if (item.label === 'SPEAKERS' && onSpeakersClick) onSpeakersClick();
+                    if (item.label === 'ABOUT' && onAboutClick) onAboutClick();
+                    if (item.label === 'EVENTS' && onEventsClick) onEventsClick();
+                    if (item.label === 'SPONSORS' && onSponsorsClick) onSponsorsClick();
                   }}
-                  className={`group relative w-32 h-32 ${item.color} bg-black bg-opacity-80 hover:bg-opacity-90 transition-all duration-300 font-mono text-xs tracking-wider overflow-hidden`}
+                  className={`group relative w-32 h-32 ${item.color} bg-black bg-opacity-80 hover:bg-opacity-90 transition-all duration-300 font-mono text-xs tracking-wider overflow-hidden flex items-center justify-center`}
                   style={{
                     clipPath: 'polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px))',
                     boxShadow: `0 0 10px ${item.glowColor}40`,
+                    textDecoration: 'none'
                   }}
                 >
                   {/* ...existing code... */}
@@ -397,7 +392,7 @@ const CyberpunkLanding: React.FC<CyberpunkLandingProps> = ({ onSpeakersClick, on
                     animate={{ opacity: [0, 0.1, 0], scaleY: [1, 1.1, 1] }}
                     transition={{ duration: 0.2, repeat: Infinity, repeatDelay: 3 }}
                   />
-                </motion.button>
+                </MotionLink>
               ))}
             </motion.div>
           )}
@@ -429,35 +424,29 @@ const CyberpunkLanding: React.FC<CyberpunkLandingProps> = ({ onSpeakersClick, on
             </button>
             <div className="flex flex-col gap-6 w-full items-end">
               {[
-                { icon: Calendar, label: 'EVENTS', color: 'text-cyan-400' },
-                { icon: Users, label: 'SPEAKERS', color: 'text-lime-400' },
-                { icon: Info, label: 'ABOUT', color: 'text-purple-400' },
-                { icon: Phone, label: 'CONTACT', color: 'text-yellow-400' },
-                { icon: Zap, label: 'SPONSORS', color: 'text-pink-400' },
-                { icon: Monitor, label: 'REGISTER', color: 'text-red-400' },
+                { icon: Calendar, label: 'EVENTS', color: 'text-cyan-400', to: '/events' },
+                { icon: Users, label: 'SPEAKERS', color: 'text-lime-400', to: '/speakers' },
+                { icon: Info, label: 'ABOUT', color: 'text-purple-400', to: '/about' },
+                { icon: Phone, label: 'CONTACT', color: 'text-yellow-400', to: '/contact' },
+                { icon: Zap, label: 'SPONSORS', color: 'text-pink-400', to: '/sponsors' },
+                { icon: Monitor, label: 'REGISTER', color: 'text-red-400', to: '/register' },
               ].map((item) => (
-                <button
+                <Link
                   key={item.label}
+                  to={item.to}
                   onClick={() => {
                     playSound('/audio/click.mp3');
                     setShowMobileMenu(false);
-                    const label = item.label;
-                    if (label === 'SPEAKERS') navigate('/speakers');
-                    else if (label === 'ABOUT') navigate('/about');
-                    else if (label === 'EVENTS') navigate('/events');
-                    else if (label === 'SPONSORS') navigate('/sponsors');
-                    else if (label === 'REGISTER') navigate('/register');
-                    else if (label === 'CONTACT') navigate('/contact');
-                    if (label === 'SPEAKERS' && onSpeakersClick) onSpeakersClick();
-                    if (label === 'ABOUT' && onAboutClick) onAboutClick();
-                    if (label === 'EVENTS' && onEventsClick) onEventsClick();
+                    if (item.label === 'SPEAKERS' && onSpeakersClick) onSpeakersClick();
+                    if (item.label === 'ABOUT' && onAboutClick) onAboutClick();
+                    if (item.label === 'EVENTS' && onEventsClick) onEventsClick();
                   }}
                   className={`flex items-center gap-3 px-6 py-3 rounded-lg bg-black bg-opacity-70 border-2 border-cyan-400 font-mono text-lg font-bold shadow-md hover:bg-opacity-100 transition-all ${item.color}`}
-                  style={{ minWidth: 180 }}
+                  style={{ minWidth: 180, textDecoration: 'none' }}
                 >
                   <item.icon className="w-6 h-6" />
                   {item.label}
-                </button>
+                </Link>
               ))}
             </div>
           </div>
