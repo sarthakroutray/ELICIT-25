@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { X, Terminal } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 interface TerminalInterfaceProps {
   onClose: () => void;
@@ -10,44 +11,112 @@ const TerminalInterface: React.FC<TerminalInterfaceProps> = ({ onClose }) => {
   const [output, setOutput] = useState<string[]>([]);
   const [input, setInput] = useState('');
   const [isTyping, setIsTyping] = useState(false);
+  const [commandHistory, setCommandHistory] = useState<string[]>([]);
+  const [historyIndex, setHistoryIndex] = useState(-1);
+  const [showOptions, setShowOptions] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
+  const outputRef = useRef<HTMLDivElement>(null);
+  const hasInitialized = useRef(false);
+  const navigate = useNavigate();
 
   const commands = {
-    help: 'Available commands: help, events, speakers, about, contact, register, clear, exit',
-    events: 'EVENTS_MODULE_LOADING... [████████████████████] 100%\nTech talks, workshops, hackathons, and more!',
-    speakers: 'ACCESSING_SPEAKER_DATABASE... [████████████████████] 100%\nIndustry experts and thought leaders confirmed.',
-    about: 'ELICIT_FEST.EXE - A premier tech festival bringing together innovators.',
-    contact: 'CONTACT_CHANNELS_ACTIVE:\n> Email: info@elicitfest.com\n> Discord: ElicitFest#2025',
-    register: 'REDIRECTING_TO_REGISTRATION_PORTAL... [████████████████████] 100%',
-    clear: 'CLEAR_TERMINAL',
-    exit: 'EXIT_TERMINAL',
+    help: `Available commands:
+• help - Show this help message
+• sponsors (s) - Navigate to Sponsors page
+• events (e) - Navigate to Events page
+• speakers (sp) - Navigate to Speakers page
+• about (a) - Navigate to About page
+• contact (c) - Navigate to Contact page
+• register (r) - Navigate to Registration page
+
+Quick navigation: Type "s" for sponsors, "e" for events, etc.`,
+    sponsors: 'NAVIGATING_TO_SPONSORS_PAGE... [████████████████████] 100%\nRedirecting to sponsors section...',
+    events: 'NAVIGATING_TO_EVENTS_PAGE... [████████████████████] 100%\nRedirecting to events section...',
+    speakers: 'NAVIGATING_TO_SPEAKERS_PAGE... [████████████████████] 100%\nRedirecting to speakers section...',
+    about: 'NAVIGATING_TO_ABOUT_PAGE... [████████████████████] 100%\nRedirecting to about section...',
+    contact: 'NAVIGATING_TO_CONTACT_PAGE... [████████████████████] 100%\nRedirecting to contact section...',
+    register: 'NAVIGATING_TO_REGISTRATION_PAGE... [████████████████████] 100%\nRedirecting to registration section...',
   };
 
+  const navigationCommands = {
+    sponsors: '/sponsors',
+    events: '/events',
+    speakers: '/speakers',
+    about: '/about',
+    contact: '/contact',
+    register: '/register',
+  };
+
+  const navigationOptions = [
+    'sponsors',
+    'events', 
+    'speakers',
+    'about',
+    'contact',
+    'register'
+  ];
+
+  // Auto-scroll to bottom when output changes
+  const scrollToBottom = () => {
+    if (outputRef.current) {
+      outputRef.current.scrollTo({
+        top: outputRef.current.scrollHeight,
+        behavior: 'smooth'
+      });
+    }
+  };
+
+  // Auto-scroll whenever output changes
   useEffect(() => {
-    const initSequence = [
-      'INITIALIZING TERMINAL...',
-      'CONNECTING TO ELICIT NETWORK...',
-      'ACCESS GRANTED - WELCOME TO ELICIT FEST TERMINAL',
-      'Type "help" for available commands',
-      ''
-    ];
+    scrollToBottom();
+  }, [output]);
 
-    let index = 0;
-    setIsTyping(true);
+  useEffect(() => {
+    console.log('TerminalInterface useEffect running, hasInitialized:', hasInitialized.current);
     
-    const typeInterval = setInterval(() => {
-      if (index < initSequence.length) {
-        setOutput(prev => [...prev, initSequence[index]]);
-        index++;
-      } else {
-        clearInterval(typeInterval);
-        setIsTyping(false);
-        inputRef.current?.focus();
-      }
-    }, 500);
-
-    return () => clearInterval(typeInterval);
+    // Only run initialization once
+    if (hasInitialized.current) return;
+    hasInitialized.current = true;
+    
+    console.log('Starting initialization sequence');
+    
+    // Set initial output immediately
+    setOutput([
+      'CONNECTING TO ELICIT NETWORK...',
+      '',
+      'QUICK START:',
+      '• Type "help" to see available commands',
+      ''
+    ]);
+    
+    // Set typing to false after a short delay
+    setTimeout(() => {
+      setIsTyping(false);
+      inputRef.current?.focus();
+    }, 1000);
+    
   }, []);
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      if (commandHistory.length > 0 && historyIndex < commandHistory.length - 1) {
+        const newIndex = historyIndex + 1;
+        setHistoryIndex(newIndex);
+        setInput(commandHistory[commandHistory.length - 1 - newIndex]);
+      }
+    } else if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      if (historyIndex > 0) {
+        const newIndex = historyIndex - 1;
+        setHistoryIndex(newIndex);
+        setInput(commandHistory[commandHistory.length - 1 - newIndex]);
+      } else if (historyIndex === 0) {
+        setHistoryIndex(-1);
+        setInput('');
+      }
+    }
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -55,15 +124,47 @@ const TerminalInterface: React.FC<TerminalInterfaceProps> = ({ onClose }) => {
 
     const command = input.toLowerCase().trim();
     setOutput(prev => [...prev, `> ${input}`]);
+    setCommandHistory(prev => [...prev, input]);
+    setHistoryIndex(-1);
 
-    if (command === 'clear') {
-      setOutput([]);
-    } else if (command === 'exit') {
-      onClose();
-    } else if (command in commands) {
-      setOutput(prev => [...prev, commands[command as keyof typeof commands]]);
+    // Command aliases
+    const commandAliases: { [key: string]: string } = {
+      's': 'sponsors',
+      'e': 'events',
+      'sp': 'speakers',
+      'a': 'about',
+      'c': 'contact',
+      'r': 'register'
+    };
+
+    // Resolve command (check aliases first, then direct commands)
+    const resolvedCommand = commandAliases[command] || command;
+
+    if (resolvedCommand === 'help') {
+      setOutput(prev => [...prev, commands.help]);
+      setShowOptions(true);
+      setOutput(prev => [...prev, '', 'Type one of the options above to navigate:']);
+    } else if (resolvedCommand in commands) {
+      // Handle navigation commands
+      if (resolvedCommand in navigationCommands) {
+        if (showOptions) {
+          setOutput(prev => [...prev, commands[resolvedCommand as keyof typeof commands]]);
+          setTimeout(() => {
+            navigate(navigationCommands[resolvedCommand as keyof typeof navigationCommands]);
+            onClose(); // Close terminal after navigation
+          }, 2000); // Give user time to see the message
+        } else {
+          setOutput(prev => [...prev, 'Type "help" first to see available options.']);
+        }
+      } else {
+        setOutput(prev => [...prev, commands[resolvedCommand as keyof typeof commands]]);
+      }
     } else {
-      setOutput(prev => [...prev, `Command not found: ${command}. Type "help" for available commands.`]);
+      if (showOptions) {
+        setOutput(prev => [...prev, `Invalid option: ${command}. Type "help" to see available options.`]);
+      } else {
+        setOutput(prev => [...prev, `Command not found: ${command}. Type "help" for available commands.`]);
+      }
     }
 
     setInput('');
@@ -99,8 +200,12 @@ const TerminalInterface: React.FC<TerminalInterfaceProps> = ({ onClose }) => {
         </div>
 
         {/* Terminal Content */}
-        <div className="p-4 h-full overflow-y-auto font-mono text-sm">
+        <div ref={outputRef} className="p-4 overflow-y-auto font-mono text-sm" style={{ height: 'calc(100% - 60px)' }}>
           <div className="space-y-1">
+            {/* Debug info */}
+            <div className="text-red-400 text-xs mb-2">
+              Debug: Output length: {output.length}, IsTyping: {isTyping.toString()}, HasInitialized: {hasInitialized.current.toString()}
+            </div>
             {output.map((line, index) => (
               <div key={index} className="text-green-400">
                 {line}
@@ -115,8 +220,9 @@ const TerminalInterface: React.FC<TerminalInterfaceProps> = ({ onClose }) => {
                   type="text"
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
+                  onKeyDown={handleKeyDown}
                   className="flex-1 bg-transparent text-green-400 outline-none"
-                  placeholder="Enter command..."
+                  placeholder={showOptions ? "Type navigation option (e.g., events)..." : "Enter command..."}
                 />
                 <span className="text-cyan-400 animate-pulse">_</span>
               </form>

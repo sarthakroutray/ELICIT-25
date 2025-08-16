@@ -102,7 +102,7 @@ const SponsorsCarousel = () => {
             filter: 'drop-shadow(4px 4px 8px rgba(0,0,0,0.9))',
           }}
         >
-          OUR SPONSORS
+          PREVIOUS SPONSORS
         </h1>
 
         <div className="flex justify-center items-center gap-4 md:gap-6 w-full">
