@@ -208,8 +208,8 @@ const CyberpunkLanding: React.FC<CyberpunkLandingProps> = ({ onSpeakersClick, on
           </div>
         </div>
         
-        {/* hero & nav parent */}
-        <div className="min-h-screen flex flex-col items-center pt-[12vh]">
+  {/* hero & nav parent */}
+  <div className="min-h-[72vh] flex flex-col items-center pt-[8vh] pb-[1vh]">
           {/* Hero Section */}
           <div className="text-center">
             {skipIntro ? (
@@ -345,7 +345,7 @@ const CyberpunkLanding: React.FC<CyberpunkLandingProps> = ({ onSpeakersClick, on
                 initial={{ opacity: 0, y: 50 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 2.5, duration: 0.8 }}
-                className="nav-buttons-desktop flex gap-12 mt-12"
+                className="nav-buttons-desktop flex gap-8 mt-0"
               >
                 {[
                   { icon: Calendar, label: 'EVENTS', color: 'border-cyan-400 text-cyan-400', glowColor: '#00ffff', to: '/events' },
