@@ -30,8 +30,8 @@ const CyberpunkLanding: React.FC<CyberpunkLandingProps> = ({ onSpeakersClick, on
   const [showTerminal, setShowTerminal] = useState(false);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [showMobileMenu, setShowMobileMenu] = useState(false);
-  const [wheelY, setWheelY] = useState<number>(4.4);
-  const [wheelBrightness, setWheelBrightness] = useState<number>(1);
+  const wheelY = 4.4;
+  const wheelBrightness = 1;
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -141,7 +141,7 @@ const CyberpunkLanding: React.FC<CyberpunkLandingProps> = ({ onSpeakersClick, on
         <CyberpunkScene mousePosition={mousePosition} />
   <Suspense fallback={null}>
           {/* Sponsors wheel: lazy-loaded 3D ring of sponsor logos */}
-          <SponsorsWheel logos={[
+    <SponsorsWheel logos={[
             '/sponsors/cisco.png',
             '/sponsors/coding_blocks.jpg',
             '/sponsors/zebronics.jpg',
@@ -152,7 +152,7 @@ const CyberpunkLanding: React.FC<CyberpunkLandingProps> = ({ onSpeakersClick, on
             '/sponsors/snapchat.webp',
             '/logos/3.png',
             '/logos/4.png',
-          ]} radius={8.7} speed={0.1} y={3.9} brightness={0.1} />
+          ]} radius={8.7} speed={0.1} y={wheelY} brightness={wheelBrightness} />
         </Suspense>
       </Canvas>
 
@@ -207,7 +207,7 @@ const CyberpunkLanding: React.FC<CyberpunkLandingProps> = ({ onSpeakersClick, on
               <>
                 <GlitchText
                   text="SYSTEM CORRUPTION DETECTED"
-                  className="main-corruption-heading-responsive text-2xl md:text-4xl lg:text-5xl font-mono font-bold text-[#00ff41] mb-16"
+                  className="main-corruption-heading-responsive text-2xl md:text-4xl lg:text-5xl font-mono font-bold text-[#00ff41] mb-10"
                   style={{
                     textShadow: `
                       -1px -1px 0 #000,
@@ -222,7 +222,7 @@ const CyberpunkLanding: React.FC<CyberpunkLandingProps> = ({ onSpeakersClick, on
                   }}
                 />
 
-                <div className="mb-16">
+                <div className="mb-8">
                   <img
                     src="/logo.png"
                     alt="ELICIT FEST Logo"
@@ -233,24 +233,30 @@ const CyberpunkLanding: React.FC<CyberpunkLandingProps> = ({ onSpeakersClick, on
                   />
                 </div>
 
-                <GlitchText
-                  text="ELICIT FEST INITIATED..."
-                  className="text-4xl md:text-4xl lg:text-5xl font-mono font-bold text-green-400 mb-12"
-                  style={{
-                    textShadow: `
-                      -2px -2px 0 #000,
-                      2px -2px 0 #000,
-                      -2px 2px 0 #000,
-                      2px 2px 0 #000,
-                      0 0 10px #00ff41,
-                      0 0 20px #00ff41,
-                      0 0 30px #00ff41,
-                      4px 4px 8px rgba(0,0,0,0.8)
-                    `,
-                    filter:
-                      'drop-shadow(4px 4px 8px rgba(0,0,0,0.9)) drop-shadow(0 0 15px #00ff41)',
-                  }}
-                />
+                <div className="mb-0" />
+
+        <button
+  className="relative w-full max-w-[620px] sm:max-w-[520px] mx-auto group"
+  onClick={() => navigate('/events')}
+  aria-label="Register"
+  style={{ maxWidth: '100%' }}
+>
+  <img
+    src="/Register/register.png"
+    alt="Register Box"
+    className="w-full h-auto max-h-[140px] md:max-h-[180px] lg:max-h-[220px] object-contain block"
+    style={{
+      filter:
+        "drop-shadow(0px 0px 12px rgba(100, 236, 76, 0.72)) drop-shadow(0px 0px 24px rgba(165, 220, 141, 0.82))",
+      transition: "transform 0.2s ease",
+    }}
+  />
+  <div className="absolute inset-0 flex items-center justify-center">
+    <span className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-silkscreen-regular text-yellow-500 transition-transform duration-200 group-hover:scale-105 leading-none">
+      REGISTER
+    </span>
+  </div>
+</button>
               </>
             ) : (
               <AnimatePresence>
@@ -262,7 +268,7 @@ const CyberpunkLanding: React.FC<CyberpunkLandingProps> = ({ onSpeakersClick, on
                   >
                     <GlitchText
                       text="SYSTEM CORRUPTION DETECTED"
-                      className="main-corruption-heading-responsive text-2xl md:text-4xl lg:text-5xl font-mono font-bold text-[#00ff41] mb-16"
+                      className="main-corruption-heading-responsive text-2xl md:text-4xl lg:text-5xl font-mono font-bold text-[#00ff41] mb-8"
                       style={{
                         textShadow: `
                           -1px -1px 0 #000,
@@ -281,7 +287,7 @@ const CyberpunkLanding: React.FC<CyberpunkLandingProps> = ({ onSpeakersClick, on
                       initial={{ opacity: 0, scale: 0.8 }}
                       animate={{ opacity: 1, scale: 1 }}
                       transition={{ delay: 0.8, duration: 0.6 }}
-                      className="mb-16"
+                      className="mb-8"
                     >
                       <img
                         src="/logo.png"

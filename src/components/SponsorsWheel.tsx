@@ -12,10 +12,21 @@ type SponsorsWheelProps = {
   brightness?: number; // emissive intensity for logos
 };
 
-const SponsorsWheel: React.FC<SponsorsWheelProps> = ({ logos, radius = 8, speed = 0.12, y = 1.9, brightness = 0.5 }) => {
+const SponsorsWheel: React.FC<SponsorsWheelProps> = ({ logos, radius = 8, speed = 0.12, y = 1.9, brightness = 1.2 }) => {
   const navigate = useNavigate();
   const textures = useLoader(TextureLoader, logos);
   const groupRef = useRef<THREE.Group | null>(null);
+
+  // ensure textures are treated as sRGB so colors and emissive look correct
+  React.useEffect(() => {
+    textures.forEach((t) => {
+      if (t) {
+        // cast to any to avoid TS type mismatch for different three.js/@types versions
+        (t as any).encoding = (THREE as any).sRGBEncoding ?? (THREE as any).SRGBColorSpace ?? (THREE as any).sRGBEncoding;
+        (t as any).needsUpdate = true;
+      }
+    });
+  }, [textures]);
 
   const items = useMemo(() => {
     const n = logos.length || 1;
@@ -52,7 +63,6 @@ const SponsorsWheel: React.FC<SponsorsWheelProps> = ({ logos, radius = 8, speed 
           <meshStandardMaterial
             map={textures[it.idx]}
             transparent
-            toneMapped={false}
             side={THREE.DoubleSide}
             emissiveMap={textures[it.idx]}
             emissive={new THREE.Color(0xffffff)}
