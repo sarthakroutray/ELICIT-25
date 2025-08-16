@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import DigitalRain from './DigitalRain';
 
 const CyberpunkEventInterface: React.FC = () => {
   const [currentCard, setCurrentCard] = useState(0);
@@ -52,6 +53,7 @@ const CyberpunkEventInterface: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-black relative overflow-hidden">
+  <DigitalRain />
       {/* Enhanced grid background with multiple layers */}
       <div 
         className="absolute inset-0 opacity-30"
@@ -68,22 +70,6 @@ const CyberpunkEventInterface: React.FC = () => {
         }}
       />
       
-      {/* Floating data streams */}
-      <div className="absolute inset-0 pointer-events-none">
-        {[...Array(20)].map((_, i) => (
-          <div
-            key={i}
-            className="absolute w-px h-20 bg-gradient-to-b from-green-400 to-transparent opacity-60"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              animation: `dataStream ${3 + Math.random() * 4}s linear infinite`,
-              animationDelay: `${Math.random() * 2}s`
-            }}
-          />
-        ))}
-      </div>
-
       {/* Glitch scanlines */}
       <div 
         className="absolute inset-0 opacity-20 pointer-events-none"
@@ -249,7 +235,7 @@ const CyberpunkEventInterface: React.FC = () => {
       <div className="absolute top-1/2 left-1/2 w-64 h-64 bg-blue-400 rounded-full opacity-5 blur-3xl animate-pulse" style={{ animationDelay: '2s' }}></div>
 
       {/* CSS animations and styles */}
-      <style jsx>{`
+  <style>{`
         @keyframes gridPulse {
           0% { opacity: 0.3; }
           100% { opacity: 0.6; }
