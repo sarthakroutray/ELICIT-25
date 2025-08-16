@@ -15,11 +15,11 @@ const SponsorsPage: React.FC = () => {
       </div>
 
       <div className="py-8 md:py-10">
-        <Carousel />
+        <PreviousSponsors />
       </div>
 
       <div className="py-6 md:py-8 -mt-6">
-        <PreviousSponsors />
+        <Carousel />
       </div>
     </div>
   );

@@ -314,7 +314,7 @@ const PreviousSponsors: React.FC = () => {
                filter: 'drop-shadow(4px 4px 8px rgba(0,0,0,0.9))',
              }}
            >
-             PREVIOUS SPONSORS
+             OUR SPONSORS
            </h1>
         </motion.div>
 
