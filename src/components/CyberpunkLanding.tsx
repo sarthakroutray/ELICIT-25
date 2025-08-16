@@ -41,16 +41,25 @@ const CyberpunkLanding: React.FC<CyberpunkLandingProps> = ({ onSpeakersClick, on
       if (seen) {
         setIsInitialized(true);
         setSkipIntro(true);
-        return;
+        // don't return here — still attach mouse listeners so the 3D scene can respond to the cursor
       }
     } catch (e) {
       // localStorage may be unavailable in some environments — fall back to normal behavior
     }
 
-    const timer = setTimeout(() => {
-      setIsInitialized(true);
-      try { localStorage.setItem('elicit_seen_intro', '1'); } catch (e) {}
-    }, 1000);
+    // Only set the intro timer if the user hasn't already seen the intro
+    let timer: ReturnType<typeof setTimeout> | null = null;
+    try {
+      const seen = localStorage.getItem('elicit_seen_intro');
+      if (!seen) {
+        timer = setTimeout(() => {
+          setIsInitialized(true);
+          try { localStorage.setItem('elicit_seen_intro', '1'); } catch (e) {}
+        }, 1000);
+      }
+    } catch (e) {
+      // ignore
+    }
 
     const handleMouseMove = (e: MouseEvent) => {
       setMousePosition({ // Directly use clientX and clientY for accurate cursor position
