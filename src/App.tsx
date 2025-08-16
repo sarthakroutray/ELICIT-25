@@ -13,6 +13,7 @@ import Contact from './components/Contact';
 import Register from './components/Register';
 import './styles/glitch.css';
 
+
 // Simple wrapper to add spacing + footer for section pages
 const SectionPage: React.FC<{ children: React.ReactNode }> = ({ children }) => (
   <div className="w-full min-h-screen bg-black flex flex-col">
