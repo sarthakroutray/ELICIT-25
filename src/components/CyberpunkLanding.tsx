@@ -189,7 +189,7 @@ const CyberpunkLanding: React.FC<CyberpunkLandingProps> = ({ onSpeakersClick, on
       </div>
 
       {/* Main UI Overlay */}
-      <div className="absolute inset-0 z-10 flex flex-col justify-between p-8 pointer-events-none">
+    <div className="absolute inset-0 z-10 flex flex-col justify-between p-8">
         {/* Top Bar */}
         <div className="flex fixed left-0 top-0 pl-8 pt-8 items-start pointer-events-auto">
           {skipIntro ? (
@@ -432,13 +432,12 @@ const CyberpunkLanding: React.FC<CyberpunkLandingProps> = ({ onSpeakersClick, on
 
         {/* Explore Button for Mobile */}
         <div
-          className="hamburger-menu"
+          className="hamburger-menu pointer-events-auto"
           style={{
             position: 'absolute',
             top: '75%',
             left: '50%',
             transform: 'translate(-50%, -50%)',
-            display: 'none',
             zIndex: 100,
           }}
         >
