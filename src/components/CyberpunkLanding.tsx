@@ -98,6 +98,11 @@ const CyberpunkLanding: React.FC<CyberpunkLandingProps> = ({ onSpeakersClick, on
       )}
       {/* Responsive styles for mobile/tablet */}
       <style>{`
+        :root {
+          --explore-top: 72%;
+          --infiltrate-bottom: 40px;
+          --social-bottom: 110px; /* infiltrate-bottom + 70 */
+        }
         @media (max-width: 1024px) {
           .nav-buttons-desktop {
             display: none !important;
@@ -116,22 +121,63 @@ const CyberpunkLanding: React.FC<CyberpunkLandingProps> = ({ onSpeakersClick, on
             font-size: 1.2rem !important;
             margin-bottom: 2rem !important;
           }
+          .top-bar-responsive {
+            padding-top: 16px !important;
+          }
+          .top-title-responsive {
+            font-size: 0.95rem !important;
+          }
+          .top-logo-responsive {
+            width: 1.625rem !important; /* ~26px */
+            height: 1.625rem !important;
+          }
+          .top-status-responsive {
+            font-size: 0.7rem !important;
+            letter-spacing: 0.08em !important;
+          }
           .countdown-timer-responsive {
-            transform: scale(0.8);
-            margin-top: 0.5rem;
-            position: absolute;
-            top:-15px;
-            right:20px;
+            position: fixed !important;
+            top: 16px !important;
+            right: 12px !important;
+            transform-origin: top right;
+            transform: scale(0.75);
           }
         }
         @media (max-width: 600px) {
+          :root {
+            --explore-top: 74%;
+            --infiltrate-bottom: 16px; /* closer to bottom on phones */
+            --social-bottom: 64px; /* keep social above infiltrate on phones */
+          }
           .main-corruption-heading-responsive {
             font-size: 1rem !important;
             margin-bottom: 1.2rem !important;
           }
+          .top-bar-responsive {
+            padding-top: 16px !important;
+          }
+          .top-title-responsive {
+            font-size: 0.85rem !important;
+          }
+          .top-logo-responsive {
+            width: 1.375rem !important; /* ~22px */
+            height: 1.375rem !important;
+          }
+          .top-status-responsive {
+            font-size: 0.65rem !important;
+            letter-spacing: 0.08em !important;
+          }
           .countdown-timer-responsive {
-            transform: scale(0.7);
-            margin-top: 0.2rem;
+            position: fixed !important;
+            top: 16px !important;
+            right: 10px !important;
+            transform-origin: top right;
+            transform: scale(0.6);
+          }
+          .explore-button-responsive {
+            padding: 0.5rem 1.25rem !important;
+            font-size: 0.95rem !important;
+            transform: scale(0.9);
           }
           .infiltrate-button-responsive {
             transform: scale(0.8);
@@ -145,6 +191,9 @@ const CyberpunkLanding: React.FC<CyberpunkLandingProps> = ({ onSpeakersClick, on
           .social-links-responsive svg {
             width: 1.25rem !important;
             height: 1.25rem !important;
+          }
+          .register-button-responsive {
+            margin-top: -18px !important; /* nudge register up on phones */
           }
         }
         .one-shot-scanline{position:fixed;top:0;left:0;width:100%;height:2px;background:linear-gradient(90deg,transparent,#ff0040,transparent);box-shadow:0 0 10px #ff0040,0 0 20px #ff0040;animation:oneScan 2s linear forwards;}
@@ -191,7 +240,7 @@ const CyberpunkLanding: React.FC<CyberpunkLandingProps> = ({ onSpeakersClick, on
       {/* Main UI Overlay */}
     <div className="absolute inset-0 z-10 flex flex-col justify-between p-8">
         {/* Top Bar */}
-        <div className="flex fixed left-0 top-0 pl-8 pt-8 items-start pointer-events-auto">
+        <div className="flex fixed left-0 top-0 pl-8 pt-8 items-start pointer-events-auto top-bar-responsive">
           {skipIntro ? (
             <div className="flex flex-col">
               <div className="flex items-center space-x-2 mb-2">
@@ -199,12 +248,12 @@ const CyberpunkLanding: React.FC<CyberpunkLandingProps> = ({ onSpeakersClick, on
                   <img
                     src="/logo.png"
                     alt="ELICIT'25 Logo"
-                    className="w-8 h-8 object-contain drop-shadow-[0_0_6px_#06b6d4]"
+                    className="w-8 h-8 object-contain drop-shadow-[0_0_6px_#06b6d4] top-logo-responsive"
                   />
                 </Link>
-                <span className="text-cyan-400 font-mono text-lg tracking-wider">ELICIT'25</span>
+                <span className="text-cyan-400 font-mono text-lg tracking-wider top-title-responsive">ELICIT'25</span>
               </div>
-              <div className="text-red-400 font-mono text-xs tracking-widest">
+              <div className="text-red-400 font-mono text-xs tracking-widest top-status-responsive">
                 NETWORK_STATUS: CORRUPTED
               </div>
             </div>
@@ -216,10 +265,10 @@ const CyberpunkLanding: React.FC<CyberpunkLandingProps> = ({ onSpeakersClick, on
               className="flex flex-col"
             >
               <div className="flex items-center space-x-2 mb-2">
-                <Monitor className="w-8 h-8 text-cyan-400" />
-                <span className="text-cyan-400 font-mono text-lg tracking-wider">ELICIT FEST</span>
+                <Monitor className="w-8 h-8 text-cyan-400 top-logo-responsive" />
+                <span className="text-cyan-400 font-mono text-lg tracking-wider top-title-responsive">ELICIT FEST</span>
               </div>
-              <div className="text-red-400 font-mono text-xs tracking-widest">
+              <div className="text-red-400 font-mono text-xs tracking-widest top-status-responsive">
                 NETWORK_STATUS: CORRUPTED
               </div>
             </motion.div>
@@ -266,7 +315,7 @@ const CyberpunkLanding: React.FC<CyberpunkLandingProps> = ({ onSpeakersClick, on
                   />
                 </div>
                 <button
-                  className="relative w-full max-w-[620px] sm:max-w-[520px] mx-auto group"
+                  className="relative w-full max-w-[620px] sm:max-w-[520px] mx-auto group register-button-responsive"
                   onClick={() => navigate('/events')}
                   aria-label="Register"
                   style={{ maxWidth: '100%' }}
@@ -435,7 +484,7 @@ const CyberpunkLanding: React.FC<CyberpunkLandingProps> = ({ onSpeakersClick, on
           className="hamburger-menu pointer-events-auto"
           style={{
             position: 'absolute',
-            top: '75%',
+            top: 'var(--explore-top)',
             left: '50%',
             transform: 'translate(-50%, -50%)',
             zIndex: 100,
@@ -443,7 +492,7 @@ const CyberpunkLanding: React.FC<CyberpunkLandingProps> = ({ onSpeakersClick, on
         >
           <button
             aria-label="Explore navigation menu"
-            className="px-8 py-4 bg-black bg-opacity-80 border-2 border-cyan-400 rounded-lg shadow-lg hover:bg-opacity-100 transition-all font-mono text-lg font-bold text-cyan-400 hover:text-white hover:border-white"
+            className="px-8 py-4 bg-black bg-opacity-80 border-2 border-cyan-400 rounded-lg shadow-lg hover:bg-opacity-100 transition-all font-mono text-lg font-bold text-cyan-400 hover:text-white hover:border-white explore-button-responsive"
             onClick={() => setShowMobileMenu(v => !v)}
           >
             EXPLORE
@@ -497,8 +546,14 @@ const CyberpunkLanding: React.FC<CyberpunkLandingProps> = ({ onSpeakersClick, on
       {/* Bottom elements with manual offsets */}
       <div className="pointer-events-none">
         <div
-          className="fixed"
-          style={{ bottom: INFILTRATE_OFFSET.bottom, right: INFILTRATE_OFFSET.left, zIndex: 60 }}
+          className="fixed social-links-responsive"
+          style={{ bottom: 'var(--social-bottom)', left: '50%', transform: 'translateX(-50%)', zIndex: 50 }}
+        >
+          <SocialLinks />
+        </div>
+        <div
+          className="fixed w-full flex justify-center infiltrate-wrapper"
+          style={{ bottom: 'var(--infiltrate-bottom)', left: 0, zIndex: 60 }}
         >
           <motion.div
             initial={{ opacity: 0, y: 50 }}
@@ -528,13 +583,6 @@ const CyberpunkLanding: React.FC<CyberpunkLandingProps> = ({ onSpeakersClick, on
               />
             </button>
           </motion.div>
-        </div>
-
-        <div
-          className="fixed social-links-responsive"
-          style={{ bottom: INFILTRATE_OFFSET.bottom, left: 40, zIndex: 50 }}
-        >
-          <SocialLinks />
         </div>
       </div>
 
