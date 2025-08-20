@@ -33,7 +33,6 @@ const CyberpunkLanding: React.FC<CyberpunkLandingProps> = ({ onSpeakersClick, on
   const [showScanline, setShowScanline] = useState(true);
   // === Manual layout controls (tweak values as needed) ===
   const COUNTDOWN_OFFSET = { top: 32, right: 36 }; // px from viewport edges
-  const INFILTRATE_OFFSET = { bottom: 40, left: 40 }; // px from viewport edges
   // ======================================================
   const wheelY = 4.4;
   const wheelBrightness = 1;
@@ -238,7 +237,7 @@ const CyberpunkLanding: React.FC<CyberpunkLandingProps> = ({ onSpeakersClick, on
       </div>
 
       {/* Main UI Overlay */}
-    <div className="absolute inset-0 z-10 flex flex-col justify-between p-8">
+  <div className="absolute inset-0 z-10 flex flex-col justify-between p-8 pointer-events-none">
         {/* Top Bar */}
         <div className="flex fixed left-0 top-0 pl-8 pt-8 items-start pointer-events-auto top-bar-responsive">
           {skipIntro ? (
@@ -285,7 +284,7 @@ const CyberpunkLanding: React.FC<CyberpunkLandingProps> = ({ onSpeakersClick, on
 
         {/* Hero Section */}
         <div className="min-h-[72vh] flex flex-col items-center pt-[8vh] pb-[1vh]">
-          <div className="text-center pointer-events-auto">
+          <div className="text-center pointer-events-none">
             {skipIntro ? (
               <>
                 <GlitchText
@@ -315,10 +314,10 @@ const CyberpunkLanding: React.FC<CyberpunkLandingProps> = ({ onSpeakersClick, on
                   />
                 </div>
                 <button
-                  className="relative w-full max-w-[620px] sm:max-w-[520px] mx-auto group register-button-responsive"
+                  className="relative mx-auto group register-button-responsive pointer-events-auto inline-block"
                   onClick={() => navigate('/events')}
                   aria-label="Register"
-                  style={{ maxWidth: '100%' }}
+                  style={{ maxWidth: '620px' }}
                 >
                   <img
                     src="/Register/register.png"
@@ -501,7 +500,7 @@ const CyberpunkLanding: React.FC<CyberpunkLandingProps> = ({ onSpeakersClick, on
 
         {/* Mobile Nav Drawer */}
         {showMobileMenu && (
-          <div className="fixed inset-0 bg-black bg-opacity-90 z-[200] flex flex-col items-end p-6 animate-fade-in">
+          <div className="fixed inset-0 bg-black bg-opacity-90 z-[200] flex flex-col items-end p-6 animate-fade-in pointer-events-auto">
             <button
               aria-label="Close navigation menu"
               className="mb-8 w-12 h-12 flex items-center justify-center bg-black border-2 border-cyan-400 rounded-lg relative"
@@ -543,30 +542,23 @@ const CyberpunkLanding: React.FC<CyberpunkLandingProps> = ({ onSpeakersClick, on
         )}
       </div>
 
-      {/* Bottom elements with manual offsets */}
-      <div className="pointer-events-none">
-        <div
-          className="fixed social-links-responsive"
-          style={{ bottom: 'var(--social-bottom)', left: '50%', transform: 'translateX(-50%)', zIndex: 50 }}
-        >
+      {/* Bottom elements - responsive layouts */}
+      {/* Desktop (>=1024px): social left, infiltrate right */}
+      <div className="hidden lg:block pointer-events-none">
+  <div className="fixed pointer-events-auto" style={{ bottom: 40, left: 40, zIndex: 50 }}>
           <SocialLinks />
         </div>
-        <div
-          className="fixed w-full flex justify-center infiltrate-wrapper"
-          style={{ bottom: 'var(--infiltrate-bottom)', left: 0, zIndex: 60 }}
-        >
+  <div className="fixed pointer-events-auto" style={{ bottom: 40, right: 40, zIndex: 60 }}>
           <motion.div
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 2.8 }}
-            className="pointer-events-auto"
           >
             <button
               onClick={handleInfiltrate}
-              className="group relative px-8 py-3 bg-red-500 text-black font-mono font-bold tracking-wider hover:bg-red-400 transition-all duration-300 hover:scale-105 infiltrate-button-responsive"
+              className="group relative px-8 py-3 bg-red-500 text-black font-mono font-bold tracking-wider hover:bg-red-400 transition-all duration-300 hover:scale-105"
               style={{
-                clipPath:
-                  'polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px))',
+                clipPath: 'polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px))',
                 boxShadow: '0 0 20px #ff0040',
               }}
             >
@@ -575,8 +567,46 @@ const CyberpunkLanding: React.FC<CyberpunkLandingProps> = ({ onSpeakersClick, on
               <motion.div
                 className="absolute inset-0 border-2 border-red-400"
                 style={{
-                  clipPath:
-                    'polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px))',
+                  clipPath: 'polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px))',
+                }}
+                animate={{ opacity: [0, 1, 0], scale: [1, 1.05, 1] }}
+                transition={{ duration: 2, repeat: Infinity }}
+              />
+            </button>
+          </motion.div>
+        </div>
+      </div>
+      {/* Mobile (<1024px): centered stacked social + infiltrate */}
+      <div className="block lg:hidden pointer-events-none">
+        <div
+          className="fixed social-links-responsive pointer-events-auto"
+          style={{ bottom: 'var(--social-bottom)', left: '50%', transform: 'translateX(-50%)', zIndex: 50 }}
+        >
+          <SocialLinks />
+        </div>
+        <div
+          className="fixed w-full flex justify-center infiltrate-wrapper pointer-events-auto"
+          style={{ bottom: 'var(--infiltrate-bottom)', left: 0, zIndex: 60 }}
+        >
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 2.8 }}
+          >
+            <button
+              onClick={handleInfiltrate}
+              className="group relative px-8 py-3 bg-red-500 text-black font-mono font-bold tracking-wider hover:bg-red-400 transition-all duration-300 hover:scale-105 infiltrate-button-responsive"
+              style={{
+                clipPath: 'polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px))',
+                boxShadow: '0 0 20px #ff0040',
+              }}
+            >
+              <span className="relative z-10">&gt; INFILTRATE SYSTEM</span>
+              <div className="absolute inset-0 bg-white opacity-0 group-hover:opacity-30 transition-opacity duration-300" />
+              <motion.div
+                className="absolute inset-0 border-2 border-red-400"
+                style={{
+                  clipPath: 'polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px))',
                 }}
                 animate={{ opacity: [0, 1, 0], scale: [1, 1.05, 1] }}
                 transition={{ duration: 2, repeat: Infinity }}
