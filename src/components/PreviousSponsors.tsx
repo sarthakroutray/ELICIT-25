@@ -299,7 +299,7 @@ const PreviousSponsors: React.FC = () => {
           
                      {/* Main Title */}
            <h1 
-             className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 tracking-wider"
+             className="text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-6 tracking-wider ps-header-title"
              style={{
                fontFamily: 'Orbitron, monospace',
                textShadow: `
@@ -323,7 +323,7 @@ const PreviousSponsors: React.FC = () => {
           {/* Navigation Arrows */}
           <button
             onClick={() => paginate(-1)}
-            className="absolute left-4 top-1/2 transform -translate-y-1/2 z-20 bg-black/50 hover:bg-black/70 text-cyan-400 p-3 rounded-full border border-cyan-400 transition-all duration-300 hover:shadow-[0_0_20px_#00ffff]"
+            className="absolute left-4 top-1/2 transform -translate-y-1/2 z-20 bg-black/50 hover:bg-black/70 text-cyan-400 p-3 rounded-full border border-cyan-400 transition-all duration-300 hover:shadow-[0_0_20px_#00ffff] ps-arrow"
             style={{ backdropFilter: 'blur(10px)' }}
           >
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -333,7 +333,7 @@ const PreviousSponsors: React.FC = () => {
 
           <button
             onClick={() => paginate(1)}
-            className="absolute right-4 top-1/2 transform -translate-y-1/2 z-20 bg-black/50 hover:bg-black/70 text-cyan-400 p-3 rounded-full border border-cyan-400 transition-all duration-300 hover:shadow-[0_0_20px_#00ffff]"
+            className="absolute right-4 top-1/2 transform -translate-y-1/2 z-20 bg-black/50 hover:bg-black/70 text-cyan-400 p-3 rounded-full border border-cyan-400 transition-all duration-300 hover:shadow-[0_0_20px_#00ffff] ps-arrow"
             style={{ backdropFilter: 'blur(10px)' }}
           >
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -342,7 +342,7 @@ const PreviousSponsors: React.FC = () => {
           </button>
 
           {/* Carousel */}
-          <div className="relative h-[500px] overflow-hidden">
+          <div className="relative h-[500px] overflow-hidden ps-carousel">
             <AnimatePresence initial={false} custom={direction}>
               <motion.div
                 key={currentIndex}
@@ -373,7 +373,7 @@ const PreviousSponsors: React.FC = () => {
                   <div className="relative group">
                     {/* Sponsor Card */}
                     <div 
-                      className="relative h-[450px] w-[400px] bg-gradient-to-br from-gray-900 to-black border-2 border-cyan-400 rounded-lg overflow-hidden"
+                      className="relative h-[450px] w-[440px] bg-gradient-to-br from-gray-900 to-black border-2 border-cyan-400 rounded-lg overflow-hidden ps-card"
                       style={{
                         boxShadow: `
                           0 0 20px #00ffff,
@@ -389,14 +389,14 @@ const PreviousSponsors: React.FC = () => {
                       </div>
 
                       {/* Content */}
-                      <div className="relative z-10 p-8 h-full flex flex-col justify-between">
+                      <div className="relative z-10 p-8 h-full flex flex-col justify-between ps-card-content">
                                                  {/* Header */}
                          <div className="text-center mb-6">
                            <div className="text-cyan-400 font-mono text-sm opacity-60 mb-2">
                              // SPONSOR_{sponsors[currentIndex].id.toString().padStart(2, '0')}
                            </div>
                            <h3 
-                             className="text-white text-2xl font-bold tracking-wider"
+                             className="text-white font-bold tracking-wider ps-card-title text-base sm:text-lg md:text-xl"
                              style={{ 
                                fontFamily: 'Orbitron, monospace',
                                textShadow: '0 0 10px #00ffff'
@@ -410,8 +410,8 @@ const PreviousSponsors: React.FC = () => {
                          </div>
 
                                                {/* Logo Display */}
-                       <div className="flex justify-center mb-6">
-                          <div className="w-32 h-32 bg-gradient-to-br from-gray-800 to-gray-900 border-2 border-cyan-400 rounded-lg flex items-center justify-center overflow-hidden relative">
+                      <div className="flex justify-center mb-6">
+                          <div className="w-32 h-32 bg-gradient-to-br from-gray-800 to-gray-900 border-2 border-cyan-400 rounded-lg flex items-center justify-center overflow-hidden relative ps-logo-box">
                             {/* Loading State */}
                             {logoStates[sponsors[currentIndex].logo] === 'loading' && (
                               <div className="absolute inset-0 flex items-center justify-center">
@@ -459,7 +459,7 @@ const PreviousSponsors: React.FC = () => {
 
                         {/* Description */}
                         <div className="text-center">
-                          <p className="text-gray-300 text-sm leading-relaxed font-mono">
+                          <p className="text-gray-300 text-sm leading-relaxed font-mono ps-desc">
                             {sponsors[currentIndex].description}
                           </p>
                         </div>
@@ -507,6 +507,27 @@ const PreviousSponsors: React.FC = () => {
           </div>
         </motion.div>
       </div>
+
+      <style>{`
+        /* Tablet */
+        @media (max-width: 1024px) {
+          .ps-carousel { height: 440px; }
+          .ps-card { width: 400px; height: 400px; }
+          .ps-logo-box { width: 7rem; height: 7rem; }
+        }
+        /* Phones */
+        @media (max-width: 600px) {
+          .ps-header-title { font-size: 1.75rem !important; }
+          .ps-carousel { height: 420px; }
+          .ps-card { width: 280px; height: 380px; }
+          .ps-card-content { padding: 1rem !important; }
+          .ps-card-title { font-size: 0.85rem !important; letter-spacing: 0.01em !important; line-height: 1.1 !important; word-break: break-word; hyphens: auto; }
+          .ps-logo-box { width: 5.5rem; height: 5.5rem; }
+          .ps-desc { font-size: 0.8rem !important; line-height: 1.25rem !important; }
+          .ps-arrow { padding: 0.4rem !important; }
+          .ps-arrow svg { width: 18px; height: 18px; }
+        }
+      `}</style>
     </div>
   );
 };

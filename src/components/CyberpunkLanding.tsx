@@ -101,6 +101,13 @@ const CyberpunkLanding: React.FC<CyberpunkLandingProps> = ({ onSpeakersClick, on
           --explore-top: 72%;
           --infiltrate-bottom: 40px;
           --social-bottom: 110px; /* infiltrate-bottom + 70 */
+          /* Desktop defaults: original positions */
+          --social-left: 40px;
+          --social-right: auto;
+          --social-transform: none;
+          --infiltrate-left: auto;
+          --infiltrate-right: 40px;
+          --infiltrate-transform: none;
         }
         @media (max-width: 1024px) {
           .nav-buttons-desktop {
@@ -144,9 +151,16 @@ const CyberpunkLanding: React.FC<CyberpunkLandingProps> = ({ onSpeakersClick, on
         }
         @media (max-width: 600px) {
           :root {
-            --explore-top: 74%;
+            --explore-top: 70%;
             --infiltrate-bottom: 16px; /* closer to bottom on phones */
-            --social-bottom: 64px; /* keep social above infiltrate on phones */
+            --social-bottom: 84px; /* move social a bit up from bottom */
+            /* Phone overrides: center align */
+            --social-left: 50%;
+            --social-right: auto;
+            --social-transform: translateX(-50%);
+            --infiltrate-left: 50%;
+            --infiltrate-right: auto;
+            --infiltrate-transform: translateX(-50%);
           }
           .main-corruption-heading-responsive {
             font-size: 1rem !important;
@@ -516,7 +530,6 @@ const CyberpunkLanding: React.FC<CyberpunkLandingProps> = ({ onSpeakersClick, on
                 { icon: Info, label: 'ABOUT', color: 'text-purple-400', to: '/about' },
                 { icon: Phone, label: 'CONTACT', color: 'text-yellow-400', to: '/contact' },
                 { icon: Zap, label: 'SPONSORS', color: 'text-pink-400', to: '/sponsors' },
-                { icon: Monitor, label: 'REGISTER', color: 'text-red-400', to: '/register' },
               ].map(item => (
                 <Link
                   key={item.label}
@@ -545,10 +558,10 @@ const CyberpunkLanding: React.FC<CyberpunkLandingProps> = ({ onSpeakersClick, on
       {/* Bottom elements - responsive layouts */}
       {/* Desktop (>=1024px): social left, infiltrate right */}
       <div className="hidden lg:block pointer-events-none">
-  <div className="fixed pointer-events-auto" style={{ bottom: 40, left: 40, zIndex: 50 }}>
+        <div className="fixed pointer-events-auto" style={{ bottom: 40, left: 40, zIndex: 50 }}>
           <SocialLinks />
         </div>
-  <div className="fixed pointer-events-auto" style={{ bottom: 40, right: 40, zIndex: 60 }}>
+        <div className="fixed pointer-events-auto" style={{ bottom: 40, right: 40, zIndex: 60 }}>
           <motion.div
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
