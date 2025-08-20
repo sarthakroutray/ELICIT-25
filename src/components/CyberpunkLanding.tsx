@@ -75,8 +75,8 @@ const CyberpunkLanding: React.FC<CyberpunkLandingProps> = ({ onSpeakersClick, on
 
     window.addEventListener('mousemove', handleMouseMove);
 
-  // Hide scanline after single pass (2s)
-  const scanTimer = setTimeout(() => setShowScanline(false), 2000);
+    // Hide scanline after single pass (2s)
+    const scanTimer = setTimeout(() => setShowScanline(false), 2000);
     
     return () => {
       if (timer !== null) clearTimeout(timer);
@@ -119,6 +119,9 @@ const CyberpunkLanding: React.FC<CyberpunkLandingProps> = ({ onSpeakersClick, on
           .countdown-timer-responsive {
             transform: scale(0.8);
             margin-top: 0.5rem;
+            position: absolute;
+            top:-15px;
+            right:20px;
           }
         }
         @media (max-width: 600px) {
@@ -130,26 +133,26 @@ const CyberpunkLanding: React.FC<CyberpunkLandingProps> = ({ onSpeakersClick, on
             transform: scale(0.7);
             margin-top: 0.2rem;
           }
+          .infiltrate-button-responsive {
+            transform: scale(0.8);
+            padding: 0.5rem 1rem !important;
+            font-size: 0.875rem !important;
+          }
+          .social-links-responsive {
+            transform: scale(0.7);
+            gap: 0.5rem !important;
+          }
+          .social-links-responsive svg {
+            width: 1.25rem !important;
+            height: 1.25rem !important;
+          }
         }
-  .one-shot-scanline{position:fixed;top:0;left:0;width:100%;height:2px;background:linear-gradient(90deg,transparent,#ff0040,transparent);box-shadow:0 0 10px #ff0040,0 0 20px #ff0040;animation:oneScan 2s linear forwards;}
-  @keyframes oneScan{0%{transform:translateY(-100vh);opacity:0;}5%{opacity:1;}95%{opacity:1;}100%{transform:translateY(100vh);opacity:0;}}
+        .one-shot-scanline{position:fixed;top:0;left:0;width:100%;height:2px;background:linear-gradient(90deg,transparent,#ff0040,transparent);box-shadow:0 0 10px #ff0040,0 0 20px #ff0040;animation:oneScan 2s linear forwards;}
+        @keyframes oneScan{0%{transform:translateY(-100vh);opacity:0;}5%{opacity:1;}95%{opacity:1;}100%{transform:translateY(100vh);opacity:0;}}
       `}</style>
-      {/* Custom Cursor
-      <div 
-        className="fixed w-2 h-2 bg-blue-500 rounded-full pointer-events-none transition-transform duration-[50ms] ease-linear will-change-transform"
-        style={{
-          left: mousePosition.x + 'px',
-          top: mousePosition.y + 'px',
-          transform: 'translate(-50%, -50%)',
-          boxShadow: '0 0 20px #3b82f6, 0 0 40px #3b82f6, 0 0 60px #3b82f6, 0 0 80px #3b82f6',
-          zIndex: 9999,
-        }}
-      /> */}
 
       {/* Digital Rain Background */}
       <DigitalRain />
-
-  
 
       {/* 3D Scene */}
       <Canvas className="absolute inset-0">
@@ -164,9 +167,8 @@ const CyberpunkLanding: React.FC<CyberpunkLandingProps> = ({ onSpeakersClick, on
           minPolarAngle={Math.PI / 4}
         />
         <CyberpunkScene mousePosition={mousePosition} />
-  <Suspense fallback={null}>
-          {/* Sponsors wheel: lazy-loaded 3D ring of sponsor logos */}
-    <SponsorsWheel logos={[
+        <Suspense fallback={null}>
+          <SponsorsWheel logos={[
             '/sponsors/cisco.png',
             '/sponsors/coding_blocks.jpg',
             '/sponsors/zebronics.jpg',
@@ -186,21 +188,20 @@ const CyberpunkLanding: React.FC<CyberpunkLandingProps> = ({ onSpeakersClick, on
         <div className="w-full h-full bg-gradient-to-br from-transparent via-white to-transparent animate-pulse mix-blend-overlay" />
       </div>
 
-  {/* Sponsors wheel controls removed (was debug UI) */}
-
-  {/* Main UI Overlay (global pointer-events disabled; selectively re-enabled where needed) */}
-  <div className="absolute inset-0 z-10 flex flex-col justify-between p-8 pointer-events-none">
-        {/* Top Bar (left cluster only now) */}
+      {/* Main UI Overlay */}
+      <div className="absolute inset-0 z-10 flex flex-col justify-between p-8 pointer-events-none">
+        {/* Top Bar */}
         <div className="flex fixed left-0 top-0 pl-8 pt-8 items-start pointer-events-auto">
           {skipIntro ? (
             <div className="flex flex-col">
               <div className="flex items-center space-x-2 mb-2">
                 <Link to="/" className="flex items-center gap-3 ">
-                <img
-                  src="/logo.png"
-                  alt="ELICIT'25 Logo"
-                  className="w-8 h-8 object-contain drop-shadow-[0_0_6px_#06b6d4]"
-      /></Link>
+                  <img
+                    src="/logo.png"
+                    alt="ELICIT'25 Logo"
+                    className="w-8 h-8 object-contain drop-shadow-[0_0_6px_#06b6d4]"
+                  />
+                </Link>
                 <span className="text-cyan-400 font-mono text-lg tracking-wider">ELICIT'25</span>
               </div>
               <div className="text-red-400 font-mono text-xs tracking-widest">
@@ -224,16 +225,17 @@ const CyberpunkLanding: React.FC<CyberpunkLandingProps> = ({ onSpeakersClick, on
             </motion.div>
           )}
         </div>
-        {/* Countdown timer with manual offsets */}
+
+        {/* Countdown Timer */}
         <div
           className="countdown-timer-responsive fixed pointer-events-auto"
           style={{ top: COUNTDOWN_OFFSET.top, right: COUNTDOWN_OFFSET.right, zIndex: 60 }}
         >
           <CountdownTimer />
         </div>
-        {/* Hero & nav parent */}
+
+        {/* Hero Section */}
         <div className="min-h-[72vh] flex flex-col items-center pt-[8vh] pb-[1vh]">
-          {/* Hero Section */}
           <div className="text-center pointer-events-auto">
             {skipIntro ? (
               <>
@@ -263,7 +265,6 @@ const CyberpunkLanding: React.FC<CyberpunkLandingProps> = ({ onSpeakersClick, on
                     }}
                   />
                 </div>
-                <div className="mb-0" />
                 <button
                   className="relative w-full max-w-[620px] sm:max-w-[520px] mx-auto group"
                   onClick={() => navigate('/events')}
@@ -356,7 +357,6 @@ const CyberpunkLanding: React.FC<CyberpunkLandingProps> = ({ onSpeakersClick, on
               </AnimatePresence>
             )}
           </div>
-          {/* Nav Icons Section (unchanged) will remain below hero as before */}
 
           {/* Nav Icons Section */}
           <AnimatePresence>
@@ -389,8 +389,8 @@ const CyberpunkLanding: React.FC<CyberpunkLandingProps> = ({ onSpeakersClick, on
                     }}
                     className={`group relative w-32 h-32 ${item.color} bg-opacity-80 hover:bg-opacity-90 transition-all duration-300 font-mono text-xs tracking-wider overflow-hidden flex items-center justify-center`}
                     style={{
-                      clipPath: 'polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px))',
-                     
+                      clipPath:
+                        'polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px))',
                       textDecoration: 'none',
                     }}
                   >
@@ -413,14 +413,10 @@ const CyberpunkLanding: React.FC<CyberpunkLandingProps> = ({ onSpeakersClick, on
                     <div className="relative z-10 flex flex-col items-center justify-center h-full space-y-4 pointer-events-none">
                       <div className="relative transform transition-transform duration-150 group-hover:scale-125">
                         <item.icon className="w-11 h-11" />
-                        <div
-                          className="absolute inset-0 pointer-events-none"
-                          style={{
-                            
-                          }}
-                        />
                       </div>
-                      <div className="pointer-events-none mt-10 text-[15px] leading-tight text-center duration-150 group-hover:scale-125">{item.label}</div>
+                      <div className="pointer-events-none mt-10 text-[15px] leading-tight text-center duration-150 group-hover:scale-125">
+                        {item.label}
+                      </div>
                     </div>
                     <motion.div
                       className="absolute inset-0 bg-current opacity-0 group-hover:opacity-10"
@@ -434,17 +430,24 @@ const CyberpunkLanding: React.FC<CyberpunkLandingProps> = ({ onSpeakersClick, on
           </AnimatePresence>
         </div>
 
-
-        {/* Hamburger Icon for Mobile */}
-        <div className="hamburger-menu" style={{position: 'absolute', top: 24, right: 24, display: 'none', zIndex: 100}}>
+        {/* Explore Button for Mobile */}
+        <div
+          className="hamburger-menu"
+          style={{
+            position: 'absolute',
+            top: '75%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+            display: 'none',
+            zIndex: 100,
+          }}
+        >
           <button
-            aria-label="Open navigation menu"
-            className="flex flex-col justify-center items-center w-12 h-12 bg-black bg-opacity-80 border-2 border-cyan-400 rounded-lg shadow-lg hover:bg-opacity-100 transition-all"
+            aria-label="Explore navigation menu"
+            className="px-8 py-4 bg-black bg-opacity-80 border-2 border-cyan-400 rounded-lg shadow-lg hover:bg-opacity-100 transition-all font-mono text-lg font-bold text-cyan-400 hover:text-white hover:border-white"
             onClick={() => setShowMobileMenu(v => !v)}
           >
-            <span className="block w-7 h-1 bg-cyan-400 mb-1 rounded"></span>
-            <span className="block w-7 h-1 bg-cyan-400 mb-1 rounded"></span>
-            <span className="block w-7 h-1 bg-cyan-400 rounded"></span>
+            EXPLORE
           </button>
         </div>
 
@@ -467,7 +470,7 @@ const CyberpunkLanding: React.FC<CyberpunkLandingProps> = ({ onSpeakersClick, on
                 { icon: Phone, label: 'CONTACT', color: 'text-yellow-400', to: '/contact' },
                 { icon: Zap, label: 'SPONSORS', color: 'text-pink-400', to: '/sponsors' },
                 { icon: Monitor, label: 'REGISTER', color: 'text-red-400', to: '/register' },
-              ].map((item) => (
+              ].map(item => (
                 <Link
                   key={item.label}
                   to={item.to}
@@ -481,7 +484,7 @@ const CyberpunkLanding: React.FC<CyberpunkLandingProps> = ({ onSpeakersClick, on
                   className={`flex items-center gap-3 px-6 py-3 rounded-lg bg-black bg-opacity-70 border-2 border-cyan-400 font-mono text-lg font-bold shadow-md hover:bg-opacity-100 transition-all ${item.color}`}
                   style={{ minWidth: 180, textDecoration: 'none' }}
                 >
-                  <div className="flex items-center gap-3 transform transition-transform duration-150 group-hover:scale-103 pointer-events-none">
+                  <div className="flex items-center gap-3 transform transition-transform duration-150 pointer-events-none">
                     <item.icon className="w-6 h-6" />
                     <span>{item.label}</span>
                   </div>
@@ -490,16 +493,14 @@ const CyberpunkLanding: React.FC<CyberpunkLandingProps> = ({ onSpeakersClick, on
             </div>
           </div>
         )}
-
-
-  {/* (Old bottom bar removed in favor of manual offset elements) */}
       </div>
-
-      {/* System Warnings */}
 
       {/* Bottom elements with manual offsets */}
       <div className="pointer-events-none">
-        <div className="fixed" style={{ bottom: INFILTRATE_OFFSET.bottom, right: INFILTRATE_OFFSET.left, zIndex: 60 }}>
+        <div
+          className="fixed"
+          style={{ bottom: INFILTRATE_OFFSET.bottom, right: INFILTRATE_OFFSET.left, zIndex: 60 }}
+        >
           <motion.div
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
@@ -508,9 +509,10 @@ const CyberpunkLanding: React.FC<CyberpunkLandingProps> = ({ onSpeakersClick, on
           >
             <button
               onClick={handleInfiltrate}
-              className="group relative px-8 py-3 bg-red-500 text-black font-mono font-bold tracking-wider hover:bg-red-400 transition-all duration-300 hover:scale-105"
+              className="group relative px-8 py-3 bg-red-500 text-black font-mono font-bold tracking-wider hover:bg-red-400 transition-all duration-300 hover:scale-105 infiltrate-button-responsive"
               style={{
-                clipPath: 'polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px))',
+                clipPath:
+                  'polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px))',
                 boxShadow: '0 0 20px #ff0040',
               }}
             >
@@ -519,7 +521,8 @@ const CyberpunkLanding: React.FC<CyberpunkLandingProps> = ({ onSpeakersClick, on
               <motion.div
                 className="absolute inset-0 border-2 border-red-400"
                 style={{
-                  clipPath: 'polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px))',
+                  clipPath:
+                    'polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px))',
                 }}
                 animate={{ opacity: [0, 1, 0], scale: [1, 1.05, 1] }}
                 transition={{ duration: 2, repeat: Infinity }}
@@ -527,16 +530,18 @@ const CyberpunkLanding: React.FC<CyberpunkLandingProps> = ({ onSpeakersClick, on
             </button>
           </motion.div>
         </div>
-  <div className="fixed" style={{ bottom: INFILTRATE_OFFSET.bottom, left: 40, zIndex: 50 }}>
+
+        <div
+          className="fixed social-links-responsive"
+          style={{ bottom: INFILTRATE_OFFSET.bottom, left: 40, zIndex: 50 }}
+        >
           <SocialLinks />
         </div>
       </div>
 
       {/* Terminal Interface */}
       <AnimatePresence>
-        {showTerminal && (
-          <TerminalInterface onClose={() => setShowTerminal(false)} />
-        )}
+        {showTerminal && <TerminalInterface onClose={() => setShowTerminal(false)} />}
       </AnimatePresence>
     </div>
   );
