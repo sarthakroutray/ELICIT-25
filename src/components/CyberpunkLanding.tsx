@@ -373,7 +373,6 @@ const CyberpunkLanding: React.FC<CyberpunkLandingProps> = ({ onSpeakersClick, on
                   { icon: Info, label: 'ABOUT', color: 'text-purple-400', to: '/about' },
                   { icon: Phone, label: 'CONTACT', color: 'text-yellow-400', to: '/contact' },
                   { icon: Zap, label: 'SPONSORS', color: 'text-pink-400', to: '/sponsors' },
-                  { icon: Monitor, label: 'REGISTER', color: 'text-red-400', to: '/register' },
                 ].map((item, idx) => (
                   <MotionLink
                     key={item.label}
