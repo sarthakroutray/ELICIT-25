@@ -31,21 +31,19 @@ const AboutSection: React.FC = () => {
         className="w-full flex flex-col items-center mt-12 mb-8 select-none about-section-content"
         style={{ zIndex: 2, position: "relative" }}
       >
-        <div className="uppercase text-sm tracking-widest text-purple-400 mr-44 font-mono drop-shadow-[0_0_6px_#c77dff] mb-2">
+        <div className="uppercase text-sm tracking-widest text-cyan-400 mr-44 font-mono drop-shadow-[0_0_6px_#c77dff] mb-2">
           SYSTEM CORE[03]
         </div>
         <h1
-          className="text-4xl md:text-5xl lg:text-6xl mr-44 font-bold text-white mb-6 tracking-wider"
+          className="text-4xl md:text-5xl lg:text-6xl mr-44 font-bold text-yellow-300 mb-6 tracking-wider"
           style={{
             fontFamily: "Orbitron, monospace",
             textShadow: `
-                -2px -2px 0 #000,
-                2px -2px 0 #000,
-                -2px 2px 0 #000,
-                2px 2px 0 #000,
-                0 0 10px #a855f7,
-                0 0 20px #c084fc,
-                0 0 30px #e879f9
+                -2px -2px 0 #00000013,
+                2px -2px 0 #0000000d,
+                -2px 2px 0 #00000009,
+                2px 2px 0 #0000003a,
+             
               `,
             filter: "drop-shadow(4px 4px 8px rgba(0,0,0,0.9))",
           }}
@@ -57,14 +55,14 @@ const AboutSection: React.FC = () => {
         </div>
 
         {/* Wrapper */}
-        <div
-          className="mb-32 mr-40 rounded-2xl bg-[rgba(10,10,10,0.75)] w-3/4 
-  shadow-[0_0_15px_#a855f7,0_0_30px_#c77dff,0_0_45px_#9333ea,inset_0_0_15px_#c084fc]"
+       <div
+          className="mb-32 mr-40 "
+  
         >
           {/* NEW SCROLL CONTAINER */}
-          <div className="max-h-[70vh] overflow-y-auto neon-scrollbar">
+          <div className="overflow-y-auto">
             <div
-              className="relative pb-2 bg-[rgba(0,0,0,0.25)] border-2 border-white 
+              className="relative  
       flex justify-center items-start gap-8 rounded-lg"
               style={{
                 clipPath:
@@ -76,7 +74,7 @@ const AboutSection: React.FC = () => {
 
             {/* LEFT RECTANGLE BOX */}
             <div
-              className="relative pl-16 pr-16 flex-shrink-0 h-[400px] m-8 mr-2 mt-8"
+              className="relative ml-20 pr-8 flex-shrink-0 h-[500px] w-[1200px] m-8 mr-2 mt-8"
               style={{
                 overflow: "visible",
               }}
@@ -85,8 +83,8 @@ const AboutSection: React.FC = () => {
                 style={{
                   height: "100%",
                   width: "100%",
-                  background: "rgba(20, 10, 25, 0.8)",
-                  border: "1px solid #c084fc",
+                  background: "rgba(49, 120, 136, 0.09)",
+                  border: "1px solid #4db6d0ff",
                   borderRadius: "1rem",
                   boxShadow: `
         0 0 12px 2px #e1e0e304,
@@ -105,15 +103,15 @@ const AboutSection: React.FC = () => {
               className="ml-8 pt-4 text-center text-6xl font-bold text-white-900"
               style={{
                 textShadow:
-                  "0 0 10px #c084fc, 0 0 20px #e879f9, 0 0 40px #9333ea",
+                  "0 0 10px #92e1e4ff, #36d4d9ff, 0 0 40px #199cbdff",
               }}
             >
               10 YEARS OF ACM!
             </p>
             <p
-              className="ml-8 mr-8 mt-6 text-md text-center text-white-200"
+              className="ml-8 mt-6 text-sm text-center text-yellow-200"
               style={{
-                textShadow: "0 0 6px rgba(246, 242, 250, 0.6)",
+                textShadow: "0 0 6px rgba(247, 236, 37, 0.6)",
               }}
             >
               The Association for Computing Machinery (ACM) stands at the
@@ -128,11 +126,11 @@ const AboutSection: React.FC = () => {
             </p>
 
             {/* FLEX ROW: PNG (left) + CAROUSELS (right) */}
-            <div className="flex gap-8 ml-24 mt-12 mr-24 mb-12 flex ">
+            <div className="flex gap-8 ml-32 mt-12">
               {/* PNG BOX */}
               <div className="relative w-[400px] h-[500px]">
                 {/* Soft violet inner glow only */}
-                <div className="absolute inset-0 rounded-xl bg-violet-400 opacity-15 blur-lg pointer-events-none"></div>
+                <div className="absolute inset-0 rounded-xl bg-cyan-400 opacity-15 blur-lg pointer-events-none"></div>
 
                 {/* PNG itself */}
                 <img
@@ -145,17 +143,17 @@ const AboutSection: React.FC = () => {
                 <div className="absolute inset-0 flex items-center justify-center">
                   <div className="text-center px-8 max-w-sm">
                     <h2
-                      className="text-5xl font-extrabold text-violet-300 mb-24"
+                      className="text-5xl font-extrabold text-white-300 mb-24"
                       style={{
                         fontFamily: "Orbitron, sans-serif",
                         letterSpacing: "2px",
-                        textShadow: "0 0 10px #c084fc, 0 0 20px #a855f7",
+                        textShadow: "0 0 10px #2ba3c4ff, 0 0 20px #55cff7ff",
                       }}
                     >
                       ELICIT
                     </h2>
                     <p
-                      className="text-sm text-violet-200 leading-relaxed"
+                      className="text-sm text-cyan-100 leading-relaxed"
                       style={{
                         fontFamily: "Orbitron, sans-serif",
                         textShadow: "0 0 8px #a855f7",
@@ -172,52 +170,54 @@ const AboutSection: React.FC = () => {
               </div>
 
               {/* RIGHT SIDE: TWO CAROUSELS */}
-              <div className="flex flex-col justify-between h-[50vh] w-[70vh] flex justify-center mb-[10vh]">
-                {/* TOP CAROUSEL */}
-                <div className="overflow-hidden rounded-xl h-[240px] flex items-center">
-                  <motion.div
-                    className="flex gap-6 px-6"
-                    animate={{ x: ["0%", "-100%"] }}
-                    transition={{
-                      repeat: Infinity,
-                      duration: 15,
-                      ease: "linear",
-                    }}
-                  >
-                    {[1, 2, 3, 4, 1, 2, 3, 4].map((i) => (
-                      <img
-                        key={`top-${i}`}
-                        src={`About/carousel/img${i}.png`}
-                        alt={`carousel ${i}`}
-                        className="w-40 h-40 object-cover rounded-lg" />
-                      
-                    ))}
-                  </motion.div>
-                  
-                </div>
+            <div className="flex flex-col justify-between h-[500px] w-[740px]">
+  {/* TOP CAROUSEL */}
+  <div className="overflow-hidden rounded-xl h-[280px] flex items-center">
+    <motion.div
+      className="flex gap-6 px-6"
+      animate={{ x: ["0%", "-50%"] }} // shift by half because of duplication
+      transition={{
+        repeat: Infinity,
+        duration: 20,
+        ease: "linear",
+      }}
+    >
+      {/* Duplicate content */}
+      {[1, 2, 3].concat([1, 2, 3]).map((i, idx) => (
+        <img
+          key={`top-${i}-${idx}`}
+          src={`/carousel/img${i}.png`}
+          alt={`carousel top ${i}`}
+          className="w-60 h-40 object-cover rounded-lg"
+        />
+      ))}
+    </motion.div>
+  </div>
 
-                {/* BOTTOM CAROUSEL */}
-                <div className="overflow-hidden  rounded-xl h-[240px] flex items-center">
-                  <motion.div
-                    className="flex gap-6 px-6"
-                    animate={{ x: ["-100%", "0%"] }}
-                    transition={{
-                      repeat: Infinity,
-                      duration: 15,
-                      ease: "linear",
-                    }}
-                  >
-                    {[5, 6, 7, 8, 5, 6, 7, 8].map((i) => (
-                      <img
-                        key={`bottom-${i}`}
-                        src={`/About/carousel/img${i}.png`}
-                        alt={`carousel ${i}`}
-                        className="w-40 h-40 object-cover rounded-lg"
-                      />
-                    ))}
-                  </motion.div>
-                </div>
-              </div>
+  {/* BOTTOM CAROUSEL */}
+  <div className="overflow-hidden rounded-xl h-[240px] flex items-center">
+    <motion.div
+      className="flex gap-6 px-6"
+      animate={{ x: ["-50%", "0%"] }} // reverse direction
+      transition={{
+        repeat: Infinity,
+        duration: 20,
+        ease: "linear",
+      }}
+    >
+      {[4, 5, 6].concat([4, 5, 6]).map((i, idx) => (
+        <img
+          key={`bottom-${i}-${idx}`}
+          src={`/carousel/img${i}.png`}
+          alt={`carousel bottom ${i}`}
+          className="w-60 h-40 object-cover rounded-lg"
+        />
+      ))}
+    </motion.div>
+  </div>
+</div>
+
+                
             </div>
           </div>
         </div>
