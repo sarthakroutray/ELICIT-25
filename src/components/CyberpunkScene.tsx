@@ -152,7 +152,7 @@ const CyberpunkScene: React.FC<CyberpunkSceneProps> = ({ mousePosition }) => {
       
       {/* Central Tower */}
       <group ref={centralTowerRef} position={[0, 0, 0]}>
-        <Cylinder args={[2, 2, 8]} position={[0, 4, 0]}>
+        <Cylinder args={[2, 2, 8]} position={[0, 0, 0]}>
           <meshStandardMaterial color="#222" metalness={0.9} roughness={0.1} />
         </Cylinder>
         

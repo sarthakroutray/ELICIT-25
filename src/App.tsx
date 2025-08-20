@@ -5,6 +5,7 @@ import AboutSection from './components/AboutSection';
 import EventsGrid from './components/EventsGrid';
 import Speakers from './components/Speakers';
 import Carousel from './components/Carousel';
+import CyberpunkEventInterface from './components/CyberpunkEvents';
 // PreviousSponsors is now composed inside SponsorsPage
 import SponsorsPage from './components/SponsorsPage';
 import Footer from './components/Footer';
@@ -28,7 +29,9 @@ function App() {
     <Routes>
       <Route path="/" element={<CyberpunkLanding />} />
       <Route path="/about" element={<SectionPage><AboutSection /></SectionPage>} />
-  <Route path="/events" element={<SectionPage><EventsGrid /></SectionPage>} />
+          <Route path="/events" element={<SectionPage><EventsGrid /></SectionPage>} />
+          {/* Route for individual event view / carousel focus */}
+          <Route path="/events/:id" element={<SectionPage><CyberpunkEventInterface /></SectionPage>} />
       <Route path="/speakers" element={<SectionPage><Speakers /></SectionPage>} />
   <Route path="/carousel" element={<SectionPage><Carousel /></SectionPage>} />
   <Route path="/sponsors" element={<SectionPage><SponsorsPage /></SectionPage>} />

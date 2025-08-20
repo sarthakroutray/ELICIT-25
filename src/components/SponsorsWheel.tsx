@@ -1,4 +1,4 @@
-import React, { useMemo, useRef } from 'react';
+import React, { useMemo, useRef, useState, useEffect } from 'react';
 import { useLoader, useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
 import { TextureLoader } from 'three';
@@ -16,6 +16,21 @@ const SponsorsWheel: React.FC<SponsorsWheelProps> = ({ logos, radius = 8, speed 
   const navigate = useNavigate();
   const textures = useLoader(TextureLoader, logos);
   const groupRef = useRef<THREE.Group | null>(null);
+  const [viewportWidth, setViewportWidth] = useState<number>(() => (typeof window !== 'undefined' ? window.innerWidth : 1024));
+
+  // Track viewport width for responsive radius
+  useEffect(() => {
+    const handleResize = () => setViewportWidth(window.innerWidth);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  // Compute a smaller radius on mobile breakpoints (<640px) and slightly reduced on small tablets (<768px)
+  const effectiveRadius = useMemo(() => {
+    if (viewportWidth < 640) return radius * 0.55; // mobile
+    if (viewportWidth < 768) return radius * 0.7;  // small tablets
+    return radius;                                  // desktop keeps original
+  }, [viewportWidth, radius]);
 
   // ensure textures are treated as sRGB so colors and emissive look correct
   React.useEffect(() => {
@@ -32,12 +47,12 @@ const SponsorsWheel: React.FC<SponsorsWheelProps> = ({ logos, radius = 8, speed 
     const n = logos.length || 1;
     return Array.from({ length: n }).map((_, i) => {
       const theta = (i / n) * Math.PI * 2;
-      const x = Math.cos(theta) * radius;
-      const z = Math.sin(theta) * radius;
+      const x = Math.cos(theta) * effectiveRadius;
+      const z = Math.sin(theta) * effectiveRadius;
       const rotY = -theta + Math.PI / 2;
       return { x, z, rotY, idx: i };
     });
-  }, [logos.length, radius]);
+  }, [logos.length, effectiveRadius]);
 
   useFrame((_, delta) => {
     if (groupRef.current) groupRef.current.rotation.y += speed * delta;

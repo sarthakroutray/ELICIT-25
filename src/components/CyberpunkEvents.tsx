@@ -1,8 +1,20 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useParams } from 'react-router-dom';
 import DigitalRain from "./DigitalRain";
 
 const CyberpunkEventInterface: React.FC = () => {
+  const params = useParams();
+  const requestedId = params.id ? parseInt(params.id, 10) : NaN;
   const [currentCard, setCurrentCard] = useState(0);
+
+  // If route provides an id param, focus that card on mount
+  useEffect(() => {
+    if (!isNaN(requestedId)) {
+      const idx = Math.max(0, Math.min(requestedId - 1, eventCards.length - 1));
+      setCurrentCard(idx);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [requestedId]);
 
   const eventCards = [
     {

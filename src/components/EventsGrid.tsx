@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import DigitalRain from './DigitalRain';
 
 // Vertical poster mode:
@@ -11,7 +12,7 @@ interface PosterBox { id: number; poster: string; }
 // You can use .png/.jpg/.webp etc. Example: '/events/frames/hackathon.png'
 const POSTER_PATHS: string[] = [
   '/events/frames/Defuse.png', // 1
-  '/events/frames/Defuse.png', // 2
+  '/events/frames/futsal.png', // 2
   '/events/frames/Defuse.png', // 3
   '/events/frames/Defuse.png', // 4
   '/events/frames/Defuse.png', // 5
@@ -31,6 +32,7 @@ const buildBoxes = (): PosterBox[] =>
 
 const EventsGrid: React.FC = () => {
   const boxes = buildBoxes();
+  const navigate = useNavigate();
   const [hovered, setHovered] = useState<number | null>(null);
   return (
     <div className="relative min-h-screen bg-black text-white font-mono py-16 px-6 overflow-hidden">
@@ -40,7 +42,7 @@ const EventsGrid: React.FC = () => {
         {boxes.map((box) => (
           <div
             key={box.id}
-            className={`relative group aspect-[3/4] select-none min-h-[220px] md:min-h-[300px] xl:min-h-[340px] overflow-visible transition-all duration-300 ease-out will-change-transform
+            className={`relative group aspect-[3/4] select-none min-h-[220px] md:min-h-[300px] xl:min-h-[340px] overflow-visible transition-all duration-300 ease-out will-change-transform pointer-events-auto
                 ${hovered === box.id
                   ? 'z-30 scale-[1.14] md:scale-[1.18] xl:scale-[1.22]'
                   : hovered
@@ -49,6 +51,7 @@ const EventsGrid: React.FC = () => {
               `}
             onMouseEnter={() => setHovered(box.id)}
             onMouseLeave={() => setHovered(null)}
+            onClick={() => navigate(`/events/${box.id}`)}
           >
             <img
               src={box.poster}
