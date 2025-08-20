@@ -188,8 +188,8 @@ const CyberpunkLanding: React.FC<CyberpunkLandingProps> = ({ onSpeakersClick, on
 
   {/* Sponsors wheel controls removed (was debug UI) */}
 
-      {/* Main UI Overlay */}
-      <div className="absolute inset-0 z-10 flex flex-col justify-between p-8 pointer-events-none">
+  {/* Main UI Overlay (global pointer-events disabled; selectively re-enabled where needed) */}
+  <div className="absolute inset-0 z-10 flex flex-col justify-between p-8 pointer-events-none">
         {/* Top Bar (left cluster only now) */}
         <div className="flex fixed left-0 top-0 pl-8 pt-8 items-start pointer-events-auto">
           {skipIntro ? (
@@ -234,7 +234,7 @@ const CyberpunkLanding: React.FC<CyberpunkLandingProps> = ({ onSpeakersClick, on
         {/* Hero & nav parent */}
         <div className="min-h-[72vh] flex flex-col items-center pt-[8vh] pb-[1vh]">
           {/* Hero Section */}
-          <div className="text-center">
+          <div className="text-center pointer-events-auto">
             {skipIntro ? (
               <>
                 <GlitchText
@@ -365,7 +365,7 @@ const CyberpunkLanding: React.FC<CyberpunkLandingProps> = ({ onSpeakersClick, on
                 initial={{ opacity: 0, y: 50 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 2.5, duration: 0.8 }}
-                className="nav-buttons-desktop flex gap-8 -mt-4 md:-mt-16"
+                className="nav-buttons-desktop flex gap-8 -mt-4 md:-mt-16 pointer-events-auto"
               >
                 {[
                   { icon: Calendar, label: 'EVENTS', color: 'text-cyan-400', to: '/events' },
