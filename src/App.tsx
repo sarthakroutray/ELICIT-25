@@ -2,7 +2,7 @@ import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import CyberpunkLanding from './components/CyberpunkLanding';
 import AboutSection from './components/AboutSection';
-import CyberpunkEvents from './components/CyberpunkEvents';
+import EventsGrid from './components/EventsGrid';
 import Speakers from './components/Speakers';
 import Carousel from './components/Carousel';
 // PreviousSponsors is now composed inside SponsorsPage
@@ -28,7 +28,7 @@ function App() {
     <Routes>
       <Route path="/" element={<CyberpunkLanding />} />
       <Route path="/about" element={<SectionPage><AboutSection /></SectionPage>} />
-      <Route path="/events" element={<SectionPage><CyberpunkEvents /></SectionPage>} />
+  <Route path="/events" element={<SectionPage><EventsGrid /></SectionPage>} />
       <Route path="/speakers" element={<SectionPage><Speakers /></SectionPage>} />
   <Route path="/carousel" element={<SectionPage><Carousel /></SectionPage>} />
   <Route path="/sponsors" element={<SectionPage><SponsorsPage /></SectionPage>} />

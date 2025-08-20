@@ -54,9 +54,9 @@ const SponsorsWheel: React.FC<SponsorsWheelProps> = ({ logos, radius = 8, speed 
           key={it.idx}
           position={[it.x, 0, it.z]}
           rotation={[0, it.rotY, 0]}
-          onPointerOver={(e) => { (e.object as any).scale.set(1.12, 1.12, 1.12); }}
-          onPointerOut={(e) => { (e.object as any).scale.set(1, 1, 1); }}
-          onClick={() => navigate(`/sponsors#${it.idx}`)}
+          onPointerOver={(e) => { (e.object as any).scale.set(1.12, 1.12, 1.12); document.body.style.cursor = 'pointer'; }}
+          onPointerOut={(e) => { (e.object as any).scale.set(1, 1, 1); document.body.style.cursor = 'auto'; }}
+          onClick={() => navigate('/sponsors')}
         >
           <planeGeometry args={[2.2, 1.2]} />
           {/* doubleSide so logos are visible from all camera angles; use emissiveMap + emissiveIntensity for manual brightness control */}
