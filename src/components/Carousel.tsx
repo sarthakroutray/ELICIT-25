@@ -87,7 +87,7 @@ const SponsorsCarousel = () => {
       {/* Centered foreground content */}
       <div className="relative z-10 flex flex-col items-center gap-10">
         <h1
-          className="text-center text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-2 tracking-wider"
+          className="text-center text-base md:text-xl lg:text-2xl font-bold text-white mb-2 tracking-wider"
           style={{
             fontFamily: 'Orbitron, monospace',
             textShadow: `
@@ -131,7 +131,7 @@ const SponsorsCarousel = () => {
                     filter: blur,
                   }}
                 >
-                  <div className="w-[500px] h-[200px] flex justify-center items-center">
+                  <div className="w-[260px] h-[110px] sm:w-[340px] sm:h-[140px] md:w-[500px] md:h-[200px] flex justify-center items-center">
                     <img
                       src={sponsor.logoSrc}
                       alt={`${sponsor.name} logo`}

@@ -102,6 +102,13 @@ const CyberpunkLanding: React.FC<CyberpunkLandingProps> = ({ onSpeakersClick, on
           --explore-top: 72%;
           --infiltrate-bottom: 40px;
           --social-bottom: 110px; /* infiltrate-bottom + 70 */
+          /* Desktop defaults: original positions */
+          --social-left: 40px;
+          --social-right: auto;
+          --social-transform: none;
+          --infiltrate-left: auto;
+          --infiltrate-right: 40px;
+          --infiltrate-transform: none;
         }
         @media (max-width: 1024px) {
           .nav-buttons-desktop {
@@ -145,9 +152,16 @@ const CyberpunkLanding: React.FC<CyberpunkLandingProps> = ({ onSpeakersClick, on
         }
         @media (max-width: 600px) {
           :root {
-            --explore-top: 74%;
+            --explore-top: 70%;
             --infiltrate-bottom: 16px; /* closer to bottom on phones */
-            --social-bottom: 64px; /* keep social above infiltrate on phones */
+            --social-bottom: 84px; /* move social a bit up from bottom */
+            /* Phone overrides: center align */
+            --social-left: 50%;
+            --social-right: auto;
+            --social-transform: translateX(-50%);
+            --infiltrate-left: 50%;
+            --infiltrate-right: auto;
+            --infiltrate-transform: translateX(-50%);
           }
           .main-corruption-heading-responsive {
             font-size: 1rem !important;
@@ -547,13 +561,13 @@ const CyberpunkLanding: React.FC<CyberpunkLandingProps> = ({ onSpeakersClick, on
       <div className="pointer-events-none">
         <div
           className="fixed social-links-responsive"
-          style={{ bottom: 'var(--social-bottom)', left: '50%', transform: 'translateX(-50%)', zIndex: 50 }}
+          style={{ bottom: 'var(--social-bottom)', left: 'var(--social-left)', right: 'var(--social-right)', transform: 'var(--social-transform)', zIndex: 50 }}
         >
           <SocialLinks />
         </div>
         <div
-          className="fixed w-full flex justify-center infiltrate-wrapper"
-          style={{ bottom: 'var(--infiltrate-bottom)', left: 0, zIndex: 60 }}
+          className="fixed infiltrate-wrapper"
+          style={{ bottom: 'var(--infiltrate-bottom)', left: 'var(--infiltrate-left)', right: 'var(--infiltrate-right)', transform: 'var(--infiltrate-transform)', zIndex: 60 }}
         >
           <motion.div
             initial={{ opacity: 0, y: 50 }}
