@@ -2,7 +2,11 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Github, Twitter, Instagram, Linkedin } from 'lucide-react';
 
-const SocialLinks: React.FC = () => {
+interface SocialLinksProps {
+  className?: string;
+}
+
+const SocialLinks: React.FC<SocialLinksProps> = ({ className = '' }) => {
   const socialLinks = [
     { icon: Github, href: '#', label: 'GitHub' },
     { icon: Twitter, href: '#', label: 'Twitter' },
@@ -15,7 +19,7 @@ const SocialLinks: React.FC = () => {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 2 }}
-      className="flex space-x-4"
+      className={`flex space-x-4 ${className}`}
     >
       {socialLinks.map((social, index) => (
         <motion.a

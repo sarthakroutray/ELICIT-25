@@ -105,6 +105,9 @@ const CyberpunkLanding: React.FC<CyberpunkLandingProps> = ({ onSpeakersClick, on
           .countdown-timer-responsive {
             transform: scale(0.8);
             margin-top: 0.5rem;
+            position: absolute;
+            top:-15px;
+            right:20px;
           }
         }
         @media (max-width: 600px) {
@@ -115,6 +118,19 @@ const CyberpunkLanding: React.FC<CyberpunkLandingProps> = ({ onSpeakersClick, on
           .countdown-timer-responsive {
             transform: scale(0.7);
             margin-top: 0.2rem;
+          }
+          .infiltrate-button-responsive {
+            transform: scale(0.8);
+            padding: 0.5rem 1rem !important;
+            font-size: 0.875rem !important;
+          }
+          .social-links-responsive {
+            transform: scale(0.7);
+            gap: 0.5rem !important;
+          }
+          .social-links-responsive svg {
+            width: 1.25rem !important;
+            height: 1.25rem !important;
           }
         }
       `}</style>
@@ -416,16 +432,14 @@ const CyberpunkLanding: React.FC<CyberpunkLandingProps> = ({ onSpeakersClick, on
         </div>
 
 
-        {/* Hamburger Icon for Mobile */}
-        <div className="hamburger-menu" style={{position: 'absolute', top: 24, right: 24, display: 'none', zIndex: 100}}>
+        {/* Explore Button for Mobile */}
+        <div className="hamburger-menu" style={{position: 'absolute', top: '75%', left: '50%', transform: 'translate(-50%, -50%)', display: 'none', zIndex: 100}}>
           <button
-            aria-label="Open navigation menu"
-            className="flex flex-col justify-center items-center w-12 h-12 bg-black bg-opacity-80 border-2 border-cyan-400 rounded-lg shadow-lg hover:bg-opacity-100 transition-all"
+            aria-label="Explore navigation menu"
+            className="px-8 py-4 bg-black bg-opacity-80 border-2 border-cyan-400 rounded-lg shadow-lg hover:bg-opacity-100 transition-all font-mono text-lg font-bold text-cyan-400 hover:text-white hover:border-white"
             onClick={() => setShowMobileMenu(v => !v)}
           >
-            <span className="block w-7 h-1 bg-cyan-400 mb-1 rounded"></span>
-            <span className="block w-7 h-1 bg-cyan-400 mb-1 rounded"></span>
-            <span className="block w-7 h-1 bg-cyan-400 rounded"></span>
+            EXPLORE
           </button>
         </div>
 
@@ -475,7 +489,7 @@ const CyberpunkLanding: React.FC<CyberpunkLandingProps> = ({ onSpeakersClick, on
 
         {/* Bottom Bar */}
         <div className="flex justify-between fixed bottom-0 w-full py-4 pr-10">
-          <SocialLinks />
+          <SocialLinks className="social-links-responsive" />
           
           <motion.div
             initial={{ opacity: 0, y: 50 }}
@@ -484,7 +498,7 @@ const CyberpunkLanding: React.FC<CyberpunkLandingProps> = ({ onSpeakersClick, on
           >
             <button
               onClick={handleInfiltrate}
-              className="group relative px-8 py-3 bg-red-500 text-black font-mono font-bold tracking-wider hover:bg-red-400 transition-all duration-300 hover:scale-105"
+              className="group relative px-8 py-3 bg-red-500 text-black font-mono font-bold tracking-wider hover:bg-red-400 transition-all duration-300 hover:scale-105 infiltrate-button-responsive"
               style={{
                 clipPath: 'polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px))',
                 boxShadow: '0 0 20px #ff0040',
