@@ -1,32 +1,33 @@
 import React, { useState } from 'react';
 import DigitalRain from './DigitalRain';
 
-// Expected frame image naming convention placed under /public/events/frames
-// One frame PER ROW, 3 rows total:
-// frame1.jpg -> used for row 1 (events 1-4)
-// frame2.jpg -> used for row 2 (events 5-8)
-// frame3.jpg -> used for row 3 (events 9-12)
-// Inner photos can still be unique: /public/events/photos/photo1.jpg ... photo12.jpg
+// Vertical poster mode:
+// Provide 12 poster images named poster1.png .. poster12.png (or .jpg) inside /public/events/frames
+// Adjust POSTER_EXT if needed. Missing images will fall back to the first available file.
 
-interface EventBox {
-  id: number;
-  title?: string;
-  frame: string; // path to frame image
-}
+interface PosterBox { id: number; poster: string; }
 
-const buildBoxes = (): EventBox[] => {
-  const ROWS = 3;
-  const COLS = 4;
-  const total = ROWS * COLS; // 12
-  return Array.from({ length: total }, (_, i) => {
-    const row = Math.floor(i / COLS); // 0,1,2
-    // Use a single frame per row: frame1.png for row 1 (items 1-4), frame2.png for row 2, frame3.png for row 3
-    return {
-      id: i + 1,
-      frame: `/events/frames/frame${row + 1}.png`,
-    };
-  });
-};
+// EDIT THESE PATHS LATER: supply the actual poster image for each event (must live under /public)
+// You can use .png/.jpg/.webp etc. Example: '/events/frames/hackathon.png'
+const POSTER_PATHS: string[] = [
+  '/events/frames/Defuse.png', // 1
+  '/events/frames/Defuse.png', // 2
+  '/events/frames/Defuse.png', // 3
+  '/events/frames/Defuse.png', // 4
+  '/events/frames/Defuse.png', // 5
+  '/events/frames/Defuse.png', // 6
+  '/events/frames/Defuse.png', // 7
+  '/events/frames/Defuse.png', // 8
+  '/events/frames/Defuse.png', // 9
+  '/events/frames/Defuse.png', // 10
+  '/events/frames/Defuse.png', // 11
+  '/events/frames/Defuse.png', // 12
+];
+
+const FALLBACK_POSTER = '/events/frames/Defuse.png';
+
+const buildBoxes = (): PosterBox[] =>
+  POSTER_PATHS.map((p, idx) => ({ id: idx + 1, poster: p }));
 
 const EventsGrid: React.FC = () => {
   const boxes = buildBoxes();
@@ -35,44 +36,32 @@ const EventsGrid: React.FC = () => {
     <div className="relative min-h-screen bg-black text-white font-mono py-16 px-6 overflow-hidden">
       <DigitalRain />
   <h1 className="text-center text-4xl mb-12 tracking-widest text-cyan-300" style={{ fontFamily: 'Orbitron, monospace' }}>EVENTS</h1>
-	<div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-5 xl:gap-6 max-w-screen-2xl mx-auto px-2 relative overflow-visible">
-        {boxes.map(box => (
+  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6 xl:gap-8 max-w-screen-2xl mx-auto px-2 relative overflow-visible">
+        {boxes.map((box) => (
           <div
             key={box.id}
-            className={`relative group aspect-[4/3] select-none min-h-[170px] md:min-h-[210px] xl:min-h-[240px] overflow-visible transition-all duration-300 ease-out will-change-transform
-              ${(() => {
-                const row = Math.floor((box.id - 1) / 4); // 0,1,2
-                const isRow3 = row === 2; // third row uses frame3
-                if (hovered === box.id) {
-                  // Larger target scale for row3 to compensate smaller asset
-                  return isRow3
-                    ? 'z-30 scale-[1.14] md:scale-[1.18] xl:scale-[1.21]'
-                    : 'z-30 scale-[1.08] md:scale-[1.12] xl:scale-[1.15]';
-                }
-                if (hovered) {
-                  // Non-hovered while some hovered: shrink a bit more but keep row3 slightly larger than others
-                  return isRow3
-                    ? 'scale-[0.92] md:scale-[0.94] xl:scale-[0.95] opacity-80'
-                    : 'scale-[0.9] md:scale-[0.92] xl:scale-[0.93] opacity-80';
-                }
-                // Idle state (no hover): row3 slightly bigger baseline
-                return isRow3 ? 'scale-[1.04] md:scale-[1.05] xl:scale-[1.06]' : 'scale-100';
-              })()}
-            `}
+            className={`relative group aspect-[3/4] select-none min-h-[220px] md:min-h-[300px] xl:min-h-[340px] overflow-visible transition-all duration-300 ease-out will-change-transform
+                ${hovered === box.id
+                  ? 'z-30 scale-[1.14] md:scale-[1.18] xl:scale-[1.22]'
+                  : hovered
+                    ? 'scale-[0.88] md:scale-[0.9] xl:scale-[0.92] opacity-80'
+                    : 'scale-[1.04]'}
+              `}
             onMouseEnter={() => setHovered(box.id)}
             onMouseLeave={() => setHovered(null)}
           >
-            {/* Frame only */}
             <img
-              src={box.frame}
-              alt={`Frame ${box.id}`}
-              className="absolute inset-0 w-full h-full object-contain pointer-events-none"
+              src={box.poster}
+              onError={(e) => { (e.currentTarget as HTMLImageElement).src = FALLBACK_POSTER; }}
+              alt={`Event poster ${box.id}`}
+              className="absolute inset-0 w-full h-full object-cover rounded-lg pointer-events-none"
+              style={{ filter: 'drop-shadow(0 0 6px rgba(0,255,255,0.18))' }}
             />
           </div>
         ))}
       </div>
       <style>{`
-        .aspect-[4/3] { position: relative; }
+        .aspect-[3/4] { position: relative; }
         /* Slight nudge effect for neighbors using data attributes could be added later if precise push directions needed */
       `}</style>
     </div>
