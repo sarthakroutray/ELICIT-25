@@ -164,7 +164,7 @@ const CyberpunkLanding: React.FC<CyberpunkLandingProps> = ({ onSpeakersClick, on
           }
           /* Override EXPLORE button to bottom-based positioning on initial mobile load */
           .explore-wrapper {
-            top: auto !important;
+            top: 65% !important;
             bottom: calc(var(--social-bottom) + 183px + env(safe-area-inset-bottom, 0px)) !important;
             left: 50% !important;
             transform: translateX(-50%) !important;
