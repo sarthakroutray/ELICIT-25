@@ -62,7 +62,7 @@ const SponsorsWheel: React.FC<SponsorsWheelProps> = ({ logos, radius = 8, speed 
     <group ref={groupRef} position={[0, y, 0]}>
       {/* subtle fill light so logos are readable */}
       <ambientLight intensity={0.6} />
-      <directionalLight position={[5, 10, 7]} intensity={0.6} />
+      <directionalLight position={[5, 10, 7]} intensity={1.0} />
 
       {items.map((it) => (
         <mesh
