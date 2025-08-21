@@ -7,6 +7,10 @@ const CyberpunkEventInterface: React.FC = () => {
   const requestedId = params.id ? parseInt(params.id, 10) : NaN;
   const [currentCard, setCurrentCard] = useState(0);
   const [isMobile, setIsMobile] = useState<boolean>(() => (typeof window !== 'undefined' ? window.innerWidth < 768 : false));
+  // Drag/swipe state (mobile)
+  const [dragStartX, setDragStartX] = useState<number | null>(null);
+  const [dragDX, setDragDX] = useState(0);
+  const [isDragging, setIsDragging] = useState(false);
 
   // If route provides an id param, focus that card on mount
   useEffect(() => {
@@ -95,51 +99,120 @@ const CyberpunkEventInterface: React.FC = () => {
   const handlePrev = () =>
     setCurrentCard((prev) => (prev - 1 + eventCards.length) % eventCards.length);
 
+  // Pointer / touch handlers for mobile swipe
+  const MIN_SWIPE = 60; // px threshold
+  const rubberBand = (d: number, constant = 180) => {
+    // asymptotic resistance using tanh
+    return constant * Math.tanh(d / constant);
+  };
+  const handlePointerDown = (clientX: number) => {
+    if (!isMobile) return;
+    setDragStartX(clientX);
+    setDragDX(0);
+    setIsDragging(true);
+  };
+  const handlePointerMove = (clientX: number) => {
+    if (!isMobile || !isDragging || dragStartX === null) return;
+    const dx = clientX - dragStartX;
+    setDragDX(dx);
+  };
+  const endDrag = () => {
+    if (!isMobile || !isDragging) return;
+    if (dragDX > MIN_SWIPE) {
+      handlePrev();
+    } else if (dragDX < -MIN_SWIPE) {
+      handleNext();
+    }
+    setIsDragging(false);
+    setDragStartX(null);
+    setDragDX(0);
+  };
+
   return (
     <div className="min-h-screen bg-black relative overflow-hidden">
       <DigitalRain />
-  {isMobile ? (
-        <div className="relative w-full flex flex-col items-center pt-24 pb-24 px-4">
-          {/* Mobile arrows */}
-          <div className="flex items-center justify-between w-full max-w-md mb-4">
+      {isMobile ? (
+        <div
+          className="relative w-full flex flex-col items-center pt-20 pb-16 px-2 overflow-hidden select-none"
+          onPointerDown={(e) => handlePointerDown(e.clientX)}
+          onPointerMove={(e) => handlePointerMove(e.clientX)}
+          onPointerUp={endDrag}
+          onPointerLeave={() => { if (isDragging) endDrag(); }}
+          onTouchStart={(e) => handlePointerDown(e.touches[0].clientX)}
+          onTouchMove={(e) => handlePointerMove(e.touches[0].clientX)}
+          onTouchEnd={endDrag}
+          style={{ touchAction: 'pan-y' }}
+        >
+          {/* Mobile progress & arrows */}
+          <div className="flex items-center justify-between w-full max-w-sm mb-3 px-2">
             <button
               aria-label="Previous event"
               onClick={handlePrev}
-              className="text-pink-500 text-3xl px-4 py-2 rounded hover:text-pink-300 transition-colors"
+              className="text-pink-500 text-3xl px-3 py-1 rounded hover:text-pink-300 active:scale-90 transition-all"
             >&larr;</button>
-            <div className="text-green-400 font-mono text-xs tracking-widest">{currentCard + 1} / {eventCards.length}</div>
+            <div className="text-green-400 font-mono text-[10px] tracking-widest">{currentCard + 1} / {eventCards.length}</div>
             <button
               aria-label="Next event"
               onClick={handleNext}
-              className="text-pink-500 text-3xl px-4 py-2 rounded hover:text-pink-300 transition-colors"
+              className="text-pink-500 text-3xl px-3 py-1 rounded hover:text-pink-300 active:scale-90 transition-all"
             >&rarr;</button>
           </div>
-          {/* Active card simplified layout */}
-          {(() => {
-            const event = eventCards[currentCard];
-            return (
-              <div className="w-full max-w-md bg-black border-2 border-green-400 shadow-lg p-4 rounded-md relative overflow-hidden" style={{ boxShadow: '0 0 18px #22c55e55' }}>
-                <div className="w-full mb-3 flex justify-center">
-                  <img
-                    src={event.poster || POSTER_FALLBACK}
-                    alt={`${event.title} Poster`}
-                    className="max-h-64 object-contain rounded-md"
-                    onError={(e) => { (e.currentTarget as HTMLImageElement).src = POSTER_FALLBACK; }}
-                  />
+          <div className="relative w-full h-[520px] flex items-center justify-center">
+            {eventCards.map((event, i) => {
+              const offset = i - currentCard;
+              const total = eventCards.length;
+              const half = Math.floor(total / 2);
+              let rel = offset;
+              if (offset > half) rel -= total;
+              if (offset < -half) rel += total;
+              if (Math.abs(rel) > 2) return null; // prune far cards
+              const isActive = rel === 0;
+      const effectiveDX = isDragging ? rubberBand(dragDX) : 0;
+      const translate = rel * 210 + effectiveDX; // horizontal shift (px) plus resisted drag offset
+      const extraScale = isActive && isDragging ? Math.min(Math.abs(dragDX) / 900, 0.07) : 0;
+      const scale = (isActive ? 1.05 : 0.78) + extraScale;
+              const opacity = isActive ? 1 : 0.35;
+              const zIndex = isActive ? 30 : 10 - Math.abs(rel);
+              return (
+                <div
+                  key={i}
+                  className="absolute transition-all ease-in-out"
+                  style={{
+        transitionDuration: isDragging ? '0ms' : '480ms',
+        transitionTimingFunction: isDragging ? 'linear' : 'cubic-bezier(0.22, 0.68, 0.35, 1.2)',
+                    transform: `translate(-50%, -50%) translateX(${translate}px) scale(${scale})`,
+                    left: '50%',
+                    top: '50%',
+                    opacity,
+                    zIndex,
+                  }}
+                >
+                  <div className="w-[310px] h-[480px] bg-black border-2 border-green-400 shadow-lg flex flex-col p-4 rounded-md overflow-hidden"
+                    style={{ boxShadow: isActive ? '0 0 22px #22c55e88' : '0 0 10px #22c55e55' }}>
+                    <div className="w-full mb-3 flex justify-center">
+                      <img
+                        src={event.poster || POSTER_FALLBACK}
+                        alt={`${event.title} Poster`}
+                        className="max-h-40 object-contain rounded-md"
+                        onError={(e) => { (e.currentTarget as HTMLImageElement).src = POSTER_FALLBACK; }}
+                      />
+                    </div>
+                    <h2 className="text-pink-500 font-mono font-bold text-lg mb-2 text-center glow-text-pink tracking-wide">{event.title}</h2>
+                    <p className="text-green-400 font-mono text-[11px] whitespace-pre-line mb-3 text-center leading-snug px-1">{event.description}</p>
+                    <div className="text-green-400 font-mono text-[11px] space-y-1 mt-auto">
+                      {event.date && <p><span className="text-pink-400">📅</span> {event.date}</p>}
+                      {event.time && <p><span className="text-pink-400">⏰</span> {event.time}</p>}
+                      {event.venue && <p><span className="text-pink-400">📍</span> {event.venue}</p>}
+                      {event.prize && <p><span className="text-pink-400">🏆</span> {event.prize}</p>}
+                      {event.organizer && <p><span className="text-pink-400">ORG:</span> {event.organizer}</p>}
+                      {event.contact && <p><span className="text-pink-400">☎</span> {event.contact}</p>}
+                      <p className="pt-1 text-[10px] tracking-widest text-green-500/70">CARD {i + 1} / {eventCards.length}</p>
+                    </div>
+                  </div>
                 </div>
-                <h2 className="text-pink-500 font-mono font-bold text-xl mb-2 text-center glow-text-pink">{event.title}</h2>
-                <p className="text-green-400 font-mono text-xs whitespace-pre-line mb-4 text-center">{event.description}</p>
-                <div className="text-green-400 font-mono text-xs space-y-1">
-                  {event.date && <p><span className="text-pink-400">📅</span> {event.date}</p>}
-                  {event.time && <p><span className="text-pink-400">⏰</span> {event.time}</p>}
-                  {event.venue && <p><span className="text-pink-400">📍</span> {event.venue}</p>}
-                  {event.prize && <p><span className="text-pink-400">🏆</span> {event.prize}</p>}
-                  {event.organizer && <p><span className="text-pink-400">ORG:</span> {event.organizer}</p>}
-                  {event.contact && <p><span className="text-pink-400">☎</span> {event.contact}</p>}
-                </div>
-              </div>
-            );
-          })()}
+              );
+            })}
+          </div>
         </div>
       ) : (
   <div className="flex items-center justify-center min-h-[100vh] py-2 relative">
