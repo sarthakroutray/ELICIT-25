@@ -199,7 +199,7 @@ const CyberpunkEventInterface: React.FC = () => {
                     </div>
                     <h2 className="text-pink-500 font-mono font-bold text-lg mb-2 text-center glow-text-pink tracking-wide">{event.title}</h2>
                     <p className="text-green-400 font-mono text-[11px] whitespace-pre-line mb-3 text-center leading-snug px-1">{event.description}</p>
-                    <div className="text-green-400 font-mono text-[11px] space-y-1 mt-auto">
+                    <div className="text-green-400 font-mono text-[11px] space-y-1 mt-5 text-center">
                       {event.date && <p><span className="text-pink-400">📅</span> {event.date}</p>}
                       {event.time && <p><span className="text-pink-400">⏰</span> {event.time}</p>}
                       {event.venue && <p><span className="text-pink-400">📍</span> {event.venue}</p>}
