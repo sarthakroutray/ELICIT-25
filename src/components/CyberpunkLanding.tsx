@@ -131,7 +131,7 @@ const CyberpunkLanding: React.FC<CyberpunkLandingProps> = ({ onSpeakersClick, on
             padding-top: 16px !important;
           }
           .top-title-responsive {
-            font-size: 0.95rem !important;
+            font-size: 0.99rem !important;
           }
           .top-logo-responsive {
             width: 1.625rem !important; /* ~26px */
@@ -165,16 +165,16 @@ const CyberpunkLanding: React.FC<CyberpunkLandingProps> = ({ onSpeakersClick, on
           /* Override EXPLORE button to bottom-based positioning on initial mobile load */
           .explore-wrapper {
             top: auto !important;
-            bottom: calc(var(--social-bottom) + 173px + env(safe-area-inset-bottom, 0px)) !important;
+            bottom: calc(var(--social-bottom) + 183px + env(safe-area-inset-bottom, 0px)) !important;
             left: 50% !important;
             transform: translateX(-50%) !important;
           }
           .main-corruption-heading-responsive {
-            font-size: 1rem !important;
-            margin-bottom: 1.2rem !important;
+            font-size: 1.3rem !important;
+            margin-bottom: 0.7rem !important;
           }
           .top-bar-responsive {
-            padding-top: 16px !important;
+            padding-top: 18px !important;
           }
           .top-title-responsive {
             font-size: 0.85rem !important;
@@ -189,13 +189,13 @@ const CyberpunkLanding: React.FC<CyberpunkLandingProps> = ({ onSpeakersClick, on
           }
           .countdown-timer-responsive {
             position: fixed !important;
-            top: 16px !important;
-            right: 10px !important;
+            top: 18px !important;
+            right: 14px !important;
             transform-origin: top right;
             transform: scale(0.6);
           }
           .explore-button-responsive {
-            padding: 0.5rem 1.25rem !important;
+            padding: 0.5rem 1.2rem !important;
             font-size: 0.95rem !important;
             transform: scale(0.9);
           }
@@ -213,7 +213,7 @@ const CyberpunkLanding: React.FC<CyberpunkLandingProps> = ({ onSpeakersClick, on
             height: 1.25rem !important;
           }
           .register-button-responsive {
-            margin-top: -18px !important; /* nudge register up on phones */
+            margin-top: -32px !important; /* nudge register up on phones */
           }
         }
         .one-shot-scanline{position:fixed;top:0;left:0;width:100%;height:2px;background:linear-gradient(90deg,transparent,#ff0040,transparent);box-shadow:0 0 10px #ff0040,0 0 20px #ff0040;animation:oneScan 2s linear forwards;}
