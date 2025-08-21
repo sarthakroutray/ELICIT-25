@@ -1,6 +1,8 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 import { Phone } from 'lucide-react';
 import DigitalRain from './DigitalRain';
+import DarkMap from './DarkMap';
 
 const MAP_EMBED_URL =
   'https://www.google.com/maps?q=Manipal+University+Jaipur&hl=en&z=16&output=embed';
@@ -18,40 +20,58 @@ const Contact: React.FC = () => {
       <div className="max-w-7xl mx-auto">
 
         {/* Title */}
-          <h1
-            className="text-4xl text-center mb-8 font-extrabold text-green-400"
-            style={{
-              fontFamily: 'Orbitron, sans-serif',
-              letterSpacing: '3px',
-              textShadow: '0 0 10px #22c55e, 0 0 20px #22c55e',
-            }}
-          >
-            CONTACT
-          </h1>
+          <motion.div
+                    initial={{ opacity: 0, y: -50 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.8 }}
+                    className="text-center mb-10"
+                  >
+                    {/* ID Text */}
+                    <div className="text-green-400 font-mono text-sm tracking-wider mb-4 opacity-60">
+                      [03] COMMUNICATION GRID
+                    </div>
+                    
+                    {/* Main Title */}
+                    <h1 
+                      className="text-4xl md:text-5xl lg:text-6xl font-bold text-blue mb-6 tracking-wider"
+                      style={{
+                        fontFamily: 'Orbitron, monospace',
+                        textShadow: `
+                          -2px -2px 0 #000,
+                          2px -2px 0 #000,
+                          -2px 2px 0 #000,
+                          2px 2px 0 #000,
+                          0 0 10px #22c55e,
+                          0 0 20px #22c55e,
+                          0 0 30px #22c55e
+                        `,
+                        filter: 'drop-shadow(4px 4px 8px rgba(0,0,0,0.9))',
+                      }}
+                    >
+                      CONTACT
+                    </h1>
+                    
+                    {/* Subtitle */}
+                    <div className="text-green-400 font-mono text-lg tracking-wider">
+                      SYSTEM CONNECT
+                    </div>
+                  </motion.div>
         {/* Outer Wrapper */}
         <div
           className="max-w-7xl mx-auto my-8 p-8 rounded-3xl bg-gradient-to-br from-gray-900 to-black bg-black"
           style={{
-            border: '1px solid #c1447eff', // change the color or style here
-            boxShadow: '0 0 15px rgba(236, 72, 153, 0.3)', // subtle glow if needed
+            border: "2px solid #c1447e", // main border
+            boxShadow: "0 0 0 4px rgba(193, 68, 126, 0.3)", // second border
             backdropFilter: 'blur(20px)',
           }}
                 >
-
-          
 
           {/* Grid: Map + Conveners */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
             {/* Left: Map */}
             <div className="lg:col-span-6 col-span-1 h-full">
-              <div className="w-full h-full rounded-lg overflow-hidden border border-green-700/40 shadow-[0_0_12px_#22c55e70]">
-                <iframe
-                  title="Location map"
-                  src={MAP_EMBED_URL}
-                  className="w-full h-full border-0"
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                />
+              <div className="w-full max-h-[300px] rounded-lg overflow-hidden border border-green-700/40 shadow-[0_0_12px_#22c55e70]">
+                <DarkMap />
               </div>
             </div>
 
@@ -97,14 +117,14 @@ const Contact: React.FC = () => {
           <div className="mt-10">
             <div className="bg-gradient-to-br from-purple-900/20 to-pink-900/20 rounded-lg p-6 border border-pink-500/30 shadow-[0_0_15px_#ec489960] w-full">
               <h2
-                className="text-2xl font-extrabold text-pink-400 text-center mb-6"
+                className="text-2xl font-extrabold text-green-400 text-center mb-6"
                 style={{
                   fontFamily: 'Orbitron, sans-serif',
                   letterSpacing: '2px',
-                  textShadow: '0 0 8px #ec4899, 0 0 15px #ec4899',
+                  textShadow: '0 0 8px #22c55e, 0 0 15px #22c55e',
                 }}
               >
-                CONTACT FORM
+                ANY QUERIES?
               </h2>
               <form className="space-y-4 w-full">
                 <input
@@ -112,7 +132,7 @@ const Contact: React.FC = () => {
                   placeholder="Name"
                   className="w-full p-3 rounded-md bg-black/70 border border-pink-500/30 text-green-200 placeholder-green-400/50 focus:outline-none focus:ring-1 focus:ring-pink-500/60"
                 />
-                <div className="flex gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <input
                     type="tel"
                     placeholder="Phone No."
