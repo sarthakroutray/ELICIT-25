@@ -153,7 +153,7 @@ const CyberpunkLanding: React.FC<CyberpunkLandingProps> = ({ onSpeakersClick, on
           :root {
             --explore-top: 70%;
             --infiltrate-bottom: 16px; /* closer to bottom on phones */
-            --social-bottom: 84px; /* move social a bit up from bottom */
+            --social-bottom: 60px; /* move social a bit up from bottom */
             /* Phone overrides: center align */
             --social-left: 50%;
             --social-right: auto;
@@ -161,6 +161,13 @@ const CyberpunkLanding: React.FC<CyberpunkLandingProps> = ({ onSpeakersClick, on
             --infiltrate-left: 50%;
             --infiltrate-right: auto;
             --infiltrate-transform: translateX(-50%);
+          }
+          /* Override EXPLORE button to bottom-based positioning on initial mobile load */
+          .explore-wrapper {
+            top: auto !important;
+            bottom: calc(var(--social-bottom) + 173px + env(safe-area-inset-bottom, 0px)) !important;
+            left: 50% !important;
+            transform: translateX(-50%) !important;
           }
           .main-corruption-heading-responsive {
             font-size: 1rem !important;
@@ -494,10 +501,10 @@ const CyberpunkLanding: React.FC<CyberpunkLandingProps> = ({ onSpeakersClick, on
 
         {/* Explore Button for Mobile */}
         <div
-          className="hamburger-menu pointer-events-auto"
+          className="hamburger-menu pointer-events-auto explore-wrapper"
           style={{
             position: 'absolute',
-            top: 'var(--explore-top)',
+            top: 'var(--explore-top)', /* desktop/tablet default; overridden on mobile by CSS */
             left: '50%',
             transform: 'translate(-50%, -50%)',
             zIndex: 100,
