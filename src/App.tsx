@@ -2,19 +2,23 @@ import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import CyberpunkLanding from './components/CyberpunkLanding';
 import AboutSection from './components/AboutSection';
-import CyberpunkEvents from './components/CyberpunkEvents';
+import EventsGrid from './components/EventsGrid';
 import Speakers from './components/Speakers';
 import Carousel from './components/Carousel';
+import CyberpunkEventInterface from './components/CyberpunkEvents';
 // PreviousSponsors is now composed inside SponsorsPage
 import SponsorsPage from './components/SponsorsPage';
 import Footer from './components/Footer';
+import Navbar from './components/Navbar';
 import Contact from './components/Contact';
 import Register from './components/Register';
 import './styles/glitch.css';
 
+
 // Simple wrapper to add spacing + footer for section pages
 const SectionPage: React.FC<{ children: React.ReactNode }> = ({ children }) => (
   <div className="w-full min-h-screen bg-black flex flex-col">
+    <Navbar />
     <div className="flex-1">{children}</div>
     <Footer />
   </div>
@@ -25,7 +29,9 @@ function App() {
     <Routes>
       <Route path="/" element={<CyberpunkLanding />} />
       <Route path="/about" element={<SectionPage><AboutSection /></SectionPage>} />
-      <Route path="/events" element={<SectionPage><CyberpunkEvents /></SectionPage>} />
+          <Route path="/events" element={<SectionPage><EventsGrid /></SectionPage>} />
+          {/* Route for individual event view / carousel focus */}
+          <Route path="/events/:id" element={<SectionPage><CyberpunkEventInterface /></SectionPage>} />
       <Route path="/speakers" element={<SectionPage><Speakers /></SectionPage>} />
   <Route path="/carousel" element={<SectionPage><Carousel /></SectionPage>} />
   <Route path="/sponsors" element={<SectionPage><SponsorsPage /></SectionPage>} />

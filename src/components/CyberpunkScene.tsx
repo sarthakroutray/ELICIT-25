@@ -122,28 +122,28 @@ const CyberpunkScene: React.FC<CyberpunkSceneProps> = ({ mousePosition }) => {
         {robots.map((robot, index) => (
           <group key={index} position={[robot.x, robot.y, robot.z]} rotation={[0, robot.rotation, 0]}>
             {/* Robot body */}
-            <Box args={[1, 2, 1]} position={[0, 1, 0]}>
+            <Box args={[1, 2, 1]} position={[0, -1, 0]}>
               <meshStandardMaterial color="#333" metalness={0.8} roughness={0.2} />
             </Box>
             
             {/* Robot head */}
-            <Box args={[0.8, 0.8, 0.8]} position={[0, 2.4, 0]}>
+            <Box args={[0.8, 0.8, 0.8]} position={[0, 0.4, 0]}>
               <meshStandardMaterial color="#444" metalness={0.9} roughness={0.1} />
             </Box>
             
             {/* Robot eyes */}
-            <Sphere args={[0.1]} position={[-0.2, 2.4, 0.4]}>
+            <Sphere args={[0.1]} position={[-0.2, 0.4, 0.4]}>
               <meshStandardMaterial color="#ff0040" emissive="#ff0040" emissiveIntensity={2} />
             </Sphere>
-            <Sphere args={[0.1]} position={[0.2, 2.4, 0.4]}>
+            <Sphere args={[0.1]} position={[0.2, 0.4, 0.4]}>
               <meshStandardMaterial color="#ff0040" emissive="#ff0040" emissiveIntensity={2} />
             </Sphere>
             
             {/* Robot arms */}
-            <Cylinder args={[0.2, 0.2, 1.5]} position={[-0.8, 1.5, 0]} rotation={[0, 0, Math.PI / 6]}>
+            <Cylinder args={[0.2, 0.2, 1.5]} position={[-0.8, -0.5, 0]} rotation={[0, 0, Math.PI / 6]}>
               <meshStandardMaterial color="#333" metalness={0.8} roughness={0.2} />
             </Cylinder>
-            <Cylinder args={[0.2, 0.2, 1.5]} position={[0.8, 1.5, 0]} rotation={[0, 0, -Math.PI / 6]}>
+            <Cylinder args={[0.2, 0.2, 1.5]} position={[0.8, -0.5, 0]} rotation={[0, 0, -Math.PI / 6]}>
               <meshStandardMaterial color="#333" metalness={0.8} roughness={0.2} />
             </Cylinder>
           </group>
@@ -152,7 +152,7 @@ const CyberpunkScene: React.FC<CyberpunkSceneProps> = ({ mousePosition }) => {
       
       {/* Central Tower */}
       <group ref={centralTowerRef} position={[0, 0, 0]}>
-        <Cylinder args={[2, 2, 8]} position={[0, 4, 0]}>
+        <Cylinder args={[2, 2, 8]} position={[0, 0, 0]}>
           <meshStandardMaterial color="#222" metalness={0.9} roughness={0.1} />
         </Cylinder>
         

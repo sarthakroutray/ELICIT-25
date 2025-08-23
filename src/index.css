@@ -36,8 +36,3 @@
   }
 }
 
-.glitch-hover:hover {
-  animation: glitch 0.6s ease-in-out;
-  color: #00ff41;
-  filter: drop-shadow(0 0 2px #00ff41) drop-shadow(0 0 6px #00ff41);
-}
