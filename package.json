@@ -12,6 +12,7 @@
   "dependencies": {
     "@react-three/drei": "^9.92.7",
     "@react-three/fiber": "^8.15.12",
+    "@supabase/supabase-js": "^2.56.0",
     "framer-motion": "^10.16.16",
     "leaflet": "^1.9.4",
     "lucide-react": "^0.344.0",
