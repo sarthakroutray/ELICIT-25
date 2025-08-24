@@ -25,7 +25,7 @@ const Speakers: React.FC = () => {
       name: "CONVERSATIONAL AI WITH NEO",
       title: "AI SPECIALIST",
       description: "The Elize model powers responsive dialogue, delivering smart, believable back-and-forth with players. Use this open framework to embed lifelike agents into Roblox-based AI-driven games.",
-      image: "/speakers/speaker1.jpg",
+      image: "/speakers/speaker1.png", // Speaker image
       outline: "/speakers/outline1.png"
     },
     {
@@ -33,7 +33,7 @@ const Speakers: React.FC = () => {
       name: "PERSISTENT PLAYER MEMORY", 
       title: "MEMORY ARCHITECT",
       description: "Game agents remember key player events - like coins earned, levels, or tasks finished. This lets them speak more relevant, informed way during future conversations.",
-      image: "/speakers/speaker2.jpg",
+      image: "/speakers/speaker1.png", // Using same speaker image
       outline: "/speakers/outline2.png"
     }
   ];
@@ -48,11 +48,12 @@ const Speakers: React.FC = () => {
 
 
   // Manual flip (tap) still works
+  // Toggle card: tap to flip to image, tap again to flip back to text
   const toggleCard = (id: number) => {
     setFlippedCards(prev =>
       prev.includes(id)
         ? prev.filter(cardId => cardId !== id)
-        : [id]
+        : [...prev, id]
     );
   };
 
@@ -214,9 +215,17 @@ const Speakers: React.FC = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.5 + index * 0.2 }}
               className="relative"
+              onClick={(e) => {
+                e.stopPropagation();
+                toggleCard(speaker.id);
+              }}
+              style={{ touchAction: 'manipulation' }}
             >
+              {/* Touch Target */}
+              <div className="absolute inset-0 z-10"></div>
+
               {/* Neon Grid Background */}
-              <div className="absolute inset-0 bg-gradient-to-br from-cyan-900/20 to-purple-900/20 rounded-xl border border-cyan-400/30 overflow-hidden">
+              <div className="absolute inset-0 bg-gradient-to-br from-cyan-900/20 to-purple-900/20 rounded-xl border border-cyan-400/30 overflow-hidden pointer-events-none">
                 <div className="absolute inset-0 opacity-30">
                   <div className="w-full h-full" style={{
                     backgroundImage: `
@@ -230,44 +239,43 @@ const Speakers: React.FC = () => {
 
               {/* Flip Card Container */}
               <div 
-                className="relative h-80 w-full cursor-pointer perspective-1000"
-                onClick={() => toggleCard(speaker.id)}
+                className="relative h-80 w-full"
+                style={{ perspective: "1000px" }}
               >
-                <motion.div
-                  className="relative w-full h-full preserve-3d transition-transform duration-700"
-                  animate={{ rotateY: flippedCards.includes(speaker.id) ? 180 : 0 }}
-                  style={{ transformStyle: 'preserve-3d' }}
+                <div
+                  className="relative w-full h-full transition-transform duration-700"
+                  style={{ 
+                    transformStyle: "preserve-3d",
+                    transform: flippedCards.includes(speaker.id) ? "rotateY(180deg)" : "rotateY(0deg)"
+                  }}
                 >
-                  {/* Front of Card */}
-                  <div className="absolute inset-0 w-full h-full backface-hidden">
-                    <div className="relative h-full w-full bg-black/80 rounded-xl border-2 border-cyan-400/50 p-6 flex flex-col justify-center items-center text-center">
+                  {/* Front of Card: text info */}
+                  <div 
+                    className="absolute inset-0 w-full h-full pointer-events-none"
+                    style={{ 
+                      backfaceVisibility: "hidden",
+                      WebkitBackfaceVisibility: "hidden"
+                    }}
+                  >
+                    <div className="relative h-full w-full bg-black/80 rounded-xl border-2 border-cyan-400/50 p-6 flex flex-col justify-center items-center text-center pointer-events-none">
                       {/* Glitch Effect */}
                       <div className="absolute inset-0 bg-gradient-to-br from-cyan-400/10 to-purple-400/10 rounded-xl animate-pulse"></div>
-                      
                       {/* Speaker ID */}
                       <div className="text-cyan-400 font-mono text-sm opacity-80 mb-4 tracking-wider">
                         // 0{speaker.id}
                       </div>
-                      
-                      {/* Speaker Image */}
-                      <div className="w-20 h-20 bg-gradient-to-br from-cyan-400 to-purple-600 rounded-full p-1 mb-4">
-                        <div className="w-full h-full bg-black rounded-full overflow-hidden">
-                          <img 
-                            src={speaker.image} 
-                            alt={speaker.name}
-                            className="w-full h-full object-cover"
-                            onError={(e) => {
-                              (e.target as HTMLImageElement).style.display = 'none';
-                            }}
-                          />
-                        </div>
-                      </div>
-                      
                       {/* Speaker Name */}
                       <h3 className="text-white text-lg font-bold mb-2 tracking-wider" style={{ fontFamily: 'Orbitron, monospace' }}>
                         {speaker.name}
                       </h3>
-                      
+                      {/* Speaker Title */}
+                      <div className="text-purple-400 font-mono text-sm opacity-80 mb-2">
+                        {speaker.title}
+                      </div>
+                      {/* Speaker Description */}
+                      <p className="text-gray-300 text-xs leading-relaxed font-mono text-center">
+                        {speaker.description}
+                      </p>
                       {/* Tap Instruction */}
                       <div className="text-cyan-400 font-mono text-xs opacity-60 mt-4">
                         TAP TO FLIP
@@ -275,30 +283,54 @@ const Speakers: React.FC = () => {
                     </div>
                   </div>
 
-                  {/* Back of Card */}
-                  <div className="absolute inset-0 w-full h-full backface-hidden rotate-y-180">
-                    <div className="relative h-full w-full bg-gradient-to-br from-black via-gray-900 to-black rounded-xl border-2 border-purple-400/50 p-6 flex flex-col justify-center">
-                      {/* Content */}
-                      <div className="text-center mb-4">
-                        <div className="text-purple-400 font-mono text-sm opacity-80 mb-2">
-                          {speaker.title}
-                        </div>
-                        <h3 className="text-white text-base font-bold mb-3 tracking-wider" style={{ fontFamily: 'Orbitron, monospace' }}>
-                          {speaker.name}
-                        </h3>
+                  {/* Back of Card: only speaker image */}
+                  <div 
+                    className="absolute inset-0 w-full h-full pointer-events-none"
+                    style={{ 
+                      backfaceVisibility: "hidden",
+                      WebkitBackfaceVisibility: "hidden",
+                      transform: "rotateY(180deg)",
+                      WebkitTransform: "rotateY(180deg)"
+                    }}
+                  >
+                    <div className="relative h-full w-full bg-gradient-to-br from-black via-gray-900 to-black rounded-xl border-2 border-purple-400/50 overflow-hidden pointer-events-none">
+                      {/* Background Image */}
+                      <div className="absolute inset-0 overflow-hidden">
+                        <img 
+                          src={speaker.image} 
+                          alt={speaker.name}
+                          className="w-full h-full object-cover"
+                          style={{
+                            filter: 'brightness(1.5) contrast(1.1)',
+                            mixBlendMode: 'normal',
+                            opacity: '0.8'
+                          }}
+                          onError={(e) => {
+                            (e.target as HTMLImageElement).style.display = 'none';
+                          }}
+                        />
+                        {/* Cyberpunk Overlay */}
+                        <div className="absolute inset-0 bg-gradient-to-b from-purple-900/20 to-cyan-900/20"></div>
+                        <div className="absolute inset-0" style={{
+                          backgroundImage: 'linear-gradient(90deg, rgba(0,0,0,0) 47%, rgba(0,255,255,0.1) 50%, rgba(0,0,0,0) 53%)',
+                          backgroundSize: '300% 100%',
+                          animation: 'scanline 3s linear infinite'
+                        }}></div>
                       </div>
                       
-                      <p className="text-gray-300 text-xs leading-relaxed font-mono text-center">
-                        {speaker.description}
-                      </p>
-                      
-                      {/* Tap to Flip Back */}
-                      <div className="text-purple-400 font-mono text-xs opacity-60 mt-4 text-center">
-                        TAP TO FLIP BACK
+                      {/* Content Overlay */}
+                      <div className="absolute inset-0 flex flex-col justify-end p-6 bg-gradient-to-t from-black/60 to-transparent">
+                        <h3 className="text-white text-lg font-bold mb-2 tracking-wider" style={{ fontFamily: 'Orbitron, monospace' }}>
+                          {speaker.name}
+                        </h3>
+                        {/* Tap to Flip Back */}
+                        <div className="text-cyan-400 font-mono text-xs opacity-80">
+                          TAP TO FLIP BACK
+                        </div>
                       </div>
                     </div>
                   </div>
-                </motion.div>
+                </div>
               </div>
 
               {/* Glow Effect */}
