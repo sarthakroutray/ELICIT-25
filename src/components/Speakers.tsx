@@ -154,23 +154,32 @@ const Speakers: React.FC = () => {
                     }}
                     draggable={false}
                   />
-                  {/* Scaled-down content */}
-                  <div style={{ transform: 'scale(1)', width: '100%', height: '100%' }}>
+                                     {/* Scaled-down content */}
+                   <div style={{ transform: 'scale(1)', width: '100%', height: '100%' }}>
+                                           {/* Speaker Image as Background */}
+                      <div className="absolute inset-0 w-full h-full overflow-hidden" style={{ padding: '50px', top: '-20px' }}>
+                        <img 
+                          src={speaker.image} 
+                          alt={speaker.name}
+                          className="w-full h-full object-cover"
+                          style={{
+                            filter: 'brightness(1.2) contrast(1.1)',
+                            opacity: '0.8'
+                          }}
+                          onError={(e) => {
+                            (e.target as HTMLImageElement).style.display = 'none';
+                          }}
+                        />
+                        {/* Dark overlay for better text readability */}
+                        <div className="absolute inset-0 bg-black/40"></div>
+                      </div>
+                    
                     <div className="relative z-10 w-full h-full flex flex-col justify-between items-stretch pt-16 pb-16 px-12">
-                      {/* Top Row: ID and Speaker Image */}
+                      {/* Top Row: ID only */}
                       <div className="flex flex-row justify-between items-start mb-4">
                         <div className="text-cyan-400 font-mono text-sm opacity-60">// 0{speaker.id}</div>
-                        <div className="w-14 h-14 bg-black overflow-hidden shadow-lg">
-                          <img 
-                            src={speaker.image} 
-                            alt={speaker.name}
-                            className="w-full h-full object-cover"
-                            onError={(e) => {
-                              (e.target as HTMLImageElement).style.display = 'none';
-                            }}
-                          />
-                        </div>
                       </div>
+                      
                       {/* Content */}
                       <div className="mb-4">
                         <h3 className="text-white text-lg font-bold mb-2 tracking-wider" style={{ fontFamily: 'Orbitron, monospace' }}>
