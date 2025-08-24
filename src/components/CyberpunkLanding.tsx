@@ -252,6 +252,25 @@ const CyberpunkLanding: React.FC<CyberpunkLandingProps> = ({ onSpeakersClick, on
         </Suspense>
       </Canvas>
 
+      {/* Procedural Film Grain (SVG turbulence) */}
+      <svg
+        className="pointer-events-none absolute inset-0"
+        aria-hidden
+        role="presentation"
+        style={{ mixBlendMode: 'multiply', opacity: 0.045 }}
+      >
+        <filter id="elicitNoiseFilter">
+          <feTurbulence
+            type="fractalNoise"
+            baseFrequency="0.9"
+            numOctaves={2}
+            stitchTiles="stitch"
+            seed={2}
+          />
+        </filter>
+        <rect width="100%" height="100%" filter="url(#elicitNoiseFilter)" />
+      </svg>
+
       {/* Static Overlay */}
       <div className="absolute inset-0 opacity-10 pointer-events-none">
         <div className="w-full h-full bg-gradient-to-br from-transparent via-white to-transparent animate-pulse mix-blend-overlay" />
