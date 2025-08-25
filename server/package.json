@@ -7,8 +7,9 @@
     "node": ">=20"
   },
   "scripts": {
-    "start": "node index.mjs",
-    "dev": "node index.mjs"
+  "start": "node index.mjs",
+  "dev": "node index.mjs",
+  "build": "node -e \"console.log('No build step for server (plain Node ESM).');\""
   },
   "dependencies": {
     "compression": "^1.7.5",
