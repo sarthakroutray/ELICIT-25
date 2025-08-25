@@ -312,7 +312,7 @@ const CyberpunkLanding: React.FC<CyberpunkLandingProps> = ({ onSpeakersClick, on
         {/* Hero Section */}
         <div className="min-h-[72vh] flex flex-col items-center pt-[8vh] pb-[1vh]">
           <div className="text-center pointer-events-none">
-            {skipIntro ? (
+            {(skipIntro || isInitialized) ? (
               <>
                 <GlitchText
                   text="VIVO X ELICIT'25"
