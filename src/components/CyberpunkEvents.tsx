@@ -11,6 +11,12 @@ const CyberpunkEventInterface: React.FC = () => {
   const [dragStartX, setDragStartX] = useState<number | null>(null);
   const [dragDX, setDragDX] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
+  // Linktree destination (hardcoded here per request)
+  const LINKTREE_URL = 'https://linktr.ee/ROAD_TO_ELICIT_25'; // TODO: replace with your actual Linktree URL
+  const openLinktree = () => {
+    if (!LINKTREE_URL) return;
+    window.open(LINKTREE_URL, '_blank', 'noopener,noreferrer');
+  };
 
   // If route provides an id param, focus that card on mount
   useEffect(() => {
@@ -202,7 +208,16 @@ const CyberpunkEventInterface: React.FC = () => {
                     zIndex,
                   }}
                 >
-                  <div className="w-[310px] h-[480px] bg-black border-2 border-green-400 shadow-lg flex flex-col p-4 rounded-md overflow-hidden"
+                  <div
+                    className={`w-[310px] h-[480px] bg-black border-2 border-green-400 shadow-lg flex flex-col p-4 rounded-md overflow-hidden ${isActive ? 'cursor-pointer' : 'cursor-default'}`}
+                    onClick={() => {
+                      if (isActive && !isDragging && Math.abs(dragDX) < 8) openLinktree();
+                    }}
+                    role={isActive ? 'button' : undefined}
+                    tabIndex={isActive ? 0 : -1}
+                    onKeyDown={(e) => { if (isActive && (e.key === 'Enter' || e.key === ' ')) openLinktree(); }}
+                    title={isActive ? 'Open Linktree' : undefined}
+                  
                     style={{ boxShadow: isActive ? '0 0 22px #22c55e88' : '0 0 10px #22c55e55' }}>
                     <div className="w-full mb-3 flex justify-center">
                       <img
@@ -260,11 +275,16 @@ const CyberpunkEventInterface: React.FC = () => {
                   }}
                 >
                   <div
-                    className="w-[900px] h-[600px] bg-black border-4 shadow-lg flex p-6 gap-6"
+                    className={`w-[900px] h-[600px] bg-black border-4 shadow-lg flex p-6 gap-6 ${isActive ? 'cursor-pointer' : 'cursor-default'}`}
                     style={{
                       borderColor: '#22c55e',
                       boxShadow: isActive ? '0 0 30px #22c55e' : '0 0 10px rgba(34,197,94,0.5)',
                     }}
+                    onClick={() => { if (isActive) openLinktree(); }}
+                    role={isActive ? 'button' : undefined}
+                    tabIndex={isActive ? 0 : -1}
+                    onKeyDown={(e) => { if (isActive && (e.key === 'Enter' || e.key === ' ')) openLinktree(); }}
+                    title={isActive ? 'Open Linktree' : undefined}
                   >
                     {/* Left side: poster & meta */}
                     <div className="flex flex-col items-center w-1/2">
