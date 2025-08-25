@@ -10,12 +10,22 @@ type SponsorsWheelProps = {
   speed?: number; // radians per second
   y?: number; // vertical offset
   brightness?: number; // emissive intensity for logos
+  centerLogo?: string; // optional center logo image path
+  centerSize?: [number, number]; // width, height of center plane
+  centerBrightness?: number; // emissive intensity for center logo
+  interleaveLogo?: string; // optional logo placed between sponsors on an inner ring
+  interleaveRadiusFactor?: number; // inner ring radius factor relative to radius
+  interleaveSize?: [number, number];
+  interleaveBrightness?: number;
 };
 
-const SponsorsWheel: React.FC<SponsorsWheelProps> = ({ logos, radius = 8, speed = 0.12, y = 1.9, brightness = 1.2 }) => {
+const SponsorsWheel: React.FC<SponsorsWheelProps> = ({ logos, radius = 8, speed = 0.12, y = 1.9, brightness = 1.2, centerLogo, centerSize = [3, 3], centerBrightness = 1.4, interleaveLogo, interleaveRadiusFactor = 0.82, interleaveSize = [2.4, 2.4], interleaveBrightness = 1.3 }) => {
   const navigate = useNavigate();
   const textures = useLoader(TextureLoader, logos);
+  const centerTexture = centerLogo ? useLoader(TextureLoader, centerLogo) : null;
+  const interleaveTexture = interleaveLogo ? useLoader(TextureLoader, interleaveLogo) : null;
   const groupRef = useRef<THREE.Group | null>(null);
+  const centerRef = useRef<THREE.Mesh | null>(null);
   const [viewportWidth, setViewportWidth] = useState<number>(() => (typeof window !== 'undefined' ? window.innerWidth : 1024));
 
   // Track viewport width for responsive radius
@@ -41,7 +51,15 @@ const SponsorsWheel: React.FC<SponsorsWheelProps> = ({ logos, radius = 8, speed 
         (t as any).needsUpdate = true;
       }
     });
-  }, [textures]);
+    if (centerTexture) {
+      (centerTexture as any).encoding = (THREE as any).sRGBEncoding ?? (THREE as any).SRGBColorSpace ?? (THREE as any).sRGBEncoding;
+      (centerTexture as any).needsUpdate = true;
+    }
+    if (interleaveTexture) {
+      (interleaveTexture as any).encoding = (THREE as any).sRGBEncoding ?? (THREE as any).SRGBColorSpace ?? (THREE as any).sRGBEncoding;
+      (interleaveTexture as any).needsUpdate = true;
+    }
+  }, [textures, centerTexture, interleaveTexture]);
 
   const items = useMemo(() => {
     const n = logos.length || 1;
@@ -54,8 +72,23 @@ const SponsorsWheel: React.FC<SponsorsWheelProps> = ({ logos, radius = 8, speed 
     });
   }, [logos.length, effectiveRadius]);
 
+  const interleaveItems = useMemo(() => {
+    if (!interleaveTexture) return [] as { x: number; z: number; rotY: number; idx: number }[];
+    const n = logos.length || 1;
+    const halfStep = Math.PI * 2 / n / 2; // half-angle between sponsors
+    const innerRadius = effectiveRadius * interleaveRadiusFactor;
+    return Array.from({ length: n }).map((_, i) => {
+      const theta = (i / n) * Math.PI * 2 + halfStep;
+      const x = Math.cos(theta) * innerRadius;
+      const z = Math.sin(theta) * innerRadius;
+      const rotY = -theta + Math.PI / 2;
+      return { x, z, rotY, idx: i };
+    });
+  }, [logos.length, effectiveRadius, interleaveTexture, interleaveRadiusFactor]);
+
   useFrame((_, delta) => {
     if (groupRef.current) groupRef.current.rotation.y += speed * delta;
+    if (centerRef.current) centerRef.current.rotation.y += speed * 0.15 * delta;
   });
 
   return (
@@ -63,6 +96,21 @@ const SponsorsWheel: React.FC<SponsorsWheelProps> = ({ logos, radius = 8, speed 
       {/* subtle fill light so logos are readable */}
       <ambientLight intensity={0.6} />
       <directionalLight position={[5, 10, 7]} intensity={1.0} />
+
+      {/* Optional center ELICIT logo */}
+      {centerTexture && (
+        <mesh ref={centerRef} position={[0, 0, 0.001]}>
+          <planeGeometry args={centerSize} />
+          <meshStandardMaterial
+            map={centerTexture}
+            transparent
+            side={THREE.DoubleSide}
+            emissiveMap={centerTexture}
+            emissive={new THREE.Color(0xffffff)}
+            emissiveIntensity={centerBrightness}
+          />
+        </mesh>
+      )}
 
       {items.map((it) => (
         <mesh
@@ -82,6 +130,25 @@ const SponsorsWheel: React.FC<SponsorsWheelProps> = ({ logos, radius = 8, speed 
             emissiveMap={textures[it.idx]}
             emissive={new THREE.Color(0xffffff)}
             emissiveIntensity={brightness}
+          />
+        </mesh>
+      ))}
+
+      {/* Interleaved inner ring with ELICIT logo */}
+      {interleaveTexture && interleaveItems.map((it) => (
+        <mesh
+          key={`interleave-${it.idx}`}
+          position={[it.x, 0, it.z]}
+          rotation={[0, it.rotY, 0]}
+        >
+          <planeGeometry args={interleaveSize} />
+          <meshStandardMaterial
+            map={interleaveTexture}
+            transparent
+            side={THREE.DoubleSide}
+            emissiveMap={interleaveTexture}
+            emissive={new THREE.Color(0xffffff)}
+            emissiveIntensity={interleaveBrightness}
           />
         </mesh>
       ))}

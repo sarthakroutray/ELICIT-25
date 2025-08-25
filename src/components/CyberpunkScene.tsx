@@ -8,7 +8,12 @@ interface CyberpunkSceneProps {
   logoZ?: number;
 }
 
+<<<<<<< HEAD
+const CyberpunkScene: React.FC<CyberpunkSceneProps> = ({ mousePosition }) => {
+  const SHOW_TOWER = false;
+=======
 const CyberpunkScene: React.FC<CyberpunkSceneProps> = ({ mousePosition, logoZ = 0 }) => {
+>>>>>>> 12aba87daa8cd0099b0fba4d26057c1e0c0b7e7e
   const gridRef = useRef<THREE.Group>(null);
   const robotsRef = useRef<THREE.Group>(null);
   const centralTowerRef = useRef<THREE.Group>(null);
@@ -166,6 +171,34 @@ const CyberpunkScene: React.FC<CyberpunkSceneProps> = ({ mousePosition, logoZ = 
         ))}
       </group>
       
+<<<<<<< HEAD
+      {/* Central Tower (disabled) */}
+      {SHOW_TOWER && (
+        <group ref={centralTowerRef} position={[0, 0, 0]}>
+          <Cylinder args={[2, 2, 8]} position={[0, 0, 0]}>
+            <meshStandardMaterial color="#222" metalness={0.9} roughness={0.1} />
+          </Cylinder>
+          {[...Array(6)].map((_, i) => (
+            <Sphere key={i} args={[0.2]} position={[
+              Math.cos(i * Math.PI / 3) * 2.2,
+              4 + Math.sin(i * 0.5) * 2,
+              Math.sin(i * Math.PI / 3) * 2.2
+            ]}>
+              <meshStandardMaterial color="#00ff41" emissive="#00ff41" emissiveIntensity={3} />
+            </Sphere>
+          ))}
+          {[...Array(4)].map((_, i) => (
+            <Box key={i} args={[0.1, 0.1, 4]} position={[
+              Math.cos(i * Math.PI / 2) * 3,
+              2,
+              Math.sin(i * Math.PI / 2) * 3
+            ]} rotation={[0, i * Math.PI / 2, 0]}>
+              <meshStandardMaterial color="#ff0040" emissive="#ff0040" emissiveIntensity={2} transparent opacity={0.7} />
+            </Box>
+          ))}
+        </group>
+      )}
+=======
       {/* Central ELICIT Logo (depth-controllable) */}
       <group ref={logoRef} position={[0, 2.5, logoZ]}>
         <mesh>
@@ -212,6 +245,7 @@ const CyberpunkScene: React.FC<CyberpunkSceneProps> = ({ mousePosition, logoZ = 
           </Box>
         ))}
       </group>
+>>>>>>> 12aba87daa8cd0099b0fba4d26057c1e0c0b7e7e
     </group>
   );
 };
