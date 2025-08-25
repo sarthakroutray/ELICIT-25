@@ -35,7 +35,18 @@ const CyberpunkEventInterface: React.FC = () => {
   }, []);
 
   const POSTER_FALLBACK = '/events/frames/Defuse.png';
-  const eventCards = [
+  interface EventCard {
+    title: string;
+    description: string;
+    date?: string;
+    time?: string;
+    venue?: string;
+    prize?: string;
+    organizer?: string;
+    contact?: string;
+    poster: string;
+  }
+  const eventCards: EventCard[] = [
     {
       title: "Keyboard Warriors",
       description: "Your fingers have survived countless assignments. But are they fast enough to win? Face off in a furiously competitive, three-round showdown to be crowned the fastest typist on campus. Let your fingers fly!",
@@ -75,14 +86,6 @@ const CyberpunkEventInterface: React.FC = () => {
       time: "02:00 PM",
       venue: "Gallery Wing",
       poster: "/events/frames/hacks10.0.png",
-    },
-    {
-      title: "PC Building Tournament",
-      description: "",
-      date: "12th-13th Sept 2025",
-      venue: "AB3 001",
-      prize: "35K",
-      poster: "/events/frames/pcbuilding.png",
     },
   ];
 
@@ -195,7 +198,7 @@ const CyberpunkEventInterface: React.FC = () => {
                   }}
                 >
                   <div
-                    className={`w-[310px] h-[480px] bg-black border-2 border-green-400 shadow-lg flex flex-col p-4 rounded-md overflow-hidden ${isActive ? 'cursor-pointer' : 'cursor-default'}`}
+                    className={`w-[310px] h-[530px] bg-black border-2 border-green-400 shadow-lg flex flex-col p-4 rounded-md overflow-hidden relative pb-12 ${isActive ? 'cursor-pointer' : 'cursor-default'}`}
                     onClick={() => {
                       if (isActive && !isDragging && Math.abs(dragDX) < 8) openLinktree();
                     }}
@@ -225,8 +228,8 @@ const CyberpunkEventInterface: React.FC = () => {
                       <p className="pt-1 text-[10px] tracking-widest text-green-500/70">CARD {i + 1} / {eventCards.length}</p>
                     </div>
                     {/* CTA: Click to register */}
-                    <div className="mt-3 text-center select-none">
-                      <span className="inline-block px-3 py-1 border border-pink-500/70 text-pink-300 rounded-md text-[10px] tracking-widest shadow-[0_0_8px_rgba(236,72,153,0.6)]">
+                    <div className="absolute bottom-3 left-1/2 -translate-x-1/2 z-10 text-center select-none">
+                      <span className="inline-block px-3 py-1 border border-pink-500/70 text-pink-300 rounded-md text-[10px] tracking-widest shadow-[0_0_8px_rgba(236,72,153,0.6)] bg-black/60 backdrop-blur-sm">
                         CLICK TO REGISTER
                       </span>
                     </div>
