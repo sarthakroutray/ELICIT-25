@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { Phone } from "lucide-react";
 import DigitalRain from "./DigitalRain";
-import DarkMap from "./DarkMap";
 
 
 const GOOGLE_MAP_URL = 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3559.8771334119424!2d75.56265401189974!3d26.843859962947285!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x396c4850e05bee9b%3A0x1b8d67402d4eb863!2sManipal%20University%20Jaipur!5e0!3m2!1sen!2sin!4v1756131010590!5m2!1sen!2sin';
