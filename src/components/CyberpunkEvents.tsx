@@ -11,11 +11,10 @@ const CyberpunkEventInterface: React.FC = () => {
   const [dragStartX, setDragStartX] = useState<number | null>(null);
   const [dragDX, setDragDX] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
-  // Linktree destination (hardcoded here per request)
-  const LINKTREE_URL = 'https://linktr.ee/ROAD_TO_ELICIT_25'; // TODO: replace with your actual Linktree URL
-  const openLinktree = () => {
-    if (!LINKTREE_URL) return;
-    window.open(LINKTREE_URL, '_blank', 'noopener,noreferrer');
+  // Open registration URL for a specific event
+  const openRegister = (url?: string) => {
+    if (!url) return;
+    window.open(url, '_blank', 'noopener,noreferrer');
   };
 
   // If route provides an id param, focus that card on mount
@@ -45,6 +44,7 @@ const CyberpunkEventInterface: React.FC = () => {
     organizer?: string;
     contact?: string;
     poster: string;
+  registerUrl?: string; // Event-specific Google Form or registration link
   }
   const eventCards: EventCard[] = [
     {
@@ -55,7 +55,8 @@ const CyberpunkEventInterface: React.FC = () => {
       venue: "Elicit Chowk",
       prize: "5K",
       organizer: "ACM MUJ",
-      poster: "/events/frames/keyboard.png",
+  poster: "/events/frames/keyboard.png",
+  registerUrl: "/register", // TODO: replace with Google Form URL
     },
     {
       title: "FUTSAL",
@@ -63,14 +64,16 @@ const CyberpunkEventInterface: React.FC = () => {
       date: "4th Sept 2025",
       time: "4:00pm",
       venue: "Elicit Chowk",
-      poster: "/events/frames/futsal.png",
+  poster: "/events/frames/futsal.png",
+  registerUrl: "https://docs.google.com/forms/d/e/1FAIpQLSfoVZt0oTO74JTYMOzrqjxz2o5ChIVVTJW5lMmQ13MrF4Yf-Q/viewform", // TODO: replace with Google Form URL
     },
     {
       title: "Defuse 2.0",
       description: "A high-tension test of teamwork. One player is the 'Brains' with the puzzles, the other is the 'Hands' with the wire cutters. Your only connection is a walkie-talkie. In a race against time, clear communication is everything. Can your duo stay cool and cut the right wire?",
       date: "10th Sept 2025",
       venue: "Main Chowk",
-      poster: "/events/frames/defuse.png",
+  poster: "/events/frames/defuse.png",
+  registerUrl: "/register", // TODO: replace with Google Form URL
     },
     {
       title: "Final Destination",
@@ -78,14 +81,16 @@ const CyberpunkEventInterface: React.FC = () => {
       date: "6th Sept 2025",
       time: "10:30 AM",
       venue: "AB2 Lobby",
-      poster: "/events/frames/fd.png",
+  poster: "/events/frames/fd.png",
+  registerUrl: "https://docs.google.com/forms/d/e/1FAIpQLSc8rbmttZALn4JwGcM1VTI40KfYqvB_HbxKTBJv0Ke2NFX2uQ/viewform", // TODO: replace with Google Form URL
     },
     {
       title: "Hacks 10.0",
-      description: "Thirty-six hours. One team. Endless possibilities. Welcome to Hacks, the 36-hour offline hackathon where ideas are forged into reality. You'll take your concept from an initial pitch to a working prototype through three intense rounds before the final presentation to the judges. Are you ready to build something incredible?",      date: "17th Sept 2025",
+  description: "Thirty-six hours. One team. Endless possibilities. Welcome to Hacks, the 36-hour offline hackathon where ideas are forged into reality. You'll take your concept from an initial pitch to a working prototype through three intense rounds before the final presentation to the judges. Are you ready to build something incredible?",      date: "17th Sept 2025",
       time: "02:00 PM",
       venue: "AB1",
-      poster: "/events/frames/hacks10.0.png",
+  poster: "/events/frames/hacks10.0.png",
+  registerUrl: "https://docs.google.com/forms/d/e/1FAIpQLSdYYACaGPrY36eIwcMM-FBYs9UnpHH3NNJOPbwMynuidt38RQ/viewform", // TODO: replace with Google Form URL
     },
   ];
 
@@ -200,12 +205,12 @@ const CyberpunkEventInterface: React.FC = () => {
                   <div
                     className={`w-[310px] h-[530px] bg-black border-2 border-green-400 shadow-lg flex flex-col p-4 rounded-md overflow-hidden relative pb-12 ${isActive ? 'cursor-pointer' : 'cursor-default'}`}
                     onClick={() => {
-                      if (isActive && !isDragging && Math.abs(dragDX) < 8) openLinktree();
+                      if (isActive && !isDragging && Math.abs(dragDX) < 8) openRegister(event.registerUrl);
                     }}
                     role={isActive ? 'button' : undefined}
                     tabIndex={isActive ? 0 : -1}
-                    onKeyDown={(e) => { if (isActive && (e.key === 'Enter' || e.key === ' ')) openLinktree(); }}
-                    title={isActive ? 'Click to register' : undefined}
+                    onKeyDown={(e) => { if (isActive && (e.key === 'Enter' || e.key === ' ')) openRegister(event.registerUrl); }}
+                    title={isActive ? (event.registerUrl ? 'Click to register' : 'Registration link unavailable') : undefined}
                   
                     style={{ boxShadow: isActive ? '0 0 22px #22c55e88' : '0 0 10px #22c55e55' }}>
                     <div className="w-full mb-3 flex justify-center">
@@ -229,9 +234,21 @@ const CyberpunkEventInterface: React.FC = () => {
                     </div>
                     {/* CTA: Click to register */}
                     <div className="absolute bottom-3 left-1/2 -translate-x-1/2 z-10 text-center select-none">
-                      <span className="inline-block px-3 py-1 border border-pink-500/70 text-pink-300 rounded-md text-[10px] tracking-widest shadow-[0_0_8px_rgba(236,72,153,0.6)] bg-black/60 backdrop-blur-sm">
-                        CLICK TO REGISTER
-                      </span>
+                      {event.registerUrl ? (
+                        <a
+                          href={event.registerUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          onClick={(e) => e.stopPropagation()}
+                          className="inline-block px-3 py-1 border border-pink-500/70 text-pink-300 rounded-md text-[10px] tracking-widest shadow-[0_0_8px_rgba(236,72,153,0.6)] bg-black/60 backdrop-blur-sm hover:bg-black/80"
+                        >
+                          CLICK TO REGISTER
+                        </a>
+                      ) : (
+                        <span className="inline-block px-3 py-1 border border-neutral-600 text-neutral-400 rounded-md text-[10px] tracking-widest bg-black/60 cursor-not-allowed">
+                          REGISTRATION CLOSED
+                        </span>
+                      )}
                     </div>
                   </div>
                 </div>
@@ -275,11 +292,11 @@ const CyberpunkEventInterface: React.FC = () => {
                       borderColor: '#22c55e',
                       boxShadow: isActive ? '0 0 30px #22c55e' : '0 0 10px rgba(34,197,94,0.5)',
                     }}
-                    onClick={() => { if (isActive) openLinktree(); }}
+                    onClick={() => { if (isActive) openRegister(event.registerUrl); }}
                     role={isActive ? 'button' : undefined}
                     tabIndex={isActive ? 0 : -1}
-                    onKeyDown={(e) => { if (isActive && (e.key === 'Enter' || e.key === ' ')) openLinktree(); }}
-                    title={isActive ? 'Click to register' : undefined}
+                    onKeyDown={(e) => { if (isActive && (e.key === 'Enter' || e.key === ' ')) openRegister(event.registerUrl); }}
+                    title={isActive ? (event.registerUrl ? 'Click to register' : 'Registration link unavailable') : undefined}
                   >
                     {/* Left side: poster & meta */}
                     <div className="flex flex-col items-center w-1/2">
@@ -306,11 +323,23 @@ const CyberpunkEventInterface: React.FC = () => {
                         {event.prize && <p><span className="text-pink-400">🏆 Prize Pool:</span> {event.prize}</p>}
                         <p className="text-green-400 text-xs font-mono pt-4">CARD {i + 1} / {eventCards.length}</p>
                       </div>
-                      {/* CTA: Click to register */}
+                      {/* CTA for desktop: explicit link */}
                       <div className="mt-6 select-none">
-                        <span className="inline-block px-4 py-2 border border-pink-500/70 text-pink-300 rounded-md text-xs tracking-widest shadow-[0_0_10px_rgba(236,72,153,0.6)]">
-                          CLICK TO REGISTER
-                        </span>
+                        {event.registerUrl ? (
+                          <a
+                            href={event.registerUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            onClick={(e) => e.stopPropagation()}
+                            className="inline-block px-4 py-2 border border-pink-500/70 text-pink-300 rounded-md text-xs tracking-widest shadow-[0_0_10px_rgba(236,72,153,0.6)] hover:bg-black/40"
+                          >
+                            CLICK TO REGISTER
+                          </a>
+                        ) : (
+                          <span className="inline-block px-4 py-2 border border-neutral-600 text-neutral-400 rounded-md text-xs tracking-widest cursor-not-allowed">
+                            REGISTRATION CLOSED
+                          </span>
+                        )}
                       </div>
                     </div>
                   </div>

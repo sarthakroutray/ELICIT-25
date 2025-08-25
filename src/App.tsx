@@ -11,6 +11,7 @@ import Navbar from './components/Navbar';
 import Contact from './components/Contact';
 import Register from './components/Register';
 import ComingSoon from './components/ComingSoon';
+import TeamPage from './components/TeamPage';
 import './styles/glitch.css';
 
 
@@ -36,6 +37,7 @@ function App() {
   <Route path="/sponsors" element={<SectionPage><ComingSoon title="SPONSORS – COMING SOON" note="We\'re finalizing our partners." /></SectionPage>} />
   <Route path="/contact" element={<SectionPage><Contact /></SectionPage>} />
   <Route path="/register" element={<SectionPage><Register /></SectionPage>} />
+  <Route path="/team" element={<SectionPage><TeamPage /></SectionPage>} />
       <Route path="*" element={<SectionPage><div className="text-center text-white py-32 font-mono">
         <h1 className="text-4xl mb-4">404</h1>
         <p className="mb-6">Route not found.</p>

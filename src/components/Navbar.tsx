@@ -18,6 +18,7 @@ const Navbar: React.FC = () => {
         <nav className="hidden md:flex items-center gap-8 pr-20">
           <Link to="/events" className="text-cyan-300 hover:text-cyan-100" style={{ fontFamily: 'Orbitron, monospace' }}>EVENTS</Link>
           <Link to="/speakers" className="text-cyan-300 hover:text-cyan-100" style={{ fontFamily: 'Orbitron, monospace' }}>SPEAKERS</Link>
+          <Link to="/team" className="text-cyan-300 hover:text-cyan-100" style={{ fontFamily: 'Orbitron, monospace' }}>TEAM</Link>
           <Link to="/about" className="text-cyan-300 hover:text-cyan-100" style={{ fontFamily: 'Orbitron, monospace' }}>ABOUT</Link>
           <Link to="/contact" className="text-cyan-300 hover:text-cyan-100" style={{ fontFamily: 'Orbitron, monospace' }}>CONTACT</Link>
           <Link to="/sponsors" className="text-cyan-300 hover:text-cyan-100" style={{ fontFamily: 'Orbitron, monospace' }}>SPONSORS</Link>
@@ -60,6 +61,9 @@ const Navbar: React.FC = () => {
               </Link>
               <Link to="/speakers" onClick={() => setIsOpen(false)} className="px-3 py-2 rounded-md text-cyan-300 hover:text-white hover:bg-cyan-900/30 transition-all">
                 <span className="opacity-60 mr-2">&gt;</span> SPEAKERS
+              </Link>
+              <Link to="/team" onClick={() => setIsOpen(false)} className="px-3 py-2 rounded-md text-cyan-300 hover:text-white hover:bg-cyan-900/30 transition-all">
+                <span className="opacity-60 mr-2">&gt;</span> TEAM
               </Link>
               <Link to="/about" onClick={() => setIsOpen(false)} className="px-3 py-2 rounded-md text-cyan-300 hover:text-white hover:bg-cyan-900/30 transition-all">
                 <span className="opacity-60 mr-2">&gt;</span> ABOUT
