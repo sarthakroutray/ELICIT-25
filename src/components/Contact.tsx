@@ -5,9 +5,9 @@ import DigitalRain from "./DigitalRain";
 import DarkMap from "./DarkMap";
 
 const conveners = [
-  { name: "Agam Bhasin", role: "Head Convener", phone: "+91-9000000001" },
-  { name: "..", role: "Convener", phone: "+91-9000000002" },
-  { name: "..", role: "Convener", phone: "+91-9000000003" },
+  { name: "Agam Bhasin", role: "Head Convener", phone: "+91-8601444494" },
+  { name: "Parthav Shah", role: "Convener", phone: "+91-9082691836" },
+  { name: "Pranav Deshpande", role: "Convener", phone: "+91-7758089319" },
 ];
 
 const Contact: React.FC = () => {

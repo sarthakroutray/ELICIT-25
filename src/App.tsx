@@ -3,15 +3,14 @@ import { Routes, Route } from 'react-router-dom';
 import CyberpunkLanding from './components/CyberpunkLanding';
 import AboutSection from './components/AboutSection';
 import EventsGrid from './components/EventsGrid';
-import Speakers from './components/Speakers';
 import Carousel from './components/Carousel';
 import CyberpunkEventInterface from './components/CyberpunkEvents';
 // PreviousSponsors is now composed inside SponsorsPage
-import SponsorsPage from './components/SponsorsPage';
 import Footer from './components/Footer';
 import Navbar from './components/Navbar';
 import Contact from './components/Contact';
 import Register from './components/Register';
+import ComingSoon from './components/ComingSoon';
 import './styles/glitch.css';
 
 
@@ -32,9 +31,9 @@ function App() {
           <Route path="/events" element={<SectionPage><EventsGrid /></SectionPage>} />
           {/* Route for individual event view / carousel focus */}
           <Route path="/events/:id" element={<SectionPage><CyberpunkEventInterface /></SectionPage>} />
-      <Route path="/speakers" element={<SectionPage><Speakers /></SectionPage>} />
+  <Route path="/speakers" element={<SectionPage><ComingSoon title="SPEAKERS – COMING SOON" note="Stay tuned for the speaker lineup." /></SectionPage>} />
   <Route path="/carousel" element={<SectionPage><Carousel /></SectionPage>} />
-  <Route path="/sponsors" element={<SectionPage><SponsorsPage /></SectionPage>} />
+  <Route path="/sponsors" element={<SectionPage><ComingSoon title="SPONSORS – COMING SOON" note="We\'re finalizing our partners." /></SectionPage>} />
   <Route path="/contact" element={<SectionPage><Contact /></SectionPage>} />
   <Route path="/register" element={<SectionPage><Register /></SectionPage>} />
       <Route path="*" element={<SectionPage><div className="text-center text-white py-32 font-mono">

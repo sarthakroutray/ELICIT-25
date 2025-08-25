@@ -8,7 +8,6 @@ interface SocialLinksProps {
 
 const SocialLinks: React.FC<SocialLinksProps> = ({ className = '' }) => {
   const socialLinks = [
-    { icon: Github, href: '#', label: 'GitHub' },
     { icon: Twitter, href: '#', label: 'Twitter' },
     { icon: Instagram, href: '#', label: 'Instagram' },
     { icon: Linkedin, href: '#', label: 'LinkedIn' },

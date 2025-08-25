@@ -28,21 +28,24 @@ const AboutSection: React.FC = () => {
         <div className="uppercase text-sm tracking-widest text-cyan-400 mr-44 font-mono drop-shadow-[0_0_6px_#c77dff] mb-2">
           SYSTEM CORE[03]
         </div>
-        <h1
-          className="text-4xl md:text-5xl lg:text-6xl mr-44 font-bold text-yellow-300 mb-6 tracking-wider"
-          style={{
-            fontFamily: "Orbitron, monospace",
-            textShadow: `
-              -2px -2px 0 #00000013,
-              2px -2px 0 #0000000d,
-              -2px 2px 0 #00000009,
-              2px 2px 0 #0000003a,
-            `,
-            filter: "drop-shadow(4px 4px 8px rgba(0,0,0,0.9))",
-          }}
-        >
-          ABOUT
-        </h1>
+    <h1 
+      className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 tracking-wider text-center"
+            style={{
+              fontFamily: 'Orbitron, monospace',
+              textShadow: `
+                -2px -2px 0 #000,
+                2px -2px 0 #000,
+                -2px 2px 0 #000,
+                2px 2px 0 #000,
+                0 0 10px #d7e60eff,
+                0 0 20px #ffff00ff,
+                0 0 30px #d4d804ff
+              `,
+              filter: 'drop-shadow(4px 4px 8px rgba(0,0,0,0.9))',
+            }}
+          >
+            ABOUT
+          </h1>
         <div className="uppercase mr-44 mb-10 text-xs tracking-widest text-white font-mono mt-0 drop-shadow-[0_0_6px_#e879f9]">
           MAIN SYSTEM POWERS
         </div>
@@ -94,7 +97,7 @@ const AboutSection: React.FC = () => {
                 letterSpacing: "0.08em",
               }}
             >
-              10 YEARS OF ACM!
+              10 YEARS OF MUJ ACM!
             </p>
 
             <div className="flex justify-center">
@@ -171,9 +174,15 @@ const AboutSection: React.FC = () => {
                     {[1, 2, 3].concat([1, 2, 3]).map((i, idx) => (
                       <img
                         key={`top-${i}-${idx}`}
-                        src={`/carousel/img${i}.png`}
+                        src={`/About/carousel/img${i}.png`}
                         alt={`carousel top ${i}`}
                         className="w-60 h-40 object-cover rounded-lg"
+                        onError={(e) => {
+                          const img = e.currentTarget as HTMLImageElement;
+                          if (img.src.endsWith(`/About/carousel/img${i}.png`)) {
+                            img.src = '/About/elicit.png';
+                          }
+                        }}
                       />
                     ))}
                   </motion.div>
@@ -192,9 +201,15 @@ const AboutSection: React.FC = () => {
                     {[4, 5, 6].concat([4, 5, 6]).map((i, idx) => (
                       <img
                         key={`bottom-${i}-${idx}`}
-                        src={`/carousel/img${i}.png`}
+                        src={`/About/carousel/img${i}.png`}
                         alt={`carousel bottom ${i}`}
                         className="w-60 h-40 object-cover rounded-lg"
+                        onError={(e) => {
+                          const img = e.currentTarget as HTMLImageElement;
+                          if (img.src.endsWith(`/About/carousel/img${i}.png`)) {
+                            img.src = '/About/elicit.png';
+                          }
+                        }}
                       />
                     ))}
                   </motion.div>
@@ -368,10 +383,16 @@ const AboutSection: React.FC = () => {
       {[1,2,3,4,5,6,1,2,3,4,5,6].map((i, idx) => (
         <img
           key={i+"-"+idx}
-          src={`/carousel/img${i}.png`}
+          src={`/About/carousel/img${i}.png`}
           alt={`carousel mobile ${i}`}
           className="h-32 w-44 flex-shrink-0 rounded-lg object-cover border border-cyan-600 bg-black/30"
           style={{ minWidth: '176px' }}
+          onError={(e) => {
+            const img = e.currentTarget as HTMLImageElement;
+            if (img.src.endsWith(`/About/carousel/img${i}.png`)) {
+              img.src = '/About/elicit.png';
+            }
+          }}
         />
       ))}
     </motion.div>

@@ -1,4 +1,4 @@
-import React, { useEffect, useState, Suspense, lazy } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls, PerspectiveCamera } from '@react-three/drei';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -14,7 +14,7 @@ import { Monitor, Zap, Users, Calendar, Info, Phone } from 'lucide-react';
 import { useNavigate, Link } from 'react-router-dom';
 const MotionLink = motion(Link);
 
-const SponsorsWheel = lazy(() => import('./SponsorsWheel'));
+// const SponsorsWheel = lazy(() => import('./SponsorsWheel'));
 
 interface CyberpunkLandingProps {
   // Callbacks removed in favor of router navigation; keep optional for backwards compatibility
@@ -34,8 +34,8 @@ const CyberpunkLanding: React.FC<CyberpunkLandingProps> = ({ onSpeakersClick, on
   // === Manual layout controls (tweak values as needed) ===
   const COUNTDOWN_OFFSET = { top: 32, right: 36 }; // px from viewport edges
   // ======================================================
-  const wheelY = 4.4;
-  const wheelBrightness = 1;
+  // const wheelY = 4.4; // SponsorsWheel disabled temporarily
+  // const wheelBrightness = 1; // SponsorsWheel disabled temporarily
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -235,21 +235,8 @@ const CyberpunkLanding: React.FC<CyberpunkLandingProps> = ({ onSpeakersClick, on
           maxPolarAngle={Math.PI / 2}
           minPolarAngle={Math.PI / 4}
         />
-        <CyberpunkScene mousePosition={mousePosition} />
-        <Suspense fallback={null}>
-          <SponsorsWheel logos={[
-            '/sponsors/cisco.png',
-            '/sponsors/coding_blocks.jpg',
-            '/sponsors/zebronics.jpg',
-            '/sponsors/InterviewCake.png',
-            '/sponsors/GeeksforGeeks.svg.png',
-            '/sponsors/Lenovo.png',
-            '/sponsors/ONGC_Logo.svg.png',
-            '/sponsors/snapchat.webp',
-            '/logos/3.png',
-            '/logos/4.png',
-          ]} radius={8.7} speed={0.1} y={wheelY} brightness={wheelBrightness} />
-        </Suspense>
+  <CyberpunkScene mousePosition={mousePosition} />
+  {/* SponsorsWheel disabled temporarily */}
       </Canvas>
 
       {/* Procedural Film Grain (SVG turbulence) */}
@@ -328,7 +315,7 @@ const CyberpunkLanding: React.FC<CyberpunkLandingProps> = ({ onSpeakersClick, on
             {skipIntro ? (
               <>
                 <GlitchText
-                  text="TITLESPONSORXELICIT'25"
+                  text="VIVO X ELICIT'25"
                   className="main-corruption-heading-responsive text-2xl md:text-4xl lg:text-5xl font-mono font-bold text-[#00ff41] mb-10"
                   style={{
                     textShadow: `
