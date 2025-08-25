@@ -36,7 +36,7 @@ const TeamPage: React.FC = () => {
   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 place-items-center justify-items-center gap-8 sm:gap-10 lg:gap-16 max-w-6xl mx-auto">
 
         <div className="flex justify-center">
-          <div className="w-[90vw] max-w-[360px]">
+          <div className="w-[90vw] max-w-[240px]">
             <ProfileCard
           name="Agam Bhasin"
           title="Head Convener"
@@ -50,28 +50,28 @@ const TeamPage: React.FC = () => {
           </div>
         </div>
         <div className="flex justify-center">
-          <div className="w-[90vw] max-w-[360px]">
+          <div className="w-[90vw] max-w-[250px]">
             <ProfileCard
           name="Pranav Deshpande"
           title="Convener"
           handle="pranavD"
           status="Online"
           contactText="Contact Me"
-          avatarUrl="/avatars/speaker1.png"
+          avatarUrl="/speakers/speaker1.png"
           showUserInfo={true}
           enableTilt={true}
             />
           </div>
         </div>
         <div className="flex justify-center">
-          <div className="w-[90vw] max-w-[360px]">
+          <div className="w-[90vw] max-w-[240px]">
             <ProfileCard
           name="Charlie Davis"
           title="Coordinator"
           handle="charlieD"
           status="Busy"
           contactText="Ping Me"
-          avatarUrl="/avatars/charlie.jpg"
+          avatarUrl="/speakers/speaker1.png"
           showUserInfo={true}
           enableTilt={true}
             />
@@ -101,57 +101,57 @@ const TeamPage: React.FC = () => {
 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 place-items-center justify-items-center gap-8 sm:gap-10 lg:gap-16 max-w-6xl mx-auto">
 
 
-  <div className="flex justify-center">
-    <div className="w-[90vw] max-w-[360px]">
+          <div className="flex justify-center">
+            <div className="w-[90vw] max-w-[240px]">
       <ProfileCard
       name="Diana Prince"
       title="Executive 1"
       handle="dianaP"
       status="Online"
       contactText="Connect"
-      avatarUrl="/avatars/diana.jpg"
+      avatarUrl="/speakers/speaker1.png"
       showUserInfo={true}
       enableTilt={true}
       />
     </div>
   </div>
-  <div className="flex justify-center">
-    <div className="w-[90vw] max-w-[360px]">
+          <div className="flex justify-center">
+            <div className="w-[90vw] max-w-[240px]">
       <ProfileCard
       name="Ethan Hunt"
       title="Executive 2"
       handle="ethanH"
       status="Offline"
       contactText="Say Hi"
-      avatarUrl="/avatars/ethan.jpg"
+      avatarUrl="/speakers/speaker1.png"
       showUserInfo={true}
       enableTilt={true}
       />
     </div>
   </div>
-  <div className="flex justify-center">
-    <div className="w-[90vw] max-w-[360px]">
+          <div className="flex justify-center">
+            <div className="w-[90vw] max-w-[240px]">
       <ProfileCard
       name="Fiona Carter"
       title="Executive 3"
       handle="fionaC"
       status="Busy"
       contactText="Ping Me"
-      avatarUrl="/avatars/fiona.jpg"
+      avatarUrl="/speakers/speaker1.png"
       showUserInfo={true}
       enableTilt={true}
       />
     </div>
   </div>
-  <div className="flex justify-center">
-    <div className="w-[90vw] max-w-[360px]">
+          <div className="flex justify-center">
+            <div className="w-[90vw] max-w-[240px]">
       <ProfileCard
       name="George Miller"
       title="Executive 4"
       handle="georgeM"
       status="Available"
       contactText="Message"
-      avatarUrl="/avatars/george.jpg"
+      avatarUrl="/speakers/speaker1.png"
       showUserInfo={true}
       enableTilt={true}
       />
