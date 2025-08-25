@@ -1,71 +1,100 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { Phone } from 'lucide-react';
-import DigitalRain from './DigitalRain';
-import DarkMap from './DarkMap';
-
-const MAP_EMBED_URL =
-  'https://www.google.com/maps?q=Manipal+University+Jaipur&hl=en&z=16&output=embed';
+import React, { useState } from "react";
+import { motion } from "framer-motion";
+import { Phone } from "lucide-react";
+import DigitalRain from "./DigitalRain";
+import DarkMap from "./DarkMap";
 
 const conveners = [
-  { name: 'Agam Bhasin', role: 'Head Convener', phone: '+91-9000000001' },
-  { name: '..', role: 'Convener', phone: '+91-9000000002' },
-  { name: '..', role: 'Convener', phone: '+91-9000000003' },
+  { name: "Agam Bhasin", role: "Head Convener", phone: "+91-9000000001" },
+  { name: "..", role: "Convener", phone: "+91-9000000002" },
+  { name: "..", role: "Convener", phone: "+91-9000000003" },
 ];
 
 const Contact: React.FC = () => {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    university: "",
+    message: "",
+  });
+
+  const [status, setStatus] = useState("");
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setStatus("Submitting...");
+
+    try {
+      const res = await fetch("http://localhost:5000/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      if (res.ok) {
+        setStatus("✅ Message sent successfully!");
+        setFormData({ name: "", email: "", phone: "", university: "", message: "" });
+      } else {
+        setStatus("❌ Failed to send message. Try again.");
+      }
+    } catch (error) {
+      console.error(error);
+      setStatus("⚠️ Error connecting to server.");
+    }
+  };
+
   return (
     <div className="min-h-[55vh] bg-black text-white font-mono p-6 relative overflow-hidden">
       <DigitalRain />
       <div className="max-w-7xl mx-auto">
 
         {/* Title */}
-          <motion.div
-                    initial={{ opacity: 0, y: -50 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8 }}
-                    className="text-center mb-10"
-                  >
-                    {/* ID Text */}
-                    <div className="text-green-400 font-mono text-sm tracking-wider mb-4 opacity-60">
-                      [03] COMMUNICATION GRID
-                    </div>
-                    
-                    {/* Main Title */}
-                    <h1 
-                      className="text-4xl md:text-5xl lg:text-6xl font-bold text-blue mb-6 tracking-wider"
-                      style={{
-                        fontFamily: 'Orbitron, monospace',
-                        textShadow: `
-                          -2px -2px 0 #000,
-                          2px -2px 0 #000,
-                          -2px 2px 0 #000,
-                          2px 2px 0 #000,
-                          0 0 10px #22c55e,
-                          0 0 20px #22c55e,
-                          0 0 30px #22c55e
-                        `,
-                        filter: 'drop-shadow(4px 4px 8px rgba(0,0,0,0.9))',
-                      }}
-                    >
-                      CONTACT
-                    </h1>
-                    
-                    {/* Subtitle */}
-                    <div className="text-green-400 font-mono text-lg tracking-wider">
-                      SYSTEM CONNECT
-                    </div>
-                  </motion.div>
+        <motion.div
+          initial={{ opacity: 0, y: -50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="text-center mb-10"
+        >
+          <div className="text-green-400 font-mono text-sm tracking-wider mb-4 opacity-60">
+            [03] COMMUNICATION GRID
+          </div>
+          <h1
+            className="text-4xl md:text-5xl lg:text-6xl font-bold text-blue mb-6 tracking-wider"
+            style={{
+              fontFamily: "Orbitron, monospace",
+              textShadow: `
+                -2px -2px 0 #000,
+                2px -2px 0 #000,
+                -2px 2px 0 #000,
+                2px 2px 0 #000,
+                0 0 10px #22c55e,
+                0 0 20px #22c55e,
+                0 0 30px #22c55e
+              `,
+              filter: "drop-shadow(4px 4px 8px rgba(0,0,0,0.9))",
+            }}
+          >
+            CONTACT
+          </h1>
+          <div className="text-green-400 font-mono text-lg tracking-wider">
+            SYSTEM CONNECT
+          </div>
+        </motion.div>
+
         {/* Outer Wrapper */}
         <div
           className="max-w-7xl mx-auto my-8 p-8 rounded-3xl bg-gradient-to-br from-gray-900 to-black bg-black"
           style={{
-            border: "2px solid #c1447e", // main border
-            boxShadow: "0 0 0 4px rgba(193, 68, 126, 0.3)", // second border
-            backdropFilter: 'blur(20px)',
+            border: "2px solid #c1447e",
+            boxShadow: "0 0 0 4px rgba(193, 68, 126, 0.3)",
+            backdropFilter: "blur(20px)",
           }}
-                >
-
+        >
           {/* Grid: Map + Conveners */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
             {/* Left: Map */}
@@ -81,10 +110,9 @@ const Contact: React.FC = () => {
                 <h2
                   className="text-2xl font-extrabold text-center mb-5 text-pink-400"
                   style={{
-                    fontFamily: 'Orbitron, sans-serif',
-                    letterSpacing: '2px',
-                    textShadow: '0 0 8px #ec4899, 0 0 16px #ec4899',
-
+                    fontFamily: "Orbitron, sans-serif",
+                    letterSpacing: "2px",
+                    textShadow: "0 0 8px #ec4899, 0 0 16px #ec4899",
                   }}
                 >
                   CONVENERS
@@ -119,53 +147,74 @@ const Contact: React.FC = () => {
               <h2
                 className="text-2xl font-extrabold text-green-400 text-center mb-6"
                 style={{
-                  fontFamily: 'Orbitron, sans-serif',
-                  letterSpacing: '2px',
-                  textShadow: '0 0 8px #22c55e, 0 0 15px #22c55e',
+                  fontFamily: "Orbitron, sans-serif",
+                  letterSpacing: "2px",
+                  textShadow: "0 0 8px #22c55e, 0 0 15px #22c55e",
                 }}
               >
                 ANY QUERIES?
               </h2>
-              <form className="space-y-4 w-full">
+              <form className="space-y-4 w-full" onSubmit={handleSubmit}>
                 <input
                   type="text"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
                   placeholder="Name"
+                  className="w-full p-3 rounded-md bg-black/70 border border-pink-500/30 text-green-200 placeholder-green-400/50 focus:outline-none focus:ring-1 focus:ring-pink-500/60"
+                />
+                <input
+                  type="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  placeholder="Email"
                   className="w-full p-3 rounded-md bg-black/70 border border-pink-500/30 text-green-200 placeholder-green-400/50 focus:outline-none focus:ring-1 focus:ring-pink-500/60"
                 />
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <input
                     type="tel"
+                    name="phone"
+                    value={formData.phone}
+                    onChange={handleChange}
                     placeholder="Phone No."
                     className="flex-1 p-3 rounded-md bg-black/70 border border-pink-500/30 text-green-200 placeholder-green-400/50 focus:outline-none focus:ring-1 focus:ring-pink-500/60"
                   />
                   <input
                     type="text"
+                    name="university"
+                    value={formData.university}
+                    onChange={handleChange}
                     placeholder="University"
                     className="flex-1 p-3 rounded-md bg-black/70 border border-pink-500/30 text-green-200 placeholder-green-400/50 focus:outline-none focus:ring-1 focus:ring-pink-500/60"
                   />
                 </div>
                 <textarea
+                  name="message"
+                  value={formData.message}
+                  onChange={handleChange}
                   placeholder="Your Query"
                   rows={4}
                   className="w-full p-3 rounded-md bg-black/70 border border-pink-500/30 text-green-200 placeholder-green-400/50 focus:outline-none focus:ring-1 focus:ring-pink-500/60 resize-none"
                 />
                 <div className="flex justify-center">
-                <button
-                  type="submit"
-                  className="px-8 py-3 rounded-md font-bold text-black bg-gradient-to-r from-pink-500 via-yellow-400 to-pink-500 hover:opacity-90 transition-all shadow-[0_0_10px_#ec4899]"
-                >
-                  Submit
-                </button>
+                  <button
+                    type="submit"
+                    className="px-8 py-3 rounded-md font-bold text-black bg-gradient-to-r from-pink-500 via-yellow-400 to-pink-500 hover:opacity-90 transition-all shadow-[0_0_10px_#ec4899]"
+                  >
+                    Submit
+                  </button>
                 </div>
               </form>
+              {status && (
+                <p className="text-center mt-4 text-sm text-green-400">{status}</p>
+              )}
             </div>
           </div>
         </div>
-
       </div>
     </div>
   );
 };
 
 export default Contact;
-  
