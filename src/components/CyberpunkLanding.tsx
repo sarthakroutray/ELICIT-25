@@ -363,75 +363,7 @@ const CyberpunkLanding: React.FC<CyberpunkLandingProps> = ({ onSpeakersClick, on
                   </div>
                 </button>
               </>
-            ) : (
-              <AnimatePresence>
-                {isInitialized && (
-                  <motion.div
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ duration: 0.8, ease: 'easeOut' }}
-                  >
-                    <GlitchText
-                      text="SYSTEM CORRUPTION DETECTED"
-                      className="main-corruption-heading-responsive text-2xl md:text-4xl lg:text-5xl font-mono font-bold text-[#00ff41] mb-8"
-                      style={{
-                        textShadow: `
-                          -1px -1px 0 #000,
-                          1px -1px 0 #000,
-                          -1px 1px 0 #000,
-                          1px 1px 0 #000,
-                          0 0 5px #00ff41,
-                          0 0 10px #00ff41,
-                          2px 0 5px #ff1a1a
-                        `,
-                        filter: 'drop-shadow(2px 2px 4px rgba(0,0,0,0.8))',
-                      }}
-                    />
-
-                    <motion.div
-                      initial={{ opacity: 0, scale: 0.8 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      transition={{ delay: 0.8, duration: 0.6 }}
-                      className="mb-8"
-                    >
-                      <img
-                        src="/logo.png"
-                        alt="ELICIT FEST Logo"
-                        className="mx-auto w-32 h-32 md:w-40 md:h-40 lg:w-48 lg:h-48 object-contain"
-                        style={{
-                          filter: 'drop-shadow(0 0 20px #00ff41) drop-shadow(0 0 40px #ff0040)',
-                        }}
-                      />
-                    </motion.div>
-
-                    <motion.div
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 1.2 }}
-                    >
-                      <GlitchText
-                        text="ELICIT FEST INITIATED..."
-                        className="text-4xl md:text-4xl lg:text-5xl font-mono font-bold text-green-400 mb-12"
-                        style={{
-                          textShadow: `
-                            -2px -2px 0 #000,
-                            2px -2px 0 #000,
-                            -2px 2px 0 #000,
-                            2px 2px 0 #000,
-                            0 0 10px #00ff41,
-                            0 0 20px #00ff41,
-                            0 0 30px #00ff41,
-                            4px 4px 8px rgba(0,0,0,0.8)
-                          `,
-                          filter:
-                            'drop-shadow(4px 4px 8px rgba(0,0,0,0.9)) drop-shadow(0 0 15px #00ff41)',
-                        }}
-                      />
-                    </motion.div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            )}
+            ) : null}
           </div>
 
           {/* Nav Icons Section */}
