@@ -1,6 +1,6 @@
-                                                                                                                                                                                                              import React from "react";
-                                                                                                                                                                                                              import DigitalRain from "./DigitalRain"; // correct relative path
-                                                                                                                                                                                                              import ProfileCard from "./ProfileCard"; // correct relative path
+import React from "react";
+import DigitalRain from "./DigitalRain"; // correct relative path
+import ProfileCard from "./ProfileCard"; // correct relative path
 
 const TeamPage: React.FC = () => {
   return (
@@ -17,8 +17,8 @@ const TeamPage: React.FC = () => {
       </div>
 
       {/* Team content */}
-      <div className="relative z-10 px-8 py-16">
-      <h2 className="text-5xl font-bold text-center text-white-400 mb-12"
+      <div className="relative z-10 px-4 sm:px-6 md:px-8 py-12 md:py-16 max-w-7xl mx-auto">
+        <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-center text-white-400 mb-8 md:mb-12"
       style={{
               fontFamily: 'Orbitron, monospace',
               textShadow: `
@@ -33,29 +33,39 @@ const TeamPage: React.FC = () => {
               filter: 'drop-shadow(4px 4px 8px rgba(0,0,0,0.9))',
             }}
           >OUR TEAM</h2>
-<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-20 max-w-6xl mx-auto">
+  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 place-items-center justify-items-center gap-8 sm:gap-10 lg:gap-16 max-w-6xl mx-auto">
 
-        <ProfileCard
-          name="Alice Johnson"
-          title="Lead Organizer"
-          handle="aliceJ"
+        <div className="flex justify-center">
+          <div className="w-[90vw] max-w-[360px]">
+            <ProfileCard
+          name="Agam Bhasin"
+          title="Head Convener"
+          handle="agamB"
           status="Online"
           contactText="Contact Me"
-          avatarUrl="/avatars/alice.jpg"
+          avatarUrl="/speakers/speaker1.png"
           showUserInfo={true}
           enableTilt={true}
-        />
-        <ProfileCard
-          name="Bob Smith"
-          title="Co-Convener"
-          handle="bobS"
-          status="Offline"
-          contactText="Say Hi"
-          avatarUrl="/avatars/bob.jpg"
+            />
+          </div>
+        </div>
+        <div className="flex justify-center">
+          <div className="w-[90vw] max-w-[360px]">
+            <ProfileCard
+          name="Pranav Deshpande"
+          title="Convener"
+          handle="pranavD"
+          status="Online"
+          contactText="Contact Me"
+          avatarUrl="/avatars/speaker1.png"
           showUserInfo={true}
           enableTilt={true}
-        />
-        <ProfileCard
+            />
+          </div>
+        </div>
+        <div className="flex justify-center">
+          <div className="w-[90vw] max-w-[360px]">
+            <ProfileCard
           name="Charlie Davis"
           title="Coordinator"
           handle="charlieD"
@@ -64,11 +74,15 @@ const TeamPage: React.FC = () => {
           avatarUrl="/avatars/charlie.jpg"
           showUserInfo={true}
           enableTilt={true}
-        />
+            />
+          </div>
+        </div>
+        </div>
       </div>
-{/* Executives content */}
-<div className="relative z-10 px-8 py-24">
-  <h2 className="text-5xl mt-8 font-bold text-center text-white-400 mb-12"
+
+    {/* Executives content */}
+    <div className="relative z-10 px-4 sm:px-6 md:px-8 py-16 md:py-24 max-w-7xl mx-auto">
+  <h2 className="text-3xl sm:text-4xl md:text-5xl mt-4 md:mt-8 font-bold text-center text-white-400 mb-8 md:mb-12"
   style={{
               fontFamily: 'Orbitron, monospace',
               textShadow: `
@@ -84,10 +98,12 @@ const TeamPage: React.FC = () => {
             }}
           >EXECUTIVES</h2>
   
-<div className="flex flex-wrap justify-center gap-16 max-w-7xl mx-auto">
+<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 place-items-center justify-items-center gap-8 sm:gap-10 lg:gap-16 max-w-6xl mx-auto">
 
 
-    <ProfileCard
+  <div className="flex justify-center">
+    <div className="w-[90vw] max-w-[360px]">
+      <ProfileCard
       name="Diana Prince"
       title="Executive 1"
       handle="dianaP"
@@ -96,8 +112,12 @@ const TeamPage: React.FC = () => {
       avatarUrl="/avatars/diana.jpg"
       showUserInfo={true}
       enableTilt={true}
-    />
-    <ProfileCard
+      />
+    </div>
+  </div>
+  <div className="flex justify-center">
+    <div className="w-[90vw] max-w-[360px]">
+      <ProfileCard
       name="Ethan Hunt"
       title="Executive 2"
       handle="ethanH"
@@ -106,8 +126,12 @@ const TeamPage: React.FC = () => {
       avatarUrl="/avatars/ethan.jpg"
       showUserInfo={true}
       enableTilt={true}
-    />
-    <ProfileCard
+      />
+    </div>
+  </div>
+  <div className="flex justify-center">
+    <div className="w-[90vw] max-w-[360px]">
+      <ProfileCard
       name="Fiona Carter"
       title="Executive 3"
       handle="fionaC"
@@ -116,8 +140,12 @@ const TeamPage: React.FC = () => {
       avatarUrl="/avatars/fiona.jpg"
       showUserInfo={true}
       enableTilt={true}
-    />
-    <ProfileCard
+      />
+    </div>
+  </div>
+  <div className="flex justify-center">
+    <div className="w-[90vw] max-w-[360px]">
+      <ProfileCard
       name="George Miller"
       title="Executive 4"
       handle="georgeM"
@@ -126,13 +154,12 @@ const TeamPage: React.FC = () => {
       avatarUrl="/avatars/george.jpg"
       showUserInfo={true}
       enableTilt={true}
-    />
-  </div>
-</div>
-
-
-      
+      />
     </div>
+  </div>
+  </div>
+    </div>
+    
     </div>
   );
 };

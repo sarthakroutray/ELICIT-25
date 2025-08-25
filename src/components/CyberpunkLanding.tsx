@@ -375,9 +375,10 @@ const CyberpunkLanding: React.FC<CyberpunkLandingProps> = ({ onSpeakersClick, on
                 transition={{ delay: 2.5, duration: 0.8 }}
                 className="nav-buttons-desktop flex gap-8 -mt-4 md:-mt-16 pointer-events-auto"
               >
-                {[
+                {[ 
                   { icon: Calendar, label: 'EVENTS', color: 'text-cyan-400', to: '/events' },
                   { icon: Users, label: 'SPEAKERS', color: 'text-lime-400', to: '/speakers' },
+                  { icon: Users, label: 'TEAM', color: 'text-emerald-400', to: '/team' },
                   { icon: Info, label: 'ABOUT', color: 'text-purple-400', to: '/about' },
                   { icon: Phone, label: 'CONTACT', color: 'text-yellow-400', to: '/contact' },
                   { icon: Zap, label: 'SPONSORS', color: 'text-pink-400', to: '/sponsors' },
@@ -473,6 +474,7 @@ const CyberpunkLanding: React.FC<CyberpunkLandingProps> = ({ onSpeakersClick, on
               {[
                 { icon: Calendar, label: 'EVENTS', color: 'text-cyan-400', to: '/events' },
                 { icon: Users, label: 'SPEAKERS', color: 'text-lime-400', to: '/speakers' },
+                { icon: Users, label: 'TEAM', color: 'text-emerald-400', to: '/team' },
                 { icon: Info, label: 'ABOUT', color: 'text-purple-400', to: '/about' },
                 { icon: Phone, label: 'CONTACT', color: 'text-yellow-400', to: '/contact' },
                 { icon: Zap, label: 'SPONSORS', color: 'text-pink-400', to: '/sponsors' },
