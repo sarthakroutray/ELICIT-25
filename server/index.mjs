@@ -58,6 +58,59 @@ app.get('/api/hello', (_req, res) => {
   res.json({ ok: true, msg: 'Hello from Render backend' });
 });
 
+// Contact schema (optional save when DB connected)
+let ContactModel = null;
+try {
+  const contactSchema = new mongoose.Schema(
+    {
+      name: { type: String, required: true, trim: true },
+      email: { type: String, required: true, trim: true },
+      phone: { type: String, trim: true },
+      university: { type: String, trim: true },
+      message: { type: String, required: true, trim: true },
+      userAgent: { type: String },
+      ip: { type: String },
+    },
+    { timestamps: true }
+  );
+  ContactModel = mongoose.models.Contact || mongoose.model('Contact', contactSchema);
+} catch {}
+
+// POST /api/contact
+app.post('/api/contact', async (req, res) => {
+  try {
+    const { name, email, phone, university, message } = req.body || {};
+    if (!name || !email || !message) {
+      return res.status(400).json({ ok: false, error: 'Missing required fields' });
+    }
+    const record = {
+      name: String(name).slice(0, 100),
+      email: String(email).slice(0, 160),
+      phone: phone ? String(phone).slice(0, 40) : '',
+      university: university ? String(university).slice(0, 120) : '',
+      message: String(message).slice(0, 4000),
+      userAgent: req.get('user-agent') || '',
+      ip: req.headers['x-forwarded-for']?.toString().split(',')[0] || req.socket.remoteAddress || '',
+    };
+
+    let saved = false;
+    if (MONGODB_URI && mongoose.connection.readyState === 1 && ContactModel) {
+      try {
+        await ContactModel.create(record);
+        saved = true;
+      } catch (err) {
+        console.warn('Contact save failed:', err?.message || err);
+      }
+    } else {
+      console.log('Contact received (no DB):', record);
+    }
+    return res.status(200).json({ ok: true, saved });
+  } catch (err) {
+    console.error('Contact error:', err?.message || err);
+    return res.status(500).json({ ok: false, error: 'Server error' });
+  }
+});
+
 // Root info for Render service
 app.get('/', (_req, res) => {
   res.type('text/plain').send('ELICIT-25 backend running. Use /api/* endpoints.');
