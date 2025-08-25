@@ -1,27 +1,16 @@
 import React, { useRef, useMemo } from 'react';
-import { useFrame, useLoader } from '@react-three/fiber';
-import { Box, Cylinder, Sphere } from '@react-three/drei';
+import { useFrame } from '@react-three/fiber';
+import { Text, Box, Cylinder, Sphere } from '@react-three/drei';
 import * as THREE from 'three';
 
 interface CyberpunkSceneProps {
   mousePosition: { x: number; y: number };
-  logoZ?: number;
 }
 
-<<<<<<< HEAD
 const CyberpunkScene: React.FC<CyberpunkSceneProps> = ({ mousePosition }) => {
-  const SHOW_TOWER = false;
-=======
-const CyberpunkScene: React.FC<CyberpunkSceneProps> = ({ mousePosition, logoZ = 0 }) => {
->>>>>>> 12aba87daa8cd0099b0fba4d26057c1e0c0b7e7e
   const gridRef = useRef<THREE.Group>(null);
   const robotsRef = useRef<THREE.Group>(null);
   const centralTowerRef = useRef<THREE.Group>(null);
-  const logoRef = useRef<THREE.Group>(null);
-
-  // Load ELICIT logo texture for a central plane
-  const logoTexture = useLoader(THREE.TextureLoader, '/logo.png');
-  logoTexture.anisotropy = 4;
 
   // Create grid lines
   const gridLines = useMemo(() => {
@@ -91,17 +80,14 @@ const CyberpunkScene: React.FC<CyberpunkSceneProps> = ({ mousePosition, logoZ = 
     if (gridRef.current) {
       const normalizedX = (mousePosition.x / window.innerWidth) * 2 - 1;
       const normalizedY = -(mousePosition.y / window.innerHeight) * 2 + 1;
-
+      
       gridRef.current.rotation.x = normalizedY * 0.1;
       gridRef.current.rotation.y = normalizedX * 0.1;
-
+      
       // Add pulsing effect to grid lines
-      gridRef.current.children.forEach((obj) => {
-        const line = obj as THREE.Line<THREE.BufferGeometry, THREE.LineBasicMaterial>;
-        const mat = line.material as THREE.LineBasicMaterial | undefined;
-        if (mat) {
-          mat.opacity = pulseIntensity;
-          mat.transparent = true;
+      gridRef.current.children.forEach((line) => {
+        if (line.material) {
+          line.material.opacity = pulseIntensity;
         }
       });
     }
@@ -117,13 +103,6 @@ const CyberpunkScene: React.FC<CyberpunkSceneProps> = ({ mousePosition, logoZ = 
     if (centralTowerRef.current) {
       centralTowerRef.current.rotation.y = state.clock.elapsedTime * 0.2;
       centralTowerRef.current.position.y = Math.sin(state.clock.elapsedTime) * 0.2;
-    }
-
-    if (logoRef.current) {
-      // Subtle idle motion
-      logoRef.current.rotation.y = Math.sin(state.clock.elapsedTime * 0.6) * 0.1;
-      logoRef.current.position.y = 2.5 + Math.sin(state.clock.elapsedTime * 1.2) * 0.15;
-      logoRef.current.position.z = logoZ; // controlled depth
     }
   });
 
@@ -171,42 +150,6 @@ const CyberpunkScene: React.FC<CyberpunkSceneProps> = ({ mousePosition, logoZ = 
         ))}
       </group>
       
-<<<<<<< HEAD
-      {/* Central Tower (disabled) */}
-      {SHOW_TOWER && (
-        <group ref={centralTowerRef} position={[0, 0, 0]}>
-          <Cylinder args={[2, 2, 8]} position={[0, 0, 0]}>
-            <meshStandardMaterial color="#222" metalness={0.9} roughness={0.1} />
-          </Cylinder>
-          {[...Array(6)].map((_, i) => (
-            <Sphere key={i} args={[0.2]} position={[
-              Math.cos(i * Math.PI / 3) * 2.2,
-              4 + Math.sin(i * 0.5) * 2,
-              Math.sin(i * Math.PI / 3) * 2.2
-            ]}>
-              <meshStandardMaterial color="#00ff41" emissive="#00ff41" emissiveIntensity={3} />
-            </Sphere>
-          ))}
-          {[...Array(4)].map((_, i) => (
-            <Box key={i} args={[0.1, 0.1, 4]} position={[
-              Math.cos(i * Math.PI / 2) * 3,
-              2,
-              Math.sin(i * Math.PI / 2) * 3
-            ]} rotation={[0, i * Math.PI / 2, 0]}>
-              <meshStandardMaterial color="#ff0040" emissive="#ff0040" emissiveIntensity={2} transparent opacity={0.7} />
-            </Box>
-          ))}
-        </group>
-      )}
-=======
-      {/* Central ELICIT Logo (depth-controllable) */}
-      <group ref={logoRef} position={[0, 2.5, logoZ]}>
-        <mesh>
-          <planeGeometry args={[3.2, 3.2]} />
-          <meshBasicMaterial map={logoTexture} transparent depthWrite={false} />
-        </mesh>
-      </group>
-
       {/* Central Tower */}
       <group ref={centralTowerRef} position={[0, 0, 0]}>
         <Cylinder args={[2, 2, 8]} position={[0, 0, 0]}>
@@ -245,7 +188,6 @@ const CyberpunkScene: React.FC<CyberpunkSceneProps> = ({ mousePosition, logoZ = 
           </Box>
         ))}
       </group>
->>>>>>> 12aba87daa8cd0099b0fba4d26057c1e0c0b7e7e
     </group>
   );
 };
