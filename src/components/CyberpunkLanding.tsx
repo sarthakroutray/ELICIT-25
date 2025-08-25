@@ -153,7 +153,7 @@ const CyberpunkLanding: React.FC<CyberpunkLandingProps> = ({ onSpeakersClick, on
           :root {
             --explore-top: 70%;
             --infiltrate-bottom: 16px; /* closer to bottom on phones */
-            --social-bottom: 60px; /* move social a bit up from bottom */
+            --social-bottom: 80px; /* move social a bit further up on phones */
             /* Phone overrides: center align */
             --social-left: 50%;
             --social-right: auto;
@@ -350,6 +350,7 @@ const CyberpunkLanding: React.FC<CyberpunkLandingProps> = ({ onSpeakersClick, on
                     className="mx-auto w-32 h-32 md:w-40 md:h-40 lg:w-48 lg:h-48 object-contain"
                     style={{
                       filter: 'drop-shadow(0 0 20px #00ff41) drop-shadow(0 0 40px #ff0040)',
+                      zIndex:50
                     }}
                   />
                 </div>
