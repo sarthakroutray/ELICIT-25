@@ -11,6 +11,12 @@ const CyberpunkEventInterface: React.FC = () => {
   const [dragStartX, setDragStartX] = useState<number | null>(null);
   const [dragDX, setDragDX] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
+  // Linktree destination (hardcoded here per request)
+  const LINKTREE_URL = 'https://linktr.ee/ROAD_TO_ELICIT_25'; // TODO: replace with your actual Linktree URL
+  const openLinktree = () => {
+    if (!LINKTREE_URL) return;
+    window.open(LINKTREE_URL, '_blank', 'noopener,noreferrer');
+  };
 
   // If route provides an id param, focus that card on mount
   useEffect(() => {
@@ -29,68 +35,57 @@ const CyberpunkEventInterface: React.FC = () => {
   }, []);
 
   const POSTER_FALLBACK = '/events/frames/Defuse.png';
-  const eventCards = [
+  interface EventCard {
+    title: string;
+    description: string;
+    date?: string;
+    time?: string;
+    venue?: string;
+    prize?: string;
+    organizer?: string;
+    contact?: string;
+    poster: string;
+  }
+  const eventCards: EventCard[] = [
     {
-      title: "DEFUSE 2.0",
-      description: "Every second counts in this thrilling bomb defusal challenge.\nTest your logic, speed, and teamwork under pressure!",
-      date: "15th Sept 2025",
-      time: "12:30 PM",
-      venue: "Old Mess",
+      title: "Keyboard Warriors",
+      description: "Your fingers have survived countless assignments. But are they fast enough to win? Face off in a furiously competitive, three-round showdown to be crowned the fastest typist on campus. Let your fingers fly!",
+      date: "1st Sept 2025",
+      time: "5:00 PM",
+      venue: "Elicit Chowk",
       prize: "5K",
-      contact: "+91-XXXXXXXXXX",
       organizer: "ACM MUJ",
-      poster: "events/Defuse.png",
+      poster: "/events/frames/keyboard.png",
     },
     {
       title: "FUTSAL",
-      description: "Digital revolution meets reality\nin this groundbreaking showcase\nof tomorrow's technology today\nExperience virtual worlds and\naugmented possibilities that will\nredefine your perception",
-      date: "16th Sept 2025",
-      time: "10:00 AM",
-      venue: "Innovation Hub",
-      organizer: "Tech Council",
+      description: "Get ready for a blast of pure energy! This is 3v3 football, where non-stop action and raw fun collide. In this fast-paced tournament, quick thinking and even quicker feet decide the winner. Grab two friends, form a team, and prepare for an adrenaline-fueled battle on the court.",
+      date: "4th Sept 2025",
+      time: "4:00pm",
+      venue: "Elicit Chowk",
       poster: "/events/frames/futsal.png",
     },
     {
-      title: "NEON NIGHTS FESTIVAL",
-      description: "Electric beats pulse through\nthe midnight air as artists\nfrom across the grid converge\nDance until dawn breaks over\nthe neon-lit cityscape while\nbass lines shake your core",
-      date: "16th Sept 2025",
-      time: "09:00 PM",
-      venue: "Main Arena",
-      poster: POSTER_FALLBACK,
+      title: "Defuse 2.0",
+      description: "A high-tension test of teamwork. One player is the 'Brains' with the puzzles, the other is the 'Hands' with the wire cutters. Your only connection is a walkie-talkie. In a race against time, clear communication is everything. Can your duo stay cool and cut the right wire?",
+      date: "10th Sept 2025",
+      venue: "Main Chowk",
+      poster: "/events/frames/defuse.png",
     },
     {
-      title: "MATRIX CODE SUMMIT",
+      title: "Final Destination",
       description: "Hackers and developers unite\nto push the boundaries of\nwhat's possible in cyberspace\nLearn cutting-edge techniques\nand network with the elite\nof the digital underground",
-      date: "17th Sept 2025",
-      time: "11:00 AM",
-      venue: "Auditorium A",
-      organizer: "Dev Guild",
-      poster: POSTER_FALLBACK,
+      date: "6th Sept 2025",
+      time: "10:30 AM",
+      venue: "AB2 Lobby",
+      poster: "/events/frames/fd.png",
     },
     {
-      title: "HOLOGRAM GALLERY OPENING",
-      description: "Step into a world where art\ntranscends physical limitations\nInteractive holographic displays\nrespond to your presence while\ncreating immersive experiences\nthat blur reality and fiction",
-      date: "17th Sept 2025",
+      title: "Hacks 10.0",
+      description: "Thirty-six hours. One team. Endless possibilities. Welcome to Hacks, the 36-hour offline hackathon where ideas are forged into reality. You'll take your concept from an initial pitch to a working prototype through three intense rounds before the final presentation to the judges. Are you ready to build something incredible?",      date: "17th Sept 2025",
       time: "02:00 PM",
       venue: "Gallery Wing",
-      poster: POSTER_FALLBACK,
-    },
-    {
-      title: "QUANTUM GAMING TOURNAMENT",
-      description: "Compete in next-generation\nvirtual reality competitions\nwhere skill meets technology\nPrize pools worth millions\nof credits await the champions\nof this digital colosseum",
-      date: "18th Sept 2025",
-      time: "01:30 PM",
-      venue: "eSports Lab",
-      prize: "10K",
-      poster: POSTER_FALLBACK,
-    },
-    {
-      title: "SYNTHWAVE CONCERT SERIES",
-      description: "Retro-futuristic sounds fill\nthe air as legendary artists\nperform live under laser lights\nNostalgic melodies meet\nmodern production in this\nepic audiovisual journey",
-      date: "18th Sept 2025",
-      time: "07:30 PM",
-      venue: "Open Grounds",
-      poster: POSTER_FALLBACK,
+      poster: "/events/frames/hacks10.0.png",
     },
   ];
 
@@ -202,7 +197,16 @@ const CyberpunkEventInterface: React.FC = () => {
                     zIndex,
                   }}
                 >
-                  <div className="w-[310px] h-[480px] bg-black border-2 border-green-400 shadow-lg flex flex-col p-4 rounded-md overflow-hidden"
+                  <div
+                    className={`w-[310px] h-[530px] bg-black border-2 border-green-400 shadow-lg flex flex-col p-4 rounded-md overflow-hidden relative pb-12 ${isActive ? 'cursor-pointer' : 'cursor-default'}`}
+                    onClick={() => {
+                      if (isActive && !isDragging && Math.abs(dragDX) < 8) openLinktree();
+                    }}
+                    role={isActive ? 'button' : undefined}
+                    tabIndex={isActive ? 0 : -1}
+                    onKeyDown={(e) => { if (isActive && (e.key === 'Enter' || e.key === ' ')) openLinktree(); }}
+                    title={isActive ? 'Click to register' : undefined}
+                  
                     style={{ boxShadow: isActive ? '0 0 22px #22c55e88' : '0 0 10px #22c55e55' }}>
                     <div className="w-full mb-3 flex justify-center">
                       <img
@@ -222,6 +226,12 @@ const CyberpunkEventInterface: React.FC = () => {
                       {event.organizer && <p><span className="text-pink-400">ORG:</span> {event.organizer}</p>}
                       {event.contact && <p><span className="text-pink-400">☎</span> {event.contact}</p>}
                       <p className="pt-1 text-[10px] tracking-widest text-green-500/70">CARD {i + 1} / {eventCards.length}</p>
+                    </div>
+                    {/* CTA: Click to register */}
+                    <div className="absolute bottom-3 left-1/2 -translate-x-1/2 z-10 text-center select-none">
+                      <span className="inline-block px-3 py-1 border border-pink-500/70 text-pink-300 rounded-md text-[10px] tracking-widest shadow-[0_0_8px_rgba(236,72,153,0.6)] bg-black/60 backdrop-blur-sm">
+                        CLICK TO REGISTER
+                      </span>
                     </div>
                   </div>
                 </div>
@@ -260,11 +270,16 @@ const CyberpunkEventInterface: React.FC = () => {
                   }}
                 >
                   <div
-                    className="w-[900px] h-[600px] bg-black border-4 shadow-lg flex p-6 gap-6"
+                    className={`w-[900px] h-[600px] bg-black border-4 shadow-lg flex p-6 gap-6 ${isActive ? 'cursor-pointer' : 'cursor-default'}`}
                     style={{
                       borderColor: '#22c55e',
                       boxShadow: isActive ? '0 0 30px #22c55e' : '0 0 10px rgba(34,197,94,0.5)',
                     }}
+                    onClick={() => { if (isActive) openLinktree(); }}
+                    role={isActive ? 'button' : undefined}
+                    tabIndex={isActive ? 0 : -1}
+                    onKeyDown={(e) => { if (isActive && (e.key === 'Enter' || e.key === ' ')) openLinktree(); }}
+                    title={isActive ? 'Click to register' : undefined}
                   >
                     {/* Left side: poster & meta */}
                     <div className="flex flex-col items-center w-1/2">
@@ -290,6 +305,12 @@ const CyberpunkEventInterface: React.FC = () => {
                         {event.venue && <p><span className="text-pink-400">📍 Venue:</span> {event.venue}</p>}
                         {event.prize && <p><span className="text-pink-400">🏆 Prize Pool:</span> {event.prize}</p>}
                         <p className="text-green-400 text-xs font-mono pt-4">CARD {i + 1} / {eventCards.length}</p>
+                      </div>
+                      {/* CTA: Click to register */}
+                      <div className="mt-6 select-none">
+                        <span className="inline-block px-4 py-2 border border-pink-500/70 text-pink-300 rounded-md text-xs tracking-widest shadow-[0_0_10px_rgba(236,72,153,0.6)]">
+                          CLICK TO REGISTER
+                        </span>
                       </div>
                     </div>
                   </div>

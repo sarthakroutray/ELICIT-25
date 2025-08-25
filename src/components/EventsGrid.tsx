@@ -11,18 +11,18 @@ interface PosterBox { id: number; poster: string; }
 // EDIT THESE PATHS LATER: supply the actual poster image for each event (must live under /public)
 // You can use .png/.jpg/.webp etc. Example: '/events/frames/hackathon.png'
 const POSTER_PATHS: string[] = [
-  '/events/frames/Defuse.png', // 1
+  '/events/frames/keyboard.png', // 1
   '/events/frames/futsal.png', // 2
-  '/events/frames/Defuse.png', // 3
-  '/events/frames/Defuse.png', // 4
-  '/events/frames/Defuse.png', // 5
-  '/events/frames/Defuse.png', // 6
-  '/events/frames/Defuse.png', // 7
-  '/events/frames/Defuse.png', // 8
-  '/events/frames/Defuse.png', // 9
-  '/events/frames/Defuse.png', // 10
-  '/events/frames/Defuse.png', // 11
-  '/events/frames/Defuse.png', // 12
+  '/events/frames/defuse.png', // 3
+  '/events/frames/fd.png', // 4
+  '/events/frames/hacks10.0.png', // 5
+  '/events/frames/pcbuilding.png', // 6
+  '/events/frames/comingsoon.png', // 7
+  '/events/frames/comingsoon.png', // 8
+  '/events/frames/comingsoon.png', // 9
+  '/events/frames/comingsoon.png', // 10
+  '/events/frames/comingsoon.png', // 11
+  '/events/frames/comingsoon.png', // 12
 ];
 
 const FALLBACK_POSTER = '/events/frames/Defuse.png';
