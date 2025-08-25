@@ -315,7 +315,7 @@ const CyberpunkLanding: React.FC<CyberpunkLandingProps> = ({ onSpeakersClick, on
             {(skipIntro || isInitialized) ? (
               <>
                 <GlitchText
-                  text="VIVO X ELICIT'25"
+                  text="ELICIT'25"
                   className="main-corruption-heading-responsive text-2xl md:text-4xl lg:text-5xl font-mono font-bold text-[#00ff41] mb-10"
                   style={{
                     textShadow: `
