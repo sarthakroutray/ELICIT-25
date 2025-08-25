@@ -18,6 +18,8 @@ const MONGODB_URI = process.env.MONGODB_URI || '';
 
 // Middleware
 app.disable('x-powered-by');
+// Behind Render's proxy; trust X-Forwarded-* headers so req.ip is correct
+app.set('trust proxy', true);
 app.use(helmet({
   contentSecurityPolicy: false, // keep simple defaults; adjust if needed
 }));
