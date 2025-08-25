@@ -32,8 +32,8 @@ const Contact: React.FC = () => {
     setStatus("Submitting...");
 
     try {
-      // const base = (import.meta.env.VITE_API_BASE || '').replace(/\/+$/, '');
-      const url = 'https://elicit-25-backend-production.up.railway.app/api/contact';
+      const base = (import.meta.env.VITE_API_BASE || '').replace(/\/+$/, '');
+      const url = base ? `${base}/api/contact` : '/api/contact';
       const res = await fetch(url, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
