@@ -153,9 +153,9 @@ const EventsGrid: React.FC = () => {
     });
   };
   return (
-    <div className="relative min-h-screen bg-black text-white font-mono py-16 px-6 overflow-hidden">
+    <div className="relative min-h-screen bg-black text-white font-orbitron py-16 px-6 overflow-hidden">
       <DigitalRain />
-  <h1 className="text-center text-4xl mb-12 tracking-widest text-cyan-300" style={{ fontFamily: 'Orbitron, monospace' }}>EVENTS</h1>
+  <h1 className="text-center text-4xl mb-12 tracking-widest text-cyan-300 font-orbitron">EVENTS</h1>
   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6 xl:gap-8 max-w-screen-2xl mx-auto px-2 relative overflow-visible">
         {boxes.map((box) => (
           <div

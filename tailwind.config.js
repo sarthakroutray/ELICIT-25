@@ -9,6 +9,7 @@ export default {
       },
       fontFamily: {
         techno: ["'Share Tech Mono'", "monospace"],
+  orbitron: ["'Orbitron'", "monospace"],
       },
     },
   },

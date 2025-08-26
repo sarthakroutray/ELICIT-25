@@ -145,12 +145,12 @@ const CyberpunkEventInterface: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-black relative overflow-hidden">
+    <div className="min-h-screen bg-black relative overflow-hidden font-orbitron">
       <DigitalRain />
       {/* Page Heading */}
       <div className="w-full flex justify-center pt-10 md:pt-8 pb-4 md:pb-0 select-none pointer-events-none">
         <h1
-          className="relative text-center font-mono font-bold tracking-[0.35em] text-sm sm:text-base md:text-2xl lg:text-3xl px-4 py-2 text-cyan-300"
+          className="relative text-center font-orbitron font-bold tracking-[0.35em] text-sm sm:text-base md:text-2xl lg:text-3xl px-4 py-2 text-cyan-300"
           style={{
             textShadow: `0 0 6px #06b6d4, 0 0 14px #06b6d4, 0 0 28px #22c55e, 2px 2px 4px rgba(0,0,0,0.9)`,
             letterSpacing: '0.35em'
@@ -181,7 +181,7 @@ const CyberpunkEventInterface: React.FC = () => {
               onClick={handlePrev}
               className="text-pink-500 text-3xl px-3 py-1 rounded hover:text-pink-300 active:scale-90 transition-all"
             >&larr;</button>
-            <div className="text-green-400 font-mono text-[10px] tracking-widest">{currentCard + 1} / {eventCards.length}</div>
+            <div className="text-green-400 font-orbitron text-[10px] tracking-widest">{currentCard + 1} / {eventCards.length}</div>
             <button
               aria-label="Next event"
               onClick={handleNext}
@@ -237,9 +237,9 @@ const CyberpunkEventInterface: React.FC = () => {
                         onError={(e) => { (e.currentTarget as HTMLImageElement).src = POSTER_FALLBACK; }}
                       />
                     </div>
-                    <h2 className="text-pink-500 font-mono font-bold text-lg mb-2 text-center glow-text-pink tracking-wide">{event.title}</h2>
-                    <p className="text-green-400 font-mono text-[11px] whitespace-pre-line mb-3 text-center leading-snug px-1">{event.description}</p>
-                    <div className="text-green-400 font-mono text-[11px] space-y-1 mt-5 text-center">
+                    <h2 className="text-pink-500 font-orbitron font-bold text-lg mb-2 text-center glow-text-pink tracking-wide">{event.title}</h2>
+                    <p className="text-green-400 font-orbitron text-[11px] whitespace-pre-line mb-3 text-center leading-snug px-1">{event.description}</p>
+                    <div className="text-green-400 font-orbitron text-[11px] space-y-1 mt-5 text-center">
                       {event.date && <p><span className="text-pink-400">📅</span> {event.date}</p>}
                       {event.time && <p><span className="text-pink-400">⏰</span> {event.time}</p>}
                       {event.venue && <p><span className="text-pink-400">📍</span> {event.venue}</p>}
@@ -322,7 +322,7 @@ const CyberpunkEventInterface: React.FC = () => {
                         className="rounded-lg shadow-lg max-h-[600px] object-contain mt-[-70px]"
                         onError={(e) => { (e.currentTarget as HTMLImageElement).src = POSTER_FALLBACK; }}
                       />
-                      <div className="text-green-400 font-mono text-sm text-center mt-[-70px] space-y-1">
+                      <div className="text-green-400 font-orbitron text-sm text-center mt-[-70px] space-y-1">
                         <p className="font-bold text-pink-500 text-lg">{event.title}</p>
                         {event.organizer && <p>Organizer: {event.organizer}</p>}
                         {event.contact && <p>Contact: {event.contact}</p>}
@@ -330,9 +330,9 @@ const CyberpunkEventInterface: React.FC = () => {
                     </div>
                     {/* Right side: details */}
                     <div className="flex flex-col justify-center w-1/2 text-left">
-                      <h2 className="text-pink-500 font-bold font-mono mb-4 text-2xl glow-text-pink">EVENT : {event.title}</h2>
-                      <p className="text-green-400 font-mono text-sm whitespace-pre-line mb-6">{event.description}</p>
-                      <div className="text-green-400 font-mono text-base space-y-2">
+                      <h2 className="text-pink-500 font-bold font-orbitron mb-4 text-2xl glow-text-pink">EVENT : {event.title}</h2>
+                      <p className="text-green-400 font-orbitron text-sm whitespace-pre-line mb-6">{event.description}</p>
+                      <div className="text-green-400 font-orbitron text-base space-y-2">
                         {event.date && <p><span className="text-pink-400">📅 Date:</span> {event.date}</p>}
                         {event.time && <p><span className="text-pink-400">⏰ Time:</span> {event.time}</p>}
                         {event.venue && <p><span className="text-pink-400">📍 Venue:</span> {event.venue}</p>}
