@@ -66,10 +66,10 @@ const TeamPage: React.FC = () => {
         <div className="flex justify-center">
           <div className="w-[90vw] max-w-[240px]">
             <ProfileCard
-          name="Charlie Davis"
-          title="Coordinator"
-          handle="charlieD"
-          status="Busy"
+          name="Parthav Shah"
+          title="Convener"
+          handle="parthavS"
+          status="Online"
           contactText="Ping Me"
           avatarUrl="/speakers/speaker1.png"
           showUserInfo={true}
@@ -80,7 +80,7 @@ const TeamPage: React.FC = () => {
         </div>
       </div>
 
-    {/* Executives content */}
+    {/* Executives content
     <div className="relative z-10 px-4 sm:px-6 md:px-8 py-16 md:py-24 max-w-7xl mx-auto">
   <h2 className="text-3xl sm:text-4xl md:text-5xl mt-4 md:mt-8 font-bold text-center text-white-400 mb-8 md:mb-12"
   style={{
@@ -155,10 +155,11 @@ const TeamPage: React.FC = () => {
       showUserInfo={true}
       enableTilt={true}
       />
+      
     </div>
   </div>
   </div>
-    </div>
+    </div> */}
     
     </div>
   );

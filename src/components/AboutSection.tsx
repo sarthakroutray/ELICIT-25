@@ -1,6 +1,35 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import DigitalRain from "./DigitalRain";
+
+// Simple in-file lazy video loader using IntersectionObserver
+const LazyVideo: React.FC<React.VideoHTMLAttributes<HTMLVideoElement> & { src: string }> = ({ src, autoPlay, ...rest }) => {
+  const ref = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    if (typeof IntersectionObserver === "undefined") {
+      // Fallback: set src immediately
+      if (!el.src) el.src = src;
+      if (autoPlay) el.play?.().catch(() => {});
+      return;
+    }
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          if (!el.src) el.src = src;
+          if (autoPlay) el.play?.().catch(() => {});
+          observer.disconnect();
+        }
+      });
+    }, { rootMargin: "200px" });
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [src, autoPlay]);
+
+  return <video ref={ref} preload="none" {...rest} />;
+};
 
 const AboutSection: React.FC = () => {
   return (
@@ -75,19 +104,20 @@ const AboutSection: React.FC = () => {
     `,
   }}
 >
- <video
+ <LazyVideo
   src="/About/Elicit.mp4"
   autoPlay
   loop
   muted
   playsInline
+  poster="/About/elicit.png"
   style={{
     width: "100%",
     height: "100%",
     objectFit: "cover",
     borderRadius: "1rem",
   }}
-/>
+ />
 
   <div className="absolute inset-0 flex items-center justify-center">
     {/* overlay content if needed */}
@@ -135,6 +165,7 @@ const AboutSection: React.FC = () => {
                   src="/About/elicit.png"
                   alt="Techy Background"
                   className="relative w-full h-full object-cover rounded-xl"
+                  loading="lazy"
                 />
 
                 <div className="absolute inset-0 flex items-center justify-center">
@@ -183,6 +214,7 @@ const AboutSection: React.FC = () => {
                         src={`/About/carousel/img${i}.png`}
                         alt={`carousel top ${i}`}
                         className="w-60 h-40 object-cover rounded-lg"
+                        loading="lazy"
                         onError={(e) => {
                           const img = e.currentTarget as HTMLImageElement;
                           if (img.src.endsWith(`/About/carousel/img${i}.png`)) {
@@ -210,6 +242,7 @@ const AboutSection: React.FC = () => {
                         src={`/About/carousel/img${i}.png`}
                         alt={`carousel bottom ${i}`}
                         className="w-60 h-40 object-cover rounded-lg"
+                        loading="lazy"
                         onError={(e) => {
                           const img = e.currentTarget as HTMLImageElement;
                           if (img.src.endsWith(`/About/carousel/img${i}.png`)) {
@@ -233,15 +266,18 @@ const AboutSection: React.FC = () => {
         </div>
 
         <h1
-          className="font-bold text-yellow-300 uppercase tracking-widest mb-6 text-center text-4xl"
+          className="font-bold text-white uppercase tracking-widest mb-6 text-center text-4xl"
           style={{
             fontFamily: "Orbitron, monospace",
             textShadow: `
-              -2px -2px 0 #00000013,
-              2px -2px 0 #0000000d,
-              -2px 2px 0 #00000009,
-              2px 2px 0 #0000003a
-            `,
+                -2px -2px 0 #000,
+                2px -2px 0 #000,
+                -2px 2px 0 #000,
+                2px 2px 0 #000,
+                0 0 10px #d7e60eff,
+                0 0 20px #ffff00ff,
+                0 0 30px #d4d804ff
+              `,
             filter: "drop-shadow(4px 4px 8px rgba(0,0,0,0.9))",
           }}
         >
@@ -254,7 +290,7 @@ const AboutSection: React.FC = () => {
 
         {/* Left info box simplified */}
 <div
-  className="bg-[rgba(49,120,136,0.09)] border border-cyan-400 rounded-lg  mb-6 shadow-inner overflow-hidden flex items-center justify-center"
+  className="bg-[rgba(49,120,136,0.09)] rounded-lg mb-6 shadow-inner overflow-hidden flex items-center justify-center"
   style={{
     boxShadow: `
       0 0 12px 2px #e1e0e304,
@@ -265,18 +301,19 @@ const AboutSection: React.FC = () => {
     height: "200px",
   }}
 >
-  <video
-    src="/About/ELICIT.mp4"
+  <LazyVideo
+    src="/About/Elicit.mp4"
     autoPlay
     loop
     muted
     playsInline
     className="rounded-lg"
+    poster="/About/elicit.png"
     style={{
-      maxWidth: "100%",
-      maxHeight: "100%",
-      objectFit: "contain", // ✅ makes it fit without cropping
-      borderRadius: "0.5rem",
+      width: "100%",
+      height: "100%",
+      objectFit: "cover",
+      borderRadius: "1rem",
     }}
   />
 </div>
@@ -290,13 +327,13 @@ const AboutSection: React.FC = () => {
             letterSpacing: "0.06em",
           }}
         >
-          10 YEARS OF ACM!
+          10 YEARS OF MUJ ACM!
         </p>
 
-        <hr className="w-16 border-t-4 border-cyan-300 rounded-full mx-auto mb-6" />
+  <hr className="w-24 border-t-4 border-cyan-300 rounded-full mx-auto mb-6" />
 
         <p
-          className="text-yellow-200 text-center text-base leading-relaxed mb-6"
+          className="text-yellow-200 text-center text-lg leading-relaxed mb-6"
           style={{
             textShadow: "0 0 8px rgba(247,236,37,0.7)",
           }}
@@ -329,6 +366,7 @@ const AboutSection: React.FC = () => {
     src="/About/elicit.png"
     alt="Border Frame"
     className="absolute top-0 left-0 w-full h-full object-contain pointer-events-none z-0"
+    loading="lazy"
   />
 
   {/* Text inside PNG frame */}
@@ -394,8 +432,8 @@ const AboutSection: React.FC = () => {
         x: ['0%', '-50%']
       }}
       transition={{
-        repeat: Infinity,
-        duration: 15,
+  repeat: Infinity,
+  duration: 20,
         ease: "linear"
       }}
     >
@@ -407,6 +445,7 @@ const AboutSection: React.FC = () => {
           alt={`carousel mobile ${i}`}
           className="h-32 w-44 flex-shrink-0 rounded-lg object-cover border border-cyan-600 bg-black/30"
           style={{ minWidth: '176px' }}
+          loading="lazy"
           onError={(e) => {
             const img = e.currentTarget as HTMLImageElement;
             if (img.src.endsWith(`/About/carousel/img${i}.png`)) {
