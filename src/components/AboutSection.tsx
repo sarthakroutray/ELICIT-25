@@ -110,7 +110,7 @@ const AboutSection: React.FC = () => {
   loop
   muted
   playsInline
-  poster="/About/elicit.png"
+  poster="/logo.png"
   style={{
     width: "100%",
     height: "100%",
