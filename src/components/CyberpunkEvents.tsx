@@ -150,16 +150,23 @@ const CyberpunkEventInterface: React.FC = () => {
       {/* Page Heading */}
       <div className="w-full flex justify-center pt-10 md:pt-8 pb-4 md:pb-0 select-none pointer-events-none">
         <h1
-          className="relative text-center font-orbitron font-bold tracking-[0.35em] text-sm sm:text-base md:text-2xl lg:text-3xl px-4 py-2 text-cyan-300"
+          className="text-center text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white tracking-wider"
           style={{
-            textShadow: `0 0 6px #06b6d4, 0 0 14px #06b6d4, 0 0 28px #22c55e, 2px 2px 4px rgba(0,0,0,0.9)`,
-            letterSpacing: '0.35em'
+            fontFamily: 'Orbitron, monospace',
+            textShadow: `
+              -2px -2px 0 #000,
+              2px -2px 0 #000,
+              -2px 2px 0 #000,
+              2px 2px 0 #000,
+              0 0 10px #00ff41,
+              0 0 20px #00ff41,
+              0 0 30px #00ff41
+            `,
+            filter: 'drop-shadow(4px 4px 8px rgba(0,0,0,0.9))',
           }}
           aria-label="Event Details"
         >
-          <span className="after:absolute after:inset-0 after:bg-gradient-to-r after:from-transparent after:via-cyan-400/10 after:to-transparent after:pointer-events-none">
-            EVENT DETAILS
-          </span>
+          EVENT DETAILS
         </h1>
       </div>
       {isMobile ? (

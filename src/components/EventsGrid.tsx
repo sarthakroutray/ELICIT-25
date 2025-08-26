@@ -13,7 +13,7 @@ interface PosterBox { id: number; poster: string; }
 const POSTER_PATHS: string[] = [
   '/events/frames/keyboard.png', // 1
   '/events/frames/futsal.png', // 2
-  '/events/frames/defuse.png', // 3
+  '/events/frames/Defuse.png', // 3 
   '/events/frames/fd.png', // 4
   '/events/frames/hacks10.0.png', // 5
   '/events/frames/comingsoon.png', // 6
@@ -155,7 +155,24 @@ const EventsGrid: React.FC = () => {
   return (
     <div className="relative min-h-screen bg-black text-white font-orbitron py-16 px-6 overflow-hidden">
       <DigitalRain />
-  <h1 className="text-center text-4xl mb-12 tracking-widest text-cyan-300 font-orbitron">EVENTS</h1>
+  <h1
+    className="text-center text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-12 tracking-wider"
+    style={{
+      fontFamily: 'Orbitron, monospace',
+      textShadow: `
+        -2px -2px 0 #000,
+        2px -2px 0 #000,
+        -2px 2px 0 #000,
+        2px 2px 0 #000,
+  0 0 10px #00ff41,
+  0 0 20px #00ff41,
+  0 0 30px #00ff41
+      `,
+      filter: 'drop-shadow(4px 4px 8px rgba(0,0,0,0.9))',
+    }}
+  >
+    EVENTS
+  </h1>
   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6 xl:gap-8 max-w-screen-2xl mx-auto px-2 relative overflow-visible">
         {boxes.map((box) => (
           <div
