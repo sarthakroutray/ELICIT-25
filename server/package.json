@@ -10,7 +10,7 @@
   "start": "node server.js",
   "dev": "node server.js",
   "postinstall": "rm -rf node_modules/.cache || true",
-  "build": "node -e \"console.log('No build step for server (plain Node ESM).');\""
+  "build": "npm ci"
   },
   "dependencies": {
     "compression": "^1.7.5",
