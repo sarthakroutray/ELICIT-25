@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from 'react-router-dom';
 import SocialLinks from './SocialLinks';
 
 interface FooterSection {
@@ -13,7 +14,7 @@ const sections: FooterSection[] = [
     title: "ELICIT '25",
     links: [
       { label: 'About', href: '/about' },
-      { label: 'Blog', href: '#blog' },
+      { label: 'Blog', href: 'https://medium.com/@acmmuj' },
       { label: 'Register', href: '/events' },
     ],
   },
@@ -68,16 +69,28 @@ const Footer: React.FC = () => {
                 <ul
                   className={`pl-1 pr-2 mt-2 md:mt-0 space-y-2 text-sm tracking-wide uppercase overflow-hidden transition-[max-height,opacity] duration-400 ease-out md:max-h-none ${isOpen ? 'max-h-64 opacity-100' : 'max-h-0 opacity-0 md:opacity-100'} md:space-y-2`}
                 >
-                  {sec.links.map(l => (
-                    <li key={l.label}>
-                      <a
-                        href={l.href}
-                        className="relative inline-block py-0.5 text-cyan-300 hover:text-white focus:text-white transition-colors duration-200 focus:outline-none after:absolute after:left-0 after:bottom-0 after:h-px after:w-0 after:bg-cyan-400 hover:after:w-full after:transition-all after:duration-300"
-                      >
-                        {l.label}
-                      </a>
-                    </li>
-                  ))}
+                  {sec.links.map(l => {
+                    const isInternal = l.href.startsWith('/');
+                    return (
+                      <li key={l.label}>
+                        {isInternal ? (
+                          <Link
+                            to={l.href}
+                            className="relative inline-block py-0.5 text-cyan-300 hover:text-white focus:text-white transition-colors duration-200 focus:outline-none after:absolute after:left-0 after:bottom-0 after:h-px after:w-0 after:bg-cyan-400 hover:after:w-full after:transition-all after:duration-300"
+                          >
+                            {l.label}
+                          </Link>
+                        ) : (
+                          <a
+                            href={l.href}
+                            className="relative inline-block py-0.5 text-cyan-300 hover:text-white focus:text-white transition-colors duration-200 focus:outline-none after:absolute after:left-0 after:bottom-0 after:h-px after:w-0 after:bg-cyan-400 hover:after:w-full after:transition-all after:duration-300"
+                          >
+                            {l.label}
+                          </a>
+                        )}
+                      </li>
+                    );
+                  })}
                 </ul>
               </div>
             );
@@ -89,12 +102,12 @@ const Footer: React.FC = () => {
           <div className="text-xs text-cyan-400/80 tracking-widest uppercase text-center sm:text-left">
             Ignite the grid. Be part of ELICIT '25.
           </div>
-          <a
-            href="/events"
+          <Link
+            to="/events"
             className="px-6 py-3 rounded-md border border-cyan-400/60 hover:border-white text-cyan-200 hover:text-white bg-black/40 hover:bg-cyan-500/10 transition-all text-sm tracking-wide font-semibold shadow-[0_0_10px_rgba(0,255,255,0.25)]"
           >
             VIEW EVENTS
-          </a>
+          </Link>
         </div>
 
         {/* Divider */}
@@ -104,8 +117,8 @@ const Footer: React.FC = () => {
         <div className="mt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-[10px] tracking-wider text-cyan-500/70 uppercase">
           <div>&copy; 2025 ELICIT Fest. All rights reserved.</div>
           <div className="flex gap-4">
-            <a href="/privacy" className="hover:text-cyan-300">Privacy</a>
-            <a href="/terms" className="hover:text-cyan-300">Terms</a>
+            <Link to="/privacy" className="hover:text-cyan-300">Privacy</Link>
+            <Link to="/terms" className="hover:text-cyan-300">Terms</Link>
             <a href="#top" className="hover:text-cyan-300">Top ↑</a>
           </div>
         </div>

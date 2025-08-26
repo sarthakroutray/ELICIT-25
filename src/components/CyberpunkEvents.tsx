@@ -57,10 +57,10 @@ const CyberpunkEventInterface: React.FC = () => {
     time?: string;
     venue?: string;
     prize?: string;
-    organizer?: string;
+    organizer?: string;//optional
     contact?: string;
     poster: string;
-  registerUrl?: string; // Event-specific Google Form or registration link
+  registerUrl?: string; 
   }
   const eventCards: EventCard[] = [
     {
@@ -70,7 +70,6 @@ const CyberpunkEventInterface: React.FC = () => {
       time: "5:00 PM",
       venue: "Elicit Chowk",
       prize: "5K",
-      organizer: "ACM MUJ",
   poster: "/events/frames/keyboard.png",
   registerUrl: "https://docs.google.com/forms/d/e/1FAIpQLSe2BUclCV4JXD0KR0jfxlwuIkpiJ6WZv9UrJoa7cqDWAmgW5A/viewform", // TODO: replace with Google Form URL
     },
@@ -83,14 +82,14 @@ const CyberpunkEventInterface: React.FC = () => {
   poster: "/events/frames/futsal.png",
   registerUrl: "https://docs.google.com/forms/d/e/1FAIpQLSfoVZt0oTO74JTYMOzrqjxz2o5ChIVVTJW5lMmQ13MrF4Yf-Q/viewform", // TODO: replace with Google Form URL
     },
-  //   {
-  //     title: "Defuse 2.0",
-  //     description: "A high-tension test of teamwork. One player is the 'Brains' with the puzzles, the other is the 'Hands' with the wire cutters. Your only connection is a walkie-talkie. In a race against time, clear communication is everything. Can your duo stay cool and cut the right wire?",
-  //     date: "10th Sept 2025",
-  //     venue: "Main Chowk",
-  // poster: "/events/frames/defuse.png",
-  // registerUrl: "/register", // TODO: replace with Google Form URL
-  //   },
+     {
+       title: "Defuse 2.0",
+       description: "A high-tension test of teamwork. One player is the 'Brains' with the puzzles, the other is the 'Hands' with the wire cutters. Your only connection is a walkie-talkie. In a race against time, clear communication is everything. Can your duo stay cool and cut the right wire?",
+       date: "10th Sept 2025",
+       venue: "Main Chowk",
+   poster: "/events/frames/defuse.png",
+   registerUrl: "https://docs.google.com/forms/d/1KRb45tBUgEoX84c8r8Gy_pf59GJ5eD5AI9ukJ0Xe6rU/viewform?edit_requested=true",
+   },
     {
       title: "Final Destination",
       description: "Hackers and developers unite\nto push the boundaries of\nwhat's possible in cyberspace\nLearn cutting-edge techniques\nand network with the elite\nof the digital underground",
