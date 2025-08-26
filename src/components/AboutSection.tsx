@@ -2,33 +2,32 @@ import React, { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import DigitalRain from "./DigitalRain";
 
-// Simple in-file lazy video loader using IntersectionObserver
-const LazyVideo: React.FC<React.VideoHTMLAttributes<HTMLVideoElement> & { src: string }> = ({ src, autoPlay, ...rest }) => {
+// Simple in-file lazy video: keep src on the element (reliable loading),
+// and only trigger play via IntersectionObserver when it is in view.
+const LazyVideo: React.FC<React.VideoHTMLAttributes<HTMLVideoElement> & { src: string }> = ({ src, autoPlay, preload = "auto", ...rest }) => {
   const ref = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
+  // Ensure muted for autoplay compliance (iOS/Safari)
+  if (autoPlay && !el.muted) el.muted = true;
+    if (!autoPlay) return; // no need to observe if not auto-playing
     if (typeof IntersectionObserver === "undefined") {
-      // Fallback: set src immediately
-      if (!el.src) el.src = src;
-      if (autoPlay) el.play?.().catch(() => {});
+      el.play?.().catch(() => {});
       return;
     }
     const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          if (!el.src) el.src = src;
-          if (autoPlay) el.play?.().catch(() => {});
-          observer.disconnect();
-        }
-      });
+      if (entries.some((e) => e.isIntersecting)) {
+        el.play?.().catch(() => {});
+        observer.disconnect();
+      }
     }, { rootMargin: "200px" });
     observer.observe(el);
     return () => observer.disconnect();
-  }, [src, autoPlay]);
+  }, [autoPlay]);
 
-  return <video ref={ref} preload="none" {...rest} />;
+  return <video ref={ref} preload={preload} src={src} {...rest} />;
 };
 
 const AboutSection: React.FC = () => {
