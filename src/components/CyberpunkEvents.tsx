@@ -148,7 +148,7 @@ const CyberpunkEventInterface: React.FC = () => {
     <div className="min-h-screen bg-black relative overflow-hidden font-orbitron">
       <DigitalRain />
       {/* Page Heading */}
-      <div className="w-full flex justify-center pt-10 md:pt-8 pb-4 md:pb-0 select-none pointer-events-none">
+  <div className="w-full flex justify-center pt-10 md:pt-8 pb-1 md:pb-0 select-none pointer-events-none">
         <h1
           className="text-center text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white tracking-wider"
           style={{
@@ -171,7 +171,7 @@ const CyberpunkEventInterface: React.FC = () => {
       </div>
       {isMobile ? (
         <div
-          className="relative w-full flex flex-col items-center pt-20 pb-16 px-2 overflow-hidden select-none"
+          className="relative w-full flex flex-col items-center pt-2 pb-12 px-2 overflow-hidden select-none"
           onPointerDown={(e) => handlePointerDown(e.clientX)}
           onPointerMove={(e) => handlePointerMove(e.clientX)}
           onPointerUp={endDrag}
