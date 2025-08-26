@@ -85,8 +85,9 @@ const CyberpunkEventInterface: React.FC = () => {
      {
        title: "Defuse 2.0",
        description: "A high-tension test of teamwork. One player is the 'Brains' with the puzzles, the other is the 'Hands' with the wire cutters. Your only connection is a walkie-talkie. In a race against time, clear communication is everything. Can your duo stay cool and cut the right wire?",
-       date: "10th Sept 2025",
-       venue: "Main Chowk",
+       date: "14th Sept 2025",
+       time: "12:00 PM",
+       venue: "Old Mess",
    poster: "/events/frames/defuse.png",
    registerUrl: "https://docs.google.com/forms/d/1KRb45tBUgEoX84c8r8Gy_pf59GJ5eD5AI9ukJ0Xe6rU/viewform?edit_requested=true",
    },

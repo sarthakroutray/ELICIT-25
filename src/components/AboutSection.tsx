@@ -186,7 +186,7 @@ const AboutSection: React.FC = () => {
                         textShadow: "0 0 8px #a855f7",
                       }}
                     >
-                      A futuristic platform that blends creativity with innovation.
+                      A fest that blends creativity with innovation.
                       Explore the possibilities of design, tech, and imagination
                       coming together in harmony. This is Elicit 25. The biggest
                       techfest of MUJ. A must have experience. We celebrate 10 years
@@ -402,7 +402,7 @@ const AboutSection: React.FC = () => {
         textShadow: "0 0 6px #00ffff",
       }}
     >
-      A futuristic platform that 
+      A fest that 
       {"\n"}blends creativity with
       {"\n"}innovation.
       {"\n"}Explore the possibilities of 
