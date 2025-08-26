@@ -33,6 +33,22 @@ const CyberpunkEventInterface: React.FC = () => {
     return () => window.removeEventListener('resize', onResize);
   }, []);
 
+  // Always start at top when navigating here (especially on mobile)
+  useEffect(() => {
+    let prev: ScrollRestoration | undefined;
+    try {
+      prev = window.history.scrollRestoration as ScrollRestoration;
+      window.history.scrollRestoration = 'manual';
+    } catch {}
+    // Scroll to top after mount
+    window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+    return () => {
+      try {
+        if (prev) window.history.scrollRestoration = prev;
+      } catch {}
+    };
+  }, []);
+
   const POSTER_FALLBACK = '/events/frames/Defuse.png';
   interface EventCard {
     title: string;
