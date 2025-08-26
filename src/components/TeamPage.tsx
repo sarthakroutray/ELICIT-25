@@ -43,7 +43,7 @@ const TeamPage: React.FC = () => {
           handle="agamB"
           status="Online"
           contactText="Contact Me"
-          avatarUrl="/speakers/speaker1.png"
+          avatarUrl="/team/agam.png"
           showUserInfo={true}
           enableTilt={true}
             />
@@ -57,7 +57,7 @@ const TeamPage: React.FC = () => {
           handle="pranavD"
           status="Online"
           contactText="Contact Me"
-          avatarUrl="/speakers/speaker1.png"
+          avatarUrl="/team/pranav.png"
           showUserInfo={true}
           enableTilt={true}
             />
@@ -71,7 +71,7 @@ const TeamPage: React.FC = () => {
           handle="parthavS"
           status="Online"
           contactText="Ping Me"
-          avatarUrl="/speakers/speaker1.png"
+          avatarUrl="/team/parthav.png"
           showUserInfo={true}
           enableTilt={true}
             />

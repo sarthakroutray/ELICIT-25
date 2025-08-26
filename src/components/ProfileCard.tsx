@@ -20,6 +20,9 @@ interface ProfileCardProps {
   contactText?: string;
   showUserInfo?: boolean;
   onContactClick?: () => void;
+  // New: height controls
+  cardHeight?: number | string; // e.g., 420, '420px', '60vh'
+  cardMaxHeight?: number | string; // e.g., 520, '520px'
 }
 
 const DEFAULT_BEHIND_GRADIENT =
@@ -73,6 +76,8 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
   contactText = "Contact",
   showUserInfo = true,
   onContactClick,
+  cardHeight,
+  cardMaxHeight,
 }) => {
   const wrapRef = useRef<HTMLDivElement>(null);
   const cardRef = useRef<HTMLDivElement>(null);
@@ -297,8 +302,10 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
           ? (behindGradient ?? DEFAULT_BEHIND_GRADIENT)
           : "none",
         "--inner-gradient": innerGradient ?? DEFAULT_INNER_GRADIENT,
+    ...(cardHeight !== undefined ? { "--card-height": typeof cardHeight === 'number' ? `${cardHeight}px` : cardHeight } : {}),
+    ...(cardMaxHeight !== undefined ? { "--card-max-height": typeof cardMaxHeight === 'number' ? `${cardMaxHeight}px` : cardMaxHeight } : {}),
       }) as React.CSSProperties,
-    [iconUrl, grainUrl, showBehindGradient, behindGradient, innerGradient]
+  [iconUrl, grainUrl, showBehindGradient, behindGradient, innerGradient, cardHeight, cardMaxHeight]
   );
 
   const handleContactClick = useCallback(() => {
