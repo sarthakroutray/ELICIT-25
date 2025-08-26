@@ -29,7 +29,7 @@ const AboutSection: React.FC = () => {
           SYSTEM CORE[03]
         </div>
     <h1 
-      className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 tracking-wider text-center"
+      className="text-4xl mr-[160px] md:text-5xl lg:text-6xl font-bold text-white mb-6 tracking-wider text-center"
             style={{
               fontFamily: 'Orbitron, monospace',
               textShadow: `
@@ -62,31 +62,37 @@ const AboutSection: React.FC = () => {
               }}
             ></div>
 
-            <div
-              className="relative ml-20 pr-8 flex-shrink-0 h-[500px] w-[1200px] m-8 mr-2 mt-8"
-              style={{
-                overflow: "visible",
-              }}
-            >
-              <div
-                style={{
-                  height: "100%",
-                  width: "100%",
-                  background: "rgba(49, 120, 136, 0.09)",
-                  border: "1px solid #4db6d0ff",
-                  borderRadius: "1rem",
-                  boxShadow: `
-                    0 0 12px 2px #e1e0e304,
-                    0 0 24px 6px rgba(230, 226, 234, 0.11),
-                    inset 0 0 12px rgba(192, 132, 252, 0.25),
-                    inset 0 0 24px rgba(192, 132, 252, 0.15)
-                  `,
-                  backdropFilter: "blur(2px)",
-                  WebkitBackdropFilter: "blur(2px)",
-                }}
-              >
-                {/* content here */}
-              </div>
+  <div
+  className="relative mx-auto mt-4 mb-12 h-[500px] w-full max-w-[1200px] flex-shrink-0"
+  style={{
+    overflow: "hidden", // make sure video doesn't overflow rounded corners
+    borderRadius: "1rem",
+    boxShadow: `
+      0 0 12px 2px #e1e0e304,
+      0 0 24px 6px rgba(230, 226, 234, 0.11),
+      inset 0 0 12px rgba(192, 132, 252, 0.25),
+      inset 0 0 24px rgba(192, 132, 252, 0.15)
+    `,
+  }}
+>
+ <video
+  src="/About/Elicit.mp4"
+  autoPlay
+  loop
+  muted
+  playsInline
+  style={{
+    width: "100%",
+    height: "100%",
+    objectFit: "cover",
+    borderRadius: "1rem",
+  }}
+/>
+
+  <div className="absolute inset-0 flex items-center justify-center">
+    {/* overlay content if needed */}
+  </div>
+
             </div>
 
             <p
@@ -160,7 +166,7 @@ const AboutSection: React.FC = () => {
                 </div>
               </div>
 
-              <div className="flex flex-col justify-between h-[500px] w-[740px]">
+              <div className="flex mr-[100px] flex-col justify-between h-[500px] w-[740px]">
                 <div className="overflow-hidden rounded-xl h-[280px] flex items-center">
                   <motion.div
                     className="flex gap-6 px-6"
@@ -247,20 +253,34 @@ const AboutSection: React.FC = () => {
         </div>
 
         {/* Left info box simplified */}
-        <div
-          className="bg-[rgba(49,120,136,0.09)] border border-cyan-400 rounded-lg p-6 mb-6 shadow-inner overflow-hidden"
-          style={{
-            boxShadow: `
-              0 0 12px 2px #e1e0e304,
-              0 0 24px 6px rgba(230, 226, 234, 0.11),
-              inset 0 0 12px rgba(192, 132, 252, 0.25),
-              inset 0 0 24px rgba(192, 132, 252, 0.15)
-            `,
-              height: "200px",
-          }}
-        >
-          {/* Content placeholder for left box */}
-        </div>
+<div
+  className="bg-[rgba(49,120,136,0.09)] border border-cyan-400 rounded-lg  mb-6 shadow-inner overflow-hidden flex items-center justify-center"
+  style={{
+    boxShadow: `
+      0 0 12px 2px #e1e0e304,
+      0 0 24px 6px rgba(230, 226, 234, 0.11),
+      inset 0 0 12px rgba(192, 132, 252, 0.25),
+      inset 0 0 24px rgba(192, 132, 252, 0.15)
+    `,
+    height: "200px",
+  }}
+>
+  <video
+    src="/About/ELICIT.mp4"
+    autoPlay
+    loop
+    muted
+    playsInline
+    className="rounded-lg"
+    style={{
+      maxWidth: "100%",
+      maxHeight: "100%",
+      objectFit: "contain", // ✅ makes it fit without cropping
+      borderRadius: "0.5rem",
+    }}
+  />
+</div>
+
 
         {/* 10 YEARS OF ACM heading */}
         <p
