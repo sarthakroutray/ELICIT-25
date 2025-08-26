@@ -218,7 +218,7 @@ const AboutSection: React.FC = () => {
                         onError={(e) => {
                           const img = e.currentTarget as HTMLImageElement;
                           if (img.src.endsWith(`/About/carousel/img${i}.png`)) {
-                            img.src = '/About/elicit.png';
+                            img.src = '/logo.png';
                           }
                         }}
                       />
@@ -246,7 +246,7 @@ const AboutSection: React.FC = () => {
                         onError={(e) => {
                           const img = e.currentTarget as HTMLImageElement;
                           if (img.src.endsWith(`/About/carousel/img${i}.png`)) {
-                            img.src = '/About/elicit.png';
+                            img.src = '/logo.png';
                           }
                         }}
                       />
@@ -308,7 +308,7 @@ const AboutSection: React.FC = () => {
     muted
     playsInline
     className="rounded-lg"
-    poster="/About/elicit.png"
+    poster="/logo.png"
     style={{
       width: "100%",
       height: "100%",
@@ -449,7 +449,7 @@ const AboutSection: React.FC = () => {
           onError={(e) => {
             const img = e.currentTarget as HTMLImageElement;
             if (img.src.endsWith(`/About/carousel/img${i}.png`)) {
-              img.src = '/About/elicit.png';
+              img.src = '/logo.png';
             }
           }}
         />
