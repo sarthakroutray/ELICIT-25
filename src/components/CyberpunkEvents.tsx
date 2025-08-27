@@ -102,7 +102,8 @@ const CyberpunkEventInterface: React.FC = () => {
     },
     {
       title: "Hacks 10.0",
-  description: "Thirty-six hours. One team. Endless possibilities. Welcome to Hacks, the 36-hour offline hackathon where ideas are forged into reality. You'll take your concept from an initial pitch to a working prototype through three intense rounds before the final presentation to the judges. Are you ready to build something incredible?",      date: "17th Sept 2025",
+  description: "Thirty-six hours. One team. Endless possibilities. Welcome to Hacks, the 36-hour offline hackathon where ideas are forged into reality. You'll take your concept from an initial pitch to a working prototype through three intense rounds before the final presentation to the judges. Are you ready to build something incredible?",
+      date: "12th Sept 2025",
       time: "02:00 PM",
       venue: "AB1",
   poster: "/events/frames/hacks10.0.png",
