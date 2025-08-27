@@ -40,14 +40,14 @@ app.post("/api/contact", async (req, res) => {
   }
 });
 
-
+// to check if server is running -> https://elicit-25.onrender.com/
 app.get("/", (req, res) => {
-  res.status(200).send("Server is alive 🚀");
+  res.status(200).send("Server is alive");
 });
 
-// optional: a dedicated health check
+// for server to run every 3 minutes, to check go to -> https://elicit-25.onrender.com/ping
 app.get("/ping", (req, res) => {
-  res.status(200).send("pong 🏓");
+  res.status(200).send("pong");
 });
 
 
