@@ -7,9 +7,10 @@
     "node": ">=20"
   },
   "scripts": {
-  "start": "node index.mjs",
-  "dev": "node index.mjs",
-  "build": "node -e \"console.log('No build step for server (plain Node ESM).');\""
+  "start": "node server.js",
+  "dev": "node server.js",
+  "postinstall": "rm -rf node_modules/.cache || true",
+  "build": "npm ci"
   },
   "dependencies": {
     "compression": "^1.7.5",
