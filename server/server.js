@@ -5,11 +5,11 @@ import cors from "cors";
 
 dotenv.config();
 const app = express();
-app.use(cors({
-  origin: ["https://elicit-25.vercel.app",
-    /\.vercel\.app$/], // allows any vercel preview deployment
-  methods: ["POST"],
-}));
+app.use(cors(
+  // origin: ["https://elicit-25.vercel.app",
+  //   /\.vercel\.app$/], // allows any vercel preview deployment
+  // methods: ["POST"],
+));
 
 
 app.use(express.json());
@@ -40,5 +40,18 @@ app.post("/api/contact", async (req, res) => {
   }
 });
 
+// to check if server is running -> https://elicit-25.onrender.com/
+app.get("/", (req, res) => {
+  res.status(200).send("Server is alive");
+});
+
+// for server to run every 3 minutes, to check go to -> https://elicit-25.onrender.com/ping
+app.get("/ping", (req, res) => {
+  res.status(200).send("pong");
+});
+
+
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));
+
+
