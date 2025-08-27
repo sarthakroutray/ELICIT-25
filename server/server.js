@@ -5,11 +5,11 @@ import cors from "cors";
 
 dotenv.config();
 const app = express();
-app.use(cors({
-  origin: ["https://elicit-25.vercel.app",
-    /\.vercel\.app$/], // allows any vercel preview deployment
-  methods: ["POST"],
-}));
+app.use(cors(
+  // origin: ["https://elicit-25.vercel.app",
+  //   /\.vercel\.app$/], // allows any vercel preview deployment
+  // methods: ["POST"],
+));
 
 
 app.use(express.json());
