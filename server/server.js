@@ -41,7 +41,6 @@ app.post("/api/contact", async (req, res) => {
 });
 
 
-// add this near the bottom of your server.js (or index.mjs)
 app.get("/", (req, res) => {
   res.status(200).send("Server is alive 🚀");
 });
