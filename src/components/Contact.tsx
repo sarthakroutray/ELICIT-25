@@ -34,7 +34,7 @@ const Contact: React.FC = () => {
     try {
       // const base = (import.meta.env.VITE_API_BASE || '').replace(/\/+$/, '');
       // const url = base ? `${base}/api/contact` : '/api/contact';
-      const res = await fetch('https://elicit-25-izlv.onrender.com/api/contact', {
+      const res = await fetch('https://elicit-25.onrender.com/api/contact', {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
