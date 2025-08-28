@@ -14,7 +14,6 @@ import ComingSoon from './components/ComingSoon';
 import TeamPage from './components/TeamPage';
 import './styles/glitch.css';
 import { Analytics } from '@vercel/analytics/react';
-import { SpeedInsights } from '@vercel/speed-insights/next';
 
 
 // Simple wrapper to add spacing + footer for section pages
@@ -47,8 +46,7 @@ function App() {
           <a href="/" className="text-cyan-400 underline">Return Home</a>
         </div></SectionPage>} />
       </Routes>
-      <Analytics />
-      <SpeedInsights />
+  <Analytics />
     </>
   );
 }
