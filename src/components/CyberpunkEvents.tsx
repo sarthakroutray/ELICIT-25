@@ -65,7 +65,7 @@ const CyberpunkEventInterface: React.FC = () => {
   const eventCards: EventCard[] = [
     {
       title: "Keyboard Warriors",
-      description: "Your fingers have survived countless assignments. But are they fast enough to win? Face off in a furiously competitive, three-round showdown to be crowned the fastest typist on campus. Let your fingers fly!",
+      description: "A fast-paced three-round typing competition designed to test speed, accuracy, and focus. Participants will go head-to-head to prove their typing skills under time pressure, with each round getting more challenging.",
       date: "1st Sept 2025",
       time: "5:00 PM",
       venue: "Elicit Chowk",
@@ -75,7 +75,7 @@ const CyberpunkEventInterface: React.FC = () => {
     },
     {
       title: "FUTSAL",
-      description: "Get ready for a blast of pure energy! This is 3v3 football, where non-stop action and raw fun collide. In this fast-paced tournament, quick thinking and even quicker feet decide the winner. Grab two friends, form a team, and prepare for an adrenaline-fueled battle on the court.",
+      description: "A 3v3 football showdown that combines speed, skill, and teamwork. Short matches keep the energy high and ensure every move counts, making it the perfect event for sports and adrenaline lovers.",
       date: "4th Sept 2025",
       time: "4:00pm",
       venue: "Elicit Chowk",
@@ -84,15 +84,16 @@ const CyberpunkEventInterface: React.FC = () => {
     },
      {
        title: "Defuse 2.0",
-       description: "A high-tension test of teamwork. One player is the 'Brains' with the puzzles, the other is the 'Hands' with the wire cutters. Your only connection is a walkie-talkie. In a race against time, clear communication is everything. Can your duo stay cool and cut the right wire?",
-       date: "10th Sept 2025",
-       venue: "Main Chowk",
+       description: "A unique two-person challenge built on communication and problem-solving. One teammate solves puzzles and riddles in a separate room while guiding their partner—equipped with a walkie-talkie—to cut the correct wires. The team that successfully defuses the bomb first claims victory.",
+       date: "14th Sept 2025",
+       time: "12:00 PM",
+       venue: "Old Mess",
    poster: "/events/frames/defuse.png",
    registerUrl: "https://docs.google.com/forms/d/1KRb45tBUgEoX84c8r8Gy_pf59GJ5eD5AI9ukJ0Xe6rU/viewform?edit_requested=true",
    },
     {
       title: "Final Destination",
-      description: "Hackers and developers unite\nto push the boundaries of\nwhat's possible in cyberspace\nLearn cutting-edge techniques\nand network with the elite\nof the digital underground",
+      description: "An engaging, campus-wide treasure hunt inspired by the thrill of discovery. Teams will solve clues spread across the campus in three phases, racing against each other to reach the final destination and secure the treasure.",
       date: "6th Sept 2025",
       time: "10:30 AM",
       venue: "AB2 Lobby",
@@ -101,11 +102,20 @@ const CyberpunkEventInterface: React.FC = () => {
     },
     {
       title: "Hacks 10.0",
-  description: "Thirty-six hours. One team. Endless possibilities. Welcome to Hacks, the 36-hour offline hackathon where ideas are forged into reality. You'll take your concept from an initial pitch to a working prototype through three intense rounds before the final presentation to the judges. Are you ready to build something incredible?",      date: "17th Sept 2025",
+  description: "The 10th edition of MUJ’s flagship 36-hour offline hackathon. Participants will brainstorm, design, and present innovative solutions across three stages: the PPT round, prototype development, and a final judging session before an expert panel. Beyond competition, HACKS offers freshers an opportunity to learn, collaborate, and experience the excitement of real-world problem-solving.",
+      date: "12th Sept 2025",
       time: "02:00 PM",
       venue: "AB1",
   poster: "/events/frames/hacks10.0.png",
   registerUrl: "https://docs.google.com/forms/d/e/1FAIpQLSdYYACaGPrY36eIwcMM-FBYs9UnpHH3NNJOPbwMynuidt38RQ/viewform", // TODO: replace with Google Form URL
+    },
+    {
+      title: "Stock Market Showdown",
+  description: "Think you have what it takes to conquer the markets? Test your trading instincts and strategic skills at Stock Market Showdown, an exciting virtual event of Elicit.",
+      date: "7th-13th Sept 2025",
+      venue: "STOCKGRO APP(Online)",
+  poster: "/events/frames/stockm.png",
+  registerUrl: "https://linktr.ee/ROAD_TO_ELICIT_25", // TODO: replace with Google Form URL
     },
   ];
 
@@ -394,3 +404,4 @@ const CyberpunkEventInterface: React.FC = () => {
 };
 
 export default CyberpunkEventInterface;
+

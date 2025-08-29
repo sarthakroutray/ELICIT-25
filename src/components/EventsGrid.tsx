@@ -16,7 +16,7 @@ const POSTER_PATHS: string[] = [
   '/events/frames/Defuse.png', // 3 
   '/events/frames/fd.png', // 4
   '/events/frames/hacks10.0.png', // 5
-  '/events/frames/comingsoon.png', // 6
+  '/events/frames/stockm.png', // 6
   '/events/frames/comingsoon.png', // 7
   '/events/frames/comingsoon.png', // 8
   '/events/frames/comingsoon.png', // 9
