@@ -109,6 +109,14 @@ const CyberpunkEventInterface: React.FC = () => {
   poster: "/events/frames/hacks10.0.png",
   registerUrl: "https://docs.google.com/forms/d/e/1FAIpQLSdYYACaGPrY36eIwcMM-FBYs9UnpHH3NNJOPbwMynuidt38RQ/viewform", // TODO: replace with Google Form URL
     },
+    {
+      title: "Stock Market Showdown",
+  description: "Think you have what it takes to conquer the markets? Test your trading instincts and strategic skills at Stock Market Showdown, an exciting virtual event of Elicit.",
+      date: "7th-13th Sept 2025",
+      venue: "STOCKGRO APP(Online)",
+  poster: "/events/frames/stockm.png",
+  registerUrl: "https://linktr.ee/ROAD_TO_ELICIT_25", // TODO: replace with Google Form URL
+    },
   ];
 
   const handleNext = () =>
