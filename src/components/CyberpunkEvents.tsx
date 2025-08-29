@@ -93,7 +93,7 @@ const CyberpunkEventInterface: React.FC = () => {
    },
     {
       title: "Final Destination",
-      description: "A unique two-person challenge built on communication and problem-solving. One teammate solves puzzles and riddles in a separate room while guiding their partner—equipped with a walkie-talkie—to cut the correct wires. The team that successfully defuses the bomb first claims victory.",
+      description: "An engaging, campus-wide treasure hunt inspired by the thrill of discovery. Teams will solve clues spread across the campus in three phases, racing against each other to reach the final destination and secure the treasure.",
       date: "6th Sept 2025",
       time: "10:30 AM",
       venue: "AB2 Lobby",
@@ -396,3 +396,4 @@ const CyberpunkEventInterface: React.FC = () => {
 };
 
 export default CyberpunkEventInterface;
+
