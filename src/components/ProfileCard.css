@@ -186,11 +186,13 @@
 }
 
 .pc-avatar-content .avatar {
-  width: 100%;
+   width: 100%;
+  height: 100%;        /* ensures it always fills the card */
+  object-fit: cover;   /* keeps proportions, crops excess */
   position: absolute;
   left: 50%;
   transform: translateX(-50%) scale(1);
-  bottom: 2px;
+  bottom: 0;           /* align to bottom nicely */
   opacity: calc(1.75 - var(--pointer-from-center));
 }
 
@@ -494,3 +496,20 @@
     border-radius: 50px;
   }
 }
+
+.pc-team-grid {
+  display: justify-evenly;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  justify-items: center;   /* centers cards inside each grid cell */
+  gap: 5rem;              /* spacing between cards */
+}
+
+
+.pc-avatar-content .avatar {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;  /* crops instead of squishing */
+  position: relative; /* instead of absolute */
+}
+
+
