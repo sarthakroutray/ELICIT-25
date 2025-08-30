@@ -41,32 +41,51 @@ const SponsorsPage: React.FC = () => {
           </h1>
 
           {/* Permanent box for video/logo */}
-          <div className="mx-auto w-[500px] md:w-[600px] h-auto mb-6 flex items-center justify-center bg-black rounded-lg overflow-hidden ">
-            {!videoEnded ? (
-              <video
-                src="/sponsors/VIVOLOAD.mp4"
-                autoPlay
-                muted
-                onEnded={() => setVideoEnded(true)}
-                className="w-full h-full object-contain"
-              />
-            ) : (
-              <img
-                src="/sponsors/vivoo.jpg"
-                alt="Vivo Tagline"
-                className="w-full h-full object-contain"
-              />
-            )}
-          </div>
+      <div className="relative mx-auto w-[500px] md:w-[600px] h-auto mb-6 flex items-center justify-center">
+  {/* Video/Image */}
+  <div className="w-full h-full bg-black rounded-lg overflow-hidden">
+    {!videoEnded ? (
+      <video
+        src="/sponsors/VIVOLOAD.mp4"
+        autoPlay
+        muted
+        onEnded={() => setVideoEnded(true)}
+        className="w-full h-full object-contain"
+      />
+    ) : (
+      <img
+        src="/sponsors/vivoo.jpg"
+        alt="Vivo Tagline"
+        className="w-full h-full object-contain"
+      />
+    )}
+  </div>
 
-          <p className="max-w-2xl mx-auto text-gray-300 text-lg leading-relaxed">
-            Vivo is a global technology company specializing in smartphones and
-            innovative devices. As our Title Sponsor, Vivo brings performance,
+  {/* PNG Border Overlay */}
+  <img
+    src="/sponsors/frames.png"
+    alt="Border Frame"
+    className="absolute top-0 left-0 w-full h-full object-contain pointer-events-none"
+  />
+</div>
 
-            style, and innovation to the forefront of this event.
 
-          
-          </p>
+          <p
+  className="
+    w-full
+    max-w-sm sm:max-w-2xl   /* mobile = smaller width, desktop = larger width */
+    mx-auto px-4
+    text-gray-300
+    text-sm sm:text-lg      /* readable on mobile, bigger on desktop */
+    leading-relaxed
+    break-words
+  "
+>
+  Vivo is a global technology company specializing in smartphones and
+  innovative devices. As our Title Sponsor, Vivo brings performance,
+  style, and innovation to the forefront of this event.
+</p>
+
            <div className="mt-4 text-center">
         <a
           href="https://www.vivo.com"   // 🔗 official Vivo link
