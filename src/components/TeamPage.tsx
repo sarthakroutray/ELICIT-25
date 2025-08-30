@@ -87,12 +87,12 @@ const TeamPage: React.FC = () => {
 
 
       {/* Sections */}
-      <Section title="CONVENERS" members={conveners} />
-      <Section title="MANAGING DIRECTORS" members={directors} />
+      
+      {/* <Section title="MANAGING DIRECTORS" members={directors} />
       <Section title="MARKETING" members={marketing} />
       <Section title="OPERATIONS" members={operations} />
       <Section title="TECHNICAL" members={technical} />
-      <Section title="SnC" members={snc} />
+      <Section title="SnC" members={snc} /> */}
       {/* Team content */}
       <div className="relative z-10 px-4 sm:px-6 md:px-8 py-12 md:py-16 max-w-7xl mx-auto">
         <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-center text-white-400 mb-8 md:mb-12"
@@ -158,7 +158,7 @@ const TeamPage: React.FC = () => {
 
 
     <div className="relative z-10 px-4 sm:px-6 md:px-8 py-16 md:py-24 max-w-7xl mx-auto">
-  <h2 className="text-3xl sm:text-4xl md:text-5xl mt-4 md:mt-8 font-bold text-center text-white-400 mb-8 md:mb-12"
+  {/* <h2 className="text-3xl sm:text-4xl md:text-5xl mt-4 md:mt-8 font-bold text-center text-white-400 mb-8 md:mb-12"
   style={{
               fontFamily: 'Orbitron, monospace',
               textShadow: `
@@ -172,11 +172,11 @@ const TeamPage: React.FC = () => {
               `,
               filter: 'drop-shadow(4px 4px 8px rgba(0,0,0,0.9))',
             }}
-          >MANAGING DIRECTORS</h2>
+          >MANAGING DIRECTORS</h2> */}
   
 <div className="flex flex-wrap justify-evenly items-center gap-8 sm:gap-10 lg:gap-16 max-w-6xl mx-auto">
   {/* Sukrit */}
-  <div className="w-[90vw] max-w-[240px]">
+  {/* <div className="w-[90vw] max-w-[240px]">
     <ProfileCard
       name="SUKRIT SINHA"
       title="Managing Director"
@@ -184,26 +184,26 @@ const TeamPage: React.FC = () => {
       avatarUrl="/team/sukrit.png"
       showUserInfo={true}
       enableTilt={true}
-    />
-  </div>
+    /> */}
+  {/* </div> */}
 
   {/* Mumukshu */}
-  <div className="w-[90vw] max-w-[240px]">
-    <ProfileCard
+  {/* <div className="w-[90vw] max-w-[240px]">
+    {/* <ProfileCard
       name="MUMUKSHU BOHARA"
       title="Managing Director"
       handle="mumukshuB"
       avatarUrl="/team/mumukshu.png"
       showUserInfo={true}
       enableTilt={true}
-    />
-  </div>
+    /> */}
+  {/* </div>  */}
 </div>
  
 
 {/* ===== EXECUTIVES ===== */}
 <div className="relative z-10  px-4 sm:px-6 md:px-8 py-16 md:py-24 max-w-7xl mx-auto justify-evenly">
-  <h2
+  {/* <h2
     className="text-3xl sm:text-4xl md:text-5xl mt-4 md:mt-8 font-bold text-center mb-8 md:mb-12"
     style={{
       fontFamily: "Orbitron, monospace",
@@ -220,191 +220,191 @@ const TeamPage: React.FC = () => {
     }}
   >
     EXECUTIVES
-  </h2>
+  </h2> */}
 
   {/* Grid Layout */}
   <div className="flex flex-wrap gap-24 justify-evenly mr-2 gap-y-10 w-full max-w-10xl mx-auto">
     {[
-      {
-        name: "Executive 1",
-        title: "Executive",
-        handle: "exec1",
-        avatarUrl: "/team/exec1.png",
-      },
-      {
-        name: "Executive 2",
-        title: "Executive",
-        handle: "exec2",
-        avatarUrl: "/team/exec2.png",
-      },
-      {
-        name: "Executive 3",
-        title: "Executive",
-        handle: "exec3",
-        avatarUrl: "/team/exec3.png",
-      },
-      {
-        name: "Executive 4",
-        title: "Executive",
-        handle: "exec4",
-        avatarUrl: "/team/exec4.png",
-      },
-      {
-        name: "Executive 4",
-        title: "Executive",
-        handle: "exec4",
-        avatarUrl: "/team/exec4.png",
-      },
-      {
-        name: "Executive 4",
-        title: "Executive",
-        handle: "exec4",
-        avatarUrl: "/team/exec4.png",
-      },
-      {
-        name: "Executive 4",
-        title: "Executive",
-        handle: "exec4",
-        avatarUrl: "/team/exec4.png",
-      },
-      {
-        name: "Executive 4",
-        title: "Executive",
-        handle: "exec4",
-        avatarUrl: "/team/exec4.png",
-      },
-      {
-        name: "Executive 4",
-        title: "Executive",
-        handle: "exec4",
-        avatarUrl: "/team/exec4.png",
-      },
-      {
-        name: "Executive 4",
-        title: "Executive",
-        handle: "exec4",
-        avatarUrl: "/team/exec4.png",
-      },
-      {
-        name: "Executive 4",
-        title: "Executive",
-        handle: "exec4",
-        avatarUrl: "/team/exec4.png",
-      },
-      {
-        name: "Executive 4",
-        title: "Executive",
-        handle: "exec4",
-        avatarUrl: "/team/exec4.png",
-      },
-      {
-        name: "Executive 4",
-        title: "Executive",
-        handle: "exec4",
-        avatarUrl: "/team/exec4.png",
-      },
-      {
-        name: "Executive 4",
-        title: "Executive",
-        handle: "exec4",
-        avatarUrl: "/team/exec4.png",
-      },
-      {
-        name: "Executive 4",
-        title: "Executive",
-        handle: "exec4",
-        avatarUrl: "/team/exec4.png",
-      },
-      {
-        name: "Executive 4",
-        title: "Executive",
-        handle: "exec4",
-        avatarUrl: "/team/exec4.png",
-      },
-      {
-        name: "Executive 4",
-        title: "Executive",
-        handle: "exec4",
-        avatarUrl: "/team/exec4.png",
-      },
-      {
-        name: "Executive 4",
-        title: "Executive",
-        handle: "exec4",
-        avatarUrl: "/team/exec4.png",
-      },
-      {
-        name: "Executive 4",
-        title: "Executive",
-        handle: "exec4",
-        avatarUrl: "/team/exec4.png",
-      },
-      {
-        name: "Executive 4",
-        title: "Executive",
-        handle: "exec4",
-        avatarUrl: "/team/exec4.png",
-      },
-      {
-        name: "Executive 4",
-        title: "Executive",
-        handle: "exec4",
-        avatarUrl: "/team/exec4.png",
-      },
-      {
-        name: "Executive 4",
-        title: "Executive",
-        handle: "exec4",
-        avatarUrl: "/team/exec4.png",
-      },
-      {
-        name: "Executive 4",
-        title: "Executive",
-        handle: "exec4",
-        avatarUrl: "/team/exec4.png",
-      },
-      {
-        name: "Executive 4",
-        title: "Executive",
-        handle: "exec4",
-        avatarUrl: "/team/exec4.png",
-      },
-      {
-        name: "Executive 4",
-        title: "Executive",
-        handle: "exec4",
-        avatarUrl: "/team/exec4.png",
-      },
-      {
-        name: "Executive 4",
-        title: "Executive",
-        handle: "exec4",
-        avatarUrl: "/team/exec4.png",
-      },
-      {
-        name: "Executive 4",
-        title: "Executive",
-        handle: "exec4",
-        avatarUrl: "/team/exec4.png",
-      },
-      {
-        name: "Executive 4",
-        title: "Executive",
-        handle: "exec4",
-        avatarUrl: "/team/exec4.png",
-      },
-      {
-        name: "Executive 4",
-        title: "Executive",
-        handle: "exec4",
-        avatarUrl: "/team/exec4.png",
-      },
-      {
-        name: "Executive 4",
-        title: "Executive",
-        handle: "exec4",
-        avatarUrl: "/team/exec4.png",
-      },
+      // {
+      //   name: "Executive 1",
+      //   title: "Executive",
+      //   handle: "exec1",
+      //   avatarUrl: "/team/exec1.png",
+      // },
+      // {
+      //   name: "Executive 2",
+      //   title: "Executive",
+      //   handle: "exec2",
+      //   avatarUrl: "/team/exec2.png",
+      // },
+      // {
+      //   name: "Executive 3",
+      //   title: "Executive",
+      //   handle: "exec3",
+      //   avatarUrl: "/team/exec3.png",
+      // },
+      // {
+      //   name: "Executive 4",
+      //   title: "Executive",
+      //   handle: "exec4",
+      //   avatarUrl: "/team/exec4.png",
+      // },
+      // {
+      //   name: "Executive 4",
+      //   title: "Executive",
+      //   handle: "exec4",
+      //   avatarUrl: "/team/exec4.png",
+      // },
+      // {
+      //   name: "Executive 4",
+      //   title: "Executive",
+      //   handle: "exec4",
+      //   avatarUrl: "/team/exec4.png",
+      // },
+      // {
+      //   name: "Executive 4",
+      //   title: "Executive",
+      //   handle: "exec4",
+      //   avatarUrl: "/team/exec4.png",
+      // },
+      // {
+      //   name: "Executive 4",
+      //   title: "Executive",
+      //   handle: "exec4",
+      //   avatarUrl: "/team/exec4.png",
+      // },
+      // {
+      //   name: "Executive 4",
+      //   title: "Executive",
+      //   handle: "exec4",
+      //   avatarUrl: "/team/exec4.png",
+      // },
+      // {
+      //   name: "Executive 4",
+      //   title: "Executive",
+      //   handle: "exec4",
+      //   avatarUrl: "/team/exec4.png",
+      // },
+      // {
+      //   name: "Executive 4",
+      //   title: "Executive",
+      //   handle: "exec4",
+      //   avatarUrl: "/team/exec4.png",
+      // },
+      // {
+      //   name: "Executive 4",
+      //   title: "Executive",
+      //   handle: "exec4",
+      //   avatarUrl: "/team/exec4.png",
+      // },
+      // {
+      //   name: "Executive 4",
+      //   title: "Executive",
+      //   handle: "exec4",
+      //   avatarUrl: "/team/exec4.png",
+      // },
+      // {
+      //   name: "Executive 4",
+      //   title: "Executive",
+      //   handle: "exec4",
+      //   avatarUrl: "/team/exec4.png",
+      // },
+      // {
+      //   name: "Executive 4",
+      //   title: "Executive",
+      //   handle: "exec4",
+      //   avatarUrl: "/team/exec4.png",
+      // },
+      // {
+      //   name: "Executive 4",
+      //   title: "Executive",
+      //   handle: "exec4",
+      //   avatarUrl: "/team/exec4.png",
+      // },
+      // {
+      //   name: "Executive 4",
+      //   title: "Executive",
+      //   handle: "exec4",
+      //   avatarUrl: "/team/exec4.png",
+      // },
+      // {
+      //   name: "Executive 4",
+      //   title: "Executive",
+      //   handle: "exec4",
+      //   avatarUrl: "/team/exec4.png",
+      // },
+      // {
+      //   name: "Executive 4",
+      //   title: "Executive",
+      //   handle: "exec4",
+      //   avatarUrl: "/team/exec4.png",
+      // },
+      // {
+      //   name: "Executive 4",
+      //   title: "Executive",
+      //   handle: "exec4",
+      //   avatarUrl: "/team/exec4.png",
+      // },
+      // {
+      //   name: "Executive 4",
+      //   title: "Executive",
+      //   handle: "exec4",
+      //   avatarUrl: "/team/exec4.png",
+      // },
+      // {
+      //   name: "Executive 4",
+      //   title: "Executive",
+      //   handle: "exec4",
+      //   avatarUrl: "/team/exec4.png",
+      // },
+      // {
+      //   name: "Executive 4",
+      //   title: "Executive",
+      //   handle: "exec4",
+      //   avatarUrl: "/team/exec4.png",
+      // },
+      // {
+      //   name: "Executive 4",
+      //   title: "Executive",
+      //   handle: "exec4",
+      //   avatarUrl: "/team/exec4.png",
+      // },
+      // {
+      //   name: "Executive 4",
+      //   title: "Executive",
+      //   handle: "exec4",
+      //   avatarUrl: "/team/exec4.png",
+      // },
+      // {
+      //   name: "Executive 4",
+      //   title: "Executive",
+      //   handle: "exec4",
+      //   avatarUrl: "/team/exec4.png",
+      // },
+      // {
+      //   name: "Executive 4",
+      //   title: "Executive",
+      //   handle: "exec4",
+      //   avatarUrl: "/team/exec4.png",
+      // },
+      // {
+      //   name: "Executive 4",
+      //   title: "Executive",
+      //   handle: "exec4",
+      //   avatarUrl: "/team/exec4.png",
+      // },
+      // {
+      //   name: "Executive 4",
+      //   title: "Executive",
+      //   handle: "exec4",
+      //   avatarUrl: "/team/exec4.png",
+      // },
+      // {
+      //   name: "Executive 4",
+      //   title: "Executive",
+      //   handle: "exec4",
+      //   avatarUrl: "/team/exec4.png",
+      // },
       // 👉 keep adding up to 30 (or however many you want)
    ].map((member, i) => (
   <div key={i} className="w-full max-w-[240px] mx-auto ">
