@@ -115,7 +115,7 @@ const CyberpunkEventInterface: React.FC = () => {
       date: "7th-13th Sept 2025",
       venue: "STOCKGRO APP(Online)",
   poster: "/events/frames/stockm.png",
-  registerUrl: "https://linktr.ee/ROAD_TO_ELICIT_25", // TODO: replace with Google Form URL
+  registerUrl: "https://docs.google.com/forms/d/e/1FAIpQLScsShdnDVMM5vCg2dgSmrGFD8N4xsY8i9cnNYLYbakr2LsLgw/viewform", // TODO: replace with Google Form URL
     },
   ];
 
