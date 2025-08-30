@@ -103,9 +103,9 @@ const CyberpunkEventInterface: React.FC = () => {
     {
       title: "Hacks 10.0",
   description: "The 10th edition of MUJ’s flagship 36-hour offline hackathon. Participants will brainstorm, design, and present innovative solutions across three stages: the PPT round, prototype development, and a final judging session before an expert panel. Beyond competition, HACKS offers freshers an opportunity to learn, collaborate, and experience the excitement of real-world problem-solving.",
-      date: "12th Sept 2025",
-      time: "02:00 PM",
+      date: "12-14th Sept 2025",
       venue: "AB1",
+      prize: "75K+",
   poster: "/events/frames/hacks10.0.png",
   registerUrl: "https://docs.google.com/forms/d/e/1FAIpQLSdYYACaGPrY36eIwcMM-FBYs9UnpHH3NNJOPbwMynuidt38RQ/viewform", // TODO: replace with Google Form URL
     },
