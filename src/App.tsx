@@ -14,6 +14,7 @@ import ComingSoon from './components/ComingSoon';
 import TeamPage from './components/TeamPage';
 import './styles/glitch.css';
 import { Analytics } from '@vercel/analytics/react';
+import SponsorsPage from './components/SponsorsPage';
 
 
 // Simple wrapper to add spacing + footer for section pages
@@ -36,7 +37,7 @@ function App() {
             <Route path="/events/:id" element={<SectionPage><CyberpunkEventInterface /></SectionPage>} />
     <Route path="/speakers" element={<SectionPage><ComingSoon title="SPEAKERS – COMING SOON" note="Stay tuned for the speaker lineup." /></SectionPage>} />
     <Route path="/carousel" element={<SectionPage><Carousel /></SectionPage>} />
-    <Route path="/sponsors" element={<SectionPage><ComingSoon title="SPONSORS – COMING SOON" note="We\'re finalizing our partners." /></SectionPage>} />
+    <Route path="/sponsors" element={<SectionPage><SponsorsPage /></SectionPage>} />
     <Route path="/contact" element={<SectionPage><Contact /></SectionPage>} />
     <Route path="/register" element={<SectionPage><Register /></SectionPage>} />
     <Route path="/team" element={<SectionPage><TeamPage /></SectionPage>} />
