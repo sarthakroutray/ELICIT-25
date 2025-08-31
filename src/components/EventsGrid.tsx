@@ -13,7 +13,7 @@ interface PosterBox { id: number; poster: string; }
 const POSTER_PATHS: string[] = [
   '/events/frames/keyboard.png', // 1
   '/events/frames/futsal.png', // 2
-  '/events/frames/Defuse.png', // 3 
+  '/events/frames/Defuse2.png', // 3 
   '/events/frames/fd.png', // 4
   '/events/frames/hacks10.0.png', // 5
   '/events/frames/stockm.png', // 6
