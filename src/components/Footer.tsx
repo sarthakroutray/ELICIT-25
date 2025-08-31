@@ -25,7 +25,6 @@ const sections: FooterSection[] = [
       { label: 'Support', href: '/contact' },
       { label: 'Sponsorships', href: '/sponsors' },
       { label: 'Team', href: '/team' },
-      { label: 'Get Updates', href: '/updates' },
     ],
   },
   
