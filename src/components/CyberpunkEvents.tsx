@@ -108,6 +108,14 @@ const CyberpunkEventInterface: React.FC = () => {
   poster: "/events/frames/hacks10.0.png",
   registerUrl: "https://docs.google.com/forms/d/e/1FAIpQLSdYYACaGPrY36eIwcMM-FBYs9UnpHH3NNJOPbwMynuidt38RQ/viewform", // TODO: replace with Google Form URL
     },
+    {
+      title: "Devcon",
+  description: "Welcome to Devcon, the Tech MUN-style event where you’ll represent companies and dive into exciting tech agendas. From futuristic problem-solving to critical thinking, every debate challenges you to push boundaries. But it’s more than discussion - it’s about leadership, innovation, and teamwork in action.",      date: "14th Sept 2025",
+      time: "11:00AM",
+      venue: "OLD MESS",
+  poster: "/events/frames/devcon.png",
+  registerUrl: "https://docs.google.com/forms/d/e/1FAIpQLSc395msYk9Z_AKDbQODx5hNuoSXwyq66hfM2_vtOPqjWcfObQ/viewform", // TODO: replace with Google Form URL
+    },
   ];
 
   const handleNext = () =>
