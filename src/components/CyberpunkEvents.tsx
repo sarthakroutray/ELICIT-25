@@ -110,21 +110,20 @@ const CyberpunkEventInterface: React.FC = () => {
   registerUrl: "https://docs.google.com/forms/d/e/1FAIpQLSdYYACaGPrY36eIwcMM-FBYs9UnpHH3NNJOPbwMynuidt38RQ/viewform", // TODO: replace with Google Form URL
     },
     {
-<<<<<<< HEAD
-      title: "Devcon",
-  description: "Welcome to Devcon, the Tech MUN-style event where you’ll represent companies and dive into exciting tech agendas. From futuristic problem-solving to critical thinking, every debate challenges you to push boundaries. But it’s more than discussion - it’s about leadership, innovation, and teamwork in action.",      date: "14th Sept 2025",
-      time: "11:00AM",
-      venue: "OLD MESS",
-  poster: "/events/frames/devcon.png",
-  registerUrl: "https://docs.google.com/forms/d/e/1FAIpQLSc395msYk9Z_AKDbQODx5hNuoSXwyq66hfM2_vtOPqjWcfObQ/viewform", // TODO: replace with Google Form URL
-=======
       title: "Stock Market Showdown",
   description: "Think you have what it takes to conquer the markets? Test your trading instincts and strategic skills at Stock Market Showdown, an exciting virtual event of Elicit.",
       date: "7th-13th Sept 2025",
       venue: "STOCKGRO APP(Online)",
   poster: "/events/frames/stockm.png",
   registerUrl: "https://docs.google.com/forms/d/e/1FAIpQLScsShdnDVMM5vCg2dgSmrGFD8N4xsY8i9cnNYLYbakr2LsLgw/viewform", // TODO: replace with Google Form URL
->>>>>>> 30b764d9f47c88d1e0e3fcd923c02a00f42449ae
+    },
+    {
+    title: "Devcon",
+  description: "Welcome to Devcon, the Tech MUN-style event where you’ll represent companies and dive into exciting tech agendas. From futuristic problem-solving to critical thinking, every debate challenges you to push boundaries. But it’s more than discussion - it’s about leadership, innovation, and teamwork in action.",      date: "14th Sept 2025",
+      time: "11:00AM",
+      venue: "OLD MESS",
+  poster: "/events/frames/devcon.png",
+  registerUrl: "https://docs.google.com/forms/d/e/1FAIpQLSc395msYk9Z_AKDbQODx5hNuoSXwyq66hfM2_vtOPqjWcfObQ/viewform", // TODO: replace with Google Form URL
     },
   ];
 
