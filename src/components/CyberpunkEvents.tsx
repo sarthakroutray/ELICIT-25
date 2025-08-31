@@ -88,7 +88,7 @@ const CyberpunkEventInterface: React.FC = () => {
        date: "14th Sept 2025",
        time: "12:00 PM",
        venue: "Old Mess",
-   poster: "/events/frames/defuse.png",
+   poster: "/events/frames/Defuse2.png",
    registerUrl: "https://docs.google.com/forms/d/1KRb45tBUgEoX84c8r8Gy_pf59GJ5eD5AI9ukJ0Xe6rU/viewform?edit_requested=true",
    },
     {
