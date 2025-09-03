@@ -3,6 +3,7 @@ import { Canvas } from '@react-three/fiber';
 import { OrbitControls, PerspectiveCamera } from '@react-three/drei';
 import { motion, AnimatePresence } from 'framer-motion';
 import CyberpunkScene from './CyberpunkScene';
+import { Suspense, lazy } from 'react';
 import GlitchText from './GlitchText';
 import TerminalInterface from './TerminalInterface';
 import CountdownTimer from './CountdownTimer';
@@ -14,7 +15,7 @@ import { Monitor, Zap, Users, Calendar, Info, Phone } from 'lucide-react';
 import { useNavigate, Link } from 'react-router-dom';
 const MotionLink = motion(Link);
 
-// const SponsorsWheel = lazy(() => import('./SponsorsWheel'));
+const SponsorsWheel = lazy(() => import('./SponsorsWheel'));
 
 interface CyberpunkLandingProps {
   // Callbacks removed in favor of router navigation; keep optional for backwards compatibility
@@ -223,21 +224,30 @@ const CyberpunkLanding: React.FC<CyberpunkLandingProps> = ({ onSpeakersClick, on
       {/* Digital Rain Background */}
       <DigitalRain />
 
-      {/* 3D Scene */}
-      <Canvas className="absolute inset-0">
-        <PerspectiveCamera makeDefault position={[0, 10, 20]} fov={60} />
-        <OrbitControls 
-          enableZoom={false}
-          enablePan={false}
-          enableRotate={true}
-          autoRotate={true}
-          autoRotateSpeed={0.5}
-          maxPolarAngle={Math.PI / 2}
-          minPolarAngle={Math.PI / 4}
-        />
-  <CyberpunkScene mousePosition={mousePosition} />
-  {/* SponsorsWheel disabled temporarily */}
-      </Canvas>
+      {/* 3D Scene + Sponsors Wheel */}
+        <Suspense fallback={null}>
+          <Canvas className="absolute inset-0">
+            <PerspectiveCamera makeDefault position={[0, 10, 20]} fov={60} />
+            <OrbitControls 
+              enableZoom={false}
+              enablePan={false}
+              enableRotate={true}
+              autoRotate={true}
+              autoRotateSpeed={0.5}
+              maxPolarAngle={Math.PI / 2}
+              minPolarAngle={Math.PI / 4}
+            />
+            <CyberpunkScene mousePosition={mousePosition} />
+            <SponsorsWheel logos={[
+               "/sponsors/amd.png",
+  "/sponsors/gigabyte.png",
+  "/sponsors/skullcandy.png",
+  "/sponsors/vivo.png",
+  "/sponsors/ghs.jpeg"
+  
+            ]} />
+          </Canvas>
+        </Suspense>
 
       {/* Procedural Film Grain (SVG turbulence) */}
       <svg
