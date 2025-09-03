@@ -119,11 +119,21 @@ const CyberpunkEventInterface: React.FC = () => {
     },
     {
     title: "Devcon",
-  description: "Welcome to Devcon, the Tech MUN-style event where you’ll represent companies and dive into exciting tech agendas. From futuristic problem-solving to critical thinking, every debate challenges you to push boundaries. But it’s more than discussion - it’s about leadership, innovation, and teamwork in action.",      date: "14th Sept 2025",
+  description: "Welcome to Devcon, the Tech MUN-style event where you’ll represent companies and dive into exciting tech agendas. From futuristic problem-solving to critical thinking, every debate challenges you to push boundaries. But it’s more than discussion - it’s about leadership, innovation, and teamwork in action.",     
+      date: "14th Sept 2025",
       time: "11:00AM",
       venue: "OLD MESS",
   poster: "/events/frames/devcon.png",
   registerUrl: "https://docs.google.com/forms/d/e/1FAIpQLSc395msYk9Z_AKDbQODx5hNuoSXwyq66hfM2_vtOPqjWcfObQ/viewform", // TODO: replace with Google Form URL
+    },
+    {
+    title: "Baller Bot",
+  description: "A high-energy robo-soccer showdown where bots battle it out on the field! Teams design and control robots to dribble, defend, and score goals in a fast-paced test of skill, strategy, and engineering.",
+      date: "13th Sept 2025",
+      time: "11:00AM",
+      venue: "OLD MESS",
+  poster: "/events/frames/ballerbot.png",
+  registerUrl: "https://docs.google.com/forms/d/1lq26KASc6uGj3nNmw45ebDSEHspQ5-ia7pOam9Ehv0Q/viewform?edit_requested=true", // TODO: replace with Google Form URL
     },
   ];
 
