@@ -16,221 +16,12 @@ interface LogoState {
 const PreviousSponsors: React.FC = () => {
   // Updated sponsor data - keeping only specified sponsors
   const sponsors: SponsorData[] = [
+    
     {
       id: 1,
-      name: "JET BRAINS",
-      logo: "/sponsors/jetbrains.png",
-      description: "Leading developer tools and IDE provider, empowering developers worldwide with intelligent coding solutions.",
-      year: "2024"
-    },
-    {
-      id: 2,
-      name: "FILECOIN",
-      logo: "/sponsors/filecoin.png", 
-      description: "Decentralized storage network revolutionizing how we store and access data on the blockchain.",
-      year: "2024"
-    },
-    {
-      id: 3,
-      name: "AIRTEL",
-      logo: "/sponsors/airtel.png",
-      description: "India's leading telecommunications provider, connecting millions with innovative digital solutions.",
-      year: "2024"
-    },
-    {
-      id: 4,
-      name: "DEVFOLIO",
-      logo: "/sponsors/devfolio.png",
-      description: "Hackathon platform empowering developers to build, showcase, and launch their innovative projects.",
-      year: "2024"
-    },
-    {
-      id: 5,
-      name: "CODING BLOCKS",
-      logo: "/sponsors/coding_blocks.jpg",
-      description: "Premier coding education platform, training the next generation of software developers.",
-      year: "2024"
-    },
-    {
-      id: 6,
-      name: "ONGC",
-      logo: "/sponsors/ONGC_Logo.svg.png",
-      description: "India's largest oil and gas exploration company, fueling the nation's energy security.",
-      year: "2024"
-    },
-    {
-      id: 7,
-      name: "GEEKS FOR GEEKS",
-      logo: "/sponsors/GeeksforGeeks.svg.png",
-      description: "Premier computer science portal for geeks, providing comprehensive programming resources and tutorials.",
-      year: "2024"
-    },
-    {
-      id: 8,
-      name: "SNAPCHAT",
-      logo: "/sponsors/snapchat.webp",
-      description: "Social media giant revolutionizing communication through innovative AR and messaging technologies.",
-      year: "2024"
-    },
-    {
-      id: 9,
-      name: "CISCO",
-      logo: "/sponsors/cisco.png",
-      description: "Networking technology pioneer, connecting the world through innovative communication solutions.",
-      year: "2024"
-    },
-    {
-      id: 10,
-      name: "LENOVO",
-      logo: "/sponsors/Lenovo.png",
-      description: "Global technology leader, innovating across PCs, smart devices, and data center solutions.",
-      year: "2024"
-    },
-    {
-      id: 11,
-      name: "BHARAT PETROLEUM",
-      logo: "/sponsors/bharatpetroleum.png",
-      description: "Leading energy company, powering India's growth with sustainable energy solutions.",
-      year: "2024"
-    },
-    {
-      id: 12,
-      name: "GIVE MY CERTIFICATE",
-      logo: "/sponsors/givemycertificate.png",
-      description: "Digital certificate platform, making credential verification seamless and secure.",
-      year: "2024"
-    },
-    {
-      id: 13,
-      name: "INTERVIEW CAKE",
-      logo: "/sponsors/InterviewCake.png",
-      description: "Coding interview preparation platform, helping developers ace their technical interviews.",
-      year: "2024"
-    },
-    {
-      id: 14,
-      name: "ZEBRONICS",
-      logo: "/sponsors/zebronics.jpg",
-      description: "Always Ahead - Premium audio and technology products for the modern lifestyle.",
-      year: "2024"
-    },
-    {
-      id: 15,
-      name: "LUMOS",
-      logo: "/sponsors/lumos.png",
-      description: "Cutting-edge technology company specializing in advanced lighting and display solutions.",
-      year: "2024"
-    },
-    {
-      id: 16,
-      name: "WAYSPIRE",
-      logo: "/sponsors/wayspire.png",
-      description: "Innovative technology solutions driving digital transformation and business growth.",
-      year: "2024"
-    },
-    {
-      id: 17,
-      name: "AXURE",
-      logo: "/sponsors/axure.png",
-      description: "Professional prototyping and wireframing platform for UX/UI designers.",
-      year: "2024"
-    },
-    {
-      id: 18,
-      name: ".XYZ",
-      logo: "/sponsors/xyz.png",
-      description: "Next-generation domain registry, empowering the future of the internet.",
-      year: "2024"
-    },
-    {
-      id: 19,
-      name: "KWIKPIC",
-      logo: "/sponsors/kwikpic.png",
-      description: "Photo sharing platform revolutionizing how we capture and share life's precious moments.",
-      year: "2024"
-    },
-    {
-      id: 20,
-      name: "LITT",
-      logo: "/sponsors/litt.png",
-      description: "Innovative technology solutions provider, driving digital transformation across industries.",
-      year: "2024"
-    },
-    {
-      id: 21,
-      name: "POLYGON",
-      logo: "/sponsors/polygon.png",
-      description: "Ethereum scaling solution, making blockchain technology accessible and scalable.",
-      year: "2024"
-    },
-    {
-      id: 22,
-      name: "EAT SURE",
-      logo: "/sponsors/eatsure.png",
-      description: "Court on an App - Revolutionary food delivery platform with innovative features.",
-      year: "2024"
-    },
-    {
-      id: 23,
-      name: "COINDCX",
-      logo: "/sponsors/coindcx.png",
-      description: "India's most trusted cryptocurrency exchange, making crypto accessible to millions.",
-      year: "2024"
-    },
-    {
-      id: 24,
-      name: "NEWTON SCHOOL",
-      logo: "/sponsors/newtonschool.png",
-      description: "Coding education platform, transforming careers through technology learning.",
-      year: "2024"
-    },
-    {
-      id: 25,
-      name: "JARS",
-      logo: "/sponsors/jars.png",
-      description: "Innovative technology company creating solutions for tomorrow's challenges.",
-      year: "2024"
-    },
-    {
-      id: 26,
-      name: "JIO",
-      logo: "/sponsors/jio.png",
-      description: "Digital revolution leader, transforming India's connectivity and digital services landscape.",
-      year: "2024"
-    },
-    {
-      id: 27,
-      name: "GROWW",
-      logo: "/sponsors/groww.png",
-      description: "Investment platform democratizing financial services for India's growing investor community.",
-      year: "2024"
-    },
-    {
-      id: 28,
-      name: "NZXT",
-      logo: "/sponsors/nzxt.png",
-      description: "Premium gaming hardware manufacturer, crafting the ultimate gaming experience for enthusiasts.",
-      year: "2024"
-    },
-    {
-      id: 29,
-      name: "INTERNSHALA",
-      logo: "/sponsors/internshala.png",
-      description: "Internships that matter - connecting students with meaningful career opportunities.",
-      year: "2024"
-    },
-    {
-      id: 30,
-      name: "UNSTOP",
-      logo: "/sponsors/unstop.png",
-      description: "Platform connecting students with opportunities, bridging the gap between education and industry.",
-      year: "2024"
-    },
-    {
-      id: 31,
-      name: "SPYKAR",
-      logo: "/sponsors/spykar.png",
-      description: "Fashion brand embodying 'Young & Restless' spirit, connecting with the dynamic youth culture.",
+      name: "GHS",
+      logo: "/sponsors/ghs.jpeg",
+      description: "",
       year: "2024"
     }
   ];
@@ -314,32 +105,14 @@ const PreviousSponsors: React.FC = () => {
                filter: 'drop-shadow(4px 4px 8px rgba(0,0,0,0.9))',
              }}
            >
-             OUR SPONSORS
+             Housing Sponsor
            </h1>
         </motion.div>
 
         {/* Carousel Container */}
         <div className="relative w-full max-w-6xl mx-auto">
           {/* Navigation Arrows */}
-          <button
-            onClick={() => paginate(-1)}
-            className="absolute left-4 top-1/2 transform -translate-y-1/2 z-20 bg-black/50 hover:bg-black/70 text-cyan-400 p-3 rounded-full border border-cyan-400 transition-all duration-300 hover:shadow-[0_0_20px_#00ffff] ps-arrow"
-            style={{ backdropFilter: 'blur(10px)' }}
-          >
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-            </svg>
-          </button>
-
-          <button
-            onClick={() => paginate(1)}
-            className="absolute right-4 top-1/2 transform -translate-y-1/2 z-20 bg-black/50 hover:bg-black/70 text-cyan-400 p-3 rounded-full border border-cyan-400 transition-all duration-300 hover:shadow-[0_0_20px_#00ffff] ps-arrow"
-            style={{ backdropFilter: 'blur(10px)' }}
-          >
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-            </svg>
-          </button>
+          
 
           {/* Carousel */}
           <div className="relative h-[500px] overflow-hidden ps-carousel">
