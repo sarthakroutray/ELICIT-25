@@ -10,7 +10,7 @@ import CountdownTimer from './CountdownTimer';
 import SocialLinks from './SocialLinks';
 import DigitalRain from './DigitalRain';
 import { playSound } from '../utils/audio';
-import { Monitor, Zap, Users, Calendar, Info, Phone } from 'lucide-react';
+import { Monitor, Zap, Users, Calendar, Info, Phone, Laptop } from 'lucide-react';
 
 import { useNavigate, Link } from 'react-router-dom';
 const MotionLink = motion(Link);
@@ -392,6 +392,7 @@ const CyberpunkLanding: React.FC<CyberpunkLandingProps> = ({ onSpeakersClick, on
                   { icon: Info, label: 'ABOUT', color: 'text-purple-400', to: '/about' },
                   { icon: Phone, label: 'CONTACT', color: 'text-yellow-400', to: '/contact' },
                   { icon: Zap, label: 'SPONSORS', color: 'text-pink-400', to: '/sponsors' },
+                  { icon: Laptop, label:'DEV TEAM', color:'text-orange-400', to:'/develop' }
                 ].map((item, idx) => (
                   <MotionLink
                     key={item.label}
@@ -488,6 +489,7 @@ const CyberpunkLanding: React.FC<CyberpunkLandingProps> = ({ onSpeakersClick, on
                 { icon: Info, label: 'ABOUT', color: 'text-purple-400', to: '/about' },
                 { icon: Phone, label: 'CONTACT', color: 'text-yellow-400', to: '/contact' },
                 { icon: Zap, label: 'SPONSORS', color: 'text-pink-400', to: '/sponsors' },
+                { icon:Laptop, label:'DEV TEAM', color:'text-orange-400', to:'/develop' }
               ].map(item => (
                 <Link
                   key={item.label}
