@@ -62,7 +62,7 @@ const TeamPage: React.FC = () => {
 
   const directors = [
     { name: "SUKRIT SINHA", title: "Managing Director", handle: "sukritS", avatarUrl: "/team/17.png" },
-    { name: "MUMUKSHU BOHARA", title: "Managing Director", handle: "mumukshuB", avatarUrl: "/team/3.png" },
+    { name: "MUMUKSHU BOHRA", title: "Managing Director", handle: "mumukshuB", avatarUrl: "/team/3.png" },
   ];
 
   const advisors = [
