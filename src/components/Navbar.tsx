@@ -22,6 +22,7 @@ const Navbar: React.FC = () => {
           <Link to="/about" className="text-cyan-300 hover:text-cyan-100" style={{ fontFamily: 'Orbitron, monospace' }}>ABOUT</Link>
           <Link to="/contact" className="text-cyan-300 hover:text-cyan-100" style={{ fontFamily: 'Orbitron, monospace' }}>CONTACT</Link>
           <Link to="/sponsors" className="text-cyan-300 hover:text-cyan-100" style={{ fontFamily: 'Orbitron, monospace' }}>SPONSORS</Link>
+          <Link to="/develop" className="text-cyan-300 hover:text-cyan-100" style={{ fontFamily: 'Orbitron, monospace' }}>DEV TEAM</Link>
         </nav>
 
         {/* Hamburger button (mobile only) */}
@@ -73,6 +74,9 @@ const Navbar: React.FC = () => {
               </Link>
               <Link to="/sponsors" onClick={() => setIsOpen(false)} className="px-3 py-2 rounded-md text-cyan-300 hover:text-white hover:bg-cyan-900/30 transition-all">
                 <span className="opacity-60 mr-2">&gt;</span> SPONSORS
+              </Link>
+              <Link to="/develop" onClick={() => setIsOpen(false)} className="px-3 py-2 rounded-md text-cyan-300 hover:text-white hover:bg-cyan-900/30 transition-all">
+                <span className="opacity-60 mr-2">&gt;</span> DEV TEAM
               </Link>
             </nav>
           </div>
