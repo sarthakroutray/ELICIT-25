@@ -518,6 +518,29 @@
 
 
 
-.agam-avatar{
-  height: 1000px; /* shift UP by 30px */
+/* Make Pranav’s pic smaller */
+.pranav-avatar {
+  transform: scale(0.85); /* shrink down */
+  margin-top: 20px;       /* optional adjustment */
 }
+
+/* Shift Neet Jain’s pic slightly up */
+.neet-avatar {
+  transform: translateY(-25px);
+}
+
+/* Shift Parnika Sunda’s pic slightly up */
+.parnika-avatar {
+  transform: translateY(-20px);
+}
+
+/* Shift Ishitva’s pic slightly up */
+.ishitva-avatar {
+  transform: translateY(-80px);
+}
+
+/* Agam’s pic adjustment */
+.agam-avatar {
+  transform: translateY(-30px);
+}
+
