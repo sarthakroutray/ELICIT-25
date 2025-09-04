@@ -11,7 +11,7 @@ const DevelopPage: React.FC = () => {
     { name: "Soumyajit Chatterjee", title: " ", handle: "mumukshuB", avatarUrl: "/DEVELOP/Soumyajeet.png" },
     { name: "Vidha", title: " ", handle: "disha", avatarUrl: "/DEVELOP/Vidha.png" },
     { name: "Jai Ratna", title: " ", handle: "akshat", avatarUrl: "/DEVELOP/Jai.png" },
-    { name: "Aditya Rai", title: " ", handle: "harman", avatarUrl: "/DEVELOP/Aditya.png" },
+    { name: "Aditya Ray", title: " ", handle: "harman", avatarUrl: "/DEVELOP/Aditya.png" },
     { name: "Agam Yadav", title: " ", handle: "pranavD", avatarUrl: "/DEVELOP/Agam.png" },
     { name: "Srikunj", title: " ", handle: "nirmit", avatarUrl: "/DEVELOP/Srikunj.png" },
   
@@ -51,20 +51,20 @@ const DevelopPage: React.FC = () => {
         </h2>
 
         {/* Grid of 18 Profile Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 place-items-center">
-          {developers.map((dev, i) => (
-            <div key={i} className="w-[90vw] max-w-[250px] flex justify-center">
-              <ProfileCard
-                name={dev.name}
-                title={dev.title}
-                handle={dev.handle}
-                avatarUrl={dev.avatarUrl}
-                showUserInfo={true}
-                enableTilt={true}
-              />
-            </div>
-          ))}
-        </div>
+       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 place-items-center">
+  {developers.map((dev, i) => (
+    <ProfileCard
+      key={i}
+      name={dev.name}
+      title={dev.title}
+      handle={dev.handle}
+      avatarUrl={dev.avatarUrl}
+      showUserInfo={true}
+      enableTilt={true}
+    />
+  ))}
+</div>
+
       </div>
     </div>
   );
