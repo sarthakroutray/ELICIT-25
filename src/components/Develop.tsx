@@ -5,7 +5,7 @@ import ProfileCard from "./ProfileCard";
 const DevelopPage: React.FC = () => {
   // All 18 team members
   const developers = [
-{ name: "Himanshi Pal", title: " ", handle: "parthavS", avatarUrl: "/DEVELOP/Himanshi.png" },
+    { name: "Himanshi Pal", title: " ", handle: "parthavS", avatarUrl: "/DEVELOP/Himanshi.png" },
     { name: "Sarthak Routray", title: " ", handle: "agamB", avatarUrl: "/DEVELOP/Sarthak.png" },
     { name: "Aarushi Sharma", title: " ", handle: "sukritS", avatarUrl: "/DEVELOP/Aarushi.png" },
     { name: "Soumyajit Chatterjee", title: " ", handle: "mumukshuB", avatarUrl: "/DEVELOP/Soumyajeet.png" },

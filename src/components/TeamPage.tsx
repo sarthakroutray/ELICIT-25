@@ -33,7 +33,7 @@ const Section = ({
 
     <div className={layout}>
       {members.map((m, i) => (
-        <div key={i} className="flex w-full max-w-[220px] sm:max-w-[220px] md:max-w-[220px] lg:max-w-[220px] mx-auto mb-8">
+        <div key={i} className="flex w-full max-w-[250px] sm:max-w-[250px] md:max-w-[250px] lg:max-w-[250px] mx-auto mb-8">
           <ProfileCard
             name={m.name}
             title={m.title}
@@ -41,7 +41,7 @@ const Section = ({
             avatarUrl={m.avatarUrl}
             showUserInfo={true}
             enableTilt={true}
-            className="w-full h-[280px] sm:h-[280px] md:h-[280px] lg:h-[280px]"
+            className="w-full h-[320px] sm:h-[320px] md:h-[320px] lg:h-[320px]"
           />
         </div>
       ))}
