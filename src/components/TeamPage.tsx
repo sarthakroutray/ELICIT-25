@@ -5,13 +5,13 @@ import ProfileCard from "./ProfileCard";
 const Section = ({ 
   title, 
   members, 
-  layout = "grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10 w-full justify-items-stretch" 
+  layout = "grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-y-6 gap-x-4 sm:gap-y-8 sm:gap-x-8 md:gap-y-10 md:gap-x-10 w-full justify-items-center"
 }: { 
   title: string; 
   members: any[]; 
   layout?: string; 
 }) => (
-  <div className="relative z-10 px-4 sm:px-6 md:px-8 py-16 max-w-7xl mx-auto">
+  <div className="relative z-10 px-2 sm:px-4 md:px-8 py-6 sm:py-10 md:py-14 max-w-7xl mx-auto">
     <h2
       className="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-12"
       style={{
@@ -33,19 +33,17 @@ const Section = ({
 
     <div className={layout}>
       {members.map((m, i) => (
-        <div key={i} className="flex w-full transform scale-90">
-  <ProfileCard
-    name={m.name}
-    title={m.title}
-    handle={m.handle}
-    avatarUrl={m.avatarUrl}
-    showUserInfo={true}
-    enableTilt={true}
-    className="flex-1"
-  />
-</div>
-
-
+        <div key={i} className="flex w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg mx-auto">
+          <ProfileCard
+            name={m.name}
+            title={m.title}
+            handle={m.handle}
+            avatarUrl={m.avatarUrl}
+            showUserInfo={true}
+            enableTilt={true}
+            className="w-full"
+          />
+        </div>
       ))}
     </div>
   </div>
@@ -127,67 +125,67 @@ const TeamPage: React.FC = () => {
     <Section 
       title="CONVENERS" 
       members={conveners} 
-      layout="grid grid-cols-1 md:grid-cols-3 gap-12 justify-items-center" 
+      layout="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-y-6 gap-x-4 sm:gap-y-8 sm:gap-x-8 md:gap-y-10 md:gap-x-10 w-full justify-items-center" 
     />
 
     <Section 
       title="MANAGING DIRECTORS" 
       members={directors} 
-      layout="grid grid-cols-1 md:grid-cols-2 gap-16 justify-items-center" 
+      layout="grid grid-cols-1 sm:grid-cols-2 gap-y-6 gap-x-4 sm:gap-y-8 sm:gap-x-8 md:gap-y-10 md:gap-x-10 w-full justify-items-center" 
     />
 
      <Section 
       title="ADVISORS" 
       members={advisors} 
-      layout="grid grid-cols-1 md:grid-cols-2 gap-16 justify-items-center" 
+      layout="grid grid-cols-1 sm:grid-cols-2 gap-y-6 gap-x-4 sm:gap-y-8 sm:gap-x-8 md:gap-y-10 md:gap-x-10 w-full justify-items-center" 
     />
 
     <Section 
       title="TECHNICAL" 
       members={technical} 
-      layout="grid grid-cols-2 md:grid-cols-4 gap-[120px] ml-[-110px]" 
+      layout="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-y-6 gap-x-4 sm:gap-y-8 sm:gap-x-8 md:gap-y-10 md:gap-x-10 w-full justify-items-center" 
     />
 
     <Section 
       title="EVENTS" 
       members={events} 
-      layout="grid grid-cols-2 md:grid-cols-4 gap-[120px] ml-[-110px]" 
+      layout="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-y-6 gap-x-4 sm:gap-y-8 sm:gap-x-8 md:gap-y-10 md:gap-x-10 w-full justify-items-center" 
     />
 
     <Section 
       title="CREATIVE DIRECTORS" 
       members={creativeDirectors} 
-      layout="grid grid-cols-3 gap-12 justify-items-center" 
+      layout="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-y-6 gap-x-4 sm:gap-y-8 sm:gap-x-8 md:gap-y-10 md:gap-x-10 w-full justify-items-center" 
     />
 
     <Section 
       title="FINANCE & REGISTRATION" 
       members={financeRegistration} 
-      layout="grid grid-cols-1 sm:grid-cols-2 gap-20 justify-items-center" 
+      layout="grid grid-cols-1 sm:grid-cols-2 gap-y-6 gap-x-4 sm:gap-y-8 sm:gap-x-8 md:gap-y-10 md:gap-x-10 w-full justify-items-center" 
     />
 
     <Section 
       title="PARTNERSHIP" 
       members={partnership} 
-      layout="grid grid-cols-1 md:grid-cols-3 gap-12 justify-items-center" 
+      layout="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-y-6 gap-x-4 sm:gap-y-8 sm:gap-x-8 md:gap-y-10 md:gap-x-10 w-full justify-items-center" 
     />
 
     <Section 
       title="OPERATIONS" 
       members={operations} 
-      layout="grid grid-cols-3 gap-12 justify-items-center" 
+      layout="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-y-6 gap-x-4 sm:gap-y-8 sm:gap-x-8 md:gap-y-10 md:gap-x-10 w-full justify-items-center" 
     />
 
     <Section 
       title="SOCIAL MEDIA" 
       members={socialMedia} 
-      layout="grid grid-cols-3 gap-12 justify-items-center" 
+      layout="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-y-6 gap-x-4 sm:gap-y-8 sm:gap-x-8 md:gap-y-10 md:gap-x-10 w-full justify-items-center" 
     />
 
     <Section 
       title="MEDIA" 
       members={media} 
-      layout="grid grid-cols-2 md:grid-cols-4 gap-[120px] ml-[-110px]" 
+      layout="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-y-6 gap-x-4 sm:gap-y-8 sm:gap-x-8 md:gap-y-10 md:gap-x-10 w-full justify-items-center" 
     />
   </div>
 );
