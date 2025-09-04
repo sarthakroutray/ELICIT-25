@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from 'react-router-dom';
 import DigitalRain from "./DigitalRain";
+import RegistrationClosed from "./RegistrationClosed";
 
 const CyberpunkEventInterface: React.FC = () => {
   const params = useParams();
@@ -11,10 +12,15 @@ const CyberpunkEventInterface: React.FC = () => {
   const [dragStartX, setDragStartX] = useState<number | null>(null);
   const [dragDX, setDragDX] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
+  const [showClosedModal, setShowClosedModal] = useState(false);
   // Open registration URL for a specific event
-  const openRegister = (url?: string) => {
-    if (!url) return;
-    window.open(url, '_blank', 'noopener,noreferrer');
+  const openRegister = (event: EventCard) => {
+    if (event.registrationClosed) {
+      setShowClosedModal(true);
+      return;
+    }
+    if (!event.registerUrl) return;
+    window.open(event.registerUrl, '_blank', 'noopener,noreferrer');
   };
 
   // If route provides an id param, focus that card on mount
@@ -57,10 +63,11 @@ const CyberpunkEventInterface: React.FC = () => {
     time?: string;
     venue?: string;
     prize?: string;
-    organizer?: string;//optional
+    organizer?: string;
     contact?: string;
     poster: string;
-  registerUrl?: string; 
+    registerUrl?: string;
+    registrationClosed?: boolean;
   }
   const eventCards: EventCard[] = [
     {
@@ -70,8 +77,9 @@ const CyberpunkEventInterface: React.FC = () => {
       time: "5:00 PM",
       venue: "Elicit Chowk",
       prize: "5K",
-  poster: "/events/frames/keyboard.png",
-  registerUrl: "https://docs.google.com/forms/d/e/1FAIpQLSe2BUclCV4JXD0KR0jfxlwuIkpiJ6WZv9UrJoa7cqDWAmgW5A/viewform", // TODO: replace with Google Form URL
+      poster: "/events/frames/keyboard.png",
+      registerUrl: undefined,
+      registrationClosed: true,
     },
     {
       title: "FUTSAL",
@@ -79,8 +87,9 @@ const CyberpunkEventInterface: React.FC = () => {
       date: "4th Sept 2025",
       time: "4:00pm",
       venue: "Elicit Chowk",
-  poster: "/events/frames/futsal.png",
-  registerUrl: "https://docs.google.com/forms/d/e/1FAIpQLSfoVZt0oTO74JTYMOzrqjxz2o5ChIVVTJW5lMmQ13MrF4Yf-Q/viewform", // TODO: replace with Google Form URL
+      poster: "/events/frames/futsal.png",
+      registerUrl: undefined,
+      registrationClosed: true,
     },
      {
        title: "Defuse 2.0",
@@ -88,7 +97,7 @@ const CyberpunkEventInterface: React.FC = () => {
        date: "14th Sept 2025",
        time: "12:00 PM",
        venue: "Old Mess",
-   poster: "/events/frames/defuse.png",
+   poster: "/events/frames/Defuse2.png",
    registerUrl: "https://docs.google.com/forms/d/1KRb45tBUgEoX84c8r8Gy_pf59GJ5eD5AI9ukJ0Xe6rU/viewform?edit_requested=true",
    },
     {
@@ -119,11 +128,21 @@ const CyberpunkEventInterface: React.FC = () => {
     },
     {
     title: "Devcon",
-  description: "Welcome to Devcon, the Tech MUN-style event where you’ll represent companies and dive into exciting tech agendas. From futuristic problem-solving to critical thinking, every debate challenges you to push boundaries. But it’s more than discussion - it’s about leadership, innovation, and teamwork in action.",      date: "14th Sept 2025",
+  description: "Welcome to Devcon, the Tech MUN-style event where you’ll represent companies and dive into exciting tech agendas. From futuristic problem-solving to critical thinking, every debate challenges you to push boundaries. But it’s more than discussion - it’s about leadership, innovation, and teamwork in action.",     
+      date: "14th Sept 2025",
       time: "11:00AM",
       venue: "OLD MESS",
   poster: "/events/frames/devcon.png",
   registerUrl: "https://docs.google.com/forms/d/e/1FAIpQLSc395msYk9Z_AKDbQODx5hNuoSXwyq66hfM2_vtOPqjWcfObQ/viewform", // TODO: replace with Google Form URL
+    },
+    {
+    title: "Baller Bot",
+  description: "A high-energy robo-soccer showdown where bots battle it out on the field! Teams design and control robots to dribble, defend, and score goals in a fast-paced test of skill, strategy, and engineering.",
+      date: "13th Sept 2025",
+      time: "11:00AM",
+      venue: "OLD MESS",
+  poster: "/events/frames/ballerbot.png",
+  registerUrl: "https://docs.google.com/forms/d/1lq26KASc6uGj3nNmw45ebDSEHspQ5-ia7pOam9Ehv0Q/viewform?edit_requested=true", // TODO: replace with Google Form URL
     },
   ];
 
@@ -245,11 +264,11 @@ const CyberpunkEventInterface: React.FC = () => {
                   <div
                     className={`w-[310px] h-[530px] bg-black border-2 border-green-400 shadow-lg flex flex-col p-4 rounded-md overflow-hidden relative pb-12 ${isActive ? 'cursor-pointer' : 'cursor-default'}`}
                     onClick={() => {
-                      if (isActive && !isDragging && Math.abs(dragDX) < 8) openRegister(event.registerUrl);
+                      if (isActive && !isDragging && Math.abs(dragDX) < 8) openRegister(event);
                     }}
                     role={isActive ? 'button' : undefined}
                     tabIndex={isActive ? 0 : -1}
-                    onKeyDown={(e) => { if (isActive && (e.key === 'Enter' || e.key === ' ')) openRegister(event.registerUrl); }}
+                    onKeyDown={(e) => { if (isActive && (e.key === 'Enter' || e.key === ' ')) openRegister(event); }}
                     title={isActive ? (event.registerUrl ? 'Click to register' : 'Registration link unavailable') : undefined}
                   
                     style={{ boxShadow: isActive ? '0 0 22px #22c55e88' : '0 0 10px #22c55e55' }}>
@@ -274,7 +293,14 @@ const CyberpunkEventInterface: React.FC = () => {
                     </div>
                     {/* CTA: Click to register */}
                     <div className="absolute bottom-3 left-1/2 -translate-x-1/2 z-10 text-center select-none">
-                      {event.registerUrl ? (
+                      {event.registrationClosed ? (
+  <button
+    className="inline-block px-3 py-1 border border-neutral-600 text-neutral-400 rounded-md text-[10px] tracking-widest bg-black/60 cursor-not-allowed"
+    onClick={(e) => { e.stopPropagation(); setShowClosedModal(true); }}
+  >
+    REGISTRATION CLOSED
+  </button>
+) : event.registerUrl ? (
                         <a
                           href={event.registerUrl}
                           target="_blank"
@@ -332,10 +358,10 @@ const CyberpunkEventInterface: React.FC = () => {
                       borderColor: '#22c55e',
                       boxShadow: isActive ? '0 0 30px #22c55e' : '0 0 10px rgba(34,197,94,0.5)',
                     }}
-                    onClick={() => { if (isActive) openRegister(event.registerUrl); }}
+                    onClick={() => { if (isActive) openRegister(event); }}
                     role={isActive ? 'button' : undefined}
                     tabIndex={isActive ? 0 : -1}
-                    onKeyDown={(e) => { if (isActive && (e.key === 'Enter' || e.key === ' ')) openRegister(event.registerUrl); }}
+                    onKeyDown={(e) => { if (isActive && (e.key === 'Enter' || e.key === ' ')) openRegister(event); }}
                     title={isActive ? (event.registerUrl ? 'Click to register' : 'Registration link unavailable') : undefined}
                   >
                     {/* Left side: poster & meta */}
@@ -365,7 +391,14 @@ const CyberpunkEventInterface: React.FC = () => {
                       </div>
                       {/* CTA for desktop: explicit link */}
                       <div className="mt-6 select-none">
-                        {event.registerUrl ? (
+                        {event.registrationClosed ? (
+  <button
+    className="inline-block px-4 py-2 border border-neutral-600 text-neutral-400 rounded-md text-xs tracking-widest cursor-not-allowed"
+    onClick={(e) => { e.stopPropagation(); setShowClosedModal(true); }}
+  >
+    REGISTRATION CLOSED
+  </button>
+) : event.registerUrl ? (
                           <a
                             href={event.registerUrl}
                             target="_blank"
@@ -401,6 +434,20 @@ const CyberpunkEventInterface: React.FC = () => {
         className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-pink-500 rounded-full opacity-10 blur-3xl animate-pulse"
         style={{ animationDelay: "1s" }}
       ></div>
+
+      {/* Registration Closed Modal */}
+{showClosedModal && (
+  <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black bg-opacity-80 backdrop-blur-sm">
+    <div className="relative">
+      <RegistrationClosed />
+      <button
+        className="absolute top-4 right-4 text-pink-400 text-2xl font-bold bg-black bg-opacity-60 rounded-full px-3 py-1 hover:bg-pink-900/40"
+        onClick={() => setShowClosedModal(false)}
+        aria-label="Close"
+      >&#10005;</button>
+    </div>
+  </div>
+)}
 
       <style>{`
         .glow-text-pink {

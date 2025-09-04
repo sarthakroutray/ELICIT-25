@@ -3,18 +3,19 @@ import { Canvas } from '@react-three/fiber';
 import { OrbitControls, PerspectiveCamera } from '@react-three/drei';
 import { motion, AnimatePresence } from 'framer-motion';
 import CyberpunkScene from './CyberpunkScene';
+import { Suspense, lazy } from 'react';
 import GlitchText from './GlitchText';
 import TerminalInterface from './TerminalInterface';
 import CountdownTimer from './CountdownTimer';
 import SocialLinks from './SocialLinks';
 import DigitalRain from './DigitalRain';
 import { playSound } from '../utils/audio';
-import { Monitor, Zap, Users, Calendar, Info, Phone } from 'lucide-react';
+import { Monitor, Zap, Users, Calendar, Info, Phone, Laptop } from 'lucide-react';
 
 import { useNavigate, Link } from 'react-router-dom';
 const MotionLink = motion(Link);
 
-// const SponsorsWheel = lazy(() => import('./SponsorsWheel'));
+const SponsorsWheel = lazy(() => import('./SponsorsWheel'));
 
 interface CyberpunkLandingProps {
   // Callbacks removed in favor of router navigation; keep optional for backwards compatibility
@@ -223,21 +224,30 @@ const CyberpunkLanding: React.FC<CyberpunkLandingProps> = ({ onSpeakersClick, on
       {/* Digital Rain Background */}
       <DigitalRain />
 
-      {/* 3D Scene */}
-      <Canvas className="absolute inset-0">
-        <PerspectiveCamera makeDefault position={[0, 10, 20]} fov={60} />
-        <OrbitControls 
-          enableZoom={false}
-          enablePan={false}
-          enableRotate={true}
-          autoRotate={true}
-          autoRotateSpeed={0.5}
-          maxPolarAngle={Math.PI / 2}
-          minPolarAngle={Math.PI / 4}
-        />
-  <CyberpunkScene mousePosition={mousePosition} />
-  {/* SponsorsWheel disabled temporarily */}
-      </Canvas>
+      {/* 3D Scene + Sponsors Wheel */}
+        <Suspense fallback={null}>
+          <Canvas className="absolute inset-0">
+            <PerspectiveCamera makeDefault position={[0, 10, 20]} fov={60} />
+            <OrbitControls 
+              enableZoom={false}
+              enablePan={false}
+              enableRotate={true}
+              autoRotate={true}
+              autoRotateSpeed={0.5}
+              maxPolarAngle={Math.PI / 2}
+              minPolarAngle={Math.PI / 4}
+            />
+            <CyberpunkScene mousePosition={mousePosition} />
+            <SponsorsWheel logos={[
+               "/sponsors/amd.png",
+  "/sponsors/gigabyte.png",
+  "/sponsors/skullcandy.png",
+  "/sponsors/vivo.png",
+  "/sponsors/ghs.jpeg"
+  
+            ]} />
+          </Canvas>
+        </Suspense>
 
       {/* Procedural Film Grain (SVG turbulence) */}
       <svg
@@ -382,6 +392,7 @@ const CyberpunkLanding: React.FC<CyberpunkLandingProps> = ({ onSpeakersClick, on
                   { icon: Info, label: 'ABOUT', color: 'text-purple-400', to: '/about' },
                   { icon: Phone, label: 'CONTACT', color: 'text-yellow-400', to: '/contact' },
                   { icon: Zap, label: 'SPONSORS', color: 'text-pink-400', to: '/sponsors' },
+                  { icon: Laptop, label:'DEV TEAM', color:'text-orange-400', to:'/develop' }
                 ].map((item, idx) => (
                   <MotionLink
                     key={item.label}
@@ -478,6 +489,7 @@ const CyberpunkLanding: React.FC<CyberpunkLandingProps> = ({ onSpeakersClick, on
                 { icon: Info, label: 'ABOUT', color: 'text-purple-400', to: '/about' },
                 { icon: Phone, label: 'CONTACT', color: 'text-yellow-400', to: '/contact' },
                 { icon: Zap, label: 'SPONSORS', color: 'text-pink-400', to: '/sponsors' },
+                { icon:Laptop, label:'DEV TEAM', color:'text-orange-400', to:'/develop' }
               ].map(item => (
                 <Link
                   key={item.label}

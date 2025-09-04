@@ -41,61 +41,91 @@ const SponsorsPage: React.FC = () => {
           </h1>
 
           {/* Permanent box for video/logo */}
-      <div className="relative mx-auto w-[500px] md:w-[600px] h-auto mb-6 flex items-center justify-center">
-  {/* Video/Image */}
-  <div className="w-full h-full bg-black rounded-lg overflow-hidden">
-    {!videoEnded ? (
-      <video
-        src="/sponsors/VIVOLOAD.mp4"
-        autoPlay
-        muted
-        onEnded={() => setVideoEnded(true)}
-        className="w-full h-full object-contain"
-      />
-    ) : (
-      <img
-        src="/sponsors/vivoo.jpg"
-        alt="Vivo Tagline"
-        className="w-full h-full object-contain"
-      />
-    )}
+     {/* 🖥️ Desktop View */}
+  <div className="relative mx-auto w-[500px] md:w-[600px] h-auto mb-6 items-center justify-center hidden sm:flex">
+    <div className="w-full h-full bg-black rounded-lg overflow-hidden">
+      {!videoEnded ? (
+        <video
+          src="/sponsors/VIVOLOAD.mp4"
+          autoPlay
+          muted
+          onEnded={() => setVideoEnded(true)}
+          className="w-full h-full object-contain"
+        />
+      ) : (
+        <img
+          src="/sponsors/vivoo.jpg"
+          alt="Vivo Tagline"
+          className="w-full h-full object-contain"
+        />
+      )}
+    </div>
+
+    {/* Frame Overlay */}
+    <img
+      src="/sponsors/frames.png"
+      alt="Border Frame"
+      className="absolute top-0 left-0 w-full h-full object-contain pointer-events-none"
+    />
   </div>
 
-  {/* PNG Border Overlay */}
-  <img
-    src="/sponsors/frames.png"
-    alt="Border Frame"
-    className="absolute top-0 left-0 w-full h-full object-contain pointer-events-none"
-  />
-</div>
+  {/* 📱 Mobile View */}
+  <div className="relative mx-auto w-full max-w-xs mb-6 flex items-center justify-center sm:hidden">
+    <div className="w-full h-auto bg-black rounded-lg overflow-hidden">
+      {!videoEnded ? (
+        <video
+          src="/sponsors/VIVOLOAD.mp4"
+          autoPlay
+          muted
+          onEnded={() => setVideoEnded(true)}
+          className="w-full h-auto object-contain"
+        />
+      ) : (
+        <img
+          src="/sponsors/vivoo.jpg"
+          alt="Vivo Tagline"
+          className="w-full h-auto object-contain"
+        />
+      )}
+    </div>
 
+    {/* Frame Overlay */}
+    <img
+      src="/sponsors/frames.png"
+      alt="Border Frame"
+      className="absolute top-0 left-0 w-full h-auto object-contain pointer-events-none"
+    />
+  </div>
 
-          <p
-  className="
-    w-full
-    max-w-sm sm:max-w-2xl   /* mobile = smaller width, desktop = larger width */
-    mx-auto px-4
-    text-gray-300
-    text-sm sm:text-lg      /* readable on mobile, bigger on desktop */
-    leading-relaxed
-    break-words
-  "
->
-  Vivo is a global technology company specializing in smartphones and
-  innovative devices. As our Title Sponsor, Vivo brings performance,
-  style, and innovation to the forefront of this event.
-</p>
+  {/* Description */}
+  <p
+    className="
+      w-full
+      max-w-sm sm:max-w-2xl
+      mx-auto px-4
+      text-gray-300
+      text-sm sm:text-lg
+      leading-relaxed
+      break-words
+    "
+  >
+    Vivo is a global technology company specializing in smartphones and
+    innovative devices. As our Title Sponsor, Vivo brings performance,
+    style, and innovation to the forefront of this event.
+  </p>
 
-           <div className="mt-4 text-center">
-        <a
-          href="https://www.vivo.com"   // 🔗 official Vivo link
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-cyan-400 hover:text-cyan-300 underline text-lg font-semibold"
-        >
-          Visit Vivo
-        </a>
-      </div>
+  {/* Link */}
+  <div className="mt-4 text-center">
+    <a
+      href="https://www.vivo.com"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="text-cyan-400 hover:text-cyan-300 underline text-lg font-semibold"
+    >
+      Visit Vivo
+    </a>
+  </div>
+
         </div>
 
 
@@ -174,6 +204,7 @@ const SponsorsPage: React.FC = () => {
       <div className="py-12 md:py-16 -mt-6">
         <Carousel />
       </div>
+      
     </div>
   );
 };
