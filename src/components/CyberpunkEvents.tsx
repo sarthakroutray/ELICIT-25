@@ -70,27 +70,8 @@ const CyberpunkEventInterface: React.FC = () => {
     registrationClosed?: boolean;
   }
   const eventCards: EventCard[] = [
-    {
-      title: "Keyboard Warriors",
-      description: "A fast-paced three-round typing competition designed to test speed, accuracy, and focus. Participants will go head-to-head to prove their typing skills under time pressure, with each round getting more challenging.",
-      date: "1st Sept 2025",
-      time: "5:00 PM",
-      venue: "Elicit Chowk",
-      prize: "5K",
-      poster: "/events/frames/keyboard.png",
-      registerUrl: undefined,
-      registrationClosed: true,
-    },
-    {
-      title: "FUTSAL",
-      description: "A 3v3 football showdown that combines speed, skill, and teamwork. Short matches keep the energy high and ensure every move counts, making it the perfect event for sports and adrenaline lovers.",
-      date: "4th Sept 2025",
-      time: "4:00pm",
-      venue: "Elicit Chowk",
-      poster: "/events/frames/futsal.png",
-      registerUrl: undefined,
-      registrationClosed: true,
-    },
+    
+    
      {
        title: "Defuse 2.0",
        description: "A unique two-person challenge built on communication and problem-solving. One teammate solves puzzles and riddles in a separate room while guiding their partner—equipped with a walkie-talkie—to cut the correct wires. The team that successfully defuses the bomb first claims victory.",
@@ -143,6 +124,35 @@ const CyberpunkEventInterface: React.FC = () => {
       venue: "OLD MESS",
   poster: "/events/frames/ballerbot.png",
   registerUrl: "https://docs.google.com/forms/d/1lq26KASc6uGj3nNmw45ebDSEHspQ5-ia7pOam9Ehv0Q/viewform?edit_requested=true", // TODO: replace with Google Form URL
+    },
+    {
+      title: "Code Lofi",
+      description: "Code Lofi is a vibe coding hackathon that blends creativity with purposeful, AI-assisted development. Participants harness modern tools and AI technologies to build functional, impactful projects in a relaxed and inspiring environment.",
+      date: "13th Sept 2025",
+      time: "11:00 AM",
+      venue: "AB1",
+  poster: "/events/frames/codelofi.png",
+  registerUrl: "https://docs.google.com/forms/d/e/1FAIpQLSdMFVOUaogjawdBqT48tZfw14dZNXyxaqkVgzdNZ8gtoT4bfQ/viewform", // TODO: replace with Google Form URL
+    },
+    {
+      title: "Keyboard Warriors",
+      description: "A fast-paced three-round typing competition designed to test speed, accuracy, and focus. Participants will go head-to-head to prove their typing skills under time pressure, with each round getting more challenging.",
+      date: "1st Sept 2025",
+      time: "5:00 PM",
+      venue: "Elicit Chowk",
+      prize: "5K",
+      poster: "/events/frames/keyboard.png",
+      registerUrl: undefined,
+      registrationClosed: true,
+    },{
+      title: "FUTSAL",
+      description: "A 3v3 football showdown that combines speed, skill, and teamwork. Short matches keep the energy high and ensure every move counts, making it the perfect event for sports and adrenaline lovers.",
+      date: "4th Sept 2025",
+      time: "4:00pm",
+      venue: "Elicit Chowk",
+      poster: "/events/frames/futsal.png",
+      registerUrl: undefined,
+      registrationClosed: true,
     },
   ];
 
