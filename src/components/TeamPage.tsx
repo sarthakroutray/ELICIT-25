@@ -34,15 +34,17 @@ const Section = ({
     <div className={layout}>
       {members.map((m, i) => (
         <div key={i} className="flex w-full max-w-[250px] sm:max-w-[250px] md:max-w-[250px] lg:max-w-[250px] mx-auto mb-8">
-          <ProfileCard
-            name={m.name}
-            title={m.title}
-            handle={m.handle}
-            avatarUrl={m.avatarUrl}
-            showUserInfo={true}
-            enableTilt={true}
-            className="w-full h-[320px] sm:h-[320px] md:h-[320px] lg:h-[320px]"
-          />
+          <div className="pt-5 w-full">
+            <ProfileCard
+              name={m.name}
+              title={m.title}
+              handle={m.handle}
+              avatarUrl={m.avatarUrl}
+              showUserInfo={true}
+              enableTilt={true}
+              className="w-full h-[320px] sm:h-[320px] md:h-[320px] lg:h-[320px]"
+            />
+          </div>
         </div>
       ))}
     </div>
