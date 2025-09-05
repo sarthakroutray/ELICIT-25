@@ -204,33 +204,7 @@ const SponsorsPage: React.FC = () => {
       <div className="py-12 md:py-16 -mt-6">
         <Carousel />
       </div>
-      {/* 📱 Mobile View (separate wrapper) */}
-<div className="relative mx-auto w-full max-w-xs mb-6 flex items-center justify-center sm:hidden">
-  <div className="w-full h-auto bg-black rounded-lg overflow-hidden">
-    {!videoEnded ? (
-      <video
-        src="/sponsors/VIVOLOAD.mp4"
-        autoPlay
-        muted
-        onEnded={() => setVideoEnded(true)}
-        className="w-full h-auto object-contain"
-      />
-    ) : (
-      <img
-        src="/sponsors/vivoo.jpg"
-        alt="Vivo Tagline"
-        className="w-full h-auto object-contain"
-      />
-    )}
-  </div>
-
-  {/* Frame Overlay (mobile specific) */}
-  <img
-    src="/sponsors/frames.png"
-    alt="Border Frame"
-    className="absolute top-0 left-0 w-full h-auto object-contain pointer-events-none"
-  />
-</div>
+      
     </div>
   );
 };
