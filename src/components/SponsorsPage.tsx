@@ -1,10 +1,51 @@
-import React from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import Carousel from './Carousel';
 import PreviousSponsors from './PreviousSponsors';
 import DigitalRain from './DigitalRain';
 
 const SponsorsPage: React.FC = () => {
-  const [videoEnded, setVideoEnded] = React.useState(false);
+  const [videoEndedDesktop, setVideoEndedDesktop] = useState(false);
+  const [videoEndedMobile, setVideoEndedMobile] = useState(false);
+  const [videoInViewDesktop, setVideoInViewDesktop] = useState(false);
+  const [videoInViewMobile, setVideoInViewMobile] = useState(false);
+  const videoRefDesktop = useRef<HTMLDivElement>(null);
+  const videoRefMobile = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observerDesktop = new window.IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setVideoInViewDesktop(true);
+            observerDesktop.disconnect();
+          }
+        });
+      },
+      { threshold: 0.2 }
+    );
+    if (videoRefDesktop.current) {
+      observerDesktop.observe(videoRefDesktop.current);
+    }
+    return () => observerDesktop.disconnect();
+  }, []);
+
+  useEffect(() => {
+    const observerMobile = new window.IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setVideoInViewMobile(true);
+            observerMobile.disconnect();
+          }
+        });
+      },
+      { threshold: 0.2 }
+    );
+    if (videoRefMobile.current) {
+      observerMobile.observe(videoRefMobile.current);
+    }
+    return () => observerMobile.disconnect();
+  }, []);
 
   return (
     <div className="w-full min-h-screen bg-black text-white relative overflow-hidden">
@@ -42,14 +83,14 @@ const SponsorsPage: React.FC = () => {
 
           {/* Permanent box for video/logo */}
      {/* 🖥️ Desktop View */}
-  <div className="relative mx-auto w-[500px] md:w-[600px] h-auto mb-6 items-center justify-center hidden sm:flex">
+  <div className="relative mx-auto w-[500px] md:w-[600px] h-auto mb-6 items-center justify-center hidden sm:flex" ref={videoRefDesktop}>
     <div className="w-full h-full bg-black rounded-lg overflow-hidden">
-      {!videoEnded ? (
+      {videoInViewDesktop && !videoEndedDesktop ? (
         <video
           src="/sponsors/VIVOLOAD.mp4"
           autoPlay
           muted
-          onEnded={() => setVideoEnded(true)}
+          onEnded={() => setVideoEndedDesktop(true)}
           className="w-full h-full object-contain"
         />
       ) : (
@@ -70,31 +111,22 @@ const SponsorsPage: React.FC = () => {
   </div>
 
   {/* 📱 Mobile View */}
-  <div className="relative mx-auto w-full max-w-xs mb-6 flex items-center justify-center sm:hidden">
-    <div className="w-full h-auto bg-black rounded-lg overflow-hidden">
-      {!videoEnded ? (
-        <video
-          src="/sponsors/VIVOLOAD.mp4"
-          autoPlay
-          muted
-          onEnded={() => setVideoEnded(true)}
-          className="w-full h-auto object-contain"
-        />
-      ) : (
-        <img
-          src="/sponsors/vivoo.jpg"
-          alt="Vivo Tagline"
-          className="w-full h-auto object-contain"
-        />
-      )}
-    </div>
-
-    {/* Frame Overlay */}
-    <img
-      src="/sponsors/frames.png"
-      alt="Border Frame"
-      className="absolute top-0 left-0 w-full h-auto object-contain pointer-events-none"
-    />
+  <div className="w-full h-auto bg-black rounded-lg overflow-hidden flex sm:hidden mb-6" ref={videoRefMobile}>
+    {videoInViewMobile && !videoEndedMobile ? (
+      <video
+        src="/sponsors/VIVOLOAD.mp4"
+        autoPlay
+        muted
+        onEnded={() => setVideoEndedMobile(true)}
+        className="w-full h-auto object-contain"
+      />
+    ) : (
+      <img
+        src="/sponsors/vivoo.jpg"
+        alt="Vivo Tagline"
+        className="w-full h-auto object-contain"
+      />
+    )}
   </div>
 
   {/* Description */}

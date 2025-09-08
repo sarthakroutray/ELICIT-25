@@ -55,8 +55,8 @@ const Section = ({
 
 const TeamPage: React.FC = () => {
   const conveners = [
-    { name: "Pranav Deshpande", title: "Convener", handle: "pranavD", avatarUrl: "/team/pranav.png" },
     { name: "Agam Bhasin", title: "Head Convener", handle: "agamB", avatarUrl: "/team/42.png",   },
+    { name: "Pranav Deshpande", title: "Convener", handle: "pranavD", avatarUrl: "/team/pranav.png" },
     { name: "Parthav Shah", title: "Convener", handle: "parthavS", avatarUrl: "/team/1)ec reveal.png" },
   ];
 
@@ -71,8 +71,8 @@ const TeamPage: React.FC = () => {
   ];
 
   const technical = [
-    { name: "ESHAAN SAHA", title: "Technical", handle: "eshaan", avatarUrl: "/team/9.png" },
     { name: "VARUN NARAYAN JAIN", title: "Technical", handle: "varun", avatarUrl: "/team/8.png" },
+    { name: "ESHAAN SAHA", title: "Technical", handle: "eshaan", avatarUrl: "/team/9.png" },
     { name: "MANAN DUBEY", title: "Technical", handle: "tech3", avatarUrl: "/team/16.png" },
     { name: "PRANAV", title: "Technical", handle: "tech4", avatarUrl: "/team/15.png" },
   ];

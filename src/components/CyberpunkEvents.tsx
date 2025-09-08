@@ -70,8 +70,14 @@ const CyberpunkEventInterface: React.FC = () => {
     registrationClosed?: boolean;
   }
   const eventCards: EventCard[] = [
-    
-    
+    {
+      title: "AMD Build Masters",
+      description: "AMD BuildMasters is a high-energy PC building challenge where participants assemble powerful rigs with speed, skill, and precision. Test your hardware knowledge and compete to be crowned the ultimate build master!\nVisit the booth on 13th and 14th",
+      date: "13th and 14th Sept 2025",
+      time: "11:00 AM",
+      venue: "OLD MESS",
+  poster: "/events/frames/pcbu.png",
+    },
      {
        title: "Defuse 2.0",
        description: "A unique two-person challenge built on communication and problem-solving. One teammate solves puzzles and riddles in a separate room while guiding their partner—equipped with a walkie-talkie—to cut the correct wires. The team that successfully defuses the bomb first claims victory.",
@@ -88,7 +94,8 @@ const CyberpunkEventInterface: React.FC = () => {
       time: "10:30 AM",
       venue: "AB2 Lobby",
   poster: "/events/frames/fd.png",
-  registerUrl: "https://docs.google.com/forms/d/e/1FAIpQLSc8rbmttZALn4JwGcM1VTI40KfYqvB_HbxKTBJv0Ke2NFX2uQ/viewform", // TODO: replace with Google Form URL
+  registerUrl: undefined,
+      registrationClosed: true
     },
     {
       title: "Hacks 10.0",
@@ -98,14 +105,6 @@ const CyberpunkEventInterface: React.FC = () => {
       prize: "75K+",
   poster: "/events/frames/hacks10.0.png",
   registerUrl: "https://docs.google.com/forms/d/e/1FAIpQLSdYYACaGPrY36eIwcMM-FBYs9UnpHH3NNJOPbwMynuidt38RQ/viewform", // TODO: replace with Google Form URL
-    },
-    {
-      title: "Stock Market Showdown",
-  description: "Think you have what it takes to conquer the markets? Test your trading instincts and strategic skills at Stock Market Showdown, an exciting virtual event of Elicit.",
-      date: "7th-13th Sept 2025",
-      venue: "STOCKGRO APP(Online)",
-  poster: "/events/frames/stockm.png",
-  registerUrl: "https://docs.google.com/forms/d/e/1FAIpQLScsShdnDVMM5vCg2dgSmrGFD8N4xsY8i9cnNYLYbakr2LsLgw/viewform", // TODO: replace with Google Form URL
     },
     {
     title: "Devcon",
@@ -303,14 +302,18 @@ const CyberpunkEventInterface: React.FC = () => {
                     </div>
                     {/* CTA: Click to register */}
                     <div className="absolute bottom-3 left-1/2 -translate-x-1/2 z-10 text-center select-none">
-                      {event.registrationClosed ? (
-  <button
-    className="inline-block px-3 py-1 border border-neutral-600 text-neutral-400 rounded-md text-[10px] tracking-widest bg-black/60 cursor-not-allowed"
-    onClick={(e) => { e.stopPropagation(); setShowClosedModal(true); }}
-  >
-    REGISTRATION CLOSED
-  </button>
-) : event.registerUrl ? (
+                      {event.title === "AMD Build Masters" ? (
+                        <span className="inline-block px-3 py-1 border border-yellow-500 text-yellow-300 rounded-md text-[10px] tracking-widest bg-black/60 cursor-default font-bold">
+                          REGISTER AT BOOTH
+                        </span>
+                      ) : event.registrationClosed ? (
+                        <button
+                          className="inline-block px-3 py-1 border border-neutral-600 text-neutral-400 rounded-md text-[10px] tracking-widest bg-black/60 cursor-not-allowed"
+                          onClick={(e) => { e.stopPropagation(); setShowClosedModal(true); }}
+                        >
+                          REGISTRATION CLOSED
+                        </button>
+                      ) : event.registerUrl ? (
                         <a
                           href={event.registerUrl}
                           target="_blank"
@@ -401,14 +404,18 @@ const CyberpunkEventInterface: React.FC = () => {
                       </div>
                       {/* CTA for desktop: explicit link */}
                       <div className="mt-6 select-none">
-                        {event.registrationClosed ? (
-  <button
-    className="inline-block px-4 py-2 border border-neutral-600 text-neutral-400 rounded-md text-xs tracking-widest cursor-not-allowed"
-    onClick={(e) => { e.stopPropagation(); setShowClosedModal(true); }}
-  >
-    REGISTRATION CLOSED
-  </button>
-) : event.registerUrl ? (
+                        {event.title === "AMD Build Masters" ? (
+                          <span className="inline-block px-4 py-2 border border-yellow-500 text-yellow-300 rounded-md text-xs tracking-widest bg-black/60 cursor-default font-bold">
+                            REGISTER AT BOOTH
+                          </span>
+                        ) : event.registrationClosed ? (
+                          <button
+                            className="inline-block px-4 py-2 border border-neutral-600 text-neutral-400 rounded-md text-xs tracking-widest cursor-not-allowed"
+                            onClick={(e) => { e.stopPropagation(); setShowClosedModal(true); }}
+                          >
+                            REGISTRATION CLOSED
+                          </button>
+                        ) : event.registerUrl ? (
                           <a
                             href={event.registerUrl}
                             target="_blank"
