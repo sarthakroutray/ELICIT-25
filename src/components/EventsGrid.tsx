@@ -11,9 +11,9 @@ interface PosterBox { id: number; poster: string; }
 // EDIT THESE PATHS LATER: supply the actual poster image for each event (must live under /public)
 // You can use .png/.jpg/.webp etc. Example: '/events/frames/hackathon.png'
 const POSTER_PATHS: string[] = [
+  '/events/frames/hacks10.0.png',
   '/events/frames/pcbu.png', // 2
-  '/events/frames/Defuse2.png', // 3
-  '/events/frames/hacks10.0.png', // 5
+  '/events/frames/Defuse2.png', // 3 // 5
   '/events/frames/devcon.png', // 7
   '/events/frames/ballerbot.png', // 8
   '/events/frames/codelofi.png',

@@ -71,6 +71,15 @@ const CyberpunkEventInterface: React.FC = () => {
   }
   const eventCards: EventCard[] = [
     {
+      title: "Hacks 10.0",
+  description: "The 10th edition of MUJ’s flagship 36-hour offline hackathon. Participants will brainstorm, design, and present innovative solutions across three stages: the PPT round, prototype development, and a final judging session before an expert panel. Beyond competition, HACKS offers freshers an opportunity to learn, collaborate, and experience the excitement of real-world problem-solving.",
+      date: "12-14th Sept 2025",
+      venue: "AB1",
+      prize: "75K+",
+  poster: "/events/frames/hacks10.0.png",
+  registerUrl: "https://docs.google.com/forms/d/e/1FAIpQLSdYYACaGPrY36eIwcMM-FBYs9UnpHH3NNJOPbwMynuidt38RQ/viewform", // TODO: replace with Google Form URL
+    },
+    {
       title: "AMD Build Masters",
       description: "AMD BuildMasters is a high-energy PC building challenge where participants assemble powerful rigs with speed, skill, and precision. Test your hardware knowledge and compete to be crowned the ultimate build master!\nVisit the booth on 13th and 14th",
       date: "13th and 14th Sept 2025",
@@ -87,15 +96,6 @@ const CyberpunkEventInterface: React.FC = () => {
    poster: "/events/frames/Defuse2.png",
    registerUrl: "https://docs.google.com/forms/d/1KRb45tBUgEoX84c8r8Gy_pf59GJ5eD5AI9ukJ0Xe6rU/viewform?edit_requested=true",
    },
-    {
-      title: "Hacks 10.0",
-  description: "The 10th edition of MUJ’s flagship 36-hour offline hackathon. Participants will brainstorm, design, and present innovative solutions across three stages: the PPT round, prototype development, and a final judging session before an expert panel. Beyond competition, HACKS offers freshers an opportunity to learn, collaborate, and experience the excitement of real-world problem-solving.",
-      date: "12-14th Sept 2025",
-      venue: "AB1",
-      prize: "75K+",
-  poster: "/events/frames/hacks10.0.png",
-  registerUrl: "https://docs.google.com/forms/d/e/1FAIpQLSdYYACaGPrY36eIwcMM-FBYs9UnpHH3NNJOPbwMynuidt38RQ/viewform", // TODO: replace with Google Form URL
-    },
     {
     title: "Devcon",
   description: "Welcome to Devcon, the Tech MUN-style event where you’ll represent companies and dive into exciting tech agendas. From futuristic problem-solving to critical thinking, every debate challenges you to push boundaries. But it’s more than discussion - it’s about leadership, innovation, and teamwork in action.",     
