@@ -87,6 +87,15 @@ const CyberpunkEventInterface: React.FC = () => {
       venue: "OLD MESS",
   poster: "/events/frames/pcbu.png",
     },
+    {
+      title: "2v2 Valorant Showdown",
+      description: "An electrifying 2v2 Valorant showdown where skill meets strategy.\nCompete, dominate, and claim ultimate bragging rights.",
+      date: "13th Sept 2025",
+      time: "11:00 AM",
+      venue: "OLD MESS",
+  poster: "/events/frames/valorant.png",
+  registerUrl: "https://linktr.ee/ROAD_TO_ELICIT_25", // TODO: replace with Google Form URL
+    },
      {
        title: "Defuse 2.0",
        description: "A unique two-person challenge built on communication and problem-solving. One teammate solves puzzles and riddles in a separate room while guiding their partner—equipped with a walkie-talkie—to cut the correct wires. The team that successfully defuses the bomb first claims victory.",
