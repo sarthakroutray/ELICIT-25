@@ -95,7 +95,16 @@ const CyberpunkEventInterface: React.FC = () => {
       time: "11:00 AM",
       venue: "OLD MESS",
   poster: "/events/frames/valorant.png",
-  registerUrl: "https://linktr.ee/ROAD_TO_ELICIT_25", // TODO: replace with Google Form URL
+  registerUrl: "https://docs.google.com/forms/d/e/1FAIpQLSdCfMj4wWcyrR11UCkTn6J6TSompZtn7skpYWfQP0eqsbRNIA/viewform", // TODO: replace with Google Form URL
+    },
+    {
+      title: "Prompt Engineering Workshop",
+  description: "A hands-on workshop exploring the art of crafting effective prompts to unlock AI’s true potential.\nDiscover how creativity and precision come together to shape powerful AI-driven outcomes.",
+      date: "12th Sept 2025",
+      venue: "AB1 307",
+      time:"3:00 PM",
+  poster: "/events/frames/prompt.png",
+  registerUrl: "https://docs.google.com/forms/d/e/1FAIpQLSfalDLmm8CbBWUHN5KZJ7ZxrWn_2jrUlqBfYV2zRX-nSYVeXg/viewform", // TODO: replace with Google Form URL
     },
      {
        title: "Defuse 2.0",
