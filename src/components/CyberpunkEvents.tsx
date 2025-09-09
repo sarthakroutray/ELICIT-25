@@ -88,16 +88,6 @@ const CyberpunkEventInterface: React.FC = () => {
    registerUrl: "https://docs.google.com/forms/d/1KRb45tBUgEoX84c8r8Gy_pf59GJ5eD5AI9ukJ0Xe6rU/viewform?edit_requested=true",
    },
     {
-      title: "Final Destination",
-      description: "An engaging, campus-wide treasure hunt inspired by the thrill of discovery. Teams will solve clues spread across the campus in three phases, racing against each other to reach the final destination and secure the treasure.",
-      date: "6th Sept 2025",
-      time: "10:30 AM",
-      venue: "AB2 Lobby",
-  poster: "/events/frames/fd.png",
-  registerUrl: undefined,
-      registrationClosed: true
-    },
-    {
       title: "Hacks 10.0",
   description: "The 10th edition of MUJ’s flagship 36-hour offline hackathon. Participants will brainstorm, design, and present innovative solutions across three stages: the PPT round, prototype development, and a final judging session before an expert panel. Beyond competition, HACKS offers freshers an opportunity to learn, collaborate, and experience the excitement of real-world problem-solving.",
       date: "12-14th Sept 2025",
@@ -152,6 +142,16 @@ const CyberpunkEventInterface: React.FC = () => {
       poster: "/events/frames/futsal.png",
       registerUrl: undefined,
       registrationClosed: true,
+    },
+     {
+      title: "Final Destination",
+      description: "An engaging, campus-wide treasure hunt inspired by the thrill of discovery. Teams will solve clues spread across the campus in three phases, racing against each other to reach the final destination and secure the treasure.",
+      date: "6th Sept 2025",
+      time: "10:30 AM",
+      venue: "AB2 Lobby",
+  poster: "/events/frames/fd.png",
+  registerUrl: undefined,
+      registrationClosed: true
     },
   ];
 
