@@ -86,6 +86,7 @@ const CyberpunkEventInterface: React.FC = () => {
       time: "11:00 AM",
       venue: "OLD MESS",
   poster: "/events/frames/pcbu.png",
+  registerUrl:"https://docs.google.com/forms/d/e/1FAIpQLSdL5PpryDGx2mrvifwgy8oPXPjI0ECq1pgEEEyzfrkL7oAxGw/viewform",
     },
     {
       title: "2v2 Valorant Showdown",
@@ -311,9 +312,9 @@ const CyberpunkEventInterface: React.FC = () => {
                     </div>
                     {/* CTA: Click to register */}
                     <div className="absolute bottom-3 left-1/2 -translate-x-1/2 z-10 text-center select-none">
-                      {event.title === "AMD Build Masters" ? (
+                      {event.title === ".." ? (
                         <span className="inline-block px-3 py-1 border border-yellow-500 text-yellow-300 rounded-md text-[10px] tracking-widest bg-black/60 cursor-default font-bold">
-                          REGISTER AT BOOTH
+                          CLICK TO REGISTER
                         </span>
                       ) : event.registrationClosed ? (
                         <button
@@ -413,9 +414,9 @@ const CyberpunkEventInterface: React.FC = () => {
                       </div>
                       {/* CTA for desktop: explicit link */}
                       <div className="mt-6 select-none">
-                        {event.title === "AMD Build Masters" ? (
+                        {event.title === ".." ? (
                           <span className="inline-block px-4 py-2 border border-yellow-500 text-yellow-300 rounded-md text-xs tracking-widest bg-black/60 cursor-default font-bold">
-                            REGISTER AT BOOTH
+                            CLICK TO REGISTER
                           </span>
                         ) : event.registrationClosed ? (
                           <button
