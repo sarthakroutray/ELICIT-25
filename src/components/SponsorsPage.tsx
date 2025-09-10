@@ -231,6 +231,18 @@ const SponsorsPage: React.FC = () => {
       <div className="py-12 md:py-16">
         <PreviousSponsors />
       </div>
+      <div className="py-12 md:py-16">
+        <PreviousSponsors
+          title="OTHER SPONSORS"
+          items={[
+            { id: 1, name: 'Aorus', logo: '/sponsors/aorus.png', description: '', year: '' },
+            { id: 2, name: 'Tata power', logo: '/sponsors/tatapower.png', description: '', year: '' },
+            { id: 3, name: 'Plum', logo: '/sponsors/plum.png', description: '', year: '' },
+            { id: 4, name: 'Being Human', logo: '/sponsors/beinghuman.png', description: '', year: '' },
+            { id: 5, name: 'Gemini', logo: '/sponsors/gemini.png', description: '', year: '' },
+          ]}
+        />
+      </div>
 
       {/* Carousel */}
       <div className="py-12 md:py-16 -mt-6">

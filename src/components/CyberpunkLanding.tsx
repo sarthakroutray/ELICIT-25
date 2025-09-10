@@ -126,7 +126,7 @@ const CyberpunkLanding: React.FC<CyberpunkLandingProps> = ({ onSpeakersClick, on
         @media (max-width: 768px) {
           .main-corruption-heading-responsive {
             font-size: 1.2rem !important;
-            margin-bottom: 2rem !important;
+            margin-bottom: 0.5rem !important;
           }
           .top-bar-responsive {
             padding-top: 16px !important;
@@ -172,7 +172,7 @@ const CyberpunkLanding: React.FC<CyberpunkLandingProps> = ({ onSpeakersClick, on
           }
           .main-corruption-heading-responsive {
             font-size: 1.3rem !important;
-            margin-bottom: 0.7rem !important;
+            margin-bottom: 0.25rem !important;
           }
           .top-bar-responsive {
             padding-top: 18px !important;
@@ -239,12 +239,17 @@ const CyberpunkLanding: React.FC<CyberpunkLandingProps> = ({ onSpeakersClick, on
             />
             <CyberpunkScene mousePosition={mousePosition} />
             <SponsorsWheel logos={[
-               "/sponsors/amd.png",
-  "/sponsors/gigabyte.png",
-  "/sponsors/skullcandy.png",
-  "/sponsors/vivo.png",
-  "/sponsors/ghs.jpeg"
-  
+              "/sponsors/amd.png",
+              "/sponsors/gigabyte.png",
+              "/sponsors/skullcandy.png",
+              "/sponsors/vivo.png",
+              "/sponsors/ghs.jpeg",
+              "/sponsors/gemini.png",
+              "/sponsors/beinghuman.png",
+              "/sponsors/plum.png",
+              "/sponsors/aorus.png",
+              "/sponsors/tatapower.png",
+              "/sponsors/ppgcl.png"
             ]} />
           </Canvas>
         </Suspense>
@@ -274,7 +279,7 @@ const CyberpunkLanding: React.FC<CyberpunkLandingProps> = ({ onSpeakersClick, on
       </div>
 
       {/* Main UI Overlay */}
-  <div className="absolute inset-0 z-10 flex flex-col justify-between p-8 pointer-events-none">
+  <div className="absolute inset-0 z-10 flex flex-col justify-between p-4 md:p-8 pointer-events-none">
         {/* Top Bar */}
         <div className="flex fixed left-0 top-0 pl-8 pt-8 items-start pointer-events-auto top-bar-responsive">
           {skipIntro ? (
@@ -318,37 +323,41 @@ const CyberpunkLanding: React.FC<CyberpunkLandingProps> = ({ onSpeakersClick, on
         >
           <CountdownTimer />
         </div>
-
         {/* Hero Section */}
-        <div className="min-h-[72vh] flex flex-col items-center pt-[8vh] pb-[1vh]">
+  <div className="min-h-[72vh] flex flex-col items-center pt-[8vh] pb-[1vh]">
           <div className="text-center pointer-events-none">
             {(skipIntro || isInitialized) ? (
-              <>
-                <GlitchText
-                  text="ELICIT'25 by MUJ ACM"
-                  className="main-corruption-heading-responsive text-2xl md:text-4xl lg:text-5xl font-mono font-bold text-[#00ff41] mb-10"
-                  style={{
-                    textShadow: `
-                      -1px -1px 0 #000,
-                      1px -1px 0 #000,
-                      -1px 1px 0 #000,
-                      1px 1px 0 #000,
-                      0 0 5px #00ff41,
-                      0 0 10px #00ff41,
-                      2px 0 5px #ff1a1a
-                    `,
-                    filter: 'drop-shadow(2px 2px 4px rgba(0,0,0,0.8))',
-                  }}
-                />
+              <div className="w-full flex flex-col items-center">
+                <div className="mx-auto pointer-events-none flex flex-col items-center space-y-0 md:space-y-3">
+                  <img
+                    src="/vivopresents.png"
+                    alt="Vivo Presents"
+                    className="mx-auto object-contain w-24 h-8 md:w-36 md:h-10 lg:w-40 lg:h-12"
+                    style={{ filter: 'drop-shadow(0 0 10px rgba(0,122,255,0.45))', opacity: 0.96 }}
+                  />
+                  <GlitchText
+                    text="ELICIT'25 by MUJ ACM"
+                    className="main-corruption-heading-responsive text-2xl md:text-4xl lg:text-5xl font-mono font-bold text-[#00ff41] -mt-10 md:mt-0 mb-0 md:mb-4 -translate-y-16 md:translate-y-0"
+                    style={{
+                      textShadow: `
+                        -1px -1px 0 #000,
+                        1px -1px 0 #000,
+                        -1px 1px 0 #000,
+                        1px 1px 0 #000,
+                        0 0 5px #00ff41,
+                        0 0 10px #00ff41,
+                        2px 0 5px #ff1a1a
+                      `,
+                      filter: 'drop-shadow(2px 2px 4px rgba(0,0,0,0.8))',
+                    }}
+                  />
+                </div>
                 <div className="mb-8">
                   <img
                     src="/logo.png"
                     alt="ELICIT FEST Logo"
                     className="mx-auto w-32 h-32 md:w-40 md:h-40 lg:w-48 lg:h-48 object-contain"
-                    style={{
-                      filter: 'drop-shadow(0 0 20px #00ff41) drop-shadow(0 0 40px #ff0040)',
-                      zIndex:50
-                    }}
+                    style={{ filter: 'drop-shadow(0 0 20px #00ff41) drop-shadow(0 0 40px #ff0040)', zIndex: 50 }}
                   />
                 </div>
                 <button
@@ -361,18 +370,13 @@ const CyberpunkLanding: React.FC<CyberpunkLandingProps> = ({ onSpeakersClick, on
                     src="/Register/register.png"
                     alt="Register Box"
                     className="w-full h-auto max-h-[140px] md:max-h-[180px] lg:max-h-[220px] object-contain block"
-                    style={{
-                      filter: 'drop-shadow(0px 0px 12px rgba(100, 236, 76, 0.72)) drop-shadow(0px 0px 24px rgba(165, 220, 141, 0.82))',
-                      transition: 'transform 0.2s ease',
-                    }}
+                    style={{ filter: 'drop-shadow(0px 0px 12px rgba(100, 236, 76, 0.72)) drop-shadow(0px 0px 24px rgba(165, 220, 141, 0.82))', transition: 'transform 0.2s ease' }}
                   />
                   <div className="absolute inset-0 flex items-center justify-center">
-                    <span className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-silkscreen-regular text-yellow-500 transition-transform duration-200 group-hover:scale-105 leading-none">
-                      REGISTER
-                    </span>
+                    <span className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-silkscreen-regular text-yellow-500 transition-transform duration-200 group-hover:scale-105 leading-none">REGISTER</span>
                   </div>
                 </button>
-              </>
+              </div>
             ) : null}
           </div>
 
@@ -537,14 +541,7 @@ const CyberpunkLanding: React.FC<CyberpunkLandingProps> = ({ onSpeakersClick, on
             >
               <span className="relative z-10">&gt; INFILTRATE SYSTEM</span>
               <div className="absolute inset-0 bg-white opacity-0 group-hover:opacity-30 transition-opacity duration-300" />
-              <motion.div
-                className="absolute inset-0 border-2 border-red-400"
-                style={{
-                  clipPath: 'polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px))',
-                }}
-                animate={{ opacity: [0, 1, 0], scale: [1, 1.05, 1] }}
-                transition={{ duration: 2, repeat: Infinity }}
-              />
+              {/* removed animated red border */}
             </button>
           </motion.div>
         </div>
@@ -576,14 +573,7 @@ const CyberpunkLanding: React.FC<CyberpunkLandingProps> = ({ onSpeakersClick, on
             >
               <span className="relative z-10">&gt; INFILTRATE SYSTEM</span>
               <div className="absolute inset-0 bg-white opacity-0 group-hover:opacity-30 transition-opacity duration-300" />
-              <motion.div
-                className="absolute inset-0 border-2 border-red-400"
-                style={{
-                  clipPath: 'polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px))',
-                }}
-                animate={{ opacity: [0, 1, 0], scale: [1, 1.05, 1] }}
-                transition={{ duration: 2, repeat: Infinity }}
-              />
+              {/* removed animated red border */}
             </button>
           </motion.div>
         </div>

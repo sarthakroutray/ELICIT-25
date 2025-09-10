@@ -13,10 +13,14 @@ interface LogoState {
   [key: string]: 'loading' | 'loaded' | 'error';
 }
 
-const PreviousSponsors: React.FC = () => {
-  // Updated sponsor data - keeping only specified sponsors
-  const sponsors: SponsorData[] = [
-    
+interface PreviousSponsorsProps {
+  items?: SponsorData[];
+  title?: string;
+}
+
+const PreviousSponsors: React.FC<PreviousSponsorsProps> = ({ items, title }) => {
+  // Default sponsor data if none provided
+  const defaultSponsors: SponsorData[] = [
     {
       id: 1,
       name: "GHS",
@@ -25,6 +29,7 @@ const PreviousSponsors: React.FC = () => {
       year: "2024"
     }
   ];
+  const sponsors: SponsorData[] = items && items.length ? items : defaultSponsors;
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const [direction, setDirection] = useState(0);
@@ -105,7 +110,7 @@ const PreviousSponsors: React.FC = () => {
                filter: 'drop-shadow(4px 4px 8px rgba(0,0,0,0.9))',
              }}
            >
-             Housing Sponsor
+             {title ?? 'Housing Sponsor'}
            </h1>
         </motion.div>
 
