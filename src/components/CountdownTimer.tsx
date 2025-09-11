@@ -93,6 +93,8 @@ const CountdownTimer: React.FC<CountdownProps> = ({ targetDate }) => {
 
   const formatNumber = (num: number) => num.toString().padStart(2, '0');
 
+  const isBreach = timeLeft.days >= 364;
+
   const handleAdd = useCallback(() => {
     // Download ICS
     if (icsContent) {
@@ -144,39 +146,51 @@ const CountdownTimer: React.FC<CountdownProps> = ({ targetDate }) => {
       }}
       title="Add ELICIT FEST to your calendar (Downloads .ics & opens Google Calendar)"
     >
-      <div className="text-lime-400 text-xs mb-2 text-center matrix-glow">SYSTEM BREACH IN:</div>
-      <div className="grid grid-cols-4 gap-2 text-center">
-        {[
-          { value: timeLeft.days, label: 'DAYS' },
-          { value: timeLeft.hours, label: 'HRS' },
-          { value: timeLeft.minutes, label: 'MIN' },
-          { value: timeLeft.seconds, label: 'SEC' },
-        ].map((item, index) => (
-          <div key={index} className="flex flex-col">
-            <motion.div 
-              className="text-red-400 text-lg font-bold"
-              animate={{
-                scale: [1, 1.1, 1],
-                textShadow: [
-                  '0 0 5px #ff0040',
-                  '0 0 15px #ff0040, 0 0 25px #ff0040',
-                  '0 0 5px #ff0040'
-                ]
-              }}
-              transition={{
-                duration: 1,
-                repeat: Infinity,
-                delay: index * 0.2
-              }}
-            >
-              {formatNumber(item.value)}
-            </motion.div>
-            <div className="text-lime-400 text-xs">
-              {item.label}
+      {isBreach ? (
+        <div className="text-center">
+          <div className="text-lime-400 text-xs mb-1 matrix-glow">SYSTEM BREACH IN:</div>
+          <motion.div
+            className="text-red-400 text-2xl md:text-3xl font-bold"
+            animate={{ scale: [1, 1.05, 1], textShadow: ['0 0 8px #ff0040', '0 0 20px #ff0040', '0 0 8px #ff0040'] }}
+            transition={{ duration: 1, repeat: Infinity }}
+          >
+            SYSTEM BREACHED
+          </motion.div>
+        </div>
+      ) : (
+        <div className="grid grid-cols-4 gap-2 text-center">
+          {[
+            { value: timeLeft.days, label: 'DAYS' },
+            { value: timeLeft.hours, label: 'HRS' },
+            { value: timeLeft.minutes, label: 'MIN' },
+            { value: timeLeft.seconds, label: 'SEC' },
+          ].map((item, index) => (
+            <div key={index} className="flex flex-col">
+              <motion.div 
+                className="text-red-400 text-lg font-bold"
+                animate={{
+                  scale: [1, 1.1, 1],
+                  textShadow: [
+                    '0 0 5px #ff0040',
+                    '0 0 15px #ff0040, 0 0 25px #ff0040',
+                    '0 0 5px #ff0040'
+                  ]
+                }}
+                transition={{
+                  duration: 1,
+                  repeat: Infinity,
+                  delay: index * 0.2
+                }}
+              >
+                {formatNumber(item.value)}
+              </motion.div>
+              <div className="text-lime-400 text-xs">
+                {item.label}
+              </div>
             </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      )}
     </motion.div>
   );
 };

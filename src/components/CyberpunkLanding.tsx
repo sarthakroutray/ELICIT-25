@@ -243,13 +243,14 @@ const CyberpunkLanding: React.FC<CyberpunkLandingProps> = ({ onSpeakersClick, on
               "/sponsors/gigabyte.png",
               "/sponsors/skullcandy.png",
               "/sponsors/vivo.png",
-              "/sponsors/ghs.jpeg",
+              "/sponsors/ghs.png",
               "/sponsors/gemini.png",
               "/sponsors/beinghuman.png",
               "/sponsors/plum.png",
               "/sponsors/aorus.png",
               "/sponsors/tatapower.png",
-              "/sponsors/ppgcl.png"
+              "/sponsors/ppgcl.png",
+              "/sponsors/masters.png",
             ]} />
           </Canvas>
         </Suspense>

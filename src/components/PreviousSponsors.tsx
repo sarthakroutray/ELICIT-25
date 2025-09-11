@@ -24,7 +24,7 @@ const PreviousSponsors: React.FC<PreviousSponsorsProps> = ({ items, title }) => 
     {
       id: 1,
       name: "GHS",
-      logo: "/sponsors/ghs.jpeg",
+      logo: "/sponsors/ghs.png",
       description: "",
       year: "2024"
     }

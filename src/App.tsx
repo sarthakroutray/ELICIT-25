@@ -16,7 +16,7 @@ import './styles/glitch.css';
 import { Analytics } from '@vercel/analytics/react';
 import SponsorsPage from './components/SponsorsPage';
 import Develop from './components/Develop';
-
+import Speakers from './components/Speakers';
 
 // Simple wrapper to add spacing + footer for section pages
 const SectionPage: React.FC<{ children: React.ReactNode }> = ({ children }) => (
@@ -36,7 +36,7 @@ function App() {
             <Route path="/events" element={<SectionPage><EventsGrid /></SectionPage>} />
             {/* Route for individual event view / carousel focus */}
             <Route path="/events/:id" element={<SectionPage><CyberpunkEventInterface /></SectionPage>} />
-    <Route path="/speakers" element={<SectionPage><ComingSoon title="SPEAKERS – COMING SOON" note="Stay tuned for the speaker lineup." /></SectionPage>} />
+    <Route path="/speakers" element={<SectionPage><Speakers/></SectionPage>} />
     <Route path="/carousel" element={<SectionPage><Carousel /></SectionPage>} />
     <Route path="/sponsors" element={<SectionPage><SponsorsPage /></SectionPage>} />
     <Route path="/contact" element={<SectionPage><Contact /></SectionPage>} />

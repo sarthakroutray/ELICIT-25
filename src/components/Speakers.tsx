@@ -22,18 +22,18 @@ const Speakers: React.FC = () => {
   const speakers: SpeakerData[] = [
     {
       id: 1,
-      name: "CONVERSATIONAL AI WITH NEO",
-      title: "AI SPECIALIST",
-      description: "The Elize model powers responsive dialogue, delivering smart, believable back-and-forth with players. Use this open framework to embed lifelike agents into Roblox-based AI-driven games.",
+      name: "Sanskaar Singh",
+      title: "AI Wizard",
+      description: "World’s Largest AI & Coding Creator",
       image: "/speakers/speaker1.png", // Speaker image
       outline: "/speakers/outline1.png"
     },
     {
       id: 2,
-      name: "PERSISTENT PLAYER MEMORY", 
-      title: "MEMORY ARCHITECT",
-      description: "Game agents remember key player events - like coins earned, levels, or tasks finished. This lets them speak more relevant, informed way during future conversations.",
-      image: "/speakers/speaker1.png", // Using same speaker image
+      name: "Mr Abhishek Purohit", 
+      title: "",
+      description: "Deputy Head \n Vivo Rajasthan",
+      image: "/speakers/speaker2.png", // Using same speaker image
       outline: "/speakers/outline2.png"
     }
   ];
@@ -182,10 +182,10 @@ const Speakers: React.FC = () => {
                       
                       {/* Content */}
                       <div className="mb-4">
-                        <h3 className="text-white text-lg font-bold mb-2 tracking-wider" style={{ fontFamily: 'Orbitron, monospace' }}>
+                        <h3 className="text-white text-xl md:text-2xl lg:text-3xl font-bold mb-2 tracking-wider" style={{ fontFamily: 'Orbitron, monospace' }}>
                           {speaker.name}
                         </h3>
-                        <p className="text-gray-300 text-xs leading-relaxed font-mono" style={{ fontSize: '11px', lineHeight: '1.6' }}>
+                        <p className="text-gray-300 text-sm md:text-base leading-relaxed font-mono" style={{ lineHeight: '1.7' }}>
                           {speaker.description}
                         </p>
                       </div>
@@ -274,11 +274,11 @@ const Speakers: React.FC = () => {
                         // 0{speaker.id}
                       </div>
                       {/* Speaker Name */}
-                      <h3 className="text-white text-lg font-bold mb-2 tracking-wider" style={{ fontFamily: 'Orbitron, monospace' }}>
+                      <h3 className="text-white text-xl md:text-2xl font-bold mb-2 tracking-wider" style={{ fontFamily: 'Orbitron, monospace' }}>
                         {speaker.name}
                       </h3>
                       {/* Speaker Title */}
-                      <div className="text-purple-400 font-mono text-sm opacity-80 mb-2">
+                      <div className="text-purple-400 font-mono text-base md:text-lg opacity-80 mb-2">
                         {speaker.title}
                       </div>
                       {/* Speaker Description */}
@@ -329,7 +329,7 @@ const Speakers: React.FC = () => {
                       
                       {/* Content Overlay */}
                       <div className="absolute inset-0 flex flex-col justify-end p-6 bg-gradient-to-t from-black/60 to-transparent">
-                        <h3 className="text-white text-lg font-bold mb-2 tracking-wider" style={{ fontFamily: 'Orbitron, monospace' }}>
+                        <h3 className="text-white text-xl md:text-2xl font-bold mb-2 tracking-wider" style={{ fontFamily: 'Orbitron, monospace' }}>
                           {speaker.name}
                         </h3>
                         {/* Tap to Flip Back */}

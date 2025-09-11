@@ -240,6 +240,7 @@ const SponsorsPage: React.FC = () => {
             { id: 3, name: 'Plum', logo: '/sponsors/plum.png', description: '', year: '' },
             { id: 4, name: 'Being Human', logo: '/sponsors/beinghuman.png', description: '', year: '' },
             { id: 5, name: 'Gemini', logo: '/sponsors/gemini.png', description: '', year: '' },
+            { id: 6, name: 'GHS', logo: '/sponsors/masters.png', description: '', year: '' },
           ]}
         />
       </div>
