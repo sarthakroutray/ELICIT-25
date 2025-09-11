@@ -19,7 +19,7 @@ type SponsorsWheelProps = {
   interleaveBrightness?: number;
 };
 
-const SponsorsWheel: React.FC<SponsorsWheelProps> = ({ logos, radius = 8, speed = 0.12, y = 1.9, brightness = 1.2, centerLogo, centerSize = [3, 3], centerBrightness = 1.4, interleaveLogo, interleaveRadiusFactor = 0.82, interleaveSize = [3.0, 3.0], interleaveBrightness = 1.3 }) => {
+const SponsorsWheel: React.FC<SponsorsWheelProps> = ({ logos, radius = 8, speed = 0.12, y = 1.9, brightness = 1.2, centerLogo, centerSize = [3, 3], centerBrightness = 1.4, interleaveLogo, interleaveRadiusFactor = 0.82, interleaveSize = [2.4, 2.4], interleaveBrightness = 1.3 }) => {
   const navigate = useNavigate();
   const textures = useLoader(TextureLoader, logos);
   const centerTexture = centerLogo ? useLoader(TextureLoader, centerLogo) : null;
@@ -121,8 +121,7 @@ const SponsorsWheel: React.FC<SponsorsWheelProps> = ({ logos, radius = 8, speed 
           onPointerOut={(e) => { (e.object as any).scale.set(1, 1, 1); document.body.style.cursor = 'auto'; }}
           onClick={() => navigate('/sponsors')}
         >
-          {/* slightly larger logo planes for better visibility */}
-          <planeGeometry args={[3.0, 1.8]} />
+          <planeGeometry args={[2.2, 1.2]} />
           {/* doubleSide so logos are visible from all camera angles; use emissiveMap + emissiveIntensity for manual brightness control */}
           <meshStandardMaterial
             map={textures[it.idx]}
