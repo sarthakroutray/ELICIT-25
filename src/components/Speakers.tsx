@@ -68,7 +68,7 @@ const Speakers: React.FC = () => {
       </div>
 
       {/* Main Content */}
-      <div className="relative z-10 min-h-screen flex flex-col items-center justify-center px-4 py-8">
+  <div className="relative z-10 min-h-screen flex flex-col items-center justify-center px-4 pt-20 pb-8 lg:py-8">
         
         {/* Header */}
         <motion.div
@@ -266,7 +266,7 @@ const Speakers: React.FC = () => {
                       WebkitBackfaceVisibility: "hidden"
                     }}
                   >
-                    <div className="relative h-full w-full bg-black/80 rounded-xl border-2 border-cyan-400/50 p-6 flex flex-col justify-center items-center text-center pointer-events-none">
+                    <div className="relative h-full w-full bg-black/80 rounded-xl border-2 border-cyan-400/50 p-6 flex flex-col justify-center items-center text-center pointer-events-none z-30">
                       {/* Glitch Effect */}
                       <div className="absolute inset-0 bg-gradient-to-br from-cyan-400/10 to-purple-400/10 rounded-xl animate-pulse"></div>
                       {/* Speaker ID */}
@@ -302,13 +302,13 @@ const Speakers: React.FC = () => {
                       WebkitTransform: "rotateY(180deg)"
                     }}
                   >
-                    <div className="relative h-full w-full bg-gradient-to-br from-black via-gray-900 to-black rounded-xl border-2 border-purple-400/50 overflow-hidden pointer-events-none">
+                    <div className="relative h-full w-full bg-gradient-to-br from-black via-gray-900 to-black rounded-xl border-2 border-purple-400/50 overflow-visible pointer-events-none">
                       {/* Background Image */}
                       <div className="absolute inset-0 overflow-hidden">
                         <img 
                           src={speaker.image} 
                           alt={speaker.name}
-                          className="w-full h-full object-cover"
+                          className="w-full h-full object-cover object-top translate-y-12 lg:translate-y-0 transition-transform duration-300 relative z-20"
                           style={{
                             filter: 'brightness(1.5) contrast(1.1)',
                             mixBlendMode: 'normal',
@@ -328,7 +328,7 @@ const Speakers: React.FC = () => {
                       </div>
                       
                       {/* Content Overlay */}
-                      <div className="absolute inset-0 flex flex-col justify-end p-6 bg-gradient-to-t from-black/60 to-transparent">
+                      <div className="absolute inset-0 flex flex-col justify-end p-6 bg-gradient-to-t from-black/60 to-transparent z-30">
                         <h3 className="text-white text-xl md:text-2xl font-bold mb-2 tracking-wider" style={{ fontFamily: 'Orbitron, monospace' }}>
                           {speaker.name}
                         </h3>
