@@ -14,6 +14,7 @@ const DevelopPage: React.FC = () => {
     { name: "Aditya Ray", title: " ", handle: "harman", avatarUrl: "/DEVELOP/Aditya.png" },
     { name: "Agam Yadav", title: " ", handle: "pranavD", avatarUrl: "/DEVELOP/Agam.png" },
     { name: "Srikunj", title: " ", handle: "nirmit", avatarUrl: "/DEVELOP/Srikunj.png" },
+    { name: "Aashi Tiwari", title: " ", handle: "nirmit", avatarUrl: "/DEVELOP/Aashi.png" },
   
   ];
 
@@ -51,10 +52,29 @@ const DevelopPage: React.FC = () => {
         </h2>
 
         {/* Grid of 18 Profile Cards */}
-       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 place-items-center">
+<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 place-items-center">
   {developers.map((dev, i) => (
     dev.url ? (
-      <a key={i} href={dev.url} target="_blank" rel="noopener noreferrer" style={{ width: '100%' }}>
+      <a
+        key={i}
+        href={dev.url}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="w-full flex justify-center"
+      >
+        <div className="w-[70%] sm:w-full">   {/* 👈 Add responsive sizing */}
+          <ProfileCard
+            name={dev.name}
+            title={dev.title}
+            handle={dev.handle}
+            avatarUrl={dev.avatarUrl}
+            showUserInfo={true}
+            enableTilt={true}
+          />
+        </div>
+      </a>
+    ) : (
+      <div key={i} className="w-[70%] mx-auto sm:w-full"> {/* 👈 same fix for non-links */}
         <ProfileCard
           name={dev.name}
           title={dev.title}
@@ -63,20 +83,11 @@ const DevelopPage: React.FC = () => {
           showUserInfo={true}
           enableTilt={true}
         />
-      </a>
-    ) : (
-      <ProfileCard
-        key={i}
-        name={dev.name}
-        title={dev.title}
-        handle={dev.handle}
-        avatarUrl={dev.avatarUrl}
-        showUserInfo={true}
-        enableTilt={true}
-      />
+      </div>
     )
   ))}
 </div>
+
 
       </div>
     </div>
