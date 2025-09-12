@@ -322,6 +322,14 @@ const CyberpunkLanding: React.FC<CyberpunkLandingProps> = ({ onSpeakersClick, on
           className="countdown-timer-responsive fixed pointer-events-auto"
           style={{ top: COUNTDOWN_OFFSET.top, right: COUNTDOWN_OFFSET.right, zIndex: 60 }}
         >
+          <style>{`
+            @media (max-width: 480px) {
+              .countdown-timer-responsive {
+                transform: scale(0.5);
+                right: 8px !important;
+              }
+            }
+          `}</style>
           <CountdownTimer />
         </div>
         {/* Hero Section */}
@@ -392,12 +400,13 @@ const CyberpunkLanding: React.FC<CyberpunkLandingProps> = ({ onSpeakersClick, on
               >
                 {[ 
                   { icon: Calendar, label: 'EVENTS', color: 'text-cyan-400', to: '/events' },
-                  { icon: Users, label: 'SPEAKERS', color: 'text-lime-400', to: '/speakers' },
+                  { icon: Laptop, label: 'HACKATHON', color: 'text-cyan-300', to: '/hackathon' },
                   { icon: Users, label: 'TEAM', color: 'text-emerald-400', to: '/team' },
                   { icon: Info, label: 'ABOUT', color: 'text-purple-400', to: '/about' },
                   { icon: Phone, label: 'CONTACT', color: 'text-yellow-400', to: '/contact' },
                   { icon: Zap, label: 'SPONSORS', color: 'text-pink-400', to: '/sponsors' },
-                  { icon: Laptop, label:'DEV TEAM', color:'text-orange-400', to:'/develop' }
+                  { icon: Laptop, label:'DEV TEAM', color:'text-orange-400', to:'/develop' },
+                  { icon: Users, label: 'SPEAKERS', color: 'text-lime-400', to: '/speakers' }
                 ].map((item, idx) => (
                   <MotionLink
                     key={item.label}
@@ -489,12 +498,13 @@ const CyberpunkLanding: React.FC<CyberpunkLandingProps> = ({ onSpeakersClick, on
             <div className="flex flex-col gap-6 w-full items-end">
               {[
                 { icon: Calendar, label: 'EVENTS', color: 'text-cyan-400', to: '/events' },
-                { icon: Users, label: 'SPEAKERS', color: 'text-lime-400', to: '/speakers' },
+                { icon: Laptop, label: 'HACKATHON', color: 'text-cyan-300', to: '/hackathon' },
                 { icon: Users, label: 'TEAM', color: 'text-emerald-400', to: '/team' },
                 { icon: Info, label: 'ABOUT', color: 'text-purple-400', to: '/about' },
                 { icon: Phone, label: 'CONTACT', color: 'text-yellow-400', to: '/contact' },
                 { icon: Zap, label: 'SPONSORS', color: 'text-pink-400', to: '/sponsors' },
-                { icon:Laptop, label:'DEV TEAM', color:'text-orange-400', to:'/develop' }
+                { icon: Laptop, label:'DEV TEAM', color:'text-orange-400', to:'/develop' },
+                { icon: Users, label: 'SPEAKERS', color: 'text-lime-400', to: '/speakers' },
               ].map(item => (
                 <Link
                   key={item.label}
@@ -569,7 +579,7 @@ const CyberpunkLanding: React.FC<CyberpunkLandingProps> = ({ onSpeakersClick, on
               className="group relative px-8 py-3 bg-red-500 text-black font-mono font-bold tracking-wider hover:bg-red-400 transition-all duration-300 hover:scale-105 infiltrate-button-responsive"
               style={{
                 clipPath: 'polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px))',
-                boxShadow: '0 0 20px #ff0040',
+                boxShadow: '0 0 20px rgba(255, 0, 0, 0.8)'
               }}
             >
               <span className="relative z-10">&gt; INFILTRATE SYSTEM</span>

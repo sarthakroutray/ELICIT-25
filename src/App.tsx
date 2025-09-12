@@ -17,6 +17,7 @@ import { Analytics } from '@vercel/analytics/react';
 import SponsorsPage from './components/SponsorsPage';
 import Develop from './components/Develop';
 import Speakers from './components/Speakers';
+import HackathonPage from './components/HackathonPage';
 
 // Simple wrapper to add spacing + footer for section pages
 const SectionPage: React.FC<{ children: React.ReactNode }> = ({ children }) => (
@@ -43,6 +44,7 @@ function App() {
     <Route path="/register" element={<SectionPage><Register /></SectionPage>} />
     <Route path="/team" element={<SectionPage><TeamPage /></SectionPage>} />
     <Route path="/develop" element={<SectionPage><Develop /></SectionPage>} />
+    <Route path="/hackathon" element={<SectionPage><HackathonPage /></SectionPage>} />
         <Route path="*" element={<SectionPage><div className="text-center text-white py-32 font-mono">
           <h1 className="text-4xl mb-4">404</h1>
           <p className="mb-6">Route not found.</p>
