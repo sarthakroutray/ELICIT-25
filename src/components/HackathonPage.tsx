@@ -58,7 +58,8 @@ const ROUND1_QUALIFIED_TEAMS = [
   "Kitsune",
   "de bugs",
   "Pixel pirates",
-  "Java Juice"
+  "Java Juice",
+  "Fantastic Four"
 ];
 
 const HackathonPage: React.FC = () => {
