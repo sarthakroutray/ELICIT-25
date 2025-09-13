@@ -1,8 +1,65 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Code, Download, ExternalLink } from 'lucide-react';
+import { Code, Download, ExternalLink, Trophy } from 'lucide-react';
 import GlitchText from './GlitchText';
 import DigitalRain from './DigitalRain';
+
+// Round 1 qualified teams - add your team names here
+const ROUND1_QUALIFIED_TEAMS = [
+  "INITIALS",
+  "Yonex",
+  "Bluntcorp",
+  "Lord Dominik's Regards",
+  "Seventh Layer",
+  "Hop2Hop",
+  "LIFE HACKERS",
+  "HacksOps",
+  "Stardust Crusaders",
+  "HeavyCoders",
+  "Bug Busters",
+  "We Can't Code",
+  "bluds",
+  "Og devs",
+  "High Sheeps",
+  "Ctrl+F",
+  "Code Blooded",
+  "Geeked Out",
+  "Team Rocket",
+  "Byteme",
+  "CodeXPredators",
+  "repo rippers",
+  "Ctrl+C",
+  "Infinite Loopers",
+  "High Performance coders",
+  "Robolex",
+  "HAL Tejas",
+  "Buildit",
+  "Ctrl Alt Elite",
+  "DevXtreme",
+  "STRAWHATS",
+  "Kasukabe defence",
+  "TechNexus",
+  "Nextgen Nomads",
+  "COMET",
+  "Team Pheonix",
+  "#include<error.h>",
+  "RAG Tag Crew",
+  "AlgoAces",
+  "308 TBR",
+  "Botbees",
+  "bobTheBuilder",
+  "Team LOCAL HOST",
+  "THE LAST BRAIN CELL",
+  "Chaukdi",
+  "AlgoSphere",
+  "Hackops",
+  "Compiler Crew",
+  "Hackfinity",
+  "Kitsune",
+  "de bugs",
+  "Pixel pirates",
+  "Java Juice"
+];
 
 const HackathonPage: React.FC = () => {
   // Responsive style to fix title cut-off on mobile
@@ -112,11 +169,58 @@ const HackathonPage: React.FC = () => {
             </div>
           </motion.div>
 
+          {/* Round 1 Results */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8, delay: 0.5 }}
+            className="bg-gray-900/50 backdrop-blur-sm border border-yellow-500/30 rounded-lg p-8 mt-8"
+            style={{
+              clipPath: 'polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 20px 100%, 0 calc(100% - 20px))'
+            }}
+          >
+            <div className="flex items-center mb-6">
+              <Trophy className="text-yellow-400 mr-3" size={32} />
+              <h2 className="text-3xl font-mono text-yellow-300">Round 1 Results</h2>
+            </div>
+            
+            <p className="text-gray-300 mb-8 font-mono leading-relaxed">
+              Congratulations to the teams that have successfully qualified for Round 2! 
+              The following teams have demonstrated exceptional problem-solving skills and innovation.
+            </p>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              {ROUND1_QUALIFIED_TEAMS.map((teamName, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.5, delay: 0.7 + index * 0.1 }}
+                  className="bg-black/40 border border-yellow-500/20 p-4 rounded-lg"
+                  style={{
+                    clipPath: 'polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px))'
+                  }}
+                >
+                  <div className="flex items-center">
+                    <span className="text-yellow-400 font-mono text-lg mr-3">#{index + 1}</span>
+                    <span className="text-white font-mono text-base">{teamName}</span>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+
+            <div className="mt-6 text-center">
+              <p className="text-yellow-400 font-mono text-sm">
+                &gt; Round 2 details will be announced soon. Stay tuned!
+              </p>
+            </div>
+          </motion.div>
+
           {/* Additional info */}
           <motion.div
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.6 }}
+            transition={{ duration: 0.8, delay: 0.8 }}
             className="mt-8 text-center"
           >
             <p className="text-sm font-mono text-gray-500">
