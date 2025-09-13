@@ -28,9 +28,9 @@ const CountdownTimer: React.FC<CountdownProps> = ({ targetDate }) => {
       
       const now = new Date();
       const year = now.getFullYear();
-      let candidate = new Date(year, 8, 12, 0, 0, 0); 
+      let candidate = new Date(year, 9, 15, 0, 0, 0); // October 15th
       if (candidate.getTime() <= now.getTime()) {
-        candidate = new Date(year + 1, 8, 12, 0, 0, 0);
+        candidate = new Date(year + 1, 9, 15, 0, 0, 0);
       }
       resolvedTarget = candidate;
     }
@@ -93,7 +93,7 @@ const CountdownTimer: React.FC<CountdownProps> = ({ targetDate }) => {
 
   const formatNumber = (num: number) => num.toString().padStart(2, '0');
 
-  const isBreach = timeLeft.days >= 364;
+  const isBreach = true; // Event is over, permanently show "SYSTEM BREACHED"
 
   const handleAdd = useCallback(() => {
     // Download ICS

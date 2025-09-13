@@ -1,8 +1,36 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Code, Download, ExternalLink, Trophy } from 'lucide-react';
+import { Code, Download, ExternalLink, Trophy, Crown, Users } from 'lucide-react';
 import GlitchText from './GlitchText';
 import DigitalRain from './DigitalRain';
+
+// Round 2 winners with their leaders
+const ROUND2_WINNERS = [
+  { team: "TechNexus", leader: "Kartikey Yadav" },
+  { team: "Lord Dominik's Regards", leader: "Varun Sivanesan" },
+  { team: "DevXtreme", leader: "Ahaan Verma" },
+  { team: "bluds", leader: "Shresth Senwal" },
+  { team: "Seventh Layer", leader: "Siddharth Meena" },
+  { team: "Nextgen Nomads", leader: "Utkarsh Yadav" },
+  { team: "Og devs", leader: "Jai Ratna" },
+  { team: "Kasukabe Defence", leader: "Ayush Roy" },
+  { team: "AlgoSphere", leader: "Ridhi Pahuja" },
+  { team: "BobTheBuilder", leader: "Kaushik" },
+  { team: "Kitsune", leader: "Yogesh Jajoria" },
+  { team: "Code Blooded", leader: "Agastya Mehtani" },
+  { team: "repo rippers", leader: "Akshat Kumar" },
+  { team: "Geeked Out", leader: "Lakshya Jha" },
+  { team: "Botbees", leader: "Yashvardhan Agarwal" },
+  { team: "Team Rocket", leader: "Devang Aswani" },
+  { team: "HAL Tejas", leader: "Shaurya Sharma" },
+  { team: "RAG-Tag Crew", leader: "Manthan vats" },
+  { team: "LOCAL HOST", leader: "SOUMYAJIT CHATTERJEE" },
+  { team: "Team Pheonix", leader: "Tanmoy Mandal" },
+  { team: "de bugs", leader: "Shreya Chadha" },
+  { team: "HackOps", leader: "Bhavya Tripathy" },
+  { team: "Buildit", leader: "Krishna goel" },
+  { team: "COMET", leader: "Aditya Narayan Ray" }
+];
 
 // Round 1 qualified teams - add your team names here
 const ROUND1_QUALIFIED_TEAMS = [
@@ -170,6 +198,76 @@ const HackathonPage: React.FC = () => {
             </div>
           </motion.div>
 
+          {/* Round 2 Winners */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            className="bg-gradient-to-br from-purple-900/30 via-gray-900/50 to-pink-900/30 backdrop-blur-sm border border-purple-500/40 rounded-lg p-8 mt-8"
+            style={{
+              clipPath: 'polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 20px 100%, 0 calc(100% - 20px))',
+              boxShadow: '0 0 30px rgba(147, 51, 234, 0.3)'
+            }}
+          >
+            <div className="flex items-center mb-6">
+              <Crown className="text-purple-400 mr-3" size={32} />
+              <h2 className="text-3xl font-mono text-purple-300">Round 2 Winners</h2>
+            </div>
+            
+            <p className="text-gray-300 mb-8 font-mono leading-relaxed">
+              🎉 Celebrating our Round 2 champions! These elite teams have showcased exceptional 
+              innovation, technical prowess, and problem-solving excellence.
+            </p>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              {ROUND2_WINNERS.map((winner, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.6 + index * 0.1 }}
+                  className="relative bg-gradient-to-r from-purple-900/40 to-pink-900/40 border border-purple-400/30 p-4 rounded-lg overflow-hidden group hover:border-purple-400/60 transition-all duration-300"
+                  style={{
+                    clipPath: 'polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px))',
+                    boxShadow: '0 0 20px rgba(147, 51, 234, 0.2)'
+                  }}
+                >
+                  {/* Ranking Badge */}
+                  <div className="absolute top-2 right-2 bg-purple-500/80 text-white text-xs font-mono px-2 py-1 rounded"
+                       style={{ clipPath: 'polygon(0 0, calc(100% - 4px) 0, 100% 4px, 100% 100%, 4px 100%, 0 calc(100% - 4px))' }}>
+                    #{index + 1}
+                  </div>
+
+                  {/* Team Name */}
+                  <div className="mb-3">
+                    <h3 className="text-lg font-mono font-bold text-purple-200 mb-2 flex items-center">
+                      <Trophy className="text-yellow-400 mr-2" size={16} />
+                      <span className="truncate">{winner.team}</span>
+                    </h3>
+                  </div>
+
+                  {/* Leader Info */}
+                  <div className="flex items-center bg-black/30 p-2 rounded-lg">
+                    <Users className="text-cyan-400 mr-2" size={14} />
+                    <div className="min-w-0 flex-1">
+                      <p className="text-xs text-gray-400 font-mono uppercase tracking-wider">Leader</p>
+                      <p className="text-cyan-300 font-mono font-semibold text-sm truncate" title={winner.leader}>{winner.leader}</p>
+                    </div>
+                  </div>
+
+                  {/* Hover Effect */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-purple-600/10 to-pink-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+                </motion.div>
+              ))}
+            </div>
+
+            <div className="mt-8 text-center">
+              <p className="text-purple-400 font-mono text-sm">
+                &gt; Congratulations to all winners! Round 3 results coming soon...
+              </p>
+            </div>
+          </motion.div>
+
           {/* Round 1 Results */}
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
@@ -190,21 +288,21 @@ const HackathonPage: React.FC = () => {
               The following teams have demonstrated exceptional problem-solving skills and innovation.
             </p>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
               {ROUND1_QUALIFIED_TEAMS.map((teamName, index) => (
                 <motion.div
                   key={index}
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.5, delay: 0.7 + index * 0.1 }}
-                  className="bg-black/40 border border-yellow-500/20 p-4 rounded-lg"
+                  className="bg-black/40 border border-yellow-500/20 p-3 rounded-lg"
                   style={{
                     clipPath: 'polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px))'
                   }}
                 >
-                  <div className="flex items-center">
-                    <span className="text-yellow-400 font-mono text-lg mr-3">#{index + 1}</span>
-                    <span className="text-white font-mono text-base">{teamName}</span>
+                  <div className="flex flex-col items-center text-center">
+                    <span className="text-yellow-400 font-mono text-sm mb-1">#{index + 1}</span>
+                    <span className="text-white font-mono text-sm truncate w-full" title={teamName}>{teamName}</span>
                   </div>
                 </motion.div>
               ))}
