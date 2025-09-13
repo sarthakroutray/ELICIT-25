@@ -215,7 +215,7 @@ const HackathonPage: React.FC = () => {
             </div>
             
             <p className="text-gray-300 mb-8 font-mono leading-relaxed">
-              🎉 Celebrating our Round 2 champions! These elite teams have showcased exceptional 
+              Celebrating our Round 2 champions! These elite teams have showcased exceptional 
               innovation, technical prowess, and problem-solving excellence.
             </p>
 
@@ -310,7 +310,7 @@ const HackathonPage: React.FC = () => {
 
             <div className="mt-6 text-center">
               <p className="text-yellow-400 font-mono text-sm">
-                &gt; Round 2 details will be announced soon. Stay tuned!
+                &gt; Round 2 Results Announced.
               </p>
             </div>
           </motion.div>
