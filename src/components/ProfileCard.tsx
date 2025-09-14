@@ -26,6 +26,7 @@ interface ProfileCardProps {
   // 👇 add these
   offsetY?: number;
   scale?: number;
+  avatarClassName?: string;
 }
 
 
@@ -82,6 +83,7 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
   onContactClick,
   cardHeight,
   cardMaxHeight,
+  avatarClassName,
 }) => {
   const wrapRef = useRef<HTMLDivElement>(null);
   const cardRef = useRef<HTMLDivElement>(null);
@@ -328,7 +330,7 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
           <div className="pc-glare" />
           <div className="pc-content pc-avatar-content">
             <img
-              className="avatar mt-30"
+              className={`avatar mt-30 ${avatarClassName ?? ""}`}
               src={avatarUrl}
               alt={`${name || "User"} avatar`}
               loading="lazy"

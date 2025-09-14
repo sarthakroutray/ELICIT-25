@@ -543,4 +543,8 @@
 .agam-avatar {
   transform: translateY(-30px);
 }
+/* Marketing director slight upward nudge */
+.marketing-avatar {
+  transform: translateY(-92px);
+}
 

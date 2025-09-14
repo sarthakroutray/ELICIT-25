@@ -40,6 +40,7 @@ const Section = ({
               title={m.title}
               handle={m.handle}
               avatarUrl={m.avatarUrl}
+              avatarClassName={m.avatarClassName}
               showUserInfo={true}
               enableTilt={true}
               className="w-full h-[320px] sm:h-[320px] md:h-[320px] lg:h-[320px]"
@@ -69,9 +70,10 @@ const TeamPage: React.FC = () => {
   
   const directorsS = [
     
-      { name: "HARMAN BHAMBRA", title: "Marketing Director", handle: "sukritS", avatarUrl: "/team/Harman_Bhambra-removebg-preview.png" },
+    { name: "HARMAN BHAMBRA", title: "Marketing Director", handle: "sukritS", avatarUrl: "/team/Harman_Bhambra-removebg-preview.png", avatarClassName: "marketing-avatar" },
  
   ];
+
 
   const advisors = [
     { name: "NEET JAIN", title: "Advisor", handle: "advisor1", avatarUrl: "/team/neetjain.png" },
@@ -147,7 +149,7 @@ const TeamPage: React.FC = () => {
     <Section 
       title="MARKETING DIRECTORS" 
       members={directorsS} 
-      layout="mr-[120px] justify-items-center" 
+      layout="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-1 xl:grid-cols-1 gap-y-8 gap-x-6 sm:gap-y-10 sm:gap-x-8 md:gap-y-12 md:gap-x-10 lg:gap-x-16 xl:gap-x-20 w-full justify-items-center" 
     />
      <Section 
       title="ADVISORS" 
