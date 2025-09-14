@@ -61,8 +61,16 @@ const TeamPage: React.FC = () => {
   ];
 
   const directors = [
-    { name: "SUKRIT SINHA", title: "Managing Director", handle: "sukritS", avatarUrl: "/team/17.png" },
+    
+      { name: "SUKRIT SINHA", title: "Managing Director", handle: "sukritS", avatarUrl: "/team/17.png" },
     { name: "MUMUKSHU BOHRA", title: "Managing Director", handle: "mumukshuB", avatarUrl: "/team/3.png" },
+  ];
+   
+  
+  const directorsS = [
+    
+      { name: "HARMAN BHAMBRA", title: "Marketing Director", handle: "sukritS", avatarUrl: "/team/Harman_Bhambra-removebg-preview.png" },
+ 
   ];
 
   const advisors = [
@@ -136,6 +144,11 @@ const TeamPage: React.FC = () => {
       layout="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 gap-y-8 gap-x-6 sm:gap-y-10 sm:gap-x-8 md:gap-y-12 md:gap-x-10 lg:gap-x-16 xl:gap-x-20 w-full justify-items-center" 
     />
 
+    <Section 
+      title="MARKETING DIRECTORS" 
+      members={directorsS} 
+      layout="mr-[120px] justify-items-center" 
+    />
      <Section 
       title="ADVISORS" 
       members={advisors} 
